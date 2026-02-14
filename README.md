@@ -1,11 +1,35 @@
 
-  # Professional Portfolio Design
+# Hernany Acosta — Portfolio
 
-  This is a code bundle for Professional Portfolio Design. The original project is available at https://www.figma.com/design/j6pD2Oj5WukHd0LsONIjfR/Professional-Portfolio-Design.
+Personal portfolio of Hernany Acosta, Lead Product Designer focused on scalable digital products, UX systems, and frontend-ready design solutions.
 
-  ## Running the code
+## About
 
-  Run `npm i` to install the dependencies.
+I design and deliver high-impact digital products by translating business requirements into structured UX systems and implementation-ready interfaces.
 
-  Run `npm run dev` to start the development server.
-  
+My work spans:
+
+- Product Design for regulated and transactional systems
+- UX Architecture & Complex Flows
+- Design Systems & Component Scalability
+- Frontend-aware UI Design
+- Multi-brand / Multi-tenant platforms
+- Gambling & Betting ecosystem products
+
+This portfolio showcases selected product cases, brand experiences, and system-level design work.
+
+## Tech Stack
+
+- Vite
+- React
+- TypeScript
+- MUI / Radix UI
+- TailwindCSS
+- Vercel Deployment
+
+## Development
+
+Install dependencies:
+
+```bash
+yarn install
