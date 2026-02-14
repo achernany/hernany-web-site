@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
@@ -9,6 +9,20 @@ interface NavigationProps {
 
 export function Navigation({ currentPage, onNavigate }: NavigationProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 8);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const menuItems = [
     { id: "home", label: "Home" },
@@ -24,7 +38,15 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+      {/* Top Navigation */}
+      <nav
+        className={[
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          isScrolled
+            ? "bg-background/80 backdrop-blur-md border-b border-border"
+            : "bg-transparent border-b border-transparent",
+        ].join(" ")}
+      >
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6 flex justify-between items-center">
           <button
             onClick={() => onNavigate("home")}
@@ -32,9 +54,10 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
           >
             HA
           </button>
+
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="p-2 hover:bg-muted rounded-lg transition-colors"
+            className="p-2 hover:bg-muted/50 rounded-lg transition-colors"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -42,6 +65,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
         </div>
       </nav>
 
+      {/* Fullscreen Menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -55,15 +79,17 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
-              className="flex flex-col gap-8"
+              transition={{ duration: 0.3 }}
+              className="flex flex-col gap-10"
             >
               {menuItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => handleNavigate(item.id)}
-                  className={`text-5xl md:text-7xl tracking-tight hover:opacity-70 transition-opacity ${
-                    currentPage === item.id ? "opacity-100" : "opacity-40"
+                  className={`text-5xl md:text-7xl tracking-tight transition-opacity ${
+                    currentPage === item.id
+                      ? "opacity-100"
+                      : "opacity-40 hover:opacity-80"
                   }`}
                 >
                   {item.label}

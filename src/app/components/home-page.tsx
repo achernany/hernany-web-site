@@ -73,71 +73,59 @@ export function HomePage({ onNavigate }: HomePageProps) {
   const opacity = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
 
   return (
-    <main className="pt-20">
+  <main>
       {/* Hero Section with Parallax */}
-      <section
+          <section
         ref={heroRef}
         aria-labelledby="home-hero-title"
-        className="relative min-h-screen flex items-center overflow-hidden"
-      >
+        className="relative min-h-[100svh] overflow-hidden pt-20"
+          >
         <motion.div style={{ y: imageY }} className="absolute inset-0 z-0">
-         <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/50 via-background/60 to-background" />
+        <div className="absolute inset-0 z-10 bg-gradient-to-l from-black/75 via-black/35 to-transparent" />
           <img
-              src="/images/hero.webp"
-              alt="Hernany Acosta — Service & Product Designer"
-              className="w-full h-full object-cover opacity-40"
-              loading="eager"
-              fetchPriority="high"
-            />
+            src="/images/hero.webp"
+            alt="Hernany Acosta — Service & Product Designer"
+            className="w-full h-full object-cover"
+            style={{ objectPosition: "20% center" }}
+            loading="eager"
+            fetchPriority="high"
+          />
         </motion.div>
 
-        <motion.header
-          style={{ y: textY, opacity }}
-          className="relative z-20 max-w-7xl mx-auto px-6 lg:px-12 py-32"
-        >
-          <div className="max-w-4xl">
-            <h1
-              id="home-hero-title"
-              className="text-6xl md:text-8xl lg:text-9xl tracking-tight mb-6"
-            >
-              Hernany Acosta
-            </h1>
+     <motion.header
+    style={{ y: textY, opacity }}
+      className="relative z-20 max-w-7xl mx-auto px-6 lg:px-12 py-24"
+    >
+      <div className="grid lg:grid-cols-12 items-center gap-10">
+        <div className="hidden lg:block lg:col-span-6" />
+        <div className="lg:col-span-6">
+          <h1
+            id="home-hero-title"
+            className="text-6xl md:text-8xl lg:text-8xl tracking-tight mb-6"
+          >
+            Hernany Acosta
+          </h1>
 
-            <p className="text-2xl md:text-3xl text-muted-foreground mb-8">
-              Service &amp; Product Designer for regulated digital ecosystems
-            </p>
+          <p className="text-2xl md:text-3xl text-muted-foreground mb-8">
+            Service &amp; Product Designer for regulated digital ecosystems
+          </p>
 
-            <p className="text-xl md:text-2xl leading-relaxed mb-8 max-w-3xl">
-              I design scalable UX systems for complex, regulated and transactional
-              environments — translating business constraints into architecture-ready,
-              frontend-aligned product experiences.
-            </p>
+          <p className="text-xl md:text-2xl leading-relaxed mb-8 max-w-2xl">
+            I design scalable UX systems for complex, regulated and transactional
+            environments — translating business constraints into architecture-ready,
+            frontend-aligned product experiences.
+          </p>
 
-            <p className="text-lg text-muted-foreground mb-12">
-              UX Architecture · Service Design · Design Systems · Frontend-aware Handoff
-            </p>
+          <p className="text-lg text-muted-foreground mb-12">
+            UX Architecture · Service Design · Design Systems · Frontend-aware Handoff
+          </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button
-                onClick={() => onNavigate("projects")}
-                className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-[var(--accent-portfolio)] text-white rounded-lg hover:opacity-90 transition-opacity"
-              >
-                <span>View selected work</span>
-                <ArrowRight
-                  size={20}
-                  className="group-hover:translate-x-1 transition-transform"
-                />
-              </button>
-
-              <button
-                onClick={() => onNavigate("contact")}
-                className="inline-flex items-center justify-center px-8 py-4 rounded-lg border border-border bg-background/40 hover:bg-background/70 transition-colors"
-              >
-                Contact
-              </button>
-            </div>
+          <div className="flex flex-col sm:flex-row gap-4">
+            {/* botones igual */}
           </div>
-        </motion.header>
+        </div>
+      </div>
+    </motion.header>
       </section>
 
       {/* Value Proposition */}
