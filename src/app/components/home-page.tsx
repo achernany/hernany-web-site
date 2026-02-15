@@ -1,64 +1,10 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
-import { ArrowRight } from "lucide-react";
+import { Linkedin, Github, Instagram, ArrowUpRight } from "lucide-react";
 
 interface HomePageProps {
   onNavigate: (page: string, projectId?: string) => void;
 }
-
-const featuredProjects = [
-  {
-    id: "lotobola",
-    title: "LotoBola",
-    description:
-      "End-to-end UX architecture and UI for a transactional betting ecosystem: critical flows, operational clarity, and frontend-ready handoff.",
-    role: "Lead Product / Service Designer",
-    type: "Regulated Platform · Web App",
-    image:
-      "https://images.unsplash.com/photo-1718157582118-f04597eaae56?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZXR0aW5nJTIwcGxhdGZvcm0lMjBpbnRlcmZhY2V8ZW58MXx8fHwxNzY5MjE3Mjk3fDA&ixlib=rb-4.1.0&q=80&w=1080",
-  },
-  {
-    id: "playzonbet",
-    title: "PlayzonBet",
-    description:
-      "Scalable UX systems and UI patterns for sports betting: reusable components, content hierarchy, and delivery alignment with engineering.",
-    role: "Lead Product Designer",
-    type: "Platform · Design System",
-    image:
-      "https://images.unsplash.com/photo-1758411898021-ef0dadaaa295?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBkYXNoYm9hcmQlMjBpbnRlcmZhY2V8ZW58MXx8fHwxNzY5MTY5OTM3fDA&ixlib=rb-4.1.0&q=80&w=1080",
-  },
-  {
-    id: "inlearning",
-    title: "Inlearning",
-    description:
-      "Information architecture + UI for enterprise learning: usability, content structure, and implementation feasibility across teams.",
-    role: "Product Designer",
-    type: "Enterprise Platform",
-    image:
-      "https://images.unsplash.com/photo-1588912914074-b93851ff14b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVhcm5pbmclMjBwbGF0Zm9ybXxlbnwxfHx8fDE3NjkyMTcyOTd8MA&ixlib=rb-4.1.0&q=80&w=1080",
-  },
-  {
-    id: "pacasmayo",
-    title: "Pacasmayo",
-    description:
-      "UX and UI for internal operations: workflows, training support, and system consistency across modules and roles.",
-    role: "UX / Product Designer",
-    type: "Internal Platform",
-    image:
-      "https://images.unsplash.com/photo-1698440050363-1697e5f0277c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZXNpZ24lMjBzeXN0ZW0lMjBjb21wb25lbnRzfGVufDF8fHx8MTc2OTEyODA1OHww&ixlib=rb-4.1.0&q=80&w=1080",
-  },
-];
-
-const additionalExperience = [
-  { title: "Jakala – Marketing Campaigns", type: "Marketing / Campaign", year: "2023", image: "https://images.unsplash.com/photo-1656164631610-f104326810c1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwbWFya2V0aW5nJTIwY2FtcGFpZ258ZW58MXx8fHwxNzY5MDk2NzI4fDA&ixlib=rb-4.1.0&q=80&w=1080" },
-  { title: "Jakala – Brand Activations", type: "Branding / Campaign", year: "2023", image: "https://images.unsplash.com/photo-1702047054352-cf264d3b1a9c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxicmFuZCUyMGRlc2lnbiUyMHdvcmtzcGFjZXxlbnwxfHx8fDE3NjkyMTcyOTh8MA&ixlib=rb-4.1.0&q=80&w=1080" },
-  { title: "Corporate Branding Projects", type: "Branding / Visual", year: "2022", image: "https://images.unsplash.com/photo-1702047054352-cf264d3b1a9c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxicmFuZCUyMGRlc2lnbiUyMHdvcmtzcGFjZXxlbnwxfHx8fDE3NjkyMTcyOTh8MA&ixlib=rb-4.1.0&q=80&w=1080" },
-  { title: "Visual Identity Systems", type: "Branding / Visual", year: "2022", image: "https://images.unsplash.com/photo-1702047054352-cf264d3b1a9c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxicmFuZCUyMGRlc2lnbiUyMHdvcmtzcGFjZXxlbnwxfHx8fDE3NjkyMTcyOTh8MA&ixlib=rb-4.1.0&q=80&w=1080" },
-  { title: "Landing Pages", type: "Visual / Web", year: "2023", image: "https://images.unsplash.com/photo-1656164631610-f104326810c1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwbWFya2V0aW5nJTIwY2FtcGFpZ258ZW58MXx8fHwxNzY5MDk2NzI4fDA&ixlib=rb-4.1.0&q=80&w=1080" },
-  { title: "Marketing Websites", type: "Visual / Web", year: "2022", image: "https://images.unsplash.com/photo-1656164631610-f104326810c1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwbWFya2V0aW5nJTIwY2FtcGFpZ258ZW58MXx8fHwxNzY5MDk2NzI4fDA&ixlib=rb-4.1.0&q=80&w=1080" },
-  { title: "Editorial Design", type: "Editorial / Visual", year: "2021", image: "https://images.unsplash.com/photo-1702047054352-cf264d3b1a9c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxicmFuZCUyMGRlc2lnbiUyMHdvcmtzcGFjZXxlbnwxfHx8fDE3NjkyMTcyOTh8MA&ixlib=rb-4.1.0&q=80&w=1080" },
-  { title: "Social Media Campaigns", type: "Marketing / Campaign", year: "2021", image: "https://images.unsplash.com/photo-1656164631610-f104326810c1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwbWFya2V0aW5nJTIwY2FtcGFpZ258ZW58MXx8fHwxNzY5MDk2NzI4fDA&ixlib=rb-4.1.0&q=80&w=1080" },
-];
 
 export function HomePage({ onNavigate }: HomePageProps) {
   const heroRef = useRef<HTMLElement>(null);
@@ -68,193 +14,252 @@ export function HomePage({ onNavigate }: HomePageProps) {
     offset: ["start start", "end start"],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "28%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "45%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "28%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
   return (
-  <main>
-      {/* Hero Section with Parallax */}
-          <section
+    <main className="pt-0">
+      <section
         ref={heroRef}
+        className="relative h-screen overflow-hidden"
         aria-labelledby="home-hero-title"
-        className="relative min-h-[100svh] overflow-hidden pt-20"
-          >
+      >
+        {/* Background */}
         <motion.div style={{ y: imageY }} className="absolute inset-0 z-0">
-        <div className="absolute inset-0 z-10 bg-gradient-to-l from-black/75 via-black/35 to-transparent" />
           <img
-            src="/images/hero.webp"
+            src="/images/hero-desktop.webp"
+            srcSet="/images/hero-mobile.webp 900w, /images/hero-desktop.webp 1920w"
+            sizes="(max-width: 768px) 100vw, 100vw"
             alt="Hernany Acosta — Service & Product Designer"
-            className="w-full h-full object-cover"
-            style={{ objectPosition: "20% center" }}
+            className="w-full h-full object-cover object-[20%_20%] md:object-[25%_20%]"
             loading="eager"
             fetchPriority="high"
+            decoding="async"
           />
+
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/35 to-transparent md:from-black/60 md:via-black/22 md:to-transparent" />
+          {/* Bottom fade */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60" />
         </motion.div>
 
-     <motion.header
-    style={{ y: textY, opacity }}
-      className="relative z-20 max-w-7xl mx-auto px-6 lg:px-12 py-24"
-    >
-      <div className="grid lg:grid-cols-12 items-center gap-10">
-        <div className="hidden lg:block lg:col-span-6" />
-        <div className="lg:col-span-6">
-          <h1
-            id="home-hero-title"
-            className="text-6xl md:text-8xl lg:text-8xl tracking-tight mb-6"
-          >
-            Hernany Acosta
-          </h1>
+        {/* Content */}
+        <motion.div style={{ y: textY, opacity }} className="relative z-10 h-full">
+          <div className="max-w-7xl mx-auto px-6 lg:px-12 h-full pt-24 md:pt-32 pb-28 md:pb-24">
+            <div className="h-full grid lg:grid-cols-12 items-end lg:items-center">
+              <div className="hidden lg:block lg:col-span-6" />
 
-          <p className="text-2xl md:text-3xl text-muted-foreground mb-8">
-            Service &amp; Product Designer for regulated digital ecosystems
-          </p>
+              <div className="lg:col-span-6 w-full">
+                {/* DESKTOP */}
+                <div className="hidden md:block max-w-xl">
+                  <h1
+                    id="home-hero-title"
+                    className="tracking-tight text-white mb-5 leading-[0.92]"
+                  >
+                    <span className="block font-brand font-extrabold text-5xl md:text-7xl lg:text-8xl">
+                      Hernany
+                    </span>
+                    <span className="block font-brand font-semibold text-5xl md:text-7xl lg:text-8xl">
+                      Acosta
+                    </span>
+                  </h1>
 
-          <p className="text-xl md:text-2xl leading-relaxed mb-8 max-w-2xl">
-            I design scalable UX systems for complex, regulated and transactional
-            environments — translating business constraints into architecture-ready,
-            frontend-aligned product experiences.
-          </p>
+                  <p className="text-white/90 text-xl md:text-2xl leading-relaxed mb-6">
+                    <span className="font-semibold">
+                      I design scalable UX systems
+                    </span>{" "}
+                    <span className="italic">
+                      for complex, regulated and transactional environments
+                    </span>{" "}
+                    — translating business constraints into architecture-ready,
+                    frontend-aligned product experiences.
+                  </p>
 
-          <p className="text-lg text-muted-foreground mb-12">
-            UX Architecture · Service Design · Design Systems · Frontend-aware Handoff
-          </p>
+                  <p className="text-white/70 text-sm md:text-base mb-8">
+                    UX Architecture · Service Design · Design Systems · Frontend-aware Handoff
+                  </p>
 
-          <div className="flex flex-col sm:flex-row gap-4">
-            {/* botones igual */}
-          </div>
-        </div>
-      </div>
-    </motion.header>
-      </section>
+                  <div className="flex items-center gap-4">
+                    <button
+                      onClick={() => onNavigate("projects")}
+                      className="
+                        inline-flex items-center justify-center
+                        h-12 px-8 rounded-full
+                        bg-[var(--accent-portfolio)] text-white
+                        hover:opacity-90 transition-opacity
+                        text-sm font-semibold
+                      "
+                    >
+                      Explore work
+                    </button>
 
-      {/* Value Proposition */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-12 py-32" aria-labelledby="value-title">
-        <h2 id="value-title" className="sr-only">
-          Value proposition
-        </h2>
+                    <button
+                      onClick={() => onNavigate("contact")}
+                      className="
+                        inline-flex items-center justify-center
+                        h-12 px-6 rounded-full
+                        border border-[var(--accent-portfolio)]
+                        bg-[color:var(--accent-portfolio)]/10
+                        text-[var(--accent-portfolio)]
+                        hover:bg-[color:var(--accent-portfolio)]/16
+                        transition-colors
+                        text-sm font-semibold
+                      "
+                    >
+                      Get in touch
+                    </button>
+                  </div>
+                </div>
 
-        <div className="grid md:grid-cols-3 gap-12 lg:gap-16">
-          <div className="space-y-4">
-            <h3 className="text-2xl md:text-3xl tracking-tight">
-              Regulated & Transactional UX
-            </h3>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              I design flows where correctness matters: validations, strict rules,
-              edge cases, operational clarity, and compliance-driven constraints.
-            </p>
-          </div>
+                {/* MOBILE */}
+                <div className="md:hidden w-full">
+                  <h1
+                    id="home-hero-title"
+                    className="
+                      font-brand uppercase text-white text-center
+                      tracking-[0.04em]
+                      leading-none
+                      mb-1
+                      text-[clamp(2rem,5.4vw,1.75rem)]
+                    "
+                  >
+                    <span className="font-semibold">HERNANY</span>{" "}
+                    <span className="font-light">ACOSTA</span>
+                  </h1>
 
-          <div className="space-y-4">
-            <h3 className="text-2xl md:text-3xl tracking-tight">
-              UX → UI → Frontend Delivery
-            </h3>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              I ship systems, not mockups: UX architecture, UI specs, reusable patterns,
-              and tight collaboration to ensure implementation matches intent.
-            </p>
-          </div>
+                  <p className="text-white/90 text-sm leading-relaxed mb-3 text-center">
+                    <span className="font-bold">Service &amp; Product Designer</span>{" "}
+                    <span className="italic">for regulated digital products.</span>
+                  </p>
 
-          <div className="space-y-4">
-            <h3 className="text-2xl md:text-3xl tracking-tight">
-              Systems over Screens
-            </h3>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              I prioritize information architecture, workflows, and component governance
-              so products scale across teams, markets and evolving requirements.
-            </p>
-          </div>
-        </div>
-      </section>
+                  <p className="text-white/45 text-[12px] leading-relaxed mb-8 text-center px-16">
+                    UX Architecture · Service Design · Design Systems · Frontend-aware Handoff
+                  </p>
 
-      {/* Featured Projects */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-12 py-32" aria-labelledby="core-work-title">
-        <h2 id="core-work-title" className="text-4xl md:text-6xl tracking-tight mb-16">
-          Core Product Work
-        </h2>
+                  {/* Mantengo row como tu referencia visual */}
+                  <div className="flex items-center justify-center gap-3">
+                    <button
+                      onClick={() => onNavigate("projects")}
+                      className="
+                        inline-flex items-center justify-center
+                        h-11 px-5 rounded-full
+                        bg-[var(--accent-portfolio)] text-white
+                        hover:opacity-90 transition-opacity
+                        text-sm font-semibold
+                        flex-1 max-w-[230px]
+                      "
+                    >
+                      Explore work
+                    </button>
 
-        <div className="grid gap-16 lg:gap-24">
-          {featuredProjects.map((project) => (
-            <motion.article
-              key={project.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6 }}
-              className="group cursor-pointer"
-              onClick={() => onNavigate("case-study", project.id)}
-              aria-label={`Open case study: ${project.title}`}
-            >
-              <div className="relative overflow-hidden rounded-lg mb-8 aspect-[16/9]">
-                <img
-                  src={project.image}
-                  alt={`${project.title} project cover`}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-              </div>
-
-              <div className="space-y-4">
-                <h3 className="text-3xl md:text-5xl tracking-tight group-hover:text-[var(--accent-portfolio)] transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl">
-                  {project.description}
-                </p>
-
-                <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-                  <span>Role: {project.role}</span>
-                  <span>·</span>
-                  <span>{project.type}</span>
+                    <button
+                      onClick={() => onNavigate("contact")}
+                      className="
+                        inline-flex items-center justify-center
+                        h-11 px-4 rounded-full
+                        border border-[var(--accent-portfolio)]
+                        bg-[color:var(--accent-portfolio)]/10
+                        text-[var(--accent-portfolio)]
+                        hover:bg-[color:var(--accent-portfolio)]/16
+                        transition-colors
+                        text-sm font-semibold
+                        w-[124px]
+                      "
+                    >
+                      Get in touch
+                    </button>
+                  </div>
                 </div>
               </div>
-            </motion.article>
-          ))}
-        </div>
-      </section>
+            </div>
+          </div>
 
-      {/* Additional Experience */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-12 py-32" aria-labelledby="additional-title">
-        <div className="mb-16 space-y-4">
-          <h2 id="additional-title" className="text-4xl md:text-6xl tracking-tight">
-            Additional Design Experience
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl">
-            Branding, campaigns, visual systems and other selected work.
-          </p>
-        </div>
+          {/* Bottom bar (icons) */}
+          <div className="absolute bottom-0 left-0 right-0 z-20">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-5">
+              <div className="flex items-center justify-between gap-4">
+                {/* Left: icons */}
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <a
+                    href="https://www.linkedin.com/in/hernanyacosta/"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="LinkedIn"
+                    className="text-white/90 hover:text-white transition-colors"
+                  >
+                    <Linkedin size={18} />
+                  </a>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {additionalExperience.map((item, index) => (
-            <motion.article
-              key={`${item.title}-${index}`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="group cursor-pointer"
-              aria-label={`${item.title} (${item.year})`}
-            >
-              <div className="relative overflow-hidden rounded-lg mb-4 aspect-square">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
+                  <a
+                    href="https://github.com/achernany"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="GitHub"
+                    className="text-white/90 hover:text-white transition-colors"
+                  >
+                    <Github size={18} />
+                  </a>
+
+                  <a
+                    href="https://medium.com/@hernanyacosta"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Medium"
+                    className="text-white/90 hover:text-white transition-colors"
+                  >
+                    <ArrowUpRight size={18} />
+                  </a>
+
+                  <a
+                    href="https://instagram.com/hernanyac"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Instagram"
+                    className="text-white/90 hover:text-white transition-colors"
+                  >
+                    <Instagram size={18} />
+                  </a>
+                </div>
+
+                {/* Center email (clickable on desktop) */}
+                <a
+                  href="mailto:hi@hernanyacosta.com"
+                  className="hidden sm:block text-white/70 hover:text-white transition-colors text-sm"
+                >
+                  hi@hernanyacosta.com
+                </a>
+
+                {/* Right: download */}
+                <a
+                  href="/Hernany-Acosta-CV.pdf"
+                  className="
+                    inline-flex items-center justify-center
+                    h-10 px-4 rounded-full
+                    border border-white/20
+                    bg-white/10 backdrop-blur-sm
+                    text-white
+                    hover:bg-white/18 transition-colors
+                    whitespace-nowrap
+                    text-xs sm:text-sm
+                  "
+                >
+                  Download CV
+                </a>
               </div>
 
-              <h3 className="text-lg mb-2 group-hover:text-[var(--accent-portfolio)] transition-colors">
-                {item.title}
-              </h3>
-
-              <div className="text-sm text-muted-foreground space-y-1">
-                <p>{item.type}</p>
-                <p>{item.year}</p>
+              {/* Mobile email line (clickable) */}
+              <div className="sm:hidden mt-2 text-center text-[11px]">
+                <a
+                  href="mailto:hi@hernanyacosta.com"
+                  className="text-white/70 hover:text-white transition-colors"
+                >
+                  hi@hernanyacosta.com
+                </a>
               </div>
-            </motion.article>
-          ))}
-        </div>
+            </div>
+          </div>
+        </motion.div>
       </section>
     </main>
   );

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
@@ -12,16 +12,10 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 8);
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    const onScroll = () => setIsScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const menuItems = [
@@ -38,59 +32,66 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
 
   return (
     <>
-      {/* Top Navigation */}
       <nav
         className={[
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          isScrolled
-            ? "bg-background/80 backdrop-blur-md border-b border-border"
+          isScrolled || isMenuOpen
+            ? "bg-background/70 backdrop-blur-md border-b border-border"
             : "bg-transparent border-b border-transparent",
         ].join(" ")}
+        aria-label="Primary"
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+          {/* Logo (link a Home) */}
           <button
-            onClick={() => onNavigate("home")}
-            className="text-xl tracking-tight hover:opacity-70 transition-opacity"
+            onClick={() => handleNavigate("home")}
+            className="inline-flex items-center gap-3 hover:opacity-80 transition-opacity"
+            aria-label="Go to Home"
           >
-            HA
+            <img
+              src="/logo.svg"
+              alt="Hernany Acosta"
+              className="h-4 w-auto"
+              loading="eager"
+            />
           </button>
 
+          {/* Menu toggle */}
           <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="p-2 hover:bg-muted/50 rounded-lg transition-colors"
-            aria-label="Toggle menu"
+            onClick={() => setIsMenuOpen((v) => !v)}
+            className="p-2 rounded-lg hover:bg-white/5 transition-colors"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </nav>
 
-      {/* Fullscreen Menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-background z-40 flex items-center justify-center"
+            transition={{ duration: 0.18 }}
+            className="fixed inset-0 z-40 bg-background/95 backdrop-blur-md flex items-center justify-center"
           >
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.3 }}
-              className="flex flex-col gap-10"
+              exit={{ opacity: 0, y: 12 }}
+              transition={{ duration: 0.22 }}
+              className="flex flex-col gap-8 text-center"
             >
               {menuItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => handleNavigate(item.id)}
-                  className={`text-5xl md:text-7xl tracking-tight transition-opacity ${
-                    currentPage === item.id
-                      ? "opacity-100"
-                      : "opacity-40 hover:opacity-80"
-                  }`}
+                  className={[
+                    "text-5xl md:text-7xl tracking-tight transition-opacity",
+                    currentPage === item.id ? "opacity-100" : "opacity-50 hover:opacity-80",
+                  ].join(" ")}
                 >
                   {item.label}
                 </button>

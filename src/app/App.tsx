@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { Navigation } from "@/app/components/navigation";
-import { Footer } from "@/app/components/footer";
-import { HomePage } from "@/app/components/home-page";
-import { AboutPage } from "@/app/components/about-page";
-import { ProjectsPage } from "@/app/components/projects-page";
-import { CaseStudyPage } from "@/app/components/case-study-page";
-import { ContactPage } from "@/app/components/contact-page";
+import { Navigation } from "./components/navigation";
+import { HomePage } from "./components/home-page";
+import { AboutPage } from "./components/about-page";
+import { ProjectsPage } from "./components/projects-page";
+import { CaseStudyPage } from "./components/case-study-page";
+import { ContactPage } from "./components/contact-page";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -47,10 +46,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
-      <main>{renderPage()}</main>
-      <Footer />
-    </div>
-  );
+  <div className="min-h-screen bg-background text-foreground overflow-hidden">
+    <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
+    <main className="h-screen overflow-hidden">{renderPage()}</main>
+  </div>
+);
 }
