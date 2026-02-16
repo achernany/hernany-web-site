@@ -55,17 +55,17 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 <div className="hidden md:block max-w-xl">
                   <h1
                     id="home-hero-title"
-                    className="tracking-tight text-white mb-5 leading-[0.92]"
+                    className="tracking-tight text-white/90 mb-8 leading-[0.92]"
                   >
-                    <span className="block font-brand font-extrabold text-5xl md:text-7xl lg:text-8xl">
+                    <span className="block font-brand font-semibold text-5xl md:text-7xl lg:text-7xl">
                       Hernany
                     </span>
-                    <span className="block font-brand font-semibold text-5xl md:text-7xl lg:text-8xl">
+                    <span className="block font-brand font-light text-5xl md:text-7xl lg:text-7xl">
                       Acosta
                     </span>
                   </h1>
 
-                  <p className="text-white/90 text-xl md:text-2xl leading-relaxed mb-6">
+                  <p className="text-white/80 text-xl md:text-xl leading-relaxed mb-8">
                     <span className="font-semibold">
                       I design scalable UX systems
                     </span>{" "}
@@ -76,7 +76,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
                     frontend-aligned product experiences.
                   </p>
 
-                  <p className="text-white/70 text-sm md:text-base mb-8">
+                  <p className="text-white/50 text-sm md:text-base mb-8">
                     UX Architecture · Service Design · Design Systems · Frontend-aware Handoff
                   </p>
 
@@ -128,17 +128,17 @@ export function HomePage({ onNavigate }: HomePageProps) {
                     <span className="font-light">ACOSTA</span>
                   </h1>
 
-                  <p className="text-white/90 text-sm leading-relaxed mb-3 text-center">
+                  <p className="text-white/90 text-[12px] leading-relaxed mb-3 text-center">
                     <span className="font-bold">Service &amp; Product Designer</span>{" "}
                     <span className="italic">for regulated digital products.</span>
                   </p>
 
-                  <p className="text-white/45 text-[12px] leading-relaxed mb-8 text-center px-16">
+                  <p className="text-white/45 text-[10px] leading-relaxed mb-8 text-center px-16">
                     UX Architecture · Service Design · Design Systems · Frontend-aware Handoff
                   </p>
 
                   {/* Mantengo row como tu referencia visual */}
-                  <div className="flex items-center justify-center gap-3">
+                  <div className="flex items-center justify-center gap-4">
                     <button
                       onClick={() => onNavigate("projects")}
                       className="
@@ -175,12 +175,15 @@ export function HomePage({ onNavigate }: HomePageProps) {
             </div>
           </div>
 
-          {/* Bottom bar (icons) */}
-          <div className="absolute bottom-0 left-0 right-0 z-20">
-            <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-5">
-              <div className="flex items-center justify-between gap-4">
+          {/* Bottom bar (fixed in mobile, absolute in desktop) */}
+          <div className="fixed md:absolute bottom-0 left-0 right-0 z-20">
+            <div
+              className="max-w-7xl mx-auto px-6 lg:px-12"
+              style={{ paddingBottom: "calc(10px + env(safe-area-inset-bottom))" }}
+            >
+              <div className="flex items-center justify-between gap-3">
                 {/* Left: icons */}
-                <div className="flex items-center gap-3 sm:gap-4">
+                <div className="flex items-center gap-3">
                   <a
                     href="https://www.linkedin.com/in/hernanyacosta/"
                     target="_blank"
@@ -202,16 +205,6 @@ export function HomePage({ onNavigate }: HomePageProps) {
                   </a>
 
                   <a
-                    href="https://medium.com/@hernanyacosta"
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="Medium"
-                    className="text-white/90 hover:text-white transition-colors"
-                  >
-                    <ArrowUpRight size={18} />
-                  </a>
-
-                  <a
                     href="https://instagram.com/hernanyac"
                     target="_blank"
                     rel="noreferrer"
@@ -222,39 +215,39 @@ export function HomePage({ onNavigate }: HomePageProps) {
                   </a>
                 </div>
 
-                {/* Center email (clickable on desktop) */}
+                {/* Desktop email */}
                 <a
-                  href="mailto:hi@hernanyacosta.com"
+                  href="mailto:hey@hernanyacosta.com"
                   className="hidden sm:block text-white/70 hover:text-white transition-colors text-sm"
                 >
-                  hi@hernanyacosta.com
+                  hey@hernanyacosta.com
                 </a>
 
-                {/* Right: download */}
+                {/* Right: download (slightly smaller in mobile) */}
                 <a
                   href="/Hernany-Acosta-CV.pdf"
                   className="
                     inline-flex items-center justify-center
-                    h-10 px-4 rounded-full
+                    h-9 md:h-10 px-3 md:px-4 rounded-full
                     border border-white/20
                     bg-white/10 backdrop-blur-sm
                     text-white
                     hover:bg-white/18 transition-colors
                     whitespace-nowrap
-                    text-xs sm:text-sm
+                    text-[11px] md:text-sm
                   "
                 >
                   Download CV
                 </a>
               </div>
 
-              {/* Mobile email line (clickable) */}
-              <div className="sm:hidden mt-2 text-center text-[11px]">
+              {/* Mobile email line (always visible now) */}
+              <div className="mt-1 text-center text-[11px] sm:hidden">
                 <a
-                  href="mailto:hi@hernanyacosta.com"
-                  className="text-white/70 hover:text-white transition-colors"
+                  href="mailto:hey@hernanyacosta.com"
+                  className="text-white/60 hover:text-white transition-colors"
                 >
-                  hi@hernanyacosta.com
+                  hey@hernanyacosta.com
                 </a>
               </div>
             </div>

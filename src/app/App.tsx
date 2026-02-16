@@ -45,10 +45,13 @@ export default function App() {
     }
   };
 
-  return (
-  <div className="min-h-screen bg-background text-foreground overflow-hidden">
+return (
+  <div className="min-h-screen bg-background text-foreground">
     <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
-    <main className="h-screen overflow-hidden">{renderPage()}</main>
+    {/* Importante: no forzar h-screen ni overflow-hidden aquí */}
+    <main className="min-h-[100svh]">
+      {renderPage()}
+    </main>
   </div>
 );
 }
