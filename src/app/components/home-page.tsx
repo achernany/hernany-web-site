@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
-import { Linkedin, Github, Instagram, ArrowUpRight } from "lucide-react";
+import { Linkedin, Github, Instagram } from "lucide-react";
 
 interface HomePageProps {
   onNavigate: (page: string, projectId?: string) => void;
@@ -38,18 +38,14 @@ export function HomePage({ onNavigate }: HomePageProps) {
             decoding="async"
           />
 
-          {/* Overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/35 to-transparent md:from-black/60 md:via-black/22 md:to-transparent" />
-          {/* Bottom fade */}
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60" />
         </motion.div>
 
-       {/* Content + Footer layout (mobile-safe, desktop unchanged) */}
-        <motion.div style={{ y: textY, opacity }} className="relative z-10">
-          {/* ✅ Mobile: 100svh avoids Safari bottom bar overlap
-              ✅ Desktop: h-full like before */}
+        {/* ✅ FIX: h-full so desktop grid fills the hero */}
+        <motion.div style={{ y: textY, opacity }} className="relative z-10 h-full">
           <div className="h-[100svh] md:h-full grid grid-rows-[1fr_auto]">
-            {/* ====== MAIN CONTENT (row 1) ====== */}
+            {/* MAIN CONTENT */}
             <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full pt-24 md:pt-32">
               <div className="h-full grid lg:grid-cols-12 items-end lg:items-center">
                 <div className="hidden lg:block lg:col-span-6" />
@@ -118,7 +114,6 @@ export function HomePage({ onNavigate }: HomePageProps) {
                       UX Architecture · Service Design · Design Systems · Frontend-aware Handoff
                     </p>
 
-                    {/* CTA row (keeps your look) */}
                     <div className="flex items-center justify-center gap-4 mb-8">
                       <button
                         onClick={() => onNavigate("projects")}
@@ -139,13 +134,12 @@ export function HomePage({ onNavigate }: HomePageProps) {
               </div>
             </div>
 
-            {/* ====== FOOTER (row 2) ALWAYS VISIBLE ====== */}
+            {/* FOOTER */}
             <div
               className="max-w-7xl mx-auto px-6 lg:px-12 w-full pb-3"
               style={{ paddingBottom: "calc(10px + env(safe-area-inset-bottom))" }}
             >
               <div className="flex items-center justify-between gap-3">
-                {/* Left icons */}
                 <div className="flex items-center gap-3">
                   <a
                     href="https://www.linkedin.com/in/hernanyacosta/"
@@ -178,7 +172,6 @@ export function HomePage({ onNavigate }: HomePageProps) {
                   </a>
                 </div>
 
-                {/* Desktop email */}
                 <a
                   href="mailto:hey@hernanyacosta.com"
                   className="hidden sm:block text-white/70 hover:text-white transition-colors text-sm"
@@ -186,16 +179,17 @@ export function HomePage({ onNavigate }: HomePageProps) {
                   hey@hernanyacosta.com
                 </a>
 
-                {/* Download */}
-                <a
+               <a
                   href="/Hernany-Acosta-CV.pdf"
+                  download="Hernany-Acosta-CV.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center justify-center h-9 md:h-10 px-3 md:px-4 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm text-white hover:bg-white/18 transition-colors whitespace-nowrap text-[11px] md:text-sm"
                 >
                   Download CV
                 </a>
               </div>
 
-              {/* Mobile email line (always visible) */}
               <div className="sm:hidden mt-1 text-center text-[11px]">
                 <a
                   href="mailto:hey@hernanyacosta.com"
