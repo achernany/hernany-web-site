@@ -35,8 +35,8 @@ export default function App() {
       <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
       <main className="flex-1 min-h-0">{renderPage()}</main>
       {currentPage !== "home" && (
-        <footer className="py-3 md:py-4">
-          <p className="text-center text-[11px] text-muted-foreground">
+        <footer className="py-2 md:py-3">
+          <p className="text-center text-[8px] leading-3 tracking-[-0.16px] text-white/50 italic font-light">
             © 2026 Hernany Acosta. All rights reserved.
           </p>
         </footer>

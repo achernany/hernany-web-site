@@ -112,12 +112,14 @@ export function HomePage({ onNavigate }: HomePageProps) {
           <img
             src="/images/hero-mobile.webp"
             alt="Hernany Acosta mobile hero"
-            className="md:hidden absolute inset-0 w-full h-full object-cover object-[28%_24%] opacity-25"
+            className="md:hidden absolute inset-0 w-full h-full object-cover object-[24%_12%] max-[380px]:object-[20%_10%] scale-[1.03] opacity-34"
             loading="eager"
             fetchPriority="high"
             decoding="async"
           />
-          <div className="md:hidden absolute inset-0 bg-black/15" />
+          <div className="md:hidden absolute inset-0 bg-gradient-to-r from-black/22 via-black/48 to-black/86" />
+          <div className="md:hidden absolute inset-0 bg-gradient-to-b from-black/46 via-black/56 to-black/84" />
+          <div className="md:hidden absolute inset-x-0 bottom-0 h-[54%] bg-black/56" />
         </motion.div>
 
         {/* ✅ FIX: h-full so desktop grid fills the hero */}
@@ -222,7 +224,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
                       </button>
                     </div>
 
-                    <p className="text-center px-4 py-3 text-[12px] leading-5 tracking-[-0.03em] text-white/90 min-h-[44px]">
+                    <p className="text-center py-3 text-[12px] leading-5 tracking-[-0.03em] text-white/90 min-h-[44px] break-words">
                       <span>{baseLine}</span>
                       <span className="typewriter-accent font-extrabold italic">
                         {accentLine}

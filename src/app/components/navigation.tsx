@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, X, Linkedin, Github, Instagram } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 interface NavigationProps {
@@ -197,52 +197,6 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                   </div>
                 </div>
 
-                {/* Bottom pinned footer */}
-                <div
-                  className={[
-                    "absolute left-6 right-6",
-                    "bottom-[clamp(18px,4vh,34px)]",
-                  ].join(" ")}
-                  style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
-                >
-                  <div className="h-px w-full bg-white/10 mb-5 max-[740px]:mb-3" />
-
-                  <div className="flex items-center justify-center gap-5 max-[740px]:gap-4">
-                    <a
-                      href="https://www.linkedin.com/in/hernanyacosta/"
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label="LinkedIn"
-                      className="text-white/80 hover:text-white transition-colors"
-                    >
-                      <Linkedin size={18} />
-                    </a>
-
-                    <a
-                      href="https://github.com/achernany"
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label="GitHub"
-                      className="text-white/80 hover:text-white transition-colors"
-                    >
-                      <Github size={18} />
-                    </a>
-
-                    <a
-                      href="https://instagram.com/hernanyac"
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label="Instagram"
-                      className="text-white/80 hover:text-white transition-colors"
-                    >
-                      <Instagram size={18} />
-                    </a>
-                  </div>
-
-                  <p className="mt-4 text-center text-[11px] text-white/55">
-                    © 2026 Hernany Acosta. All rights reserved.
-                  </p>
-                </div>
               </div>
             </motion.div>
           </>
