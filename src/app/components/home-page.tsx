@@ -42,18 +42,8 @@ export function HomePage({ onNavigate }: HomePageProps) {
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60" />
           </div>
 
-          {/* Mobile background image with app-style overlays */}
-          <img
-            src="/images/hero-mobile.webp"
-            alt="Hernany Acosta mobile hero"
-            className="md:hidden w-full h-full object-cover object-[28%_24%]"
-            loading="eager"
-            fetchPriority="high"
-            decoding="async"
-          />
-          <div className="md:hidden absolute inset-0 bg-gradient-to-b from-black/48 via-[#09102a]/58 to-[#05070f]/86" />
-          <div className="md:hidden absolute inset-0 bg-gradient-to-r from-[#0f1a38]/30 to-transparent" />
-          <div className="md:hidden absolute inset-0 opacity-[0.07] [background-size:20px_20px] [background-image:linear-gradient(rgba(255,255,255,0.24)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.24)_1px,transparent_1px)]" />
+          {/* Mobile background */}
+          <div className="md:hidden absolute inset-0 bg-black" />
         </motion.div>
 
         {/* ✅ FIX: h-full so desktop grid fills the hero */}
@@ -111,62 +101,42 @@ export function HomePage({ onNavigate }: HomePageProps) {
 
                   {/* MOBILE */}
                   <div className="md:hidden w-full max-w-md mx-auto">
-                    <div className="rounded-[30px] border border-white/15 bg-black/35 backdrop-blur-2xl p-4 shadow-[0_20px_70px_rgba(0,0,0,0.45)]">
-                      <p className="text-[10px] leading-relaxed uppercase tracking-[0.11em] text-white/72">
-                        Service | Product Designer UX/UI | Design System | Regulated
-                        Digital Products
-                      </p>
+                    <h1
+                      id="home-hero-title"
+                      className="font-brand text-center text-white tracking-tight leading-[0.93] [text-shadow:0_0_20px_rgba(255,255,255,0.18)]"
+                    >
+                      <span className="block text-[42px] font-semibold">Hernany</span>
+                      <span className="block text-[42px] font-light">Acosta</span>
+                    </h1>
 
-                      <div className="mt-3 rounded-2xl border border-white/10 bg-black/20 backdrop-blur-xl p-4">
-                        <p className="text-[10px] uppercase tracking-[0.13em] text-[var(--accent-portfolio)]">
-                          UX / UI
-                        </p>
-                        <h1
-                          id="home-hero-title"
-                          className="font-brand text-white tracking-tight leading-[0.95] mt-2"
-                        >
-                          <span className="block text-[32px] font-semibold">Hernany</span>
-                          <span className="block text-[32px] font-light">Acosta</span>
-                        </h1>
-                        <p className="mt-3 text-[13px] leading-relaxed text-white/85">
-                          Portfolio experience focused on UX architecture and
-                          regulated product design.
-                        </p>
+                    <div className="mt-6 grid grid-cols-3 gap-2.5">
+                      <div className="rounded-xl border border-white/20 bg-white/[0.03] p-2.5">
+                        <p className="text-[10px] text-white/55">Role</p>
+                        <p className="text-[11px] text-white/90 mt-1">Lead Product</p>
                       </div>
-
-                      <div className="mt-3 grid grid-cols-3 gap-2">
-                        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-2.5">
-                          <p className="text-[10px] text-white/55">Role</p>
-                          <p className="text-[11px] text-white/90 mt-1">Lead Product</p>
-                        </div>
-                        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-2.5">
-                          <p className="text-[10px] text-white/55">Focus</p>
-                          <p className="text-[11px] text-white/90 mt-1">UX Systems</p>
-                        </div>
-                        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-2.5">
-                          <p className="text-[10px] text-white/55">Mode</p>
-                          <p className="text-[11px] text-white/90 mt-1">Shipping</p>
-                        </div>
+                      <div className="rounded-xl border border-white/20 bg-white/[0.03] p-2.5">
+                        <p className="text-[10px] text-white/55">Focus</p>
+                        <p className="text-[11px] text-white/90 mt-1">UX Systems</p>
                       </div>
-
-                      <div className="mt-4 grid grid-cols-2 gap-3">
-                        <button
-                          onClick={() => onNavigate("projects")}
-                          className="inline-flex items-center justify-center h-11 rounded-xl bg-[var(--accent-portfolio)] text-white text-sm font-semibold hover:opacity-90 transition-opacity"
-                        >
-                          Open Works
-                        </button>
-                        <button
-                          onClick={() => onNavigate("contact")}
-                          className="inline-flex items-center justify-center h-11 rounded-xl border border-white/20 bg-white/[0.05] text-white/90 text-sm font-semibold hover:bg-white/[0.12] transition-colors"
-                        >
-                          Contact Me
-                        </button>
+                      <div className="rounded-xl border border-white/20 bg-white/[0.03] p-2.5">
+                        <p className="text-[10px] text-white/55">Mode</p>
+                        <p className="text-[11px] text-white/90 mt-1">Shipping</p>
                       </div>
+                    </div>
 
-                      <p className="mt-3 text-[11px] text-white/60">
-                        End-to-end journeys, business rules and frontend-ready handoff.
-                      </p>
+                    <div className="mt-4 grid grid-cols-2 gap-3">
+                      <button
+                        onClick={() => onNavigate("projects")}
+                        className="inline-flex items-center justify-center h-11 rounded-full bg-[var(--accent-portfolio)] text-white text-sm font-semibold hover:opacity-90 transition-opacity"
+                      >
+                        Open Works
+                      </button>
+                      <button
+                        onClick={() => onNavigate("contact")}
+                        className="inline-flex items-center justify-center h-11 rounded-full border border-white/20 bg-white/[0.04] text-white/90 text-sm font-semibold hover:bg-white/[0.12] transition-colors"
+                      >
+                        Contact Me
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -229,15 +199,15 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 </a>
               </div>
 
-              <div className="md:hidden mt-3 px-1">
-                <div className="flex items-center justify-between gap-3">
+              <div className="md:hidden mt-4">
+                <div className="flex flex-col items-center gap-2">
                   <div className="flex items-center gap-3">
                     <a
                       href="https://www.linkedin.com/in/hernanyacosta/"
                       target="_blank"
                       rel="noreferrer"
                       aria-label="LinkedIn"
-                      className="text-white/85 hover:text-white transition-colors"
+                      className="text-white/80 hover:text-white transition-colors [filter:drop-shadow(0_0_5px_rgba(255,255,255,0.28))]"
                     >
                       <Linkedin size={18} />
                     </a>
@@ -246,7 +216,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
                       target="_blank"
                       rel="noreferrer"
                       aria-label="GitHub"
-                      className="text-white/85 hover:text-white transition-colors"
+                      className="text-white/80 hover:text-white transition-colors [filter:drop-shadow(0_0_5px_rgba(255,255,255,0.28))]"
                     >
                       <Github size={18} />
                     </a>
@@ -255,7 +225,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
                       target="_blank"
                       rel="noreferrer"
                       aria-label="Instagram"
-                      className="text-white/85 hover:text-white transition-colors"
+                      className="text-white/80 hover:text-white transition-colors [filter:drop-shadow(0_0_5px_rgba(255,255,255,0.28))]"
                     >
                       <Instagram size={18} />
                     </a>
@@ -263,7 +233,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
 
                   <a
                     href="mailto:hey@hernanyacosta.com"
-                    className="text-[11px] text-white/70 hover:text-white transition-colors"
+                    className="text-[11px] text-white/72 hover:text-white transition-colors text-center"
                   >
                     hey@hernanyacosta.com
                   </a>
