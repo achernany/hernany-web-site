@@ -27,19 +27,24 @@ export function HomePage({ onNavigate }: HomePageProps) {
       >
         {/* Background */}
         <motion.div style={{ y: imageY }} className="absolute inset-0 z-0">
-          <img
-            src="/images/hero-desktop.webp"
-            srcSet="/images/hero-mobile.webp 900w, /images/hero-desktop.webp 1920w"
-            sizes="(max-width: 768px) 100vw, 100vw"
-            alt="Hernany Acosta — Service & Product Designer"
-            className="w-full h-full object-cover object-[20%_20%] md:object-[25%_20%]"
-            loading="eager"
-            fetchPriority="high"
-            decoding="async"
-          />
+          <div className="hidden md:block h-full w-full">
+            <img
+              src="/images/hero-desktop.webp"
+              srcSet="/images/hero-mobile.webp 900w, /images/hero-desktop.webp 1920w"
+              sizes="(max-width: 768px) 100vw, 100vw"
+              alt="Hernany Acosta — Service & Product Designer"
+              className="w-full h-full object-cover object-[20%_20%] md:object-[25%_20%]"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/35 to-transparent md:from-black/60 md:via-black/22 md:to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60" />
+          </div>
 
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/35 to-transparent md:from-black/60 md:via-black/22 md:to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60" />
+          {/* Mobile-only app background */}
+          <div className="md:hidden absolute inset-0 bg-[radial-gradient(120%_90%_at_10%_0%,rgba(99,102,241,0.35),transparent_56%),radial-gradient(100%_90%_at_90%_100%,rgba(56,189,248,0.2),transparent_62%),linear-gradient(180deg,#06070e_0%,#0a0d1a_58%,#090b14_100%)]" />
+          <div className="md:hidden absolute inset-0 opacity-[0.08] [background-size:20px_20px] [background-image:linear-gradient(rgba(255,255,255,0.24)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.24)_1px,transparent_1px)]" />
         </motion.div>
 
         {/* ✅ FIX: h-full so desktop grid fills the hero */}
@@ -96,38 +101,63 @@ export function HomePage({ onNavigate }: HomePageProps) {
                   </div>
 
                   {/* MOBILE */}
-                  <div className="md:hidden w-full">
-                    <h1
-                      id="home-hero-title"
-                      className="font-brand uppercase text-white text-center tracking-[0.04em] leading-none mb-1 text-[32px]"
-                    >
-                      <span className="font-semibold">HERNANY</span>{" "}
-                      <span className="font-light">ACOSTA</span>
-                    </h1>
+                  <div className="md:hidden w-full max-w-md mx-auto">
+                    <div className="rounded-[30px] border border-white/15 bg-black/45 backdrop-blur-2xl p-4 shadow-[0_20px_70px_rgba(0,0,0,0.45)]">
+                      <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.14em] text-white/60">
+                        <span>Portfolio App</span>
+                        <span>Live</span>
+                      </div>
 
-                    <p className="text-white/90 text-[12px] leading-relaxed mb-2 text-center">
-                      <span className="font-bold">Service &amp; Product Designer</span>{" "}
-                      <span className="italic">for regulated digital products.</span>
-                    </p>
+                      <div className="mt-4 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                        <p className="text-[10px] uppercase tracking-[0.13em] text-[var(--accent-portfolio)]">
+                          Product System
+                        </p>
+                        <h1
+                          id="home-hero-title"
+                          className="font-brand text-white tracking-tight leading-[0.95] mt-2"
+                        >
+                          <span className="block text-[32px] font-semibold">Hernany</span>
+                          <span className="block text-[32px] font-light">Acosta</span>
+                        </h1>
+                        <p className="mt-3 text-[13px] leading-relaxed text-white/85">
+                          Portfolio experience focused on UX architecture and
+                          regulated product design.
+                        </p>
+                      </div>
 
-                    <p className="text-white/45 text-[clamp(0.68rem,2.7vw,0.78rem)] leading-relaxed mb-6 text-center px-10">
-                      UX Architecture · Service Design · Design Systems · Frontend-aware Handoff
-                    </p>
+                      <div className="mt-3 grid grid-cols-3 gap-2">
+                        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-2.5">
+                          <p className="text-[10px] text-white/55">Role</p>
+                          <p className="text-[11px] text-white/90 mt-1">Lead Product</p>
+                        </div>
+                        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-2.5">
+                          <p className="text-[10px] text-white/55">Focus</p>
+                          <p className="text-[11px] text-white/90 mt-1">UX Systems</p>
+                        </div>
+                        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-2.5">
+                          <p className="text-[10px] text-white/55">Mode</p>
+                          <p className="text-[11px] text-white/90 mt-1">Shipping</p>
+                        </div>
+                      </div>
 
-                    <div className="flex items-center justify-center gap-4 mb-8">
-                      <button
-                        onClick={() => onNavigate("projects")}
-                        className="inline-flex items-center justify-center h-11 px-5 rounded-full bg-[var(--accent-portfolio)] text-white hover:opacity-90 transition-opacity text-sm font-semibold flex-1 max-w-[220px]"
-                      >
-                        Explore work
-                      </button>
+                      <div className="mt-4 grid grid-cols-2 gap-3">
+                        <button
+                          onClick={() => onNavigate("projects")}
+                          className="inline-flex items-center justify-center h-11 rounded-xl bg-[var(--accent-portfolio)] text-white text-sm font-semibold hover:opacity-90 transition-opacity"
+                        >
+                          Open Works
+                        </button>
+                        <button
+                          onClick={() => onNavigate("contact")}
+                          className="inline-flex items-center justify-center h-11 rounded-xl border border-white/20 bg-white/[0.05] text-white/90 text-sm font-semibold hover:bg-white/[0.12] transition-colors"
+                        >
+                          Contact Me
+                        </button>
+                      </div>
 
-                      <button
-                        onClick={() => onNavigate("contact")}
-                        className="inline-flex items-center justify-center h-11 px-4 rounded-full border border-[var(--accent-portfolio)] bg-[color:var(--accent-portfolio)]/10 text-[var(--accent-portfolio)] hover:bg-[color:var(--accent-portfolio)]/16 transition-colors text-sm font-semibold w-[132px]"
-                      >
-                        Get in touch
-                      </button>
+                      <p className="mt-3 text-[11px] text-white/60">
+                        End-to-end journeys, business rules and frontend-ready handoff.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -139,7 +169,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
               className="max-w-7xl mx-auto px-6 lg:px-12 w-full pb-3"
               style={{ paddingBottom: "calc(10px + env(safe-area-inset-bottom))" }}
             >
-              <div className="flex items-center justify-between gap-3">
+              <div className="hidden md:flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
                   <a
                     href="https://www.linkedin.com/in/hernanyacosta/"
@@ -190,13 +220,47 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 </a>
               </div>
 
-              <div className="sm:hidden mt-1 text-center text-[11px]">
-                <a
-                  href="mailto:hey@hernanyacosta.com"
-                  className="text-white/60 hover:text-white transition-colors"
-                >
-                  hey@hernanyacosta.com
-                </a>
+              <div className="md:hidden">
+                <div className="rounded-2xl border border-white/15 bg-black/45 backdrop-blur-2xl px-4 py-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      <a
+                        href="https://www.linkedin.com/in/hernanyacosta/"
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label="LinkedIn"
+                        className="text-white/85 hover:text-white transition-colors"
+                      >
+                        <Linkedin size={18} />
+                      </a>
+                      <a
+                        href="https://github.com/achernany"
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label="GitHub"
+                        className="text-white/85 hover:text-white transition-colors"
+                      >
+                        <Github size={18} />
+                      </a>
+                      <a
+                        href="https://instagram.com/hernanyac"
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label="Instagram"
+                        className="text-white/85 hover:text-white transition-colors"
+                      >
+                        <Instagram size={18} />
+                      </a>
+                    </div>
+
+                    <a
+                      href="mailto:hey@hernanyacosta.com"
+                      className="text-[11px] text-white/70 hover:text-white transition-colors"
+                    >
+                      hey@hernanyacosta.com
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

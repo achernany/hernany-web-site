@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Mail, Linkedin, Download } from "lucide-react";
+import { Mail, Linkedin, Download, ArrowUpRight, Clock3 } from "lucide-react";
 
 export function ContactPage() {
   return (
@@ -9,48 +9,79 @@ export function ContactPage() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="max-w-4xl"
+          className="max-w-6xl"
         >
-          <h1 className="text-5xl md:text-7xl lg:text-8xl tracking-tight mb-12">
-            Let's build scalable digital products.
-          </h1>
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+            <div>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl tracking-tight mb-6">
+                Let's build your next product experience.
+              </h1>
 
-          <p className="text-2xl md:text-3xl text-muted-foreground mb-24">
-            I'm open to Lead Product Designer and Senior Product Designer roles.
-          </p>
+              <p className="text-lg md:text-2xl text-muted-foreground mb-10 max-w-2xl">
+                Available for Lead Product Designer and Senior Product Designer roles in
+                complex, transactional and regulated environments.
+              </p>
 
-          <div className="space-y-12">
-            <div className="space-y-6">
-              <h2 className="text-2xl md:text-3xl tracking-tight">Get in touch</h2>
-              <div className="space-y-4">
+              <div className="rounded-2xl border border-border bg-muted/30 p-6 md:p-7 space-y-4">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Clock3 size={16} />
+                  <span>Usually replies within 24 hours</span>
+                </div>
+
                 <a
-                  href="mailto:hey@hernanyacosta.com"
-                  className="group flex items-center gap-4 text-xl hover:text-[var(--accent-portfolio)] transition-colors"
+                  href="mailto:hey@hernanyacosta.com?subject=Portfolio%20Inquiry"
+                  className="group inline-flex w-full items-center justify-between rounded-xl bg-[var(--accent-portfolio)] px-4 py-3.5 text-white transition-opacity hover:opacity-90"
                 >
-                  <Mail size={24} />
-                  <span>hey@hernanyacosta.com</span>
+                  <span className="inline-flex items-center gap-3 font-semibold">
+                    <Mail size={18} />
+                    Email me
+                  </span>
+                  <ArrowUpRight size={18} />
                 </a>
+
                 <a
                   href="https://linkedin.com/in/hernanyacosta"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-4 text-xl hover:text-[var(--accent-portfolio)] transition-colors"
+                  className="group inline-flex w-full items-center justify-between rounded-xl border border-border bg-background px-4 py-3.5 transition-colors hover:bg-muted"
                 >
-                  <Linkedin size={24} />
-                  <span>LinkedIn Profile</span>
+                  <span className="inline-flex items-center gap-3 font-semibold">
+                    <Linkedin size={18} />
+                    Message on LinkedIn
+                  </span>
+                  <ArrowUpRight size={18} />
                 </a>
+
+                <p className="text-sm text-muted-foreground">hey@hernanyacosta.com</p>
               </div>
             </div>
 
-            <div className="pt-12">
+            <div className="rounded-2xl border border-border bg-background p-6 md:p-7 h-fit">
+              <h2 className="text-2xl md:text-3xl tracking-tight mb-3">Quick profile</h2>
+              <p className="text-muted-foreground mb-7">
+                UX Architecture, Service Design and design systems with frontend-aware
+                delivery for teams that need reliable execution.
+              </p>
+
+              <div className="grid grid-cols-2 gap-3 mb-7">
+                <div className="rounded-xl border border-border bg-muted/30 px-3 py-2.5">
+                  <p className="text-xs text-muted-foreground">Specialty</p>
+                  <p className="text-sm mt-1">Regulated UX</p>
+                </div>
+                <div className="rounded-xl border border-border bg-muted/30 px-3 py-2.5">
+                  <p className="text-xs text-muted-foreground">Delivery</p>
+                  <p className="text-sm mt-1">End-to-end</p>
+                </div>
+              </div>
+
               <a
                 href="/Hernany-Acosta-CV.pdf"
                 download="Hernany-Acosta-CV.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-4 px-8 py-4 bg-[var(--accent-portfolio)] text-white rounded-lg hover:opacity-90 transition-opacity text-lg"
+                className="group inline-flex w-full items-center justify-center gap-3 rounded-xl border border-border px-4 py-3.5 text-base transition-colors hover:bg-muted"
               >
-                <Download size={24} />
+                <Download size={18} />
                 <span>Download CV</span>
               </a>
             </div>

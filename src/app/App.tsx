@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Navigation } from "./components/navigation";
 import { HomePage } from "./components/home-page";
-import { AboutPage } from "./components/about-page";
 import { ProjectsPage } from "./components/projects-page";
 import { CaseStudyPage } from "./components/case-study-page";
 import { ContactPage } from "./components/contact-page";
@@ -27,8 +26,6 @@ export default function App() {
     switch (currentPage) {
       case "home":
         return <HomePage onNavigate={handleNavigate} />;
-      case "about":
-        return <AboutPage />;
       case "projects":
         return <ProjectsPage onNavigate={handleNavigate} />;
       case "case-study":
@@ -45,13 +42,11 @@ export default function App() {
     }
   };
 
-return (
-  <div className="min-h-screen bg-background text-foreground">
-    <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
-    {/* Importante: no forzar h-screen ni overflow-hidden aquí */}
-    <main className="min-h-[100svh]">
-      {renderPage()}
-    </main>
-  </div>
-);
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
+      {/* Importante: no forzar h-screen ni overflow-hidden aquí */}
+      <main className="min-h-[100svh]">{renderPage()}</main>
+    </div>
+  );
 }
