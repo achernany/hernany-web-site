@@ -24,11 +24,11 @@ export function ContactPage() {
               <h2 className="text-2xl md:text-3xl tracking-tight">Get in touch</h2>
               <div className="space-y-4">
                 <a
-                  href="mailto:hernany.acosta@example.com"
+                  href="mailto:hey@hernanyacosta.com"
                   className="group flex items-center gap-4 text-xl hover:text-[var(--accent-portfolio)] transition-colors"
                 >
                   <Mail size={24} />
-                  <span>hernany.acosta@example.com</span>
+                  <span>hey@hernanyacosta.com</span>
                 </a>
                 <a
                   href="https://linkedin.com/in/hernanyacosta"
@@ -43,10 +43,16 @@ export function ContactPage() {
             </div>
 
             <div className="pt-12">
-              <button className="group inline-flex items-center gap-4 px-8 py-4 bg-[var(--accent-portfolio)] text-white rounded-lg hover:opacity-90 transition-opacity text-lg">
+              <a
+                href="/Hernany-Acosta-CV.pdf"
+                download="Hernany-Acosta-CV.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-4 px-8 py-4 bg-[var(--accent-portfolio)] text-white rounded-lg hover:opacity-90 transition-opacity text-lg"
+              >
                 <Download size={24} />
                 <span>Download CV</span>
-              </button>
+              </a>
             </div>
           </div>
         </motion.div>

@@ -7,11 +7,11 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
           <div className="flex flex-col gap-4">
             <a
-              href="mailto:hernany.acosta@example.com"
+              href="mailto:hey@hernanyacosta.com"
               className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
             >
               <Mail size={20} />
-              <span>hernany.acosta@example.com</span>
+              <span>hey@hernanyacosta.com</span>
             </a>
             <a
               href="https://linkedin.com/in/hernanyacosta"
@@ -23,10 +23,16 @@ export function Footer() {
               <span>LinkedIn Profile</span>
             </a>
           </div>
-          <button className="flex items-center gap-3 px-6 py-3 border border-border hover:bg-muted rounded-lg transition-colors">
+          <a
+            href="/Hernany-Acosta-CV.pdf"
+            download="Hernany-Acosta-CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 px-6 py-3 border border-border hover:bg-muted rounded-lg transition-colors"
+          >
             <Download size={20} />
             <span>Download CV</span>
-          </button>
+          </a>
         </div>
       </div>
     </footer>
