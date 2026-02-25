@@ -42,9 +42,18 @@ export function HomePage({ onNavigate }: HomePageProps) {
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60" />
           </div>
 
-          {/* Mobile-only app background */}
-          <div className="md:hidden absolute inset-0 bg-[radial-gradient(120%_90%_at_10%_0%,rgba(99,102,241,0.35),transparent_56%),radial-gradient(100%_90%_at_90%_100%,rgba(56,189,248,0.2),transparent_62%),linear-gradient(180deg,#06070e_0%,#0a0d1a_58%,#090b14_100%)]" />
-          <div className="md:hidden absolute inset-0 opacity-[0.08] [background-size:20px_20px] [background-image:linear-gradient(rgba(255,255,255,0.24)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.24)_1px,transparent_1px)]" />
+          {/* Mobile background image with app-style overlays */}
+          <img
+            src="/images/hero-mobile.webp"
+            alt="Hernany Acosta mobile hero"
+            className="md:hidden w-full h-full object-cover object-[28%_24%]"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+          />
+          <div className="md:hidden absolute inset-0 bg-gradient-to-b from-black/48 via-[#09102a]/58 to-[#05070f]/86" />
+          <div className="md:hidden absolute inset-0 bg-gradient-to-r from-[#0f1a38]/30 to-transparent" />
+          <div className="md:hidden absolute inset-0 opacity-[0.07] [background-size:20px_20px] [background-image:linear-gradient(rgba(255,255,255,0.24)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.24)_1px,transparent_1px)]" />
         </motion.div>
 
         {/* ✅ FIX: h-full so desktop grid fills the hero */}
@@ -102,15 +111,15 @@ export function HomePage({ onNavigate }: HomePageProps) {
 
                   {/* MOBILE */}
                   <div className="md:hidden w-full max-w-md mx-auto">
-                    <div className="rounded-[30px] border border-white/15 bg-black/45 backdrop-blur-2xl p-4 shadow-[0_20px_70px_rgba(0,0,0,0.45)]">
-                      <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.14em] text-white/60">
-                        <span>Portfolio App</span>
-                        <span>Live</span>
-                      </div>
+                    <div className="rounded-[30px] border border-white/15 bg-black/35 backdrop-blur-2xl p-4 shadow-[0_20px_70px_rgba(0,0,0,0.45)]">
+                      <p className="text-[10px] leading-relaxed uppercase tracking-[0.11em] text-white/72">
+                        Service | Product Designer UX/UI | Design System | Regulated
+                        Digital Products
+                      </p>
 
-                      <div className="mt-4 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                      <div className="mt-3 rounded-2xl border border-white/10 bg-black/20 backdrop-blur-xl p-4">
                         <p className="text-[10px] uppercase tracking-[0.13em] text-[var(--accent-portfolio)]">
-                          Product System
+                          UX / UI
                         </p>
                         <h1
                           id="home-hero-title"
@@ -220,46 +229,44 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 </a>
               </div>
 
-              <div className="md:hidden">
-                <div className="rounded-2xl border border-white/15 bg-black/45 backdrop-blur-2xl px-4 py-3">
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                      <a
-                        href="https://www.linkedin.com/in/hernanyacosta/"
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label="LinkedIn"
-                        className="text-white/85 hover:text-white transition-colors"
-                      >
-                        <Linkedin size={18} />
-                      </a>
-                      <a
-                        href="https://github.com/achernany"
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label="GitHub"
-                        className="text-white/85 hover:text-white transition-colors"
-                      >
-                        <Github size={18} />
-                      </a>
-                      <a
-                        href="https://instagram.com/hernanyac"
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label="Instagram"
-                        className="text-white/85 hover:text-white transition-colors"
-                      >
-                        <Instagram size={18} />
-                      </a>
-                    </div>
-
+              <div className="md:hidden mt-3 px-1">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
                     <a
-                      href="mailto:hey@hernanyacosta.com"
-                      className="text-[11px] text-white/70 hover:text-white transition-colors"
+                      href="https://www.linkedin.com/in/hernanyacosta/"
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="LinkedIn"
+                      className="text-white/85 hover:text-white transition-colors"
                     >
-                      hey@hernanyacosta.com
+                      <Linkedin size={18} />
+                    </a>
+                    <a
+                      href="https://github.com/achernany"
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="GitHub"
+                      className="text-white/85 hover:text-white transition-colors"
+                    >
+                      <Github size={18} />
+                    </a>
+                    <a
+                      href="https://instagram.com/hernanyac"
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="Instagram"
+                      className="text-white/85 hover:text-white transition-colors"
+                    >
+                      <Instagram size={18} />
                     </a>
                   </div>
+
+                  <a
+                    href="mailto:hey@hernanyacosta.com"
+                    className="text-[11px] text-white/70 hover:text-white transition-colors"
+                  >
+                    hey@hernanyacosta.com
+                  </a>
                 </div>
               </div>
             </div>
