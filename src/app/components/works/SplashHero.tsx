@@ -4,10 +4,10 @@ export function SplashHero() {
   return (
     <section className="relative h-screen flex items-center justify-center bg-black overflow-hidden">
       {/* Vignette overlay */}
-      <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/20 to-black pointer-events-none" />
+      <div className="absolute inset-0 hidden md:block bg-gradient-radial from-transparent via-black/20 to-black pointer-events-none" />
       
       {/* Subtle grain */}
-      <div className="absolute inset-0 opacity-[0.015] pointer-events-none mix-blend-overlay">
+      <div className="absolute inset-0 hidden md:block opacity-[0.015] pointer-events-none mix-blend-overlay">
         <div 
           className="w-full h-full"
           style={{
@@ -19,7 +19,7 @@ export function SplashHero() {
 
       <div className="relative z-10 text-center px-6 max-w-5xl">
         <motion.div
-          className="mb-3 text-sm tracking-[0.3em] uppercase text-white/40"
+          className="mb-4 text-[11px] md:text-sm tracking-[0.22em] md:tracking-[0.3em] uppercase text-white/45"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
@@ -28,7 +28,7 @@ export function SplashHero() {
         </motion.div>
 
         <motion.h1
-          className="text-[clamp(3rem,12vw,9rem)] leading-[0.9] tracking-[-0.03em] mb-8"
+          className="font-brand text-[clamp(3rem,12vw,9rem)] leading-[0.9] tracking-[-0.03em] mb-8"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
@@ -41,7 +41,7 @@ export function SplashHero() {
         </motion.h1>
 
         <motion.p
-          className="text-lg md:text-xl text-white/60 mb-8 max-w-3xl mx-auto leading-relaxed tracking-tight"
+          className="text-base md:text-xl text-white/65 mb-8 max-w-3xl mx-auto leading-relaxed tracking-tight"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
@@ -50,7 +50,7 @@ export function SplashHero() {
         </motion.p>
 
         <motion.div
-          className="text-sm text-white/40 tracking-wide mb-12"
+          className="text-xs md:text-sm text-white/42 tracking-wide mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -59,19 +59,19 @@ export function SplashHero() {
         </motion.div>
 
         <motion.button
-          className="group inline-flex items-center gap-3 px-8 py-4 bg-cyan-500 text-black rounded-full hover:bg-cyan-400 transition-all duration-300"
+          className="group inline-flex h-11 items-center justify-center rounded-full bg-[var(--accent-portfolio)] px-6 text-sm font-semibold text-white transition-opacity hover:opacity-90"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
           onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
         >
-          <span className="text-sm tracking-wide">Start the Walkthrough</span>
+          <span>Start the Walkthrough</span>
         </motion.button>
       </div>
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-12 left-1/2 -translate-x-1/2"
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 hidden md:block"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}

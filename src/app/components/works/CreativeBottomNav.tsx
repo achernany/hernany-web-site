@@ -104,7 +104,7 @@ export function CreativeBottomNav() {
           viewport={{ once: true }}
           transition={{ delay: 0.6, duration: 0.8 }}
         >
-          <button className="px-8 py-4 bg-cyan-500 text-black rounded-full text-sm tracking-wide hover:bg-cyan-400 transition-colors">
+          <button className="inline-flex h-11 items-center justify-center rounded-full bg-[var(--accent-portfolio)] px-6 text-sm font-semibold text-white transition-opacity hover:opacity-90">
             Contact Me
           </button>
           

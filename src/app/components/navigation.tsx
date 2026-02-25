@@ -10,12 +10,21 @@ interface NavigationProps {
 export function Navigation({ currentPage, onNavigate }: NavigationProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 12);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobile(mediaQuery.matches);
+    update();
+    mediaQuery.addEventListener("change", update);
+    return () => mediaQuery.removeEventListener("change", update);
   }, []);
 
   // Lock scroll ONLY while menu is open
@@ -46,6 +55,8 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
     { id: "contact", label: "Contact" },
   ];
 
+  const isHomeMobile = currentPage === "home" && isMobile;
+
   const handleNavigate = (page: string) => {
     onNavigate(page);
     setIsMenuOpen(false);
@@ -61,13 +72,21 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
           // ✅ IMPORTANT: nav must be ABOVE the fullscreen menu layer on mobile
           "fixed top-0 left-0 right-0 z-[70]",
           "transition-colors duration-300",
-          isScrolled || isMenuOpen
-            ? "bg-black/45 backdrop-blur-2xl border-b border-white/10"
-            : "bg-transparent border-b border-transparent",
+          isHomeMobile && !isMenuOpen
+            ? "bg-transparent border-b border-transparent backdrop-blur-0"
+            : isScrolled || isMenuOpen
+              ? "bg-black/45 backdrop-blur-2xl border-b border-white/10"
+              : "bg-transparent border-b border-transparent",
         ].join(" ")}
         aria-label="Primary"
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+        <div
+          className="max-w-7xl mx-auto h-20 flex items-center justify-between"
+          style={{
+            paddingLeft: "max(1.5rem, env(safe-area-inset-left))",
+            paddingRight: "max(1.5rem, env(safe-area-inset-right))",
+          }}
+        >
           {/* Logo (link to Home) */}
           <button
             onClick={() => handleNavigate("home")}
@@ -115,6 +134,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
             className={[
               "inline-flex items-center justify-center",
               ICON_BOX,
+              "shrink-0",
               "rounded-lg",
               "hover:bg-white/10 active:bg-white/15",
               "transition-colors",

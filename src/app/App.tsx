@@ -31,12 +31,11 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-[100svh] bg-background text-foreground flex flex-col">
       <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
-      {/* Importante: no forzar h-screen ni overflow-hidden aquí */}
-      <main className="min-h-[100svh]">{renderPage()}</main>
+      <main className="flex-1 min-h-0">{renderPage()}</main>
       {currentPage !== "home" && (
-        <footer className="pb-6 md:pb-8">
+        <footer className="py-3 md:py-4">
           <p className="text-center text-[11px] text-muted-foreground">
             © 2026 Hernany Acosta. All rights reserved.
           </p>

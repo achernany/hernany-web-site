@@ -1,4 +1,5 @@
-import { motion } from 'motion/react';
+import { motion } from "motion/react";
+import { useEffect, useState } from "react";
 
 export function LotobolaChapter() {
   return (
@@ -40,7 +41,7 @@ export function LotobolaChapter() {
           transition={{ duration: 0.8 }}
         >
           <h3 className="text-2xl md:text-3xl tracking-tight mb-12">Ecosystem Architecture</h3>
-          <div className="border border-white/5 bg-white/[0.02] backdrop-blur-sm p-8 md:p-12 rounded-sm">
+          <div className="border border-white/5 bg-white/[0.02] backdrop-blur-sm p-4 md:p-12 rounded-2xl md:rounded-sm">
             <EcosystemRadial />
           </div>
         </motion.div>
@@ -125,23 +126,33 @@ export function LotobolaChapter() {
 }
 
 function EcosystemRadial() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobile(mediaQuery.matches);
+    update();
+    mediaQuery.addEventListener("change", update);
+    return () => mediaQuery.removeEventListener("change", update);
+  }, []);
+
   const integrations = [
-    { name: 'Yape', sector: 0, radius: 180 },
-    { name: 'Plin', sector: 60, radius: 180 },
-    { name: 'Banks', sector: 120, radius: 180 },
-    { name: 'Tambo+', sector: 180, radius: 160 },
-    { name: 'Retail POS', sector: 240, radius: 160 },
-    { name: 'AWS Brazil', sector: 300, radius: 200 },
-    { name: 'RNG Core', sector: 30, radius: 220 },
-    { name: 'Compliance', sector: 150, radius: 220 },
-    { name: 'Regulator', sector: 270, radius: 200 },
+    { name: "Yape", sector: 0, desktopRadius: 180, mobileRadius: 110 },
+    { name: "Plin", sector: 60, desktopRadius: 180, mobileRadius: 110 },
+    { name: "Banks", sector: 120, desktopRadius: 180, mobileRadius: 110 },
+    { name: "Tambo+", sector: 180, desktopRadius: 160, mobileRadius: 95 },
+    { name: "Retail POS", sector: 240, desktopRadius: 160, mobileRadius: 95 },
+    { name: "AWS Brazil", sector: 300, desktopRadius: 200, mobileRadius: 118 },
+    { name: "RNG Core", sector: 30, desktopRadius: 220, mobileRadius: 130 },
+    { name: "Compliance", sector: 150, desktopRadius: 220, mobileRadius: 130 },
+    { name: "Regulator", sector: 270, desktopRadius: 200, mobileRadius: 118 },
   ];
 
   return (
-    <div className="relative w-full aspect-square max-w-2xl mx-auto">
+    <div className="relative w-full aspect-square max-w-[340px] md:max-w-2xl mx-auto">
       {/* Center Core */}
       <motion.div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full border border-cyan-500/30 bg-cyan-500/5 flex items-center justify-center"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 rounded-full border border-cyan-500/30 bg-cyan-500/5 flex items-center justify-center"
         initial={{ scale: 0, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
         viewport={{ once: true }}
@@ -155,9 +166,10 @@ function EcosystemRadial() {
 
       {/* Integration Nodes */}
       {integrations.map((integration, index) => {
+        const radius = isMobile ? integration.mobileRadius : integration.desktopRadius;
         const angle = (integration.sector * Math.PI) / 180;
-        const x = Math.cos(angle) * integration.radius;
-        const y = Math.sin(angle) * integration.radius;
+        const x = Math.cos(angle) * radius;
+        const y = Math.sin(angle) * radius;
 
         return (
           <div key={integration.name}>
@@ -186,7 +198,7 @@ function EcosystemRadial() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 + 0.2, duration: 0.4 }}
             >
-              <div className="px-3 py-2 border border-white/10 bg-black/80 backdrop-blur-sm rounded-sm text-[10px] whitespace-nowrap">
+              <div className="px-2.5 md:px-3 py-1.5 md:py-2 border border-white/10 bg-black/80 backdrop-blur-sm rounded-full md:rounded-sm text-[10px] whitespace-nowrap">
                 {integration.name}
               </div>
             </motion.div>
@@ -207,33 +219,31 @@ function ServiceBlueprint() {
   ];
 
   return (
-    <div className="overflow-x-auto">
-      <div className="min-w-[800px] space-y-[1px]">
-        {lanes.map((lane, laneIndex) => (
-          <motion.div
-            key={lane.name}
-            className="flex items-stretch"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: laneIndex * 0.1 }}
-          >
-            <div className="w-48 flex-shrink-0 bg-white/[0.02] border border-white/5 px-6 py-4 flex items-center">
-              <div className="text-xs text-white/50">{lane.name}</div>
-            </div>
-            <div className="flex-1 flex items-stretch">
-              {lane.items.map((item, itemIndex) => (
-                <div
-                  key={item}
-                  className="flex-1 border border-white/5 bg-white/[0.01] px-4 py-4 flex items-center justify-center"
-                >
-                  <div className="text-[10px] text-white/40 text-center">{item}</div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        ))}
-      </div>
+    <div className="grid grid-cols-1 gap-4 md:gap-3">
+      {lanes.map((lane, laneIndex) => (
+        <motion.article
+          key={lane.name}
+          className="border border-white/10 bg-white/[0.02] p-5 md:p-6 rounded-2xl md:rounded-sm"
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: laneIndex * 0.08 }}
+        >
+          <div className="text-[11px] md:text-xs tracking-[0.14em] uppercase text-white/52 mb-4">
+            {lane.name}
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {lane.items.map((item) => (
+              <span
+                key={item}
+                className="inline-flex items-center rounded-full border border-white/12 bg-black/35 px-3 py-1.5 text-[11px] text-white/72"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        </motion.article>
+      ))}
     </div>
   );
 }

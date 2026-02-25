@@ -1,5 +1,6 @@
 html {
   font-family: var(--font-body);
+  scrollbar-gutter: stable;
 }
 
 /* Brand utility */
@@ -66,4 +67,86 @@ html {
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+@keyframes typewriterBlink {
+  0%,
+  46% {
+    opacity: 1;
+  }
+
+  47%,
+  100% {
+    opacity: 0.15;
+  }
+}
+
+@keyframes typewriterSheen {
+  0% {
+    background-position: 0% 50%;
+    filter: drop-shadow(0 0 5px rgba(99, 102, 241, 0.2));
+  }
+
+  50% {
+    background-position: 100% 50%;
+    filter: drop-shadow(0 0 11px rgba(99, 102, 241, 0.42));
+  }
+
+  100% {
+    background-position: 0% 50%;
+    filter: drop-shadow(0 0 5px rgba(99, 102, 241, 0.2));
+  }
+}
+
+.typewriter-caret {
+  display: inline-block;
+  animation: typewriterBlink 1.05s steps(1, end) infinite;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
+}
+
+.typewriter-accent {
+  color: transparent;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--accent-portfolio) 88%, white),
+    var(--accent-portfolio),
+    color-mix(in srgb, var(--accent-portfolio) 75%, white)
+  );
+  background-size: 220% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: typewriterSheen 3.8s ease-in-out infinite;
+}
+
+/* Works visual alignment with the main site */
+.works-shell {
+  --color-cyan-500: var(--accent-portfolio);
+  --color-cyan-400: color-mix(in srgb, var(--accent-portfolio) 88%, white);
+  --color-cyan-300: color-mix(in srgb, var(--accent-portfolio) 72%, white);
+  font-family: var(--font-body);
+  overflow-x: clip;
+}
+
+.works-shell h1,
+.works-shell h2,
+.works-shell h3,
+.works-shell h4 {
+  font-family: var(--font-brand);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 767px) {
+  .works-shell [class*="border"][class*="bg-"]:not([class*="rounded-full"]):not([class*="rounded-none"]) {
+    border-radius: 24px !important;
+  }
+
+  .works-shell [class*="rounded-full"] {
+    border-radius: 9999px !important;
+  }
+
+  .works-shell .bg-gradient-radial {
+    background: none !important;
+  }
 }

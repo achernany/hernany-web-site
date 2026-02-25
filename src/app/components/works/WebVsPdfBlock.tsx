@@ -51,10 +51,10 @@ export function WebVsPdfBlock() {
               </li>
             </ul>
             <button 
-              className="text-sm tracking-wide text-cyan-500 hover:text-cyan-400 transition-colors"
+              className="inline-flex h-11 items-center justify-center rounded-full border border-white/20 bg-white/[0.03] px-6 text-sm font-semibold text-white/90 transition-colors hover:bg-white/[0.08]"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
-              ↑ Back to Top
+              Back to Top
             </button>
           </motion.div>
 
@@ -86,7 +86,7 @@ export function WebVsPdfBlock() {
                 <span>Key highlights only</span>
               </li>
             </ul>
-            <button className="px-6 py-3 bg-cyan-500 text-black rounded-full text-sm tracking-wide hover:bg-cyan-400 transition-colors inline-flex items-center gap-2">
+            <button className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-[var(--accent-portfolio)] px-6 text-sm font-semibold text-white transition-opacity hover:opacity-90">
               <Download className="w-4 h-4" />
               Download PDF
             </button>

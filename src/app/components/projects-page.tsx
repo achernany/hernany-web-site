@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { MotionConfig } from "motion/react";
 import { useActiveChapter } from "../hooks/useScrollProgress";
 import { Timeline } from "./works/Timeline";
 import { ProgressBar } from "./works/ProgressBar";
@@ -16,6 +17,7 @@ export function ProjectsPage() {
   const totalChapters = 6;
   const activeChapter = useActiveChapter(totalChapters);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,7 +25,7 @@ export function ProjectsPage() {
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
       const totalScrollable = documentHeight - windowHeight;
-      const progress = scrollPosition / totalScrollable;
+      const progress = totalScrollable > 0 ? scrollPosition / totalScrollable : 0;
       setScrollProgress(progress);
     };
 
@@ -41,20 +43,30 @@ export function ProjectsPage() {
     }
   }, []);
 
-  return (
-    <div className="bg-black text-white antialiased">
-      <ProgressBar progress={scrollProgress} />
-      <Timeline activeChapter={activeChapter} scrollProgress={scrollProgress} />
-      <FloatingNav activeChapter={activeChapter} />
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobile(mediaQuery.matches);
+    update();
+    mediaQuery.addEventListener("change", update);
+    return () => mediaQuery.removeEventListener("change", update);
+  }, []);
 
-      <SplashHero />
-      <LotobolaChapter />
-      <PlayzonBetChapter />
-      <AlazChapter />
-      <InLearningChapter />
-      <PacasmayoChapter />
-      <WebVsPdfBlock />
-      <CreativeBottomNav />
-    </div>
+  return (
+    <MotionConfig reducedMotion={isMobile ? "always" : "user"}>
+      <div className="works-shell bg-black text-white antialiased">
+        <ProgressBar progress={scrollProgress} />
+        <Timeline activeChapter={activeChapter} scrollProgress={scrollProgress} />
+        <FloatingNav activeChapter={activeChapter} />
+
+        <SplashHero />
+        <LotobolaChapter />
+        <PlayzonBetChapter />
+        <AlazChapter />
+        <InLearningChapter />
+        <PacasmayoChapter />
+        <WebVsPdfBlock />
+        <CreativeBottomNav />
+      </div>
+    </MotionConfig>
   );
 }
