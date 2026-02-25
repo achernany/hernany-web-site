@@ -2,18 +2,13 @@ import { useState, useEffect } from "react";
 import { Navigation } from "./components/navigation";
 import { HomePage } from "./components/home-page";
 import { ProjectsPage } from "./components/projects-page";
-import { CaseStudyPage } from "./components/case-study-page";
 import { ContactPage } from "./components/contact-page";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
-  const [selectedProject, setSelectedProject] = useState<string | null>(null);
 
-  const handleNavigate = (page: string, projectId?: string) => {
+  const handleNavigate = (page: string) => {
     setCurrentPage(page);
-    if (projectId) {
-      setSelectedProject(projectId);
-    }
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -27,14 +22,7 @@ export default function App() {
       case "home":
         return <HomePage onNavigate={handleNavigate} />;
       case "projects":
-        return <ProjectsPage onNavigate={handleNavigate} />;
-      case "case-study":
-        return (
-          <CaseStudyPage
-            projectId={selectedProject || "lotobola"}
-            onNavigate={handleNavigate}
-          />
-        );
+        return <ProjectsPage />;
       case "contact":
         return <ContactPage />;
       default:
