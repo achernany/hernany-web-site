@@ -176,15 +176,15 @@ export function HomePage({ onNavigate }: HomePageProps) {
                     </p>
 
                     <div className="mt-6 grid grid-cols-3 gap-2.5">
-                      <div className="rounded-xl border border-white/20 bg-white/[0.03] p-2.5">
+                      <div className="energy-border rounded-xl border border-white/20 bg-white/[0.03] p-2.5">
                         <p className="text-[10px] text-white/55">Role</p>
                         <p className="text-[11px] text-white/90 mt-1">Lead Product</p>
                       </div>
-                      <div className="rounded-xl border border-white/20 bg-white/[0.03] p-2.5">
+                      <div className="energy-border rounded-xl border border-white/20 bg-white/[0.03] p-2.5">
                         <p className="text-[10px] text-white/55">Focus</p>
                         <p className="text-[11px] text-white/90 mt-1">UX Systems</p>
                       </div>
-                      <div className="rounded-xl border border-white/20 bg-white/[0.03] p-2.5">
+                      <div className="energy-border rounded-xl border border-white/20 bg-white/[0.03] p-2.5">
                         <p className="text-[10px] text-white/55">Mode</p>
                         <p className="text-[11px] text-white/90 mt-1">Shipping</p>
                       </div>
@@ -264,9 +264,12 @@ export function HomePage({ onNavigate }: HomePageProps) {
                   Download CV
                 </a>
               </div>
+              <p className="hidden md:block mt-3 text-center text-[11px] text-white/55">
+                © 2026 Hernany Acosta. All rights reserved.
+              </p>
 
               <div className="md:hidden mt-8 pt-8 pb-8">
-                <div className="relative flex items-center min-h-[22px]">
+                <div className="flex items-center justify-between min-h-[22px]">
                   <div className="flex items-center gap-3">
                     <a
                       href="https://www.linkedin.com/in/hernanyacosta/"
@@ -299,11 +302,14 @@ export function HomePage({ onNavigate }: HomePageProps) {
 
                   <a
                     href="mailto:hey@hernanyacosta.com"
-                    className="absolute left-1/2 -translate-x-1/2 text-[11px] text-white/72 hover:text-white transition-colors text-center"
+                    className="text-[11px] text-white/72 hover:text-white transition-colors text-right"
                   >
                     hey@hernanyacosta.com
                   </a>
                 </div>
+                <p className="mt-3 text-center text-[10px] text-white/50">
+                  © 2026 Hernany Acosta. All rights reserved.
+                </p>
               </div>
             </div>
           </div>

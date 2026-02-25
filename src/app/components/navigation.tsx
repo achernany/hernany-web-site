@@ -218,6 +218,10 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                       <Instagram size={18} />
                     </a>
                   </div>
+
+                  <p className="mt-4 text-center text-[11px] text-white/55">
+                    © 2026 Hernany Acosta. All rights reserved.
+                  </p>
                 </div>
               </div>
             </motion.div>

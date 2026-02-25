@@ -27,3 +27,29 @@ html {
   font-family: var(--font-body);
   letter-spacing: 0.01em;
 }
+
+/* Subtle purple energy pulse for bordered cards */
+.energy-border {
+  box-shadow:
+    0 0 0 1px rgba(99, 102, 241, 0.22),
+    0 0 10px rgba(99, 102, 241, 0.16),
+    0 0 16px rgba(99, 102, 241, 0.08);
+  animation: energyPulse 3s ease-in-out infinite;
+}
+
+@keyframes energyPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(99, 102, 241, 0.2),
+      0 0 8px rgba(99, 102, 241, 0.14),
+      0 0 14px rgba(99, 102, 241, 0.07);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(99, 102, 241, 0.34),
+      0 0 14px rgba(99, 102, 241, 0.24),
+      0 0 22px rgba(99, 102, 241, 0.12);
+  }
+}

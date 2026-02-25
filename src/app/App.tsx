@@ -47,6 +47,13 @@ export default function App() {
       <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
       {/* Importante: no forzar h-screen ni overflow-hidden aquí */}
       <main className="min-h-[100svh]">{renderPage()}</main>
+      {currentPage !== "home" && (
+        <footer className="pb-6 md:pb-8">
+          <p className="text-center text-[11px] text-muted-foreground">
+            © 2026 Hernany Acosta. All rights reserved.
+          </p>
+        </footer>
+      )}
     </div>
   );
 }
