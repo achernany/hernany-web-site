@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { Linkedin, Github, Instagram } from "lucide-react";
 
@@ -6,8 +6,15 @@ interface HomePageProps {
   onNavigate: (page: string, projectId?: string) => void;
 }
 
+const FIXED_TYPING_PREFIX = "Pensamiento sistémico +";
+// Keep the first phrase fixed and edit this list when you want to rotate alternatives.
+const ROTATING_TYPING_PHRASES = ["implementacion real"];
+
 export function HomePage({ onNavigate }: HomePageProps) {
   const heroRef = useRef<HTMLElement>(null);
+  const [typedPhrase, setTypedPhrase] = useState("");
+  const [isDeletingPhrase, setIsDeletingPhrase] = useState(false);
+  const [phraseIndex, setPhraseIndex] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -17,6 +24,35 @@ export function HomePage({ onNavigate }: HomePageProps) {
   const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "28%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
+  useEffect(() => {
+    const phrases = ROTATING_TYPING_PHRASES.length
+      ? ROTATING_TYPING_PHRASES
+      : [""];
+    const currentPhrase = phrases[phraseIndex % phrases.length] ?? "";
+    const typingDelay = isDeletingPhrase ? 55 : 95;
+
+    if (!isDeletingPhrase && typedPhrase === currentPhrase) {
+      const holdTimeout = window.setTimeout(() => setIsDeletingPhrase(true), 1000);
+      return () => window.clearTimeout(holdTimeout);
+    }
+
+    if (isDeletingPhrase && typedPhrase.length === 0) {
+      setIsDeletingPhrase(false);
+      setPhraseIndex((prev) => (prev + 1) % phrases.length);
+      return;
+    }
+
+    const timeout = window.setTimeout(() => {
+      setTypedPhrase((prev) =>
+        isDeletingPhrase
+          ? currentPhrase.slice(0, Math.max(0, prev.length - 1))
+          : currentPhrase.slice(0, prev.length + 1),
+      );
+    }, typingDelay);
+
+    return () => window.clearTimeout(timeout);
+  }, [typedPhrase, isDeletingPhrase, phraseIndex]);
 
   return (
     <main className="pt-0">
@@ -44,6 +80,15 @@ export function HomePage({ onNavigate }: HomePageProps) {
 
           {/* Mobile background */}
           <div className="md:hidden absolute inset-0 bg-black" />
+          <img
+            src="/images/hero-mobile.webp"
+            alt="Hernany Acosta mobile hero"
+            className="md:hidden absolute inset-0 w-full h-full object-cover object-[28%_24%] opacity-25"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+          />
+          <div className="md:hidden absolute inset-0 bg-black/70" />
         </motion.div>
 
         {/* ✅ FIX: h-full so desktop grid fills the hero */}
@@ -101,6 +146,14 @@ export function HomePage({ onNavigate }: HomePageProps) {
 
                   {/* MOBILE */}
                   <div className="md:hidden w-full max-w-md mx-auto">
+                    <p className="text-center text-[15px] leading-relaxed text-white/90 mb-4">
+                      <span className="font-normal">{FIXED_TYPING_PREFIX} </span>
+                      <span className="font-semibold italic text-[var(--accent-portfolio)]">
+                        {typedPhrase}
+                      </span>
+                      <span className="ml-0.5 text-white/70 animate-pulse">|</span>
+                    </p>
+
                     <h1
                       id="home-hero-title"
                       className="font-brand text-center text-white tracking-tight leading-[0.93] [text-shadow:0_0_20px_rgba(255,255,255,0.18)]"
@@ -108,6 +161,19 @@ export function HomePage({ onNavigate }: HomePageProps) {
                       <span className="block text-[42px] font-semibold">Hernany</span>
                       <span className="block text-[42px] font-light">Acosta</span>
                     </h1>
+
+                    <p className="mt-4 text-center text-white/82 text-[16px] leading-relaxed">
+                      <span className="font-semibold">I design scalable UX systems</span>{" "}
+                      <span className="italic">
+                        for complex, regulated and transactional environments
+                      </span>{" "}
+                      — translating business constraints into architecture-ready,
+                      frontend-aligned product experiences.
+                    </p>
+
+                    <p className="mt-3 text-center text-white/56 text-[12px] leading-relaxed">
+                      UX Architecture · Service Design · Design Systems · Frontend-aware Handoff
+                    </p>
 
                     <div className="mt-6 grid grid-cols-3 gap-2.5">
                       <div className="rounded-xl border border-white/20 bg-white/[0.03] p-2.5">
@@ -199,8 +265,8 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 </a>
               </div>
 
-              <div className="md:hidden mt-4">
-                <div className="flex flex-col items-center gap-2">
+              <div className="md:hidden mt-8 pt-8 pb-8">
+                <div className="relative flex items-center min-h-[22px]">
                   <div className="flex items-center gap-3">
                     <a
                       href="https://www.linkedin.com/in/hernanyacosta/"
@@ -233,7 +299,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
 
                   <a
                     href="mailto:hey@hernanyacosta.com"
-                    className="text-[11px] text-white/72 hover:text-white transition-colors text-center"
+                    className="absolute left-1/2 -translate-x-1/2 text-[11px] text-white/72 hover:text-white transition-colors text-center"
                   >
                     hey@hernanyacosta.com
                   </a>
