@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 export function LotobolaChapter() {
   return (
-    <section className="min-h-screen bg-black py-24 md:py-32 relative">
+    <section id="lotobola" className="min-h-screen bg-black py-24 md:py-32 relative">
       {/* Vignette */}
       <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/10 to-black/40 pointer-events-none" />
       

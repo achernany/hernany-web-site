@@ -2,20 +2,17 @@ import { Mail, Linkedin, Download } from "lucide-react";
 
 export function ContactPage() {
   return (
-    <div className="pt-20 md:pt-28 pb-0 md:pb-3">
+    <div className="pt-0 md:pt-28 pb-0 md:pb-3">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="md:hidden min-h-[calc(100svh-8rem)] flex items-center justify-center">
-          <div className="w-full max-w-[342px] flex flex-col gap-4 py-4">
-            <h1 className="font-body font-semibold text-[#f5f5f7] text-[36px] leading-[40px] tracking-[-2px] text-center">
+        <div className="md:hidden min-h-[100svh] flex items-start justify-center">
+          <div className="w-full max-w-[342px] flex flex-col gap-4 pt-[156px] pb-4">
+            <h1 className="hero-title-mobile font-body text-[#f5f5f7] text-center">
               Building Something Complex?
             </h1>
 
-            <p className="font-body text-[14px] leading-5 text-center text-[rgba(245,245,247,0.65)]">
-              I work on{" "}
-              <span className="font-extrabold">
-                complex, high-constraint products
-              </span>{" "}
-              that demand systemic thinking and production-ready execution.
+            <p className="hero-paragraph-mobile font-body text-center text-[rgba(245,245,247,0.65)]">
+              I work on complex, high-constraint products that demand systemic
+              thinking and production-ready execution.
             </p>
 
             <div className="flex flex-col items-center justify-center gap-3">
@@ -24,7 +21,7 @@ export function ContactPage() {
                 className="inline-flex h-11 w-[256px] items-center justify-center gap-2 rounded-[120px] border-2 border-[rgba(99,102,241,0.5)] bg-[var(--accent-portfolio)] px-3.5"
               >
                 <Mail size={18} />
-                <span className="font-body font-semibold text-[16px] leading-6 text-white/90">
+                <span className="font-body font-medium text-[16px] leading-6 text-white/90">
                   Start the Conversation
                 </span>
               </a>
@@ -36,7 +33,7 @@ export function ContactPage() {
                 className="inline-flex h-11 w-[257px] items-center justify-center gap-2 rounded-[120px] border-2 border-white/20 bg-white/[0.06] px-5"
               >
                 <Linkedin size={18} />
-                <span className="font-body font-semibold text-[16px] leading-6 text-white/90">
+                <span className="font-body font-medium text-[16px] leading-6 text-white/90">
                   Connect on LinkedIn
                 </span>
               </a>
@@ -44,11 +41,11 @@ export function ContactPage() {
 
             <div className="h-px w-full bg-white/10" />
 
-            <h2 className="font-body font-semibold text-[#f5f5f7] text-[24px] leading-8 tracking-[-0.6px] text-center">
+            <h2 className="font-body font-medium text-[#f5f5f7] text-[24px] leading-8 tracking-[-0.6px] text-center">
               Professional Snapshot
             </h2>
 
-            <p className="font-body text-[14px] leading-5 text-center text-[rgba(245,245,247,0.65)]">
+            <p className="hero-paragraph-mobile font-body text-center text-[rgba(245,245,247,0.65)]">
               Systemic product thinking, service architecture, and frontend-aware
               delivery{" "}
               <span className="italic text-[rgba(99,102,241,0.75)]">
@@ -64,7 +61,7 @@ export function ContactPage() {
               className="mx-auto inline-flex h-11 w-[256px] items-center justify-center gap-3 rounded-[120px] border-2 border-white/20 bg-white/[0.06] px-5"
             >
               <Download size={18} />
-              <span className="font-body font-semibold text-[16px] leading-6 text-white/90">
+              <span className="font-body font-medium text-[16px] leading-6 text-white/90">
                 Download Executive CV
               </span>
             </a>

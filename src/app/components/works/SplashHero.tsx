@@ -1,83 +1,101 @@
-import { motion } from 'motion/react';
+import { useEffect, useState } from "react";
+import { ArrowDown } from "lucide-react";
 
 export function SplashHero() {
+  const [hasStarted, setHasStarted] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    if (!mediaQuery.matches || hasStarted) {
+      return;
+    }
+
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+    const previousBodyOverflow = document.body.style.overflow;
+
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+
+    const preventDefault = (event: Event) => {
+      event.preventDefault();
+    };
+
+    const preventKeys = (event: KeyboardEvent) => {
+      if (
+        [
+          " ",
+          "ArrowDown",
+          "ArrowUp",
+          "PageDown",
+          "PageUp",
+          "Home",
+          "End",
+        ].includes(event.key)
+      ) {
+        event.preventDefault();
+      }
+    };
+
+    window.addEventListener("wheel", preventDefault, { passive: false });
+    window.addEventListener("touchmove", preventDefault, { passive: false });
+    window.addEventListener("keydown", preventKeys, { passive: false });
+
+    return () => {
+      document.documentElement.style.overflow = previousHtmlOverflow;
+      document.body.style.overflow = previousBodyOverflow;
+      window.removeEventListener("wheel", preventDefault as EventListener);
+      window.removeEventListener("touchmove", preventDefault as EventListener);
+      window.removeEventListener("keydown", preventKeys);
+    };
+  }, [hasStarted]);
+
+  const scrollToFirstChapter = () => {
+    const firstChapter = document.getElementById("lotobola");
+    if (!firstChapter) {
+      return;
+    }
+
+    setHasStarted(true);
+    firstChapter.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
-    <section className="relative h-screen flex items-center justify-center bg-black overflow-hidden">
-      {/* Vignette overlay */}
-      <div className="absolute inset-0 hidden md:block bg-gradient-radial from-transparent via-black/20 to-black pointer-events-none" />
-      
-      {/* Subtle grain */}
-      <div className="absolute inset-0 hidden md:block opacity-[0.015] pointer-events-none mix-blend-overlay">
-        <div 
-          className="w-full h-full"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-            backgroundRepeat: 'repeat'
-          }}
-        />
+    <section id="works-hero" className="relative h-[100svh] bg-black overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_20%,rgba(24,30,70,0.28),transparent_48%)] pointer-events-none" />
+
+      <div className="relative z-10 h-full w-full max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="w-full max-w-[342px] mx-auto pt-[156px] text-center">
+          <h1 className="hero-title-mobile font-body text-[#f5f5f7]">
+            Designing Systems
+            <br />
+            Under Constraint
+          </h1>
+
+          <p className="hero-paragraph-mobile mt-3 font-body text-center text-[rgba(245,245,247,0.65)]">
+            <span className="text-[var(--accent-portfolio)]">
+              Regulated platforms, multi-tenant systems and enterprise infrastructures
+            </span>{" "}
+            delivered from architecture to production.
+          </p>
+
+          <p className="mt-5 text-[8px] leading-3 tracking-[0.11em] text-white/42">
+            Strategy → Architecture → Production.
+          </p>
+
+          <p className="mt-8 text-[10px] tracking-[0.34em] uppercase text-white/44">
+            Start - <span className="text-[var(--accent-portfolio)]">Now</span>
+          </p>
+
+          <button
+            type="button"
+            onClick={scrollToFirstChapter}
+            aria-label="Start walkthrough from LotoBola"
+            className="sweep-glint mt-3 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/24 bg-[var(--accent-portfolio)]/90 text-white shadow-[0_0_0_1px_rgba(99,102,241,0.24),0_10px_20px_rgba(99,102,241,0.28)] transition-all duration-500 hover:scale-[1.03] hover:opacity-95"
+          >
+            <ArrowDown size={16} strokeWidth={2.2} />
+          </button>
+        </div>
       </div>
-
-      <div className="relative z-10 text-center px-6 max-w-5xl">
-        <motion.div
-          className="mb-4 text-[11px] md:text-sm tracking-[0.22em] md:tracking-[0.3em] uppercase text-white/45"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-        >
-          SELECTED SYSTEMS · until 2026
-        </motion.div>
-
-        <motion.h1
-          className="font-brand text-[clamp(3rem,12vw,9rem)] leading-[0.9] tracking-[-0.03em] mb-8"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-        >
-          Designing Systems
-          <br />
-          Under Real-World
-          <br />
-          Constraints
-        </motion.h1>
-
-        <motion.p
-          className="text-base md:text-xl text-white/65 mb-8 max-w-3xl mx-auto leading-relaxed tracking-tight"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        >
-          A curated progression of regulated platforms, multi-tenant products and enterprise infrastructures built from strategy to implementation.
-        </motion.p>
-
-        <motion.div
-          className="text-xs md:text-sm text-white/42 tracking-wide mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        >
-          Service Design · Product Architecture · Multi-tenant Systems · Design Systems Engineering
-        </motion.div>
-
-        <motion.button
-          className="group inline-flex h-11 items-center justify-center rounded-full bg-[var(--accent-portfolio)] px-6 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
-        >
-          <span>Start the Walkthrough</span>
-        </motion.button>
-      </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 hidden md:block"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-      >
-        <div className="w-[1px] h-16 bg-gradient-to-b from-white/20 to-transparent" />
-      </motion.div>
     </section>
   );
 }

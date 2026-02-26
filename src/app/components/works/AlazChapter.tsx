@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 
 export function AlazChapter() {
   return (
-    <section className="min-h-screen bg-black py-24 md:py-32 relative border-t border-white/5">
+    <section id="alaz" className="min-h-screen bg-black py-24 md:py-32 relative border-t border-white/5">
       <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/10 to-black/40 pointer-events-none" />
       
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12">

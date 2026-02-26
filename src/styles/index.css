@@ -29,6 +29,25 @@ html {
   letter-spacing: 0.01em;
 }
 
+/* Shared mobile hero typography for Contact/Works parity */
+.hero-title-mobile {
+  font-family: var(--font-body);
+  font-size: 36px;
+  line-height: 40px;
+  letter-spacing: -2px;
+  font-weight: 600;
+  font-variation-settings: "wght" 600;
+}
+
+.hero-paragraph-mobile {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+  font-weight: 400;
+  font-variation-settings: "wght" 400;
+}
+
 /* Subtle purple energy pulse for bordered cards */
 .energy-border {
   box-shadow:
@@ -67,6 +86,49 @@ html {
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+@keyframes sweepGlint {
+  0% {
+    transform: translateX(-145%) skewX(-18deg);
+    opacity: 0;
+  }
+
+  18% {
+    opacity: 0.38;
+  }
+
+  46% {
+    opacity: 0.12;
+  }
+
+  100% {
+    transform: translateX(180%) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+.sweep-glint {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.sweep-glint::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  width: 38%;
+  background: linear-gradient(
+    110deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.16) 42%,
+    rgba(255, 255, 255, 0.32) 55%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: sweepGlint 3.3s ease-in-out infinite;
+  mix-blend-mode: screen;
 }
 
 @keyframes typewriterBlink {
@@ -135,6 +197,18 @@ html {
   font-family: var(--font-brand);
   font-weight: 500;
   letter-spacing: -0.02em;
+}
+
+/* Let explicit body-typed headlines bypass the generic works heading override */
+.works-shell h1.font-body,
+.works-shell h2.font-body,
+.works-shell h3.font-body,
+.works-shell h4.font-body,
+.works-shell h1.hero-title-mobile,
+.works-shell h2.hero-title-mobile,
+.works-shell h3.hero-title-mobile,
+.works-shell h4.hero-title-mobile {
+  font-family: var(--font-body);
 }
 
 @media (max-width: 767px) {
