@@ -11,7 +11,6 @@ import { SelectedWorkDetail } from "../pages/SelectedWorkDetail";
 import { ExtendedWorks } from "../pages/ExtendedWorks";
 import { ExtendedWorkDetail } from "../pages/ExtendedWorkDetail";
 import { Contact } from "../pages/Contact";
-import { LotoBolaCaseStudy } from "../pages/LotoBolaCaseStudy";
 import "../components/ui/ui.css";
 import "../components/layout/layout.css";
 import "../pages/pages.css";
@@ -62,14 +61,6 @@ export default function App() {
   };
 
   const route = useMemo(() => {
-    // Case study must be checked before the generic :slug pattern
-    if (path === "/selected-works/lotobola/case-study") {
-      return {
-        kind: "caseStudy" as const,
-        element: <LotoBolaCaseStudy onNavigate={navigate} />,
-      };
-    }
-
     const selectedDetail = matchRoute("/selected-works/:slug", path);
     if (selectedDetail) {
       return {
@@ -115,8 +106,7 @@ export default function App() {
 
   const showTopBar =
     route.kind !== "selectedDetail" &&
-    route.kind !== "extendedDetail" &&
-    route.kind !== "caseStudy";
+    route.kind !== "extendedDetail";
 
   return (
     <div className="app-shell">

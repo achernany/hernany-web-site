@@ -574,6 +574,51 @@
 .cs-placeholder--card      { aspect-ratio: 4 / 3; }     /* Annex cards / process materials */
 .cs-placeholder--square    { aspect-ratio: 1 / 1; }     /* Module icons / supporting evidence */
 
+/* --- Tab bar sticky at bottom (used in SelectedWorkDetail / LotoBola full view) --- */
+.cs-tab-bar {
+  position: sticky;
+  bottom: var(--space-16);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  padding-inline: var(--layout-container-pad-inline);
+  /* Extra bottom clearance so content isn't clipped by the bar */
+  margin-top: var(--space-32);
+}
+
+.cs-tab-bar .ui-segmented {
+  width: min(100%, 760px);
+}
+
+@media (min-width: 1024px) {
+  .cs-tab-bar .ui-segmented {
+    overflow: visible;
+  }
+  .cs-tab-bar .ui-segmented__item {
+    flex: 1 1 0;
+    text-align: center;
+  }
+}
+
+@media (max-width: 1023px) {
+  .cs-tab-bar .ui-segmented {
+    width: 100%;
+  }
+  .cs-tab-bar .ui-segmented__item {
+    flex: 0 0 calc((100% - (var(--space-8) * 2)) / 3);
+    min-width: 0;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-inline: var(--space-8);
+  }
+}
+
+/* Padding at the bottom of the scrollable body to clear the sticky tab bar */
+.cs-body--tabbed {
+  padding-bottom: calc(var(--space-96) + 60px);
+}
+
 .cs-caption {
   font-family: var(--font-sans);
   font-size: var(--text-micro-size);

@@ -4,6 +4,7 @@ import { SegmentedControl } from "../components/ui/SegmentedControl";
 import { StatPill } from "../components/ui/StatPill";
 import { PageFooter } from "../components/layout/PageFooter";
 import { DetailHeader } from "../components/layout/DetailHeader";
+import { LotoBolaSections } from "./LotoBolaSections";
 import { useI18n } from "../i18n";
 
 interface SelectedWorkDetailProps {
@@ -37,6 +38,41 @@ export function SelectedWorkDetail({ slug, onNavigate }: SelectedWorkDetailProps
     label: String(t(`selectedWorks.works.${item}.name`)),
   }));
 
+  /* ── LotoBola: full case study with sticky tab bar ── */
+  if (fallbackSlug === "lotobola") {
+    return (
+      <div>
+        {/* Sticky header */}
+        <div className="cs-sticky-header">
+          <Container>
+            <DetailHeader
+              title={t("menu.selectedWork")}
+              onBack={() => onNavigate("/selected-works")}
+            />
+          </Container>
+        </div>
+
+        {/* Full case study content */}
+        <Container>
+          <LotoBolaSections />
+        </Container>
+
+        {/* Sticky project tab bar — always visible at the bottom */}
+        <div className="cs-tab-bar">
+          <SegmentedControl
+            ariaLabel={t("selectedWorks.segmentLabel")}
+            items={segmentedItems}
+            activeId={fallbackSlug}
+            onChange={(next) => onNavigate(`/selected-works/${next}`)}
+          />
+        </div>
+
+        <PageFooter />
+      </div>
+    );
+  }
+
+  /* ── All other projects: compact stats layout ── */
   return (
     <Container>
       <section className="selected-detail">
