@@ -583,14 +583,15 @@
 /* --- Tab bar fixed at bottom — always visible while scrolling --- */
 .cs-tab-bar {
   position: fixed;
-  bottom: var(--space-16);
+  /* Respect iOS/Android safe area so the bar never hides behind browser chrome */
+  bottom: calc(var(--space-16) + env(safe-area-inset-bottom, 0px));
   left: 0;
   right: 0;
   z-index: var(--layer-topbar);
   display: flex;
   justify-content: center;
   padding-inline: var(--layout-container-pad-inline);
-  pointer-events: none; /* let clicks pass through the transparent gap areas */
+  pointer-events: none;
 }
 
 .cs-tab-bar .ui-segmented {
@@ -601,6 +602,7 @@
   backdrop-filter: blur(20px);
 }
 
+/* Desktop: items fill the bar equally, allow overflow for scale hover */
 @media (min-width: 1024px) {
   .cs-tab-bar .ui-segmented {
     overflow: visible;
@@ -611,17 +613,23 @@
   }
 }
 
+/* Mobile: full width pill, items split evenly with a min-width
+   so they never squash — scroll kicks in only if labels are very long */
 @media (max-width: 1023px) {
+  .cs-tab-bar {
+    padding-inline: var(--space-12);
+  }
   .cs-tab-bar .ui-segmented {
     width: 100%;
   }
   .cs-tab-bar .ui-segmented__item {
-    flex: 0 0 calc((100% - (var(--space-8) * 2)) / 3);
-    min-width: 0;
+    flex: 1 1 0;
+    min-width: 88px;
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding-inline: var(--space-8);
+    padding-inline: var(--space-12);
+    font-size: var(--text-body-sm-size, 13px);
   }
 }
 

@@ -125,6 +125,14 @@
   opacity: 0.9;
 }
 
+@media (min-width: 1024px) {
+  .ui-button--primary:hover {
+    opacity: 1;
+    transform: scale(1.04);
+    box-shadow: var(--button-primary-shadow), 0 8px 28px var(--color-accent-glow);
+  }
+}
+
 .ui-icon-button {
   width: var(--icon-button-size);
   height: var(--icon-button-size);
