@@ -121,16 +121,38 @@
   line-height: var(--text-body-md-line);
 }
 
-.detail-header__brand {
-  color: var(--color-text-secondary);
+.detail-header__lang {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.detail-header__lang-btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
   font-size: var(--text-micro-size);
   line-height: var(--text-micro-line);
   letter-spacing: var(--text-micro-spacing);
+  color: var(--color-text-soft);
+  transition: color 160ms ease;
 }
 
-.detail-header__brand-logo {
-  width: 120px;
-  height: auto;
-  display: block;
-  opacity: 0.85;
+.detail-header__lang-btn:hover {
+  color: var(--color-text-primary);
+}
+
+.detail-header__lang-btn--active {
+  color: var(--color-accent-500);
+  font-weight: 600;
+}
+
+.detail-header__lang-sep {
+  color: var(--color-text-soft);
+  font-size: var(--text-micro-size);
+  opacity: 0.4;
+  user-select: none;
 }

@@ -7,6 +7,7 @@ import { DetailHeader } from "../components/layout/DetailHeader";
 import { LotoBolaSections } from "./LotoBolaSections";
 import { PlayzonBetSections } from "./PlayzonBetSections";
 import { EvaSections } from "./EvaSections";
+import { AlazSections } from "./AlazSections";
 import { useI18n } from "../i18n";
 
 interface SelectedWorkDetailProps {
@@ -28,13 +29,14 @@ interface WorkTranslation {
 }
 
 // Only slugs with a full case study built — add new entries here as they're created
-const order = ["lotobola", "playzonbet", "eva"];
+const order = ["lotobola", "playzonbet", "eva", "alaz"];
 
 // Content map — add new Sections components here when a new case study is built
 const caseStudyContent: Record<string, JSX.Element> = {
   lotobola: <LotoBolaSections />,
   playzonbet: <PlayzonBetSections />,
   eva: <EvaSections />,
+  alaz: <AlazSections />,
 };
 
 export function SelectedWorkDetail({ slug, onNavigate }: SelectedWorkDetailProps) {
@@ -51,7 +53,7 @@ export function SelectedWorkDetail({ slug, onNavigate }: SelectedWorkDetailProps
   /* ── Full case studies: single render path so header + tab bar never remount ── */
   if (fallbackSlug in caseStudyContent) {
     return (
-      <div>
+      <div className="cs-case-page">
         {/* Sticky header — same element across all case studies, never remounts */}
         <div className="cs-sticky-header">
           <Container>

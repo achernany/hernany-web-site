@@ -692,3 +692,19 @@
   color: var(--color-text-muted);
   margin: 0;
 }
+
+/* ── Case page footer clearance ────────────────────────────
+   The fixed tab bar floats over the page — ensure the footer
+   (copyright) is always visible above it.
+   Desktop: pill sits ~80px from bottom → give footer room.
+   Mobile: edge-to-edge navbar is 56px + safe area at bottom.
+   ─────────────────────────────────────────────────────────── */
+.cs-case-page .page-footer {
+  padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+}
+
+@media (max-width: 1023px) {
+  .cs-case-page .page-footer {
+    padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px) + var(--space-16));
+  }
+}
