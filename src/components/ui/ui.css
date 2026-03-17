@@ -210,11 +210,21 @@
   white-space: nowrap;
   font-size: var(--text-body-md-size);
   line-height: var(--text-body-md-line);
+  transition: background 180ms ease, transform 180ms ease, color 180ms ease;
 }
 
 .ui-segmented__item--active {
   background: var(--segment-item-active-bg);
   color: var(--segment-item-active-color);
+  font-weight: 600;
+}
+
+@media (min-width: 1024px) {
+  .ui-segmented__item:not(.ui-segmented__item--active):hover {
+    background: rgba(255, 255, 255, 0.09);
+    color: var(--color-text-primary);
+    transform: scale(1.04);
+  }
 }
 
 .ui-stat-grid {

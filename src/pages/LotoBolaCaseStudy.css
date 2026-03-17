@@ -596,6 +596,9 @@
 .cs-tab-bar .ui-segmented {
   pointer-events: all;
   width: min(100%, 760px);
+  background: rgba(18, 18, 20, 0.55);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
 }
 
 @media (min-width: 1024px) {
