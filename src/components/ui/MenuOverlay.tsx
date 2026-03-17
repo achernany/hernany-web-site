@@ -17,7 +17,6 @@ const menuItems: MenuItem[] = [
   { key: "systems", path: "/" },
   { key: "approach", path: "/approach" },
   { key: "selectedWork", path: "/selected-works" },
-  { key: "extendedWork", path: "/extended-works" },
   { key: "contact", path: "/contact" },
 ];
 
