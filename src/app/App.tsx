@@ -62,6 +62,14 @@ export default function App() {
   };
 
   const route = useMemo(() => {
+    // Case study must be checked before the generic :slug pattern
+    if (path === "/selected-works/lotobola/case-study") {
+      return {
+        kind: "caseStudy" as const,
+        element: <LotoBolaCaseStudy onNavigate={navigate} />,
+      };
+    }
+
     const selectedDetail = matchRoute("/selected-works/:slug", path);
     if (selectedDetail) {
       return {
@@ -100,13 +108,6 @@ export default function App() {
 
     if (path === "/contact") {
       return { kind: "contact" as const, element: <Contact /> };
-    }
-
-    if (path === "/case-study/lotobola") {
-      return {
-        kind: "caseStudy" as const,
-        element: <LotoBolaCaseStudy onNavigate={navigate} />,
-      };
     }
 
     return { kind: "home" as const, element: <Home onNavigate={navigate} /> };

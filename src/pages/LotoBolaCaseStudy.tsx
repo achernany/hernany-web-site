@@ -66,7 +66,7 @@ export function LotoBolaCaseStudy({ onNavigate }: LotoBolaCaseStudyProps) {
       <div className="cs-sticky-header">
         <Container>
           <DetailHeader
-            title="Selected Work"
+            title="LotoBola"
             onBack={() => onNavigate("/selected-works/lotobola")}
           />
         </Container>
