@@ -113,6 +113,18 @@
           "scale": "Admin, instructor and learner journeys"
         }
       },
+      "eva": {
+        "name": "EVA",
+        "kicker": "HUMANIZING THE VIRTUAL CAMPUS EXPERIENCE",
+        "descriptionAccent": "Guided, community-aware UX for a virtual campus",
+        "descriptionRest": "redesigning login, password recovery, and a new notification system.",
+        "stats": {
+          "role": "UX/UI Lead",
+          "scope": "Login · Password Recovery · Notifications",
+          "timeline": "Multi-phase",
+          "scale": "Students, teachers, and staff across 4 institutions"
+        }
+      },
       "pacasmayo": {
         "name": "Pacasmayo",
         "kicker": "DESIGN SYSTEMS ENGINEERING",

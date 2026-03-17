@@ -94,6 +94,12 @@
   }
 }
 
+@media (min-width: 1024px) {
+  .cs-meta--3col {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 .cs-meta__item {
   padding: var(--space-16) var(--space-24);
   display: flex;
@@ -613,23 +619,63 @@
   }
 }
 
-/* Mobile: full width pill, items split evenly with a min-width
-   so they never squash — scroll kicks in only if labels are very long */
+/* Mobile: bottom navbar — edge-to-edge, immutable fixed dimensions */
 @media (max-width: 1023px) {
+  /* Height lives HERE on the fixed wrapper — this is what keeps it stable.
+     position:fixed removes it from flow, but explicit height + bottom:0
+     makes the box truly immutable regardless of child content changes. */
   .cs-tab-bar {
-    padding-inline: var(--space-12);
+    padding-inline: 0;
+    bottom: 0;
+    height: calc(56px + env(safe-area-inset-bottom, 0px));
+    align-items: stretch; /* segmented control stretches to fill full height */
   }
+
   .cs-tab-bar .ui-segmented {
     width: 100%;
+    height: 100%; /* fills the fixed parent exactly */
+    border-radius: 0;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    background: rgba(18, 18, 20, 0.55);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    padding: 0;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    gap: 0;
+    align-items: stretch;
+    overflow: hidden;
   }
+
   .cs-tab-bar .ui-segmented__item {
     flex: 1 1 0;
-    min-width: 88px;
+    min-width: 0;
+    border-radius: 0;
+    align-self: stretch;
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding-inline: var(--space-12);
-    font-size: var(--text-body-sm-size, 13px);
+    padding-inline: var(--space-4, 4px);
+    font-size: 11px;
+    letter-spacing: 0.03em;
+    color: var(--color-text-muted);
+    border-top: 2px solid transparent;
+    transition: color 180ms ease, border-color 180ms ease;
+  }
+
+  /* Active: accent text + top indicator line, no pill */
+  .cs-tab-bar .ui-segmented__item--active {
+    background: transparent;
+    color: var(--color-accent-500);
+    font-weight: 600;
+    border-top-color: var(--color-accent-500);
+  }
+}
+
+/* Bottom padding — mobile clears the fixed 56px navbar + safe area */
+@media (max-width: 1023px) {
+  .cs-body {
+    padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px) + var(--space-32));
   }
 }
 

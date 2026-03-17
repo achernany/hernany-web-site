@@ -6,6 +6,7 @@ import { PageFooter } from "../components/layout/PageFooter";
 import { DetailHeader } from "../components/layout/DetailHeader";
 import { LotoBolaSections } from "./LotoBolaSections";
 import { PlayzonBetSections } from "./PlayzonBetSections";
+import { EvaSections } from "./EvaSections";
 import { useI18n } from "../i18n";
 
 interface SelectedWorkDetailProps {
@@ -27,7 +28,14 @@ interface WorkTranslation {
 }
 
 // Only slugs with a full case study built — add new entries here as they're created
-const order = ["lotobola", "playzonbet"];
+const order = ["lotobola", "playzonbet", "eva"];
+
+// Content map — add new Sections components here when a new case study is built
+const caseStudyContent: Record<string, JSX.Element> = {
+  lotobola: <LotoBolaSections />,
+  playzonbet: <PlayzonBetSections />,
+  eva: <EvaSections />,
+};
 
 export function SelectedWorkDetail({ slug, onNavigate }: SelectedWorkDetailProps) {
   const { t, tn } = useI18n();
@@ -40,11 +48,11 @@ export function SelectedWorkDetail({ slug, onNavigate }: SelectedWorkDetailProps
     label: String(t(`selectedWorks.works.${item}.name`)),
   }));
 
-  /* ── LotoBola: full case study with sticky tab bar ── */
-  if (fallbackSlug === "lotobola") {
+  /* ── Full case studies: single render path so header + tab bar never remount ── */
+  if (fallbackSlug in caseStudyContent) {
     return (
       <div>
-        {/* Sticky header */}
+        {/* Sticky header — same element across all case studies, never remounts */}
         <div className="cs-sticky-header">
           <Container>
             <DetailHeader
@@ -54,12 +62,12 @@ export function SelectedWorkDetail({ slug, onNavigate }: SelectedWorkDetailProps
           </Container>
         </div>
 
-        {/* Full case study content */}
+        {/* Content area — only this swaps when navigating between projects */}
         <Container>
-          <LotoBolaSections />
+          {caseStudyContent[fallbackSlug]}
         </Container>
 
-        {/* Sticky project tab bar — always visible at the bottom */}
+        {/* Fixed tab bar — same element across all case studies, never remounts */}
         <div className="cs-tab-bar">
           <SegmentedControl
             ariaLabel={t("selectedWorks.segmentLabel")}
@@ -69,34 +77,6 @@ export function SelectedWorkDetail({ slug, onNavigate }: SelectedWorkDetailProps
           />
         </div>
 
-        <PageFooter />
-      </div>
-    );
-  }
-
-  /* ── PlayzonBet: full case study with sticky tab bar ── */
-  if (fallbackSlug === "playzonbet") {
-    return (
-      <div>
-        <div className="cs-sticky-header">
-          <Container>
-            <DetailHeader
-              title={t("menu.selectedWork")}
-              onBack={() => onNavigate("/selected-works")}
-            />
-          </Container>
-        </div>
-        <Container>
-          <PlayzonBetSections />
-        </Container>
-        <div className="cs-tab-bar">
-          <SegmentedControl
-            ariaLabel={t("selectedWorks.segmentLabel")}
-            items={segmentedItems}
-            activeId={fallbackSlug}
-            onChange={(next) => onNavigate(`/selected-works/${next}`)}
-          />
-        </div>
         <PageFooter />
       </div>
     );
