@@ -11,6 +11,7 @@ import { SelectedWorkDetail } from "../pages/SelectedWorkDetail";
 import { ExtendedWorks } from "../pages/ExtendedWorks";
 import { ExtendedWorkDetail } from "../pages/ExtendedWorkDetail";
 import { Contact } from "../pages/Contact";
+import { LotoBolaCaseStudy } from "../pages/LotoBolaCaseStudy";
 import "../components/ui/ui.css";
 import "../components/layout/layout.css";
 import "../pages/pages.css";
@@ -101,10 +102,20 @@ export default function App() {
       return { kind: "contact" as const, element: <Contact /> };
     }
 
+    if (path === "/case-study/lotobola") {
+      return {
+        kind: "caseStudy" as const,
+        element: <LotoBolaCaseStudy onNavigate={navigate} />,
+      };
+    }
+
     return { kind: "home" as const, element: <Home onNavigate={navigate} /> };
   }, [path]);
 
-  const showTopBar = route.kind !== "selectedDetail" && route.kind !== "extendedDetail";
+  const showTopBar =
+    route.kind !== "selectedDetail" &&
+    route.kind !== "extendedDetail" &&
+    route.kind !== "caseStudy";
 
   return (
     <div className="app-shell">

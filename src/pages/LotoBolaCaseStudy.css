@@ -1,0 +1,584 @@
+/* ============================================================
+   LotoBola Case Study — Page Styles
+   Extends the existing token system. No new visual direction.
+   ============================================================ */
+
+/* --- Sticky Navigation Header --- */
+.cs-sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--layer-topbar);
+  background: rgba(8, 9, 15, 0.88);
+  -webkit-backdrop-filter: blur(32px);
+  backdrop-filter: blur(32px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* --- Page Body --- */
+.cs-body {
+  padding-bottom: var(--space-96);
+}
+
+/* --- Generic Section --- */
+.cs-section {
+  padding-top: var(--space-64);
+  padding-bottom: var(--space-32);
+}
+
+.cs-section + .cs-section {
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+@media (min-width: 1024px) {
+  .cs-section {
+    padding-top: var(--space-80);
+    padding-bottom: var(--space-48);
+  }
+}
+
+/* --- Hero Section Override --- */
+.cs-section--hero {
+  padding-top: var(--space-48);
+  padding-bottom: var(--space-48);
+}
+
+@media (min-width: 1024px) {
+  .cs-section--hero {
+    padding-top: var(--space-64);
+    padding-bottom: var(--space-64);
+  }
+}
+
+.cs-hero-text {
+  max-width: var(--measure-detail-max);
+  margin-inline: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  margin-bottom: var(--space-48);
+}
+
+@media (min-width: 1024px) {
+  .cs-hero-text {
+    gap: var(--space-24);
+    margin-bottom: var(--space-64);
+  }
+}
+
+/* --- Metadata Strip --- */
+.cs-meta {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: var(--card-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-top: var(--space-48);
+}
+
+@media (min-width: 768px) {
+  .cs-meta {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .cs-meta {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.cs-meta__item {
+  padding: var(--space-16) var(--space-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  border: var(--card-border);
+}
+
+.cs-meta__label {
+  font-family: var(--font-sans);
+  font-size: var(--text-micro-size);
+  line-height: var(--text-micro-line);
+  letter-spacing: var(--text-micro-spacing);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.cs-meta__value {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-md-size);
+  line-height: var(--text-body-md-line);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* --- Section Head (prose-constrained heading block) --- */
+.cs-section-head {
+  max-width: var(--measure-detail-max);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  margin-bottom: var(--space-32);
+}
+
+.cs-section-head--center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .cs-section-head {
+    gap: var(--space-24);
+    margin-bottom: var(--space-48);
+  }
+}
+
+/* --- Section Content --- */
+.cs-section-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+}
+
+@media (min-width: 1024px) {
+  .cs-section-content {
+    gap: var(--space-48);
+  }
+}
+
+/* --- Callout / Pull Quote --- */
+.cs-callout {
+  border-left: 2px solid var(--color-accent-500);
+  padding: var(--space-24) var(--space-32);
+  background: var(--color-accent-100);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  max-width: var(--measure-detail-max);
+}
+
+/* --- Subheading Group (within section content) --- */
+.cs-subhead {
+  max-width: var(--measure-detail-max);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+/* --- Inline Bullet List --- */
+.cs-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cs-list__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-12);
+  font-size: var(--text-body-md-size);
+  line-height: var(--text-body-md-line);
+  color: var(--color-text-secondary);
+}
+
+.cs-list__item::before {
+  content: '—';
+  color: var(--color-accent-500);
+  flex-shrink: 0;
+  line-height: var(--text-body-md-line);
+}
+
+/* --- Cards / Sub-blocks (3-col) --- */
+.cs-blocks {
+  display: grid;
+  gap: var(--layout-grid-gap);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .cs-blocks {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.cs-block {
+  background: var(--color-background-secondary);
+  border: var(--card-border);
+  border-radius: var(--radius-md);
+  padding: var(--card-pad-mobile);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+@media (min-width: 1024px) {
+  .cs-block {
+    padding: var(--card-pad-desktop);
+  }
+}
+
+/* --- Module Grid (Section 4 — Scope) --- */
+.cs-module-grid {
+  display: grid;
+  gap: var(--layout-grid-gap);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 1024px) {
+  .cs-module-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.cs-module-item {
+  background: var(--color-background-secondary);
+  border: var(--card-border);
+  border-radius: var(--radius-md);
+  padding: var(--card-pad-mobile);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+@media (min-width: 1024px) {
+  .cs-module-item {
+    padding: var(--card-pad-desktop);
+  }
+}
+
+.cs-module-item__index {
+  font-family: var(--font-sans);
+  font-size: var(--text-micro-size);
+  line-height: var(--text-micro-line);
+  letter-spacing: var(--text-micro-spacing);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.cs-module-item__placeholder {
+  width: 100%;
+}
+
+/* --- Two-column split --- */
+.cs-split {
+  display: grid;
+  gap: var(--layout-grid-gap);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+  .cs-split {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- Three-up grid --- */
+.cs-three-up {
+  display: grid;
+  gap: var(--layout-grid-gap);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .cs-three-up {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* --- Four-up grid (flow steps) --- */
+.cs-four-up {
+  display: grid;
+  gap: var(--layout-grid-gap);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 1024px) {
+  .cs-four-up {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* --- Staggered Gallery (2-col) --- */
+.cs-stagger {
+  display: grid;
+  gap: var(--layout-grid-gap);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .cs-stagger {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- Supporting Visuals Grid (3-col) --- */
+.cs-supporting {
+  display: grid;
+  gap: var(--layout-grid-gap);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .cs-supporting {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.cs-supporting-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+/* --- Value Blocks (Section 13) --- */
+.cs-value-grid {
+  display: grid;
+  gap: var(--layout-grid-gap);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .cs-value-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.cs-value-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  padding: var(--card-pad-mobile);
+  background: var(--color-accent-100);
+  border: 1px solid var(--color-accent-200);
+  border-radius: var(--radius-md);
+}
+
+@media (min-width: 1024px) {
+  .cs-value-block {
+    padding: var(--card-pad-desktop);
+  }
+}
+
+/* --- Evidence / Metrics Row (Section 13) --- */
+.cs-evidence {
+  display: grid;
+  gap: var(--layout-grid-gap);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .cs-evidence {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .cs-evidence {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+}
+
+/* --- Iteration Grid (Section 12) --- */
+.cs-iter-grid {
+  display: grid;
+  gap: var(--layout-grid-gap);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 1024px) {
+  .cs-iter-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.cs-iter-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.cs-iter-label {
+  font-family: var(--font-sans);
+  font-size: var(--text-micro-size);
+  line-height: var(--text-micro-line);
+  letter-spacing: var(--text-micro-spacing);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* --- Role / Collaboration Grid (Section 15) --- */
+.cs-role-grid {
+  display: grid;
+  gap: var(--layout-grid-gap);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .cs-role-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.cs-role-item {
+  background: var(--color-background-secondary);
+  border: var(--card-border);
+  border-radius: var(--radius-md);
+  padding: var(--card-pad-mobile);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+@media (min-width: 1024px) {
+  .cs-role-item {
+    padding: var(--card-pad-desktop);
+  }
+}
+
+.cs-role-item__label {
+  font-family: var(--font-sans);
+  font-size: var(--text-micro-size);
+  line-height: var(--text-micro-line);
+  letter-spacing: var(--text-micro-spacing);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.cs-role-item__value {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-md-size);
+  line-height: var(--text-body-md-line);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* --- Annex Section --- */
+.cs-annex {
+  border-top: var(--card-border);
+  padding-top: var(--space-64);
+  padding-bottom: 0;
+}
+
+@media (min-width: 1024px) {
+  .cs-annex {
+    padding-top: var(--space-80);
+  }
+}
+
+.cs-annex-head {
+  max-width: var(--measure-detail-max);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  margin-bottom: var(--space-48);
+}
+
+.cs-annex-grid {
+  display: grid;
+  gap: var(--layout-grid-gap);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .cs-annex-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .cs-annex-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.cs-annex-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+/* ============================================================
+   Placeholder System
+   Replace each .cs-placeholder with <img> or <video>.
+   The placeholder ID is visible in the UI and in code comments.
+   ============================================================ */
+
+.cs-ph-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  margin: 0;
+  width: 100%;
+}
+
+.cs-placeholder {
+  position: relative;
+  background-color: var(--color-background-secondary);
+  border: var(--card-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--space-8);
+  width: 100%;
+}
+
+/* Subtle grid texture for placeholder readability */
+.cs-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+.cs-placeholder__id {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: 500;
+}
+
+.cs-placeholder__hint {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  line-height: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.12);
+  font-weight: 400;
+}
+
+/* Aspect ratios — aligned to content type conventions */
+.cs-placeholder--hero      { aspect-ratio: 2 / 1; }     /* Hero mosaic / system overview */
+.cs-placeholder--wide      { aspect-ratio: 21 / 9; }    /* Journey maps / service blueprints */
+.cs-placeholder--landscape { aspect-ratio: 16 / 9; }    /* Website / admin / design system */
+.cs-placeholder--portrait  { aspect-ratio: 3 / 4; }     /* App screens / mobile flows */
+.cs-placeholder--card      { aspect-ratio: 4 / 3; }     /* Annex cards / process materials */
+.cs-placeholder--square    { aspect-ratio: 1 / 1; }     /* Module icons / supporting evidence */
+
+.cs-caption {
+  font-family: var(--font-sans);
+  font-size: var(--text-micro-size);
+  line-height: var(--text-micro-line);
+  letter-spacing: var(--text-micro-spacing);
+  color: var(--color-text-muted);
+  margin: 0;
+}
