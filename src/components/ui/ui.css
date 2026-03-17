@@ -340,11 +340,12 @@
 
 .ui-menu-overlay__lang {
   width: fit-content;
+  height: 28px;
   display: inline-flex;
-  gap: var(--space-4);
+  gap: 2px;
   border-radius: var(--radius-pill);
   background: var(--menu-toggle-bg);
-  padding: var(--space-4);
+  padding: 2px;
   transition: background-color 280ms ease, box-shadow 280ms ease;
 }
 
@@ -360,7 +361,7 @@
   border-radius: var(--radius-pill);
   background: transparent;
   color: var(--color-text-muted);
-  padding: var(--space-8) var(--space-16);
+  padding: 2px var(--space-8);
   cursor: pointer;
   font-size: var(--text-body-md-size);
   line-height: var(--text-body-md-line);
