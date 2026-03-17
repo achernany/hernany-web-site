@@ -1,5 +1,6 @@
 import { useI18n } from "../../i18n";
 import { cn } from "../../lib/cn";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 interface MenuItem {
   key: string;
@@ -21,7 +22,7 @@ const menuItems: MenuItem[] = [
 ];
 
 export function MenuOverlay({ open, currentPath, onNavigate, onClose }: MenuOverlayProps) {
-  const { t, lang, setLang } = useI18n();
+  const { t } = useI18n();
 
   if (!open) {
     return null;
@@ -54,28 +55,7 @@ export function MenuOverlay({ open, currentPath, onNavigate, onClose }: MenuOver
         </nav>
 
         <div className="ui-menu-overlay__lang-wrap">
-          <div className="ui-menu-overlay__lang" role="group" aria-label="Language selector">
-            <button
-              type="button"
-              onClick={() => setLang("en")}
-              className={cn(
-                "ui-menu-overlay__lang-btn",
-                lang === "en" && "ui-menu-overlay__lang-btn--active",
-              )}
-            >
-              {t("common.language.en")}
-            </button>
-            <button
-              type="button"
-              onClick={() => setLang("es")}
-              className={cn(
-                "ui-menu-overlay__lang-btn",
-                lang === "es" && "ui-menu-overlay__lang-btn--active",
-              )}
-            >
-              {t("common.language.es")}
-            </button>
-          </div>
+          <LanguageSwitcher />
         </div>
       </div>
     </aside>
