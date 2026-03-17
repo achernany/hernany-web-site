@@ -88,6 +88,12 @@
   }
 }
 
+@media (min-width: 1024px) {
+  .cs-meta--5col {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
 .cs-meta__item {
   padding: var(--space-16) var(--space-24);
   display: flex;
@@ -574,19 +580,21 @@
 .cs-placeholder--card      { aspect-ratio: 4 / 3; }     /* Annex cards / process materials */
 .cs-placeholder--square    { aspect-ratio: 1 / 1; }     /* Module icons / supporting evidence */
 
-/* --- Tab bar sticky at bottom (used in SelectedWorkDetail / LotoBola full view) --- */
+/* --- Tab bar fixed at bottom — always visible while scrolling --- */
 .cs-tab-bar {
-  position: sticky;
+  position: fixed;
   bottom: var(--space-16);
-  z-index: 10;
+  left: 0;
+  right: 0;
+  z-index: var(--layer-topbar);
   display: flex;
   justify-content: center;
   padding-inline: var(--layout-container-pad-inline);
-  /* Extra bottom clearance so content isn't clipped by the bar */
-  margin-top: var(--space-32);
+  pointer-events: none; /* let clicks pass through the transparent gap areas */
 }
 
 .cs-tab-bar .ui-segmented {
+  pointer-events: all;
   width: min(100%, 760px);
 }
 
@@ -614,9 +622,9 @@
   }
 }
 
-/* Padding at the bottom of the scrollable body to clear the sticky tab bar */
-.cs-body--tabbed {
-  padding-bottom: calc(var(--space-96) + 60px);
+/* Bottom padding on the page body so last content clears the fixed tab bar */
+.cs-body {
+  padding-bottom: calc(var(--space-64) + 64px);
 }
 
 .cs-caption {

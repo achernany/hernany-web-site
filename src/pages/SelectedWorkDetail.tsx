@@ -5,6 +5,7 @@ import { StatPill } from "../components/ui/StatPill";
 import { PageFooter } from "../components/layout/PageFooter";
 import { DetailHeader } from "../components/layout/DetailHeader";
 import { LotoBolaSections } from "./LotoBolaSections";
+import { PlayzonBetSections } from "./PlayzonBetSections";
 import { useI18n } from "../i18n";
 
 interface SelectedWorkDetailProps {
@@ -67,6 +68,34 @@ export function SelectedWorkDetail({ slug, onNavigate }: SelectedWorkDetailProps
           />
         </div>
 
+        <PageFooter />
+      </div>
+    );
+  }
+
+  /* ── PlayzonBet: full case study with sticky tab bar ── */
+  if (fallbackSlug === "playzonbet") {
+    return (
+      <div>
+        <div className="cs-sticky-header">
+          <Container>
+            <DetailHeader
+              title={t("menu.selectedWork")}
+              onBack={() => onNavigate("/selected-works")}
+            />
+          </Container>
+        </div>
+        <Container>
+          <PlayzonBetSections />
+        </Container>
+        <div className="cs-tab-bar">
+          <SegmentedControl
+            ariaLabel={t("selectedWorks.segmentLabel")}
+            items={segmentedItems}
+            activeId={fallbackSlug}
+            onChange={(next) => onNavigate(`/selected-works/${next}`)}
+          />
+        </div>
         <PageFooter />
       </div>
     );

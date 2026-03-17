@@ -127,3 +127,10 @@
   line-height: var(--text-micro-line);
   letter-spacing: var(--text-micro-spacing);
 }
+
+.detail-header__brand-logo {
+  width: 120px;
+  height: auto;
+  display: block;
+  opacity: 0.85;
+}

@@ -18,7 +18,11 @@ export function DetailHeader({ title, onBack }: DetailHeaderProps) {
         </IconButton>
         <span className="detail-header__title">{title}</span>
       </div>
-      <span className="detail-header__brand">{t("common.brand")}</span>
+      <img
+        src="/logo-menu.svg"
+        alt={t("common.brand")}
+        className="detail-header__brand-logo"
+      />
     </div>
   );
 }
