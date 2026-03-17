@@ -26,7 +26,8 @@ interface WorkTranslation {
   };
 }
 
-const order = ["lotobola", "playzonbet", "alaz", "inlearning", "pacasmayo"];
+// Only slugs with a full case study built — add new entries here as they're created
+const order = ["lotobola", "playzonbet"];
 
 export function SelectedWorkDetail({ slug, onNavigate }: SelectedWorkDetailProps) {
   const { t, tn } = useI18n();
