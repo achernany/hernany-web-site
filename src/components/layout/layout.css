@@ -121,15 +121,3 @@
   line-height: var(--text-body-md-line);
 }
 
-/* Scale the shared LanguageSwitcher down to match the old logo footprint (~120px) */
-.detail-header .ui-menu-overlay__lang {
-  width: 120px;
-  justify-content: center;
-}
-
-.detail-header .ui-menu-overlay__lang-btn {
-  font-size: 10px;
-  line-height: var(--text-micro-line);
-  letter-spacing: 0;
-  padding: var(--space-4) 2px;
-}
