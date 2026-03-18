@@ -627,7 +627,7 @@
   .cs-tab-bar {
     padding-inline: 0;
     bottom: 0;
-    height: calc(56px + env(safe-area-inset-bottom, 0px));
+    height: calc(64px + env(safe-area-inset-bottom, 0px));
     align-items: stretch; /* segmented control stretches to fill full height */
   }
 
@@ -652,9 +652,11 @@
     min-width: 0;
     border-radius: 0;
     align-self: stretch;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 12px;
     padding-inline: var(--space-4, 4px);
     font-size: 11px;
     letter-spacing: 0.03em;
@@ -672,10 +674,10 @@
   }
 }
 
-/* Bottom padding — mobile clears the fixed 56px navbar + safe area */
+/* Bottom padding — mobile clears the fixed 64px navbar + safe area */
 @media (max-width: 1023px) {
   .cs-body {
-    padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px) + var(--space-32));
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px) + var(--space-32));
   }
 }
 
@@ -697,7 +699,7 @@
    The fixed tab bar floats over the page — ensure the footer
    (copyright) is always visible above it.
    Desktop: pill sits ~80px from bottom → give footer room.
-   Mobile: edge-to-edge navbar is 56px + safe area at bottom.
+   Mobile: edge-to-edge navbar is 64px + safe area at bottom.
    ─────────────────────────────────────────────────────────── */
 .cs-case-page .page-footer {
   padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
@@ -705,6 +707,6 @@
 
 @media (max-width: 1023px) {
   .cs-case-page .page-footer {
-    padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px) + var(--space-16));
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px) + var(--space-16));
   }
 }
