@@ -163,6 +163,10 @@
       }
     }
   },
+  "lotoBolaGate": {
+    "eyebrow": "Acceso restringido",
+    "copy": "Este caso de estudio es privado. Ingresa el código para verlo."
+  },
   "extendedWorkDetail": {
     "applied": {
       "backTitle": "Extended works",

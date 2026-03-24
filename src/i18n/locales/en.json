@@ -163,6 +163,10 @@
       }
     }
   },
+  "lotoBolaGate": {
+    "eyebrow": "Restricted access",
+    "copy": "This case study is private. Enter the code to view it."
+  },
   "extendedWorkDetail": {
     "applied": {
       "backTitle": "Extended works",

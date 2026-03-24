@@ -8,6 +8,7 @@ import { LotoBolaSections } from "./LotoBolaSections";
 import { PlayzonBetSections } from "./PlayzonBetSections";
 import { EvaSections } from "./EvaSections";
 import { AlazSections } from "./AlazSections";
+import { LotoBolaGate } from "../components/ui/LotoBolaGate";
 import { useI18n } from "../i18n";
 
 interface SelectedWorkDetailProps {
@@ -54,6 +55,7 @@ export function SelectedWorkDetail({ slug, onNavigate }: SelectedWorkDetailProps
   if (fallbackSlug in caseStudyContent) {
     return (
       <div className="cs-case-page">
+        {fallbackSlug === "lotobola" && <LotoBolaGate />}
         {/* Sticky header — same element across all case studies, never remounts */}
         <div className="cs-sticky-header">
           <Container>

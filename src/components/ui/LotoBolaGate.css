@@ -1,0 +1,252 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   LotoBolaGate
+   Access gate for LotoBola — activates on first scroll via IntersectionObserver.
+   Auto-unlocks on correct 6-char OTP. Fades in/out like dissipating fog.
+───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Sentinel ────────────────────────────────────────────────────────────── */
+
+/* 1px in normal flow — IntersectionObserver fires when it exits the viewport. */
+.lb-gate__sentinel {
+  display: block;
+  width: 100%;
+  height: 1px;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ── Chrome elevation ─────────────────────────────────────────────────────── */
+
+/*
+  Permanent z-index overrides so the sticky header and tab bar always sit above
+  the gate overlay. No conditional selectors → no dynamic repaint/jump.
+  These values only affect the case-study pages where these elements exist.
+*/
+.cs-sticky-header {
+  z-index: calc(var(--layer-overlay) + 10); /* 60 — above gate (50) */
+}
+
+.cs-tab-bar {
+  z-index: calc(var(--layer-overlay) + 10); /* 60 — above gate (50) */
+}
+
+/* ── Overlay ─────────────────────────────────────────────────────────────── */
+
+.lb-gate {
+  position: fixed;
+  top: var(--topbar-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--layer-overlay); /* 50 — above content, below chrome (60) */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  /*
+    No backdrop-filter — animating it triggers compositor promotions that cause
+    visible layout jumps on surrounding elements. Dark background + blobs give
+    equivalent visual density without the repaint cost.
+  */
+  background: var(--color-background-deep);
+
+  animation: lb-fade-in 380ms ease both;
+}
+
+/* Fog rolls in */
+@keyframes lb-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Fog dissipates on unlock — duration must match FADE_OUT_MS constant in .tsx */
+.lb-gate--leaving {
+  animation: lb-fade-out 500ms ease forwards;
+  pointer-events: none;
+}
+
+@keyframes lb-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* Shake on wrong code — applied to content only */
+.lb-gate--shake .lb-gate__body {
+  animation: lb-shake 0.52s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes lb-shake {
+  10%, 90% { transform: translateX(-2px); }
+  20%, 80% { transform: translateX( 5px); }
+  30%, 50%, 70% { transform: translateX(-6px); }
+  40%, 60% { transform: translateX( 6px); }
+}
+
+/* ── Liquid blobs ─────────────────────────────────────────────────────────── */
+
+.lb-gate__blobs {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.lb-gate__blob {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.50;
+}
+
+.lb-gate__blob--a {
+  width: 560px; height: 560px;
+  background: radial-gradient(circle, rgba(108, 99, 255, 0.72) 0%, transparent 68%);
+  filter: blur(72px);
+  top: -160px; left: -120px;
+  animation: lb-drift-a 14s ease-in-out infinite alternate;
+}
+.lb-gate__blob--b {
+  width: 440px; height: 440px;
+  background: radial-gradient(circle, rgba(90, 60, 220, 0.60) 0%, transparent 68%);
+  filter: blur(64px);
+  top: 45%; right: -100px;
+  animation: lb-drift-b 18s ease-in-out infinite alternate;
+}
+.lb-gate__blob--c {
+  width: 380px; height: 380px;
+  background: radial-gradient(circle, rgba(140, 130, 255, 0.50) 0%, transparent 68%);
+  filter: blur(80px);
+  bottom: -80px; left: 30%;
+  animation: lb-drift-c 11s ease-in-out infinite alternate;
+}
+.lb-gate__blob--d {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(60, 40, 180, 0.45) 0%, transparent 68%);
+  filter: blur(56px);
+  top: 20%; left: 50%;
+  animation: lb-drift-d 20s ease-in-out infinite alternate;
+}
+.lb-gate__blob--e {
+  width: 260px; height: 260px;
+  background: radial-gradient(circle, rgba(160, 100, 255, 0.40) 0%, transparent 68%);
+  filter: blur(60px);
+  bottom: 10%; right: 20%;
+  animation: lb-drift-e 16s ease-in-out infinite alternate;
+}
+
+@keyframes lb-drift-a {
+  0%   { transform: translate(  0px,   0px) scale(1.00); }
+  40%  { transform: translate( 90px,  70px) scale(1.12); }
+  70%  { transform: translate( 50px, 140px) scale(0.95); }
+  100% { transform: translate(130px,  50px) scale(1.06); }
+}
+@keyframes lb-drift-b {
+  0%   { transform: translate(   0px,   0px) scale(1.00); }
+  30%  { transform: translate( -70px,  80px) scale(1.08); }
+  65%  { transform: translate( -30px, -60px) scale(0.92); }
+  100% { transform: translate(-100px,  30px) scale(1.04); }
+}
+@keyframes lb-drift-c {
+  0%   { transform: translate(  0px,   0px) scale(1.00); }
+  50%  { transform: translate(-80px, -90px) scale(1.15); }
+  100% { transform: translate( 60px, -50px) scale(0.96); }
+}
+@keyframes lb-drift-d {
+  0%   { transform: translate( 0px,   0px) scale(1.00); }
+  35%  { transform: translate(60px, -80px) scale(1.10); }
+  70%  { transform: translate(-50px,-40px) scale(0.94); }
+  100% { transform: translate(80px,  60px) scale(1.08); }
+}
+@keyframes lb-drift-e {
+  0%   { transform: translate(   0px,   0px) scale(1.00); }
+  45%  { transform: translate( -90px, -50px) scale(1.12); }
+  100% { transform: translate(  40px,  80px) scale(0.90); }
+}
+
+/* ── Content ─────────────────────────────────────────────────────────────── */
+
+.lb-gate__body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-inline: var(--layout-container-pad-inline);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.lb-gate__eyebrow {
+  margin: 0 0 12px;
+  font-size: var(--text-micro-size);
+  line-height: var(--text-micro-line);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent-500);
+}
+
+.lb-gate__copy {
+  margin: 0 0 32px;
+  font-size: var(--text-body-md-size);
+  line-height: var(--text-body-md-line);
+  color: var(--color-text-muted);
+}
+
+/* ── OTP slots ───────────────────────────────────────────────────────────── */
+
+.lb-gate__otp {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.lb-gate__slot {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  caret-color: transparent;
+  outline: none;
+  -webkit-appearance: none;
+  transition: border-color 140ms ease, box-shadow 140ms ease, background 140ms ease;
+}
+
+.lb-gate__slot:focus {
+  border-color: var(--color-accent-500);
+  background: rgba(108, 99, 255, 0.08);
+  box-shadow: 0 0 0 3px var(--color-accent-100);
+}
+
+.lb-gate__slot:not(:placeholder-shown) {
+  border-color: rgba(255, 255, 255, 0.30);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.lb-gate__otp--error .lb-gate__slot {
+  border-color: rgba(255, 80, 80, 0.55);
+  background: rgba(255, 80, 80, 0.06);
+  box-shadow: 0 0 0 3px rgba(255, 80, 80, 0.10);
+}
+
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .lb-gate__slot {
+    width: 44px;
+    height: 44px;
+  }
+
+  .lb-gate__otp {
+    gap: 8px;
+  }
+}
