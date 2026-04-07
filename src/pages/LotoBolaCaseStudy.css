@@ -586,6 +586,14 @@
 .cs-placeholder--card      { aspect-ratio: 4 / 3; }     /* Annex cards / process materials */
 .cs-placeholder--square    { aspect-ratio: 1 / 1; }     /* Module icons / supporting evidence */
 
+/* Real asset image */
+.cs-asset {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+}
+
 /* --- Tab bar fixed at bottom — always visible while scrolling --- */
 .cs-tab-bar {
   position: fixed;
@@ -693,6 +701,252 @@
   letter-spacing: var(--text-micro-spacing);
   color: var(--color-text-muted);
   margin: 0;
+}
+
+/* ============================================================
+   Arquitectura de la experiencia — embedded editorial module
+   3 blocks: service logic, navigation structure, friction map.
+   Uses site tokens exclusively. No standalone visual identity.
+   ============================================================ */
+
+.lba-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+@media (min-width: 1024px) {
+  .lba-block {
+    gap: var(--space-32);
+  }
+}
+
+/* Shared artifact frame */
+.lba-artifact {
+  border: var(--card-border);
+  border-radius: var(--radius-md);
+  background: var(--color-background-secondary);
+  overflow: hidden;
+}
+
+/* ── Block 1: Service phase strip ────────────────────────── */
+
+.lba-phases {
+  display: flex;
+  align-items: flex-start;
+  overflow-x: auto;
+  padding: var(--space-24) var(--space-24) var(--space-20);
+  border-bottom: 1px solid var(--color-border-subtle);
+  position: relative;
+  gap: 0;
+}
+
+/* Connecting line behind dots */
+.lba-phases::before {
+  content: '';
+  position: absolute;
+  top: calc(var(--space-24) + 10px); /* center of 20px dot */
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-border-subtle);
+  pointer-events: none;
+}
+
+.lba-phase {
+  flex: 1 0 0;
+  min-width: 88px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  position: relative;
+  z-index: 1;
+}
+
+/* Dot masks the connecting line */
+.lba-phase__dot {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-pill);
+  background: var(--color-background-secondary);
+  border: 1px solid var(--color-border-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.02em;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.lba-phase__label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  line-height: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 0 4px;
+}
+
+/* Service layer rows */
+.lba-service-layers {
+  display: flex;
+  flex-direction: column;
+}
+
+.lba-service-row {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: var(--space-16);
+  border-top: 1px solid var(--color-border-subtle);
+  padding: var(--space-16) var(--space-24);
+  align-items: baseline;
+}
+
+@media (min-width: 768px) {
+  .lba-service-row {
+    grid-template-columns: 140px 1fr;
+  }
+}
+
+.lba-service-row__layer {
+  font-family: var(--font-sans);
+  font-size: var(--text-micro-size);
+  line-height: var(--text-micro-line);
+  letter-spacing: var(--text-micro-spacing);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  padding-top: 2px;
+  flex-shrink: 0;
+}
+
+.lba-service-row__items {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-md-size);
+  line-height: var(--text-body-md-line);
+  color: var(--color-text-secondary);
+}
+
+/* ── Block 2: Navigation structure ──────────────────────── */
+
+.lba-artifact--nav {
+  overflow-x: auto;
+}
+
+.lba-nav {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(130px, 1fr));
+  min-width: 700px;
+}
+
+.lba-nav-col {
+  border-left: 1px solid var(--color-border-subtle);
+}
+
+.lba-nav-col:first-child {
+  border-left: none;
+}
+
+.lba-nav-col__label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--text-micro-size);
+  line-height: var(--text-micro-line);
+  letter-spacing: var(--text-micro-spacing);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  padding: var(--space-16) var(--space-16) var(--space-12);
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: var(--color-background-deep);
+}
+
+.lba-nav-col__screens {
+  list-style: none;
+  padding: var(--space-12) var(--space-16) var(--space-16);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.lba-nav-col__screens li {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+/* ── Block 3: Friction & opportunities ──────────────────── */
+
+.lba-friction {
+  display: flex;
+  flex-direction: column;
+}
+
+.lba-friction__header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--color-background-deep);
+  border-bottom: 1px solid var(--color-border-soft);
+}
+
+.lba-friction__header span {
+  padding: var(--space-12) var(--space-24);
+  font-family: var(--font-sans);
+  font-size: var(--text-micro-size);
+  line-height: var(--text-micro-line);
+  letter-spacing: var(--text-micro-spacing);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.lba-friction__col--opp {
+  border-left: 1px solid var(--color-border-subtle);
+}
+
+.lba-friction__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.lba-friction__pain,
+.lba-friction__opp {
+  padding: var(--space-16) var(--space-24);
+  font-family: var(--font-sans);
+  font-size: var(--text-body-md-size);
+  line-height: var(--text-body-md-line);
+}
+
+.lba-friction__pain {
+  color: var(--color-text-muted);
+}
+
+.lba-friction__opp {
+  color: var(--color-text-secondary);
+  border-left: 1px solid var(--color-border-subtle);
+}
+
+/* Mobile: stack friction/opp vertically */
+@media (max-width: 767px) {
+  .lba-friction__header {
+    grid-template-columns: 1fr;
+  }
+  .lba-friction__col--opp {
+    display: none;
+  }
+  .lba-friction__row {
+    grid-template-columns: 1fr;
+  }
+  .lba-friction__opp {
+    border-left: none;
+    border-top: 1px solid var(--color-border-subtle);
+    padding-top: var(--space-12);
+  }
 }
 
 /* ── Case page footer clearance ────────────────────────────
