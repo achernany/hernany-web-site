@@ -1,7 +1,6 @@
 import { Container } from "../components/ui/Container";
 import { Section } from "../components/ui/Section";
 import { Typography, Accent } from "../components/ui/Typography";
-import { Button } from "../components/ui/Button";
 import { Divider } from "../components/ui/Divider";
 import { PageFooter } from "../components/layout/PageFooter";
 import { useI18n } from "../i18n";
@@ -41,9 +40,9 @@ export function Approach() {
             <Typography variant="bodyLg" center>{t("approach.dontThree")}</Typography>
           </div>
 
-          <Button variant="primary" onClick={() => window.open("mailto:hey@hernanyacosta.com", "_blank")}> 
+          <a href="mailto:hey@hernanyacosta.com" className="ui-button ui-button--primary">
             {t("common.actions.startConversation")}
-          </Button>
+          </a>
         </div>
       </Section>
       <PageFooter />

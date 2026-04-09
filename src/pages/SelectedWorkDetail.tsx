@@ -4,12 +4,10 @@ import { SegmentedControl } from "../components/ui/SegmentedControl";
 import { StatPill } from "../components/ui/StatPill";
 import { PageFooter } from "../components/layout/PageFooter";
 import { DetailHeader } from "../components/layout/DetailHeader";
-import { LotoBolaSections } from "./LotoBolaSections";
-import { PlayzonBetSections } from "./PlayzonBetSections";
-import { EvaSections } from "./EvaSections";
-import { AlazSections } from "./AlazSections";
 import { LotoBolaGate } from "../components/ui/LotoBolaGate";
+import { CaseStudyShell } from "../components/case-study/CaseStudyShell";
 import { useI18n } from "../i18n";
+import { CASE_STUDY_CONTENT, CASE_STUDY_ORDER, isCaseStudySlug } from "./caseStudyRegistry";
 
 interface SelectedWorkDetailProps {
   slug: string;
@@ -29,60 +27,31 @@ interface WorkTranslation {
   };
 }
 
-// Only slugs with a full case study built — add new entries here as they're created
-const order = ["lotobola", "playzonbet", "eva", "alaz"];
-
-// Content map — add new Sections components here when a new case study is built
-const caseStudyContent: Record<string, JSX.Element> = {
-  lotobola: <LotoBolaSections />,
-  playzonbet: <PlayzonBetSections />,
-  eva: <EvaSections />,
-  alaz: <AlazSections />,
-};
-
 export function SelectedWorkDetail({ slug, onNavigate }: SelectedWorkDetailProps) {
   const { t, tn } = useI18n();
 
-  const fallbackSlug = order.includes(slug) ? slug : order[0]!;
+  const fallbackSlug = isCaseStudySlug(slug) ? slug : CASE_STUDY_ORDER[0];
   const selected = tn(`selectedWorks.works.${fallbackSlug}`) as WorkTranslation;
 
-  const segmentedItems = order.map((item) => ({
+  const segmentedItems = CASE_STUDY_ORDER.map((item) => ({
     id: item,
     label: String(t(`selectedWorks.works.${item}.name`)),
   }));
 
   /* ── Full case studies: single render path so header + tab bar never remount ── */
-  if (fallbackSlug in caseStudyContent) {
+  if (fallbackSlug in CASE_STUDY_CONTENT) {
     return (
-      <div className="cs-case-page">
-        {fallbackSlug === "lotobola" && <LotoBolaGate />}
-        {/* Sticky header — same element across all case studies, never remounts */}
-        <div className="cs-sticky-header">
-          <Container>
-            <DetailHeader
-              title={t("menu.selectedWork")}
-              onBack={() => onNavigate("/selected-works")}
-            />
-          </Container>
-        </div>
-
-        {/* Content area — only this swaps when navigating between projects */}
-        <Container>
-          {caseStudyContent[fallbackSlug]}
-        </Container>
-
-        {/* Fixed tab bar — same element across all case studies, never remounts */}
-        <div className="cs-tab-bar">
-          <SegmentedControl
-            ariaLabel={t("selectedWorks.segmentLabel")}
-            items={segmentedItems}
-            activeId={fallbackSlug}
-            onChange={(next) => onNavigate(`/selected-works/${next}`)}
-          />
-        </div>
-
-        <PageFooter />
-      </div>
+      <CaseStudyShell
+        caseStudyId={fallbackSlug}
+        title={t("menu.selectedWork")}
+        activeSlug={fallbackSlug}
+        segmentedItems={segmentedItems}
+        segmentedAriaLabel={t("selectedWorks.segmentLabel")}
+        onNavigate={onNavigate}
+        guard={fallbackSlug === "lotobola" ? <LotoBolaGate /> : undefined}
+      >
+        {CASE_STUDY_CONTENT[fallbackSlug]}
+      </CaseStudyShell>
     );
   }
 
