@@ -215,6 +215,11 @@
   .cs-case-page--lotobola .lotobola-timeline__hint {
     display: none;
   }
+
+  .cs-case-page--lotobola .lotobola-timeline__track {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    overflow-x: visible;
+  }
 }
 
 .cs-case-page--lotobola .lotobola-timeline__track {
@@ -312,7 +317,7 @@
 @media (min-width: 1024px) {
   .cs-case-page--lotobola .lotobola-service-grid__desktop {
     display: block;
-    overflow-x: auto;
+    overflow-x: visible;
   }
 
   .cs-case-page--lotobola .lotobola-service-grid__mobile {
@@ -321,7 +326,7 @@
 
   .cs-case-page--lotobola .lotobola-service-grid__row {
     display: grid;
-    grid-template-columns: 120px repeat(7, minmax(140px, 1fr));
+    grid-template-columns: 96px repeat(7, minmax(0, 1fr));
   }
 
   .cs-case-page--lotobola .lotobola-service-grid__row--alt {
@@ -331,9 +336,14 @@
   .cs-case-page--lotobola .lotobola-service-grid__row-title,
   .cs-case-page--lotobola .lotobola-service-grid__phase,
   .cs-case-page--lotobola .lotobola-service-grid__cell {
-    padding: 14px 12px;
+    padding: 14px 10px;
     border-right: 1px solid rgba(255, 255, 255, 0.08);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .cs-case-page--lotobola .lotobola-service-grid__cell {
+    font-size: 12px;
+    line-height: 1.55;
   }
 
   .cs-case-page--lotobola .lotobola-service-grid__row-title {
@@ -403,8 +413,12 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 14px;
-  padding: 28px 0 28px 64px;
+  padding: 28px 0 28px 72px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition:
+    background-color 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease;
 }
 
 .cs-case-page--lotobola .cs-friction-number {
@@ -435,18 +449,37 @@
 .cs-case-page--lotobola .cs-friction-arrow {
   color: rgba(255, 255, 255, 0.36);
   font-size: 24px;
+  transition:
+    color 220ms ease,
+    text-shadow 220ms ease,
+    transform 220ms ease;
 }
 
 @media (min-width: 1024px) {
   .cs-case-page--lotobola .cs-friction-item {
     grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr);
     align-items: center;
-    gap: 24px;
-    padding: 36px 0 36px 96px;
+    gap: 32px;
+    padding: 36px 12px 36px 116px;
   }
 
   .cs-case-page--lotobola .cs-friction-arrow {
     text-align: center;
+  }
+
+  .cs-case-page--lotobola .cs-friction-item:hover {
+    background: rgba(255, 255, 255, 0.02);
+    box-shadow: inset 0 0 0 1px rgba(107, 91, 235, 0.18);
+  }
+
+  .cs-case-page--lotobola .cs-friction-item:hover .cs-friction-number,
+  .cs-case-page--lotobola .cs-friction-item:hover .cs-friction-arrow {
+    color: rgba(107, 91, 235, 0.92);
+    text-shadow: 0 0 20px rgba(107, 91, 235, 0.32);
+  }
+
+  .cs-case-page--lotobola .cs-friction-item:hover .cs-friction-arrow {
+    transform: translateX(4px);
   }
 }
 
@@ -466,6 +499,68 @@
 .cs-case-page--lotobola .lotobola-public-grid .case-image-reveal--bleed {
   margin-left: 0;
   width: 100%;
+}
+
+.cs-case-page--lotobola .lotobola-asset-card {
+  position: relative;
+  isolation: isolate;
+}
+
+.cs-case-page--lotobola .lotobola-asset-card::after {
+  content: "";
+  position: absolute;
+  inset: 8% 10%;
+  z-index: -1;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 50% 10%, rgba(107, 91, 235, 0.22), transparent 58%),
+    radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.08), transparent 62%);
+  opacity: 0;
+  filter: blur(28px);
+  transition: opacity 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cs-case-page--lotobola .lotobola-asset-card .cs-media__frame {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition:
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cs-case-page--lotobola .lotobola-asset-card .cs-media__image {
+  transition:
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cs-case-page--lotobola .lotobola-asset-card[data-animate="image"] .cs-media__frame {
+  transform: translateY(20px) scale(0.985);
+}
+
+.cs-case-page--lotobola .lotobola-asset-card[data-animate="image"].is-visible .cs-media__frame {
+  transform: translateY(0) scale(1);
+}
+
+@media (min-width: 1024px) {
+  .cs-case-page--lotobola .lotobola-asset-card.case-image-reveal--interactive:hover::after {
+    opacity: 1;
+  }
+
+  .cs-case-page--lotobola .lotobola-asset-card.case-image-reveal--interactive:hover .cs-media__frame {
+    transform: translateY(-8px) scale(1.018);
+    border-color: rgba(107, 91, 235, 0.32);
+    box-shadow:
+      0 18px 42px rgba(0, 0, 0, 0.36),
+      0 0 0 1px rgba(107, 91, 235, 0.16);
+    filter: saturate(1.06);
+  }
+
+  .cs-case-page--lotobola .lotobola-asset-card.case-image-reveal--interactive:hover .cs-media__image {
+    transform: scale(1.02);
+    filter: brightness(1.02);
+  }
 }
 
 .cs-case-page--lotobola .lotobola-retail-steps {
@@ -563,5 +658,13 @@
     transform: none !important;
     clip-path: none !important;
     transition: opacity 200ms ease !important;
+  }
+
+  .cs-case-page--lotobola .lotobola-asset-card .cs-media__frame,
+  .cs-case-page--lotobola .lotobola-asset-card .cs-media__image,
+  .cs-case-page--lotobola .cs-friction-item,
+  .cs-case-page--lotobola .cs-friction-arrow {
+    transform: none !important;
+    transition: opacity 200ms ease, background-color 200ms ease !important;
   }
 }

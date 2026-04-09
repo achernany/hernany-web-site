@@ -11,6 +11,8 @@ interface CaseImageRevealProps {
   bleed?: boolean;
   width?: number;
   height?: number;
+  parallax?: "hero" | "standard" | "deep" | "reverse" | "none";
+  interactive?: boolean;
 }
 
 export function CaseImageReveal({
@@ -23,15 +25,19 @@ export function CaseImageReveal({
   bleed = true,
   width,
   height,
+  parallax = "standard",
+  interactive = false,
 }: CaseImageRevealProps) {
   return (
     <div
       className={cn(
         "case-image-reveal",
         bleed && "case-image-reveal--bleed",
+        interactive && "case-image-reveal--interactive",
         className,
       )}
       data-animate="image"
+      data-parallax={parallax === "none" ? undefined : parallax}
     >
       <CaseMedia
         id={alt}

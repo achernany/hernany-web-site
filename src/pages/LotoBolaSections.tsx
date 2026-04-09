@@ -438,6 +438,7 @@ export function LotoBolaSections() {
           width={2400}
           height={1400}
           className="lotobola-hero__image"
+          parallax="hero"
         />
 
         <div className="cs-meta lotobola-meta" data-animate="text" data-animate-delay="320">
@@ -692,6 +693,7 @@ export function LotoBolaSections() {
         <CaseImageReveal
           src="/images/lotobola/lb_web_01.webp"
           alt="LotoBola public website and product ecosystem — digital and physical touchpoints"
+          parallax="deep"
         />
         <CaseStaggerGrid
           columns={2}
@@ -703,11 +705,17 @@ export function LotoBolaSections() {
             src="/images/lotobola/lb_web_02.webp"
             alt="LotoBola website — homepage and main product section"
             ratio="portrait"
+            className="lotobola-asset-card"
+            parallax="deep"
+            interactive
           />
           <CaseImageReveal
             src="/images/lotobola/lb_web_03.webp"
             alt="LotoBola website — product flow and participation experience"
             ratio="portrait"
+            className="lotobola-asset-card"
+            parallax="deep"
+            interactive
           />
         </CaseStaggerGrid>
       </CaseSection>
@@ -739,6 +747,7 @@ export function LotoBolaSections() {
           src="/images/lotobola/lb_retail_01.webp"
           alt="LotoBola retail interface — full POS and assisted channel overview"
           ratio="wide"
+          parallax="deep"
         />
         <CaseStaggerGrid
           columns={3}
@@ -752,18 +761,27 @@ export function LotoBolaSections() {
             alt="LotoBola retail — step 1: product entry and selection"
             caption={c.s5Caption1}
             ratio="portrait"
+            className="lotobola-asset-card"
+            parallax="deep"
+            interactive
           />
           <CaseImageReveal
             src="/images/lotobola/lb_retail_03.webp"
             alt="LotoBola retail — step 2: confirmation and assisted validation"
             caption={c.s5Caption2}
             ratio="portrait"
+            className="lotobola-asset-card"
+            parallax="deep"
+            interactive
           />
           <CaseImageReveal
             src="/images/lotobola/lb_retail_04.webp"
             alt="LotoBola retail — step 3: transaction and receipt"
             caption={c.s5Caption3}
             ratio="portrait"
+            className="lotobola-asset-card"
+            parallax="deep"
+            interactive
           />
         </CaseStaggerGrid>
       </CaseSection>
@@ -780,10 +798,16 @@ export function LotoBolaSections() {
         <CaseImageReveal
           src="/images/lotobola/lb_admin_01.webp"
           alt="LotoBola admin — draw results control panel"
+          className="lotobola-asset-card"
+          parallax="deep"
+          interactive
         />
         <CaseImageReveal
           src="/images/lotobola/lb_admin_02.webp"
           alt="LotoBola admin — tickets, inventory, and operational management views"
+          className="lotobola-asset-card"
+          parallax="deep"
+          interactive
         />
       </CaseSection>
 
@@ -798,6 +822,9 @@ export function LotoBolaSections() {
         <CaseImageReveal
           src="/images/lotobola/lb_ds_01.webp"
           alt="LotoBola design system — typography, colors, components, and Figma foundation"
+          className="lotobola-asset-card"
+          parallax="deep"
+          interactive
         />
         <div className="lotobola-system-copy" data-animate="text" data-animate-delay="0">
           <Typography variant="h3">{c.s7SubheadTitle}</Typography>
@@ -822,6 +849,7 @@ export function LotoBolaSections() {
           src="/images/lotobola/lb_iter_01.webp"
           alt="LotoBola design iteration — early exploration to structured mature ecosystem"
           ratio="wide"
+          parallax="deep"
         />
       </CaseSection>
 
@@ -846,6 +874,7 @@ export function LotoBolaSections() {
           alt="LotoBola — closing ecosystem composition"
           width={2400}
           height={1400}
+          parallax="reverse"
         />
         <div className="lotobola-endcap" aria-hidden />
       </CaseSection>

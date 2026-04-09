@@ -9,6 +9,18 @@ type SimpleParallaxConstructor = new (
   options: Record<string, unknown>,
 ) => EffectHandle;
 
+function createParallaxHandle(
+  SimpleParallax: SimpleParallaxConstructor,
+  elements: HTMLImageElement[],
+  options: Record<string, unknown>,
+) {
+  if (elements.length === 0) {
+    return null;
+  }
+
+  return new SimpleParallax(elements.length === 1 ? elements[0] : elements, options);
+}
+
 function applyDelay(root: ParentNode) {
   root.querySelectorAll<HTMLElement>("[data-animate-delay]").forEach((element) => {
     const delay = element.dataset.animateDelay;
@@ -33,51 +45,65 @@ async function initParallax(container: HTMLElement) {
   const SimpleParallax = SimpleParallaxModule as unknown as SimpleParallaxConstructor;
   const handles: EffectHandle[] = [];
 
-  const heroImg = container.querySelector<HTMLImageElement>(".cs-section--hero img");
-  if (heroImg) {
-    handles.push(
-      new SimpleParallax(heroImg, {
-        orientation: "up",
-        scale: 1.08,
-        delay: 0.1,
-        transition: EASE_OUT_EXPO,
-        maxTransition: 50,
-        overflow: false,
-      }),
-    );
-  }
-
-  const sectionImgs = Array.from(
-    container.querySelectorAll<HTMLImageElement>(
-      ".cs-section:not(.cs-section--hero):not(.cs-section--closing) img",
-    ),
+  const heroImg = Array.from(
+    container.querySelectorAll<HTMLImageElement>('[data-parallax="hero"] img'),
+  );
+  const standardImgs = Array.from(
+    container.querySelectorAll<HTMLImageElement>('[data-parallax="standard"] img'),
+  );
+  const deepImgs = Array.from(
+    container.querySelectorAll<HTMLImageElement>('[data-parallax="deep"] img'),
+  );
+  const reverseImgs = Array.from(
+    container.querySelectorAll<HTMLImageElement>('[data-parallax="reverse"] img'),
   );
 
-  if (sectionImgs.length > 0) {
-    handles.push(
-      new SimpleParallax(sectionImgs, {
-        orientation: "up",
-        scale: 1.12,
-        delay: 0.1,
-        transition: EASE_OUT_EXPO,
-        maxTransition: 55,
-        overflow: false,
-      }),
-    );
+  const heroHandle = createParallaxHandle(SimpleParallax, heroImg, {
+    orientation: "up",
+    scale: 1.14,
+    delay: 0,
+    transition: EASE_OUT_EXPO,
+    maxTransition: 96,
+    overflow: false,
+  });
+  if (heroHandle) {
+    handles.push(heroHandle);
   }
 
-  const closingImg = container.querySelector<HTMLImageElement>(".cs-section--closing img");
-  if (closingImg) {
-    handles.push(
-      new SimpleParallax(closingImg, {
-        orientation: "down",
-        scale: 1.08,
-        delay: 0.1,
-        transition: EASE_OUT_EXPO,
-        maxTransition: 50,
-        overflow: false,
-      }),
-    );
+  const standardHandle = createParallaxHandle(SimpleParallax, standardImgs, {
+    orientation: "up",
+    scale: 1.18,
+    delay: 0,
+    transition: EASE_OUT_EXPO,
+    maxTransition: 120,
+    overflow: false,
+  });
+  if (standardHandle) {
+    handles.push(standardHandle);
+  }
+
+  const deepHandle = createParallaxHandle(SimpleParallax, deepImgs, {
+    orientation: "up",
+    scale: 1.22,
+    delay: 0,
+    transition: EASE_OUT_EXPO,
+    maxTransition: 148,
+    overflow: false,
+  });
+  if (deepHandle) {
+    handles.push(deepHandle);
+  }
+
+  const reverseHandle = createParallaxHandle(SimpleParallax, reverseImgs, {
+    orientation: "down",
+    scale: 1.14,
+    delay: 0,
+    transition: EASE_OUT_EXPO,
+    maxTransition: 96,
+    overflow: false,
+  });
+  if (reverseHandle) {
+    handles.push(reverseHandle);
   }
 
   return handles;
