@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { Typography, Accent } from "../components/ui/Typography";
 import { CaseSection } from "../components/case-study/CaseSection";
 import { CaseImageReveal } from "../components/case-study/CaseImageReveal";
+import { CaseHeroStage } from "../components/case-study/CaseHeroStage";
 import { CasePullquote } from "../components/case-study/CasePullquote";
 import { CaseStaggerGrid } from "../components/case-study/CaseStaggerGrid";
 import { CaseLabelPill } from "../components/case-study/CaseLabelPill";
@@ -399,6 +400,15 @@ export function LotoBolaSections() {
       ? { user: "Usuario", interface: "Interfaz", system: "Sistema", swipe: "Desliza para ver más" }
       : { user: "User", interface: "Interface", system: "System", swipe: "Swipe to see more" };
 
+  const heroStagePoster = {
+    src: "/images/lotobola/lb_hero_01.webp",
+    mobileSrc: "/images/lotobola/lb_hero_01.webp",
+    tabletSrc: "/images/lotobola/lb_hero_01.webp",
+    desktopSrc: "/images/lotobola/lb_hero_01.webp",
+    width: 2400,
+    height: 1400,
+  };
+
   return (
     <div ref={rootRef} className="cs-body lotobola-story">
 
@@ -430,15 +440,16 @@ export function LotoBolaSections() {
           </Typography>
         </div>
 
-        <CaseImageReveal
-          src="/images/lotobola/lb_hero_01.webp"
+        <CaseHeroStage
           alt="LotoBola — draw results management panel in a live lottery broadcast context"
+          poster={heroStagePoster}
           priority
-          ratio="hero"
-          width={2400}
-          height={1400}
-          className="lotobola-hero__image"
-          parallax="hero"
+          ratio={{
+            mobile: "12 / 7",
+            tablet: "12 / 7",
+            desktop: "12 / 7",
+          }}
+          className="lotobola-hero__stage"
         />
 
         <div className="cs-meta lotobola-meta" data-animate="text" data-animate-delay="320">

@@ -4,14 +4,16 @@ interface EffectHandle {
   destroy?: () => void;
 }
 
+type ParallaxMediaElement = HTMLImageElement | HTMLVideoElement;
+
 type SimpleParallaxConstructor = new (
-  element: HTMLImageElement | HTMLImageElement[],
+  element: ParallaxMediaElement | ParallaxMediaElement[],
   options: Record<string, unknown>,
 ) => EffectHandle;
 
 function createParallaxHandle(
   SimpleParallax: SimpleParallaxConstructor,
-  elements: HTMLImageElement[],
+  elements: ParallaxMediaElement[],
   options: Record<string, unknown>,
 ) {
   if (elements.length === 0) {
@@ -46,16 +48,16 @@ async function initParallax(container: HTMLElement) {
   const handles: EffectHandle[] = [];
 
   const heroImg = Array.from(
-    container.querySelectorAll<HTMLImageElement>('[data-parallax="hero"] img'),
+    container.querySelectorAll<ParallaxMediaElement>('[data-parallax="hero"] img, [data-parallax="hero"] video'),
   );
   const standardImgs = Array.from(
-    container.querySelectorAll<HTMLImageElement>('[data-parallax="standard"] img'),
+    container.querySelectorAll<ParallaxMediaElement>('[data-parallax="standard"] img, [data-parallax="standard"] video'),
   );
   const deepImgs = Array.from(
-    container.querySelectorAll<HTMLImageElement>('[data-parallax="deep"] img'),
+    container.querySelectorAll<ParallaxMediaElement>('[data-parallax="deep"] img, [data-parallax="deep"] video'),
   );
   const reverseImgs = Array.from(
-    container.querySelectorAll<HTMLImageElement>('[data-parallax="reverse"] img'),
+    container.querySelectorAll<ParallaxMediaElement>('[data-parallax="reverse"] img, [data-parallax="reverse"] video'),
   );
 
   const heroHandle = createParallaxHandle(SimpleParallax, heroImg, {
