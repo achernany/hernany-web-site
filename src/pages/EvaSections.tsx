@@ -1,40 +1,7 @@
 import { Typography, Accent } from "../components/ui/Typography";
-import { cn } from "../lib/cn";
+import { CaseMedia } from "../components/case-study/CaseMedia";
 import { useI18n } from "../i18n";
 import "./LotoBolaCaseStudy.css";
-
-/* ============================================================
-   CasePlaceholder — local helper
-   Replace each .cs-placeholder with <img> or <video>.
-   The `id` matches the asset ID (e.g., "EVA-HERO-01").
-   ============================================================ */
-
-type PlaceholderRatio = "hero" | "wide" | "landscape" | "portrait" | "card" | "square";
-
-interface CasePlaceholderProps {
-  id: string;
-  ratio?: PlaceholderRatio;
-  caption?: string;
-  hint?: string;
-  className?: string;
-}
-
-function CasePlaceholder({ id, ratio = "landscape", caption, hint, className }: CasePlaceholderProps) {
-  return (
-    // asset-slot: {id} — swap this <div> for <img src="..." alt="..." /> or <video>
-    <figure className={cn("cs-ph-wrap", className)}>
-      <div
-        className={cn("cs-placeholder", `cs-placeholder--${ratio}`)}
-        aria-label={`Visual placeholder: ${id}`}
-        role="img"
-      >
-        <span className="cs-placeholder__id">{id}</span>
-        {hint && <span className="cs-placeholder__hint">{hint}</span>}
-      </div>
-      {caption && <figcaption className="cs-caption">{caption}</figcaption>}
-    </figure>
-  );
-}
 
 /* ============================================================
    EvaSections
@@ -262,7 +229,7 @@ export function EvaSections() {
         </div>
 
         {/* asset-slot: EVA-HERO-01 — Replace with platform hero / composed opening visual */}
-        <CasePlaceholder id="EVA-HERO-01" ratio="hero" hint={c.heroPlaceholderHint} />
+        <CaseMedia id="EVA-HERO-01" ratio="hero" hint={c.heroPlaceholderHint} />
 
         <div className="cs-meta">
           <div className="cs-meta__item">
@@ -311,7 +278,7 @@ export function EvaSections() {
             </div>
           </div>
           {/* asset-slot: EVA-OVERVIEW-01 — Replace with platform overview or system diagram */}
-          <CasePlaceholder id="EVA-OVERVIEW-01" ratio="landscape" hint={c.s2PlaceholderHint} />
+          <CaseMedia id="EVA-OVERVIEW-01" ratio="landscape" hint={c.s2PlaceholderHint} />
         </div>
       </section>
 
@@ -333,7 +300,7 @@ export function EvaSections() {
             </Typography>
           </div>
           {/* asset-slot: EVA-THESIS-01 — Replace with concept visual / guided campus vs. cold portal */}
-          <CasePlaceholder id="EVA-THESIS-01" ratio="landscape" hint={c.s3PlaceholderHint} />
+          <CaseMedia id="EVA-THESIS-01" ratio="landscape" hint={c.s3PlaceholderHint} />
         </div>
       </section>
 
@@ -368,7 +335,7 @@ export function EvaSections() {
             </div>
           </div>
           {/* asset-slot: EVA-PROCESS-01 — Replace with process diagram or phase reference */}
-          <CasePlaceholder id="EVA-PROCESS-01" ratio="landscape" hint={c.s4PlaceholderHint} />
+          <CaseMedia id="EVA-PROCESS-01" ratio="landscape" hint={c.s4PlaceholderHint} />
         </div>
       </section>
 
@@ -390,9 +357,9 @@ export function EvaSections() {
           </div>
           <div className="cs-split">
             {/* asset-slot: EVA-LOGIN-01 — Replace with login redesign main view */}
-            <CasePlaceholder id="EVA-LOGIN-01" ratio="portrait" caption={c.s5Login1Caption} hint={c.s5Login1Hint} />
+            <CaseMedia id="EVA-LOGIN-01" ratio="portrait" caption={c.s5Login1Caption} hint={c.s5Login1Hint} />
             {/* asset-slot: EVA-RECOVERY-01 — Replace with password recovery flow */}
-            <CasePlaceholder id="EVA-RECOVERY-01" ratio="portrait" caption={c.s5Recovery1Caption} hint={c.s5Recovery1Hint} />
+            <CaseMedia id="EVA-RECOVERY-01" ratio="portrait" caption={c.s5Recovery1Caption} hint={c.s5Recovery1Hint} />
           </div>
         </div>
       </section>
@@ -415,15 +382,15 @@ export function EvaSections() {
             </Typography>
           </div>
           {/* asset-slot: EVA-NOTIF-01 — Replace with main composed notification system view */}
-          <CasePlaceholder id="EVA-NOTIF-01" ratio="wide" hint={c.s6Notif1Hint} />
+          <CaseMedia id="EVA-NOTIF-01" ratio="wide" hint={c.s6Notif1Hint} />
           <Typography variant="bodyLg" tone="secondary" as="p">
             {c.s6SystemBody}
           </Typography>
           <div className="cs-split">
             {/* asset-slot: EVA-NOTIF-02 — Replace with read/unread states and hierarchy detail */}
-            <CasePlaceholder id="EVA-NOTIF-02" ratio="portrait" hint={c.s6Notif2Hint} />
+            <CaseMedia id="EVA-NOTIF-02" ratio="portrait" hint={c.s6Notif2Hint} />
             {/* asset-slot: EVA-NOTIF-03 — Replace with categories, empty state, preference logic */}
-            <CasePlaceholder id="EVA-NOTIF-03" ratio="portrait" hint={c.s6Notif3Hint} />
+            <CaseMedia id="EVA-NOTIF-03" ratio="portrait" hint={c.s6Notif3Hint} />
           </div>
         </div>
       </section>
@@ -441,7 +408,7 @@ export function EvaSections() {
         </div>
         <div className="cs-section-content">
           {/* asset-slot: EVA-TONE-01 — Replace with tone/guidance visual: platform voice or orientation moment */}
-          <CasePlaceholder id="EVA-TONE-01" ratio="landscape" hint={c.s7PlaceholderHint} />
+          <CaseMedia id="EVA-TONE-01" ratio="landscape" hint={c.s7PlaceholderHint} />
         </div>
       </section>
 
@@ -459,13 +426,13 @@ export function EvaSections() {
         <div className="cs-section-content">
           <div className="cs-split">
             {/* asset-slot: EVA-BEFOREAFTER-01 — Replace with before/after login comparison */}
-            <CasePlaceholder id="EVA-BEFOREAFTER-01" ratio="landscape" caption={c.s8Before1Caption} hint={c.s8Before1Hint} />
-            <CasePlaceholder id="EVA-BEFOREAFTER-01" ratio="landscape" caption={c.s8After1Caption} hint={c.s8After1Hint} />
+            <CaseMedia id="EVA-BEFOREAFTER-01" ratio="landscape" caption={c.s8Before1Caption} hint={c.s8Before1Hint} />
+            <CaseMedia id="EVA-BEFOREAFTER-01" ratio="landscape" caption={c.s8After1Caption} hint={c.s8After1Hint} />
           </div>
           <div className="cs-split">
             {/* asset-slot: EVA-BEFOREAFTER-02 — Replace with before/after notification comparison */}
-            <CasePlaceholder id="EVA-BEFOREAFTER-02" ratio="landscape" caption={c.s8Before2Caption} hint={c.s8Before2Hint} />
-            <CasePlaceholder id="EVA-BEFOREAFTER-02" ratio="landscape" caption={c.s8After2Caption} hint={c.s8After2Hint} />
+            <CaseMedia id="EVA-BEFOREAFTER-02" ratio="landscape" caption={c.s8Before2Caption} hint={c.s8Before2Hint} />
+            <CaseMedia id="EVA-BEFOREAFTER-02" ratio="landscape" caption={c.s8After2Caption} hint={c.s8After2Hint} />
           </div>
         </div>
       </section>
@@ -487,7 +454,7 @@ export function EvaSections() {
             <Accent>{c.s9ClosingAccent}</Accent>
           </Typography>
           {/* asset-slot: EVA-CLOSING-01 — Replace with strong closing visual / final platform composition */}
-          <CasePlaceholder id="EVA-CLOSING-01" ratio="landscape" hint={c.s9PlaceholderHint} />
+          <CaseMedia id="EVA-CLOSING-01" ratio="landscape" hint={c.s9PlaceholderHint} />
         </div>
       </section>
 

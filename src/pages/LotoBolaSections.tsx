@@ -1,51 +1,18 @@
+import { useEffect, useRef, useState } from "react";
 import { Typography, Accent } from "../components/ui/Typography";
-import { cn } from "../lib/cn";
+import { CaseSection } from "../components/case-study/CaseSection";
+import { CaseImageReveal } from "../components/case-study/CaseImageReveal";
+import { CaseHeroStage } from "../components/case-study/CaseHeroStage";
+import { CasePullquote } from "../components/case-study/CasePullquote";
+import { CaseStaggerGrid } from "../components/case-study/CaseStaggerGrid";
+import { CaseLabelPill } from "../components/case-study/CaseLabelPill";
+import { CaseFrictionItem } from "../components/case-study/CaseFrictionItem";
 import { useI18n } from "../i18n";
+import { initCaseMotion } from "../lib/caseMotion";
+import { LotoBolaDesktopFigma } from "./LotoBolaDesktopFigma";
+import { LotoBolaSystemDiagram } from "../components/case-study/LotoBolaSystemDiagram";
 import "./LotoBolaCaseStudy.css";
-
-/* ============================================================
-   CasePlaceholder — local helper
-   Replace each .cs-placeholder with <img> or <video>.
-   The `id` matches the asset ID (e.g., "LB-HERO-01").
-   ============================================================ */
-
-type PlaceholderRatio = "hero" | "wide" | "landscape" | "portrait" | "card" | "square";
-
-interface CasePlaceholderProps {
-  id: string;
-  ratio?: PlaceholderRatio;
-  caption?: string;
-  hint?: string;
-  className?: string;
-  src?: string;
-  alt?: string;
-}
-
-function CasePlaceholder({ id, ratio = "landscape", caption, hint, className, src, alt }: CasePlaceholderProps) {
-  return (
-    <figure className={cn("cs-ph-wrap", className)}>
-      {src ? (
-        <img
-          src={src}
-          alt={alt ?? id}
-          className="cs-asset"
-          loading="lazy"
-          decoding="async"
-        />
-      ) : (
-        <div
-          className={cn("cs-placeholder", `cs-placeholder--${ratio}`)}
-          aria-label={`Visual placeholder: ${id}`}
-          role="img"
-        >
-          <span className="cs-placeholder__id">{id}</span>
-          {hint && <span className="cs-placeholder__hint">{hint}</span>}
-        </div>
-      )}
-      {caption && <figcaption className="cs-caption">{caption}</figcaption>}
-    </figure>
-  );
-}
+import "./LotoBolaNarrative.css";
 
 /* ============================================================
    LotoBolaSections
@@ -55,6 +22,31 @@ function CasePlaceholder({ id, ratio = "landscape", caption, hint, className, sr
 
 export function LotoBolaSections() {
   const { lang } = useI18n();
+  const rootRef = useRef<HTMLDivElement>(null);
+  const [isDesktop, setIsDesktop] = useState(() =>
+    typeof window !== "undefined" && window.matchMedia("(min-width: 1024px)").matches,
+  );
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    const handleChange = (event: MediaQueryListEvent) => {
+      setIsDesktop(event.matches);
+    };
+
+    setIsDesktop(mediaQuery.matches);
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", handleChange);
+      return () => mediaQuery.removeEventListener("change", handleChange);
+    }
+
+    mediaQuery.addListener(handleChange);
+    return () => mediaQuery.removeListener(handleChange);
+  }, []);
 
   const c = lang === "es" ? {
     /* ── HERO ── */
@@ -309,32 +301,193 @@ export function LotoBolaSections() {
     s9PlaceholderHint: "Closing visual — final ecosystem composition",
   };
 
+  useEffect(() => {
+    if (!rootRef.current || isDesktop) {
+      return;
+    }
+
+    return initCaseMotion(rootRef.current);
+  }, [isDesktop, lang]);
+
+  const panoramaBlocks = [
+    { title: c.s2Block1Title, body: c.s2Block1Body },
+    { title: c.s2Block2Title, body: c.s2Block2Body },
+    { title: c.s2Block3Title, body: c.s2Block3Body },
+  ];
+
+  const overviewCaption =
+    lang === "es"
+      ? "Ecosistema de servicio — capas de usuario, puntos de contacto y mediación retail"
+      : "Service ecosystem — user layers, touchpoints, and retail mediation";
+
+  const layerPills =
+    lang === "es"
+      ? { public: "Público", assisted: "Asistido", operational: "Operativo" }
+      : { public: "Public", assisted: "Assisted", operational: "Operational" };
+
+  const closingQuote =
+    lang === "es"
+      ? "Sigue siendo la expresión más clara de mi transición hacia una práctica de diseño más senior, sistémica, orientada a producto y servicio."
+      : "It remains the clearest expression of my transition into a more senior, systemic, product-and-service-oriented design practice.";
+
+  const serviceLayers =
+    lang === "es"
+      ? [
+          {
+            phase: "Descubrimiento",
+            user: "Descarga la app",
+            interface: "Onboarding",
+            system: "Disponibilidad de boletos",
+          },
+          {
+            phase: "Registro",
+            user: "Crea cuenta",
+            interface: "Login / Registro",
+            system: "Validación de registro",
+          },
+          {
+            phase: "Exploración",
+            user: "Explora sorteos",
+            interface: "Catálogo de sorteos",
+            system: "Disponibilidad de boletos",
+          },
+          {
+            phase: "Creación de orden",
+            user: "Elige números",
+            interface: "Selector numérico",
+            system: "Generación de ticket único",
+          },
+          {
+            phase: "Pago",
+            user: "Paga",
+            interface: "Checkout",
+            system: "Procesamiento de pago",
+          },
+          {
+            phase: "Confirmación",
+            user: "Recibe ticket",
+            interface: "Pantalla de éxito · Ticket digital",
+            system: "Generación de ticket único",
+          },
+          {
+            phase: "Resultados",
+            user: "Consulta resultados",
+            interface: "Resultados",
+            system: "Sorteo certificado",
+          },
+        ]
+      : [
+          {
+            phase: "Discovery",
+            user: "Downloads app",
+            interface: "Onboarding",
+            system: "Ticket availability",
+          },
+          {
+            phase: "Registration",
+            user: "Creates account",
+            interface: "Login / Register",
+            system: "Registration validation",
+          },
+          {
+            phase: "Exploration",
+            user: "Browses draws",
+            interface: "Game catalog",
+            system: "Ticket availability",
+          },
+          {
+            phase: "Order creation",
+            user: "Picks numbers",
+            interface: "Number selector",
+            system: "Unique ticket generation",
+          },
+          {
+            phase: "Payment",
+            user: "Pays",
+            interface: "Checkout",
+            system: "Payment processing",
+          },
+          {
+            phase: "Confirmation",
+            user: "Receives ticket",
+            interface: "Success screen · Digital ticket",
+            system: "Unique ticket generation",
+          },
+          {
+            phase: "Results",
+            user: "Checks results",
+            interface: "Results",
+            system: "Certified draw",
+          },
+        ];
+
+  const serviceLayerLabels =
+    lang === "es"
+      ? { user: "Usuario", interface: "Interfaz", system: "Sistema", swipe: "Desliza para ver más" }
+      : { user: "User", interface: "Interface", system: "System", swipe: "Swipe to see more" };
+
+  const heroStagePoster = {
+    src: "/images/lotobola/lb_hero_01.webp",
+    mobileSrc: "/images/lotobola/lb_hero_01.webp",
+    tabletSrc: "/images/lotobola/lb_hero_01.webp",
+    desktopSrc: "/images/lotobola/lb_hero_01.webp",
+    width: 2400,
+    height: 1400,
+  };
+
   return (
-    <div className="cs-body">
+    <div ref={rootRef} className="cs-body lotobola-story">
+      {isDesktop ? <LotoBolaDesktopFigma lang={lang} /> : null}
+
+      {isDesktop && (
+        <div className="lotobola-system-diagram-wrapper lotobola-system-diagram-wrapper--desktop">
+          <LotoBolaSystemDiagram lang={lang} />
+        </div>
+      )}
+
+      <div className="lotobola-mobile-legacy">
 
       {/* ════════════════════════════════════════════
           S1 — HERO
           ════════════════════════════════════════════ */}
-      <section className="cs-section cs-section--hero" id="hero">
-
-        <div className="cs-hero-text">
+      <section className="cs-section cs-section--hero lotobola-hero" id="hero">
+        <div className="cs-hero-text lotobola-hero__text">
           <Typography variant="micro" tone="muted">
-            {c.heroKicker}
+            <span data-animate="text" data-animate-delay="0">
+              {c.heroKicker}
+            </span>
           </Typography>
-          <Typography variant="h1">LotoBola</Typography>
-          <Typography variant="bodyLg" tone="secondary">
-            <Accent>{c.heroBodyAccent}</Accent>{c.heroBodyRest}
+          <Typography variant="h1" className="lotobola-hero__title">
+            <span data-animate="text" data-animate-delay="80">
+              LotoBola
+            </span>
           </Typography>
-          <Typography variant="bodyLg" tone="secondary">
-            {c.heroBody2}
+          <Typography variant="bodyLg" tone="secondary" className="lotobola-hero__subtitle">
+            <span data-animate="text" data-animate-delay="160">
+              <Accent>{c.heroBodyAccent}</Accent>
+              {c.heroBodyRest}
+            </span>
+          </Typography>
+          <Typography variant="bodyLg" tone="secondary" className="lotobola-hero__body">
+            <span data-animate="text" data-animate-delay="240">
+              {c.heroBody2}
+            </span>
           </Typography>
         </div>
 
-        <CasePlaceholder id="LB-HERO-01" ratio="hero"
-          src="/images/lotobola/lb_hero_01.webp"
-          alt="LotoBola — draw results management panel in a live lottery broadcast context" />
+        <CaseHeroStage
+          alt="LotoBola — draw results management panel in a live lottery broadcast context"
+          poster={heroStagePoster}
+          priority
+          ratio={{
+            mobile: "12 / 7",
+            tablet: "12 / 7",
+            desktop: "12 / 7",
+          }}
+          className="lotobola-hero__stage"
+        />
 
-        <div className="cs-meta">
+        <div className="cs-meta lotobola-meta" data-animate="text" data-animate-delay="320">
           <div className="cs-meta__item">
             <p className="cs-meta__label">{c.heroMetaRoleLabel}</p>
             <p className="cs-meta__value">{c.heroMetaRoleValue}</p>
@@ -354,310 +507,429 @@ export function LotoBolaSections() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════
-          S2 — THE CASE IN ONE MINUTE
-          ════════════════════════════════════════════ */}
-      <section className="cs-section" id="overview">
-        <div className="cs-section-head">
-          <Typography variant="micro" tone="muted">{c.s2Kicker}</Typography>
-          <Typography variant="h2">{c.s2Title}</Typography>
-          <Typography variant="bodyLg" tone="secondary">
-            {c.s2Body}
-          </Typography>
-        </div>
-        <div className="cs-section-content">
-          <div className="cs-blocks">
-            <div className="cs-block">
-              <Typography variant="h3">{c.s2Block1Title}</Typography>
+      <CaseSection
+        id="overview"
+        number="01"
+        label={lang === "es" ? "Panorama" : "Overview"}
+        heading={c.s2Title}
+        body={c.s2Body}
+        layout="text-grid"
+      >
+        <CaseStaggerGrid columns={3} className="lotobola-overview-grid">
+          {panoramaBlocks.map((block) => (
+            <article key={block.title} className="lotobola-info-card">
+              <Typography variant="h3">{block.title}</Typography>
               <Typography variant="bodyMd" tone="secondary">
-                {c.s2Block1Body}
+                {block.body}
               </Typography>
-            </div>
-            <div className="cs-block">
-              <Typography variant="h3">{c.s2Block2Title}</Typography>
-              <Typography variant="bodyMd" tone="secondary">
-                {c.s2Block2Body}
-              </Typography>
-            </div>
-            <div className="cs-block">
-              <Typography variant="h3">{c.s2Block3Title}</Typography>
-              <Typography variant="bodyMd" tone="secondary">
-                {c.s2Block3Body}
-              </Typography>
-            </div>
-          </div>
-          <CasePlaceholder id="LB-OVERVIEW-01" ratio="landscape"
-            src="/images/lotobola/lb_overview_01.webp"
-            alt="LotoBola service ecosystem — user, touchpoints, retail mediation, operations, and continuity layers" />
-        </div>
-      </section>
+            </article>
+          ))}
+        </CaseStaggerGrid>
+        <CaseImageReveal
+          src="/images/lotobola/lb_overview_01.webp"
+          alt="LotoBola service ecosystem — user, touchpoints, retail mediation, operations, and continuity layers"
+          caption={overviewCaption}
+          width={2200}
+          height={1400}
+        />
+      </CaseSection>
 
-      {/* ════════════════════════════════════════════
-          S3 — THE CHALLENGE
-          ════════════════════════════════════════════ */}
-      <section className="cs-section" id="challenge">
-        <div className="cs-section-head">
-          <Typography variant="micro" tone="muted">{c.s3Kicker}</Typography>
-          <Typography variant="h2">{c.s3Title}</Typography>
-          <Typography variant="bodyLg" tone="secondary">
-            {c.s3Body}
-          </Typography>
-        </div>
-        <div className="cs-section-content">
-          <div className="cs-callout">
-            <Typography variant="bodyLg" tone="secondary">
-              <Accent>{c.s3CalloutAccent}</Accent>{" "}
-              {c.s3CalloutRest}
-            </Typography>
-          </div>
-          <CasePlaceholder id="LB-CHALLENGE-01" ratio="landscape"
-            src="/images/lotobola/lb_challenge_01.webp"
-            alt="LotoBola challenge framing — ecosystem complexity and multi-surface scope" />
-        </div>
-      </section>
+      <CaseSection
+        id="challenge"
+        number="02"
+        label={lang === "es" ? "Desafío" : "Challenge"}
+        heading={c.s3Title}
+        body={c.s3Body}
+        layout="text-image"
+      >
+        <CasePullquote>
+          <Accent>{c.s3CalloutAccent}</Accent> {c.s3CalloutRest}
+        </CasePullquote>
+        <CaseImageReveal
+          src="/images/lotobola/lb_challenge_01.webp"
+          alt="LotoBola challenge framing — ecosystem complexity and multi-surface scope"
+          width={2200}
+          height={1400}
+        />
+      </CaseSection>
 
-      {/* ════════════════════════════════════════════
-          S3.5 — EXPERIENCE ARCHITECTURE
-          ════════════════════════════════════════════ */}
-      <section className="cs-section" id="architecture">
-        <div className="cs-section-head">
-          <Typography variant="micro" tone="muted">{c.archKicker}</Typography>
-          <Typography variant="h2">{c.archTitle}</Typography>
-          <Typography variant="bodyLg" tone="secondary">{c.archBody}</Typography>
+      <CaseSection
+        id="architecture"
+        number="03"
+        label={lang === "es" ? "Arquitectura" : "Architecture"}
+        heading={c.archTitle}
+        body={c.archBody}
+        layout="text-only"
+      >
+        <div className="lotobola-system-diagram-wrapper">
+          <LotoBolaSystemDiagram lang={lang} />
         </div>
-        <div className="cs-section-content">
 
-          {/* Block 1 — Service logic */}
-          <div className="lba-block">
-            <div className="cs-subhead">
+        <div className="lotobola-architecture">
+          <section className="lotobola-architecture__block">
+            <div className="lotobola-architecture__intro" data-animate="text" data-animate-delay="0">
               <Typography variant="h3">{c.archB1Title}</Typography>
-              <Typography variant="bodyMd" tone="secondary">{c.archB1Body}</Typography>
+              <Typography variant="bodyMd" tone="secondary">
+                {c.archB1Body}
+              </Typography>
             </div>
-            <div className="lba-artifact">
-              <div className="lba-phases" role="list" aria-label={c.archB1Title}>
-                {c.archPhases.map((phase, i) => (
-                  <div key={i} className="lba-phase" role="listitem">
-                    <div className="lba-phase__dot">{String(i + 1).padStart(2, "0")}</div>
-                    <span className="lba-phase__label">{phase}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="lba-service-layers">
-                {c.archServiceRows.map((row, i) => (
-                  <div key={i} className="lba-service-row">
-                    <span className="lba-service-row__layer">{row.layer}</span>
-                    <span className="lba-service-row__items">{row.items}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
 
-          {/* Block 2 — Navigation structure */}
-          <div className="lba-block">
-            <div className="cs-subhead">
-              <Typography variant="h3">{c.archB2Title}</Typography>
-              <Typography variant="bodyMd" tone="secondary">{c.archB2Body}</Typography>
-            </div>
-            <div className="lba-artifact lba-artifact--nav">
-              <div className="lba-nav" role="list" aria-label={c.archB2Title}>
-                {c.archNavCols.map((col, i) => (
-                  <div key={i} className="lba-nav-col" role="listitem">
-                    <span className="lba-nav-col__label">{col.phase}</span>
-                    <ul className="lba-nav-col__screens">
-                      {col.screens.map((screen, j) => (
-                        <li key={j}>{screen}</li>
-                      ))}
-                    </ul>
+            <div className="lotobola-timeline" data-animate="text" data-animate-delay="65">
+              <div className="lotobola-timeline__hint">{serviceLayerLabels.swipe}</div>
+              <div className="lotobola-timeline__track" role="list" aria-label={c.archB1Title}>
+                {serviceLayers.map((item, index) => (
+                  <div
+                    key={item.phase}
+                    className="lotobola-timeline__item"
+                    role="listitem"
+                    data-animate="text"
+                    data-animate-delay={String(index * 65)}
+                  >
+                    <span className="lotobola-timeline__number">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="lotobola-timeline__label">{item.phase}</span>
                   </div>
                 ))}
               </div>
             </div>
-          </div>
 
-          {/* Block 3 — Friction & opportunities */}
-          <div className="lba-block">
-            <div className="cs-subhead">
-              <Typography variant="h3">{c.archB3Title}</Typography>
-              <Typography variant="bodyMd" tone="secondary">{c.archB3Body}</Typography>
-            </div>
-            <div className="lba-artifact">
-              <div className="lba-friction">
-                <div className="lba-friction__header">
-                  <span>{c.archFrictionLabel}</span>
-                  <span className="lba-friction__col--opp">{c.archOpportunityLabel}</span>
+            <div className="lotobola-service-grid" data-animate="text" data-animate-delay="120">
+              <div className="lotobola-service-grid__desktop" role="table" aria-label={c.archB1Title}>
+                <div className="lotobola-service-grid__row lotobola-service-grid__row--header" role="row">
+                  <span className="lotobola-service-grid__row-title" />
+                  {serviceLayers.map((item) => (
+                    <span key={item.phase} className="lotobola-service-grid__phase" role="columnheader">
+                      {item.phase}
+                    </span>
+                  ))}
                 </div>
-                {c.archFrictions.map((row, i) => (
-                  <div key={i} className="lba-friction__row">
-                    <span className="lba-friction__pain">{row.pain}</span>
-                    <span className="lba-friction__opp">{row.opp}</span>
-                  </div>
+                <div className="lotobola-service-grid__row" role="row">
+                  <span className="lotobola-service-grid__row-title">{serviceLayerLabels.user}</span>
+                  {serviceLayers.map((item) => (
+                    <span key={`${item.phase}-user`} className="lotobola-service-grid__cell" role="cell">
+                      {item.user}
+                    </span>
+                  ))}
+                </div>
+                <div className="lotobola-service-grid__row lotobola-service-grid__row--alt" role="row">
+                  <span className="lotobola-service-grid__row-title">{serviceLayerLabels.interface}</span>
+                  {serviceLayers.map((item) => (
+                    <span key={`${item.phase}-interface`} className="lotobola-service-grid__cell" role="cell">
+                      {item.interface}
+                    </span>
+                  ))}
+                </div>
+                <div className="lotobola-service-grid__row" role="row">
+                  <span className="lotobola-service-grid__row-title">{serviceLayerLabels.system}</span>
+                  {serviceLayers.map((item) => (
+                    <span key={`${item.phase}-system`} className="lotobola-service-grid__cell" role="cell">
+                      {item.system}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="lotobola-service-grid__mobile">
+                {serviceLayers.map((item, index) => (
+                  <details
+                    key={item.phase}
+                    className="lotobola-service-detail"
+                    data-animate="text"
+                    data-animate-delay={String(index * 65)}
+                  >
+                    <summary>
+                      <span>{String(index + 1).padStart(2, "0")}</span>
+                      <span>{item.phase}</span>
+                    </summary>
+                    <div className="lotobola-service-detail__body">
+                      <div>
+                        <strong>{serviceLayerLabels.user}</strong>
+                        <span>{item.user}</span>
+                      </div>
+                      <div>
+                        <strong>{serviceLayerLabels.interface}</strong>
+                        <span>{item.interface}</span>
+                      </div>
+                      <div>
+                        <strong>{serviceLayerLabels.system}</strong>
+                        <span>{item.system}</span>
+                      </div>
+                    </div>
+                  </details>
                 ))}
               </div>
             </div>
-          </div>
+          </section>
 
-        </div>
-      </section>
+          <section className="lotobola-architecture__block">
+            <div className="lotobola-architecture__intro" data-animate="text" data-animate-delay="0">
+              <Typography variant="h3">{c.archB2Title}</Typography>
+              <Typography variant="bodyMd" tone="secondary">
+                {c.archB2Body}
+              </Typography>
+            </div>
 
-      {/* ════════════════════════════════════════════
-          S4 — DESIGNING THE PUBLIC EXPERIENCE
-          ════════════════════════════════════════════ */}
-      <section className="cs-section" id="public">
-        <div className="cs-section-head">
-          <Typography variant="micro" tone="muted">{c.s4Kicker}</Typography>
-          <Typography variant="h2">{c.s4Title}</Typography>
-          <Typography variant="bodyLg" tone="secondary">
-            {c.s4Body}
-          </Typography>
-        </div>
-        <div className="cs-section-content">
-          <CasePlaceholder id="LB-WEB-01" ratio="landscape"
-            src="/images/lotobola/lb_web_01.webp"
-            alt="LotoBola public website and product ecosystem — digital and physical touchpoints" />
-          <div className="cs-split">
-            <CasePlaceholder id="LB-WEB-02" ratio="portrait"
-              src="/images/lotobola/lb_web_02.webp"
-              alt="LotoBola website — homepage and main product section" />
-            <CasePlaceholder id="LB-WEB-03" ratio="portrait"
-              src="/images/lotobola/lb_web_03.webp"
-              alt="LotoBola website — product flow and participation experience" />
-          </div>
-        </div>
-      </section>
+            <div className="lotobola-nav lotobola-nav--desktop" data-animate="text" data-animate-delay="65">
+              {c.archNavCols.map((column, index) => (
+                <div
+                  key={column.phase}
+                  className="lotobola-nav__column"
+                  data-animate="text"
+                  data-animate-delay={String(index * 65)}
+                >
+                  <span className="lotobola-nav__label">{column.phase}</span>
+                  <ul className="lotobola-nav__list">
+                    {column.screens.map((screen) => (
+                      <li key={screen}>{screen}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
 
-      {/* ════════════════════════════════════════════
-          S5 — DESIGNING THE ASSISTED RETAIL LAYER
-          ════════════════════════════════════════════ */}
-      <section className="cs-section" id="retail">
-        <div className="cs-section-head">
-          <Typography variant="micro" tone="muted">{c.s5Kicker}</Typography>
-          <Typography variant="h2">{c.s5Title}</Typography>
-          <Typography variant="bodyLg" tone="secondary">
-            {c.s5Body}
-          </Typography>
+            <div className="lotobola-nav lotobola-nav--mobile">
+              {c.archNavCols.map((column, index) => (
+                <details
+                  key={column.phase}
+                  className="lotobola-nav__detail"
+                  data-animate="text"
+                  data-animate-delay={String(index * 65)}
+                >
+                  <summary>{column.phase}</summary>
+                  <ul className="lotobola-nav__list">
+                    {column.screens.map((screen) => (
+                      <li key={screen}>{screen}</li>
+                    ))}
+                  </ul>
+                </details>
+              ))}
+            </div>
+          </section>
+
+          <section className="lotobola-architecture__block">
+            <div className="lotobola-architecture__intro" data-animate="text" data-animate-delay="0">
+              <Typography variant="h3">{c.archB3Title}</Typography>
+              <Typography variant="bodyMd" tone="secondary">
+                {c.archB3Body}
+              </Typography>
+            </div>
+
+            <div className="lotobola-friction-list">
+              {c.archFrictions.map((item, index) => (
+                <CaseFrictionItem
+                  key={`${item.pain}-${index}`}
+                  index={index}
+                  problem={item.pain}
+                  solution={item.opp}
+                />
+              ))}
+            </div>
+          </section>
         </div>
-        <div className="cs-section-content">
-          <div className="cs-subhead">
+      </CaseSection>
+
+      <CaseSection
+        id="public"
+        number="04"
+        label={lang === "es" ? "Experiencia Pública" : "Public Experience"}
+        heading={c.s4Title}
+        body={c.s4Body}
+        layout="text-image"
+      >
+        <div data-animate="text" data-animate-delay="0">
+          <CaseLabelPill>{layerPills.public}</CaseLabelPill>
+        </div>
+        <CaseImageReveal
+          src="/images/lotobola/lb_web_01.webp"
+          alt="LotoBola public website and product ecosystem — digital and physical touchpoints"
+          parallax="deep"
+        />
+        <CaseStaggerGrid
+          columns={2}
+          className="lotobola-public-grid"
+          animateAs="image"
+          delegateToChild
+        >
+          <CaseImageReveal
+            src="/images/lotobola/lb_web_02.webp"
+            alt="LotoBola website — homepage and main product section"
+            ratio="portrait"
+            className="lotobola-asset-card"
+            parallax="deep"
+            interactive
+          />
+          <CaseImageReveal
+            src="/images/lotobola/lb_web_03.webp"
+            alt="LotoBola website — product flow and participation experience"
+            ratio="portrait"
+            className="lotobola-asset-card"
+            parallax="deep"
+            interactive
+          />
+        </CaseStaggerGrid>
+      </CaseSection>
+
+      <CaseSection
+        id="retail"
+        number="05"
+        label={lang === "es" ? "Retail y Canales" : "Retail & Channels"}
+        heading={c.s5Title}
+        subheading={
+          <div>
+            <CaseLabelPill>{layerPills.assisted}</CaseLabelPill>
             <Typography variant="h3">{c.s5SubheadTitle}</Typography>
+          </div>
+        }
+        body={
+          <>
+            <Typography variant="bodyLg" tone="secondary">
+              {c.s5Body}
+            </Typography>
             <Typography variant="bodyLg" tone="secondary">
               {c.s5SubheadBody}
             </Typography>
-          </div>
-          <CasePlaceholder id="LB-RETAIL-01" ratio="wide"
-            src="/images/lotobola/lb_retail_01.webp"
-            alt="LotoBola retail interface — full POS and assisted channel overview" />
-          <div className="cs-four-up">
-            <div className="cs-supporting-item">
-              <CasePlaceholder id="LB-RETAIL-02" ratio="portrait"
-                src="/images/lotobola/lb_retail_02.webp"
-                alt="LotoBola retail — step 1: product entry and selection" />
-              <p className="cs-caption">{c.s5Caption1}</p>
-            </div>
-            <div className="cs-supporting-item">
-              <CasePlaceholder id="LB-RETAIL-03" ratio="portrait"
-                src="/images/lotobola/lb_retail_03.webp"
-                alt="LotoBola retail — step 2: confirmation and assisted validation" />
-              <p className="cs-caption">{c.s5Caption2}</p>
-            </div>
-            <div className="cs-supporting-item">
-              <CasePlaceholder id="LB-RETAIL-04" ratio="portrait"
-                src="/images/lotobola/lb_retail_04.webp"
-                alt="LotoBola retail — step 3: transaction and receipt" />
-              <p className="cs-caption">{c.s5Caption3}</p>
-            </div>
-          </div>
-        </div>
-      </section>
+          </>
+        }
+        layout="text-image"
+      >
+        <CaseImageReveal
+          src="/images/lotobola/lb_retail_01.webp"
+          alt="LotoBola retail interface — full POS and assisted channel overview"
+          ratio="wide"
+          parallax="deep"
+        />
+        <CaseStaggerGrid
+          columns={3}
+          className="lotobola-retail-steps"
+          itemClassName="lotobola-retail-steps__item"
+          animateAs="image"
+          delegateToChild
+        >
+          <CaseImageReveal
+            src="/images/lotobola/lb_retail_02.webp"
+            alt="LotoBola retail — step 1: product entry and selection"
+            caption={c.s5Caption1}
+            ratio="portrait"
+            className="lotobola-asset-card"
+            parallax="deep"
+            interactive
+          />
+          <CaseImageReveal
+            src="/images/lotobola/lb_retail_03.webp"
+            alt="LotoBola retail — step 2: confirmation and assisted validation"
+            caption={c.s5Caption2}
+            ratio="portrait"
+            className="lotobola-asset-card"
+            parallax="deep"
+            interactive
+          />
+          <CaseImageReveal
+            src="/images/lotobola/lb_retail_04.webp"
+            alt="LotoBola retail — step 3: transaction and receipt"
+            caption={c.s5Caption3}
+            ratio="portrait"
+            className="lotobola-asset-card"
+            parallax="deep"
+            interactive
+          />
+        </CaseStaggerGrid>
+      </CaseSection>
 
-      {/* ════════════════════════════════════════════
-          S6 — DESIGNING THE OPERATIONAL LAYER
-          ════════════════════════════════════════════ */}
-      <section className="cs-section" id="admin">
-        <div className="cs-section-head">
-          <Typography variant="micro" tone="muted">{c.s6Kicker}</Typography>
-          <Typography variant="h2">{c.s6Title}</Typography>
+      <CaseSection
+        id="admin"
+        number="06"
+        label={lang === "es" ? "Operaciones" : "Operations"}
+        heading={c.s6Title}
+        subheading={<CaseLabelPill>{layerPills.operational}</CaseLabelPill>}
+        body={c.s6Body}
+        layout="text-image"
+      >
+        <CaseImageReveal
+          src="/images/lotobola/lb_admin_01.webp"
+          alt="LotoBola admin — draw results control panel"
+          className="lotobola-asset-card"
+          parallax="deep"
+          interactive
+        />
+        <CaseImageReveal
+          src="/images/lotobola/lb_admin_02.webp"
+          alt="LotoBola admin — tickets, inventory, and operational management views"
+          className="lotobola-asset-card"
+          parallax="deep"
+          interactive
+        />
+      </CaseSection>
+
+      <CaseSection
+        id="system"
+        number="07"
+        label={lang === "es" ? "Sistema y Coherencia" : "System & Coherence"}
+        heading={c.s7Title}
+        body={c.s7Body}
+        layout="text-image"
+      >
+        <CaseImageReveal
+          src="/images/lotobola/lb_ds_01.webp"
+          alt="LotoBola design system — typography, colors, components, and Figma foundation"
+          className="lotobola-asset-card"
+          parallax="deep"
+          interactive
+        />
+        <div className="lotobola-system-copy" data-animate="text" data-animate-delay="0">
+          <Typography variant="h3">{c.s7SubheadTitle}</Typography>
           <Typography variant="bodyLg" tone="secondary">
-            {c.s6Body}
+            {c.s7SubheadBody}
           </Typography>
         </div>
-        <div className="cs-section-content">
-          <CasePlaceholder id="LB-ADMIN-01" ratio="landscape"
-            src="/images/lotobola/lb_admin_01.webp"
-            alt="LotoBola admin — draw results control panel" />
-          <CasePlaceholder id="LB-ADMIN-02" ratio="landscape"
-            src="/images/lotobola/lb_admin_02.webp"
-            alt="LotoBola admin — tickets, inventory, and operational management views" />
-        </div>
-      </section>
+      </CaseSection>
 
-      {/* ════════════════════════════════════════════
-          S7 — BUILDING COHERENCE ACROSS THE SYSTEM
-          ════════════════════════════════════════════ */}
-      <section className="cs-section" id="system">
-        <div className="cs-section-head">
-          <Typography variant="micro" tone="muted">{c.s7Kicker}</Typography>
-          <Typography variant="h2">{c.s7Title}</Typography>
-          <Typography variant="bodyLg" tone="secondary">
-            {c.s7Body}
-          </Typography>
+      <CaseSection
+        id="iteration"
+        number="08"
+        label={lang === "es" ? "Proceso" : "Process"}
+        heading={c.s8Title}
+        body={c.s8Body}
+        layout="text-image"
+      >
+        <div className="lotobola-system-copy" data-animate="text" data-animate-delay="0">
+          <Typography variant="h3">{c.s8SubheadTitle}</Typography>
         </div>
-        <div className="cs-section-content">
-          <CasePlaceholder id="LB-DS-01" ratio="landscape"
-            src="/images/lotobola/lb_ds_01.webp"
-            alt="LotoBola design system — typography, colors, components, and Figma foundation" />
-          <div className="cs-subhead">
-            <Typography variant="h3">{c.s7SubheadTitle}</Typography>
-            <Typography variant="bodyLg" tone="secondary">
-              {c.s7SubheadBody}
-            </Typography>
-          </div>
-        </div>
-      </section>
+        <CaseImageReveal
+          src="/images/lotobola/lb_iter_01.webp"
+          alt="LotoBola design iteration — early exploration to structured mature ecosystem"
+          ratio="wide"
+          parallax="deep"
+        />
+      </CaseSection>
 
-      {/* ════════════════════════════════════════════
-          S8 — ITERATION AND EVOLUTION
-          ════════════════════════════════════════════ */}
-      <section className="cs-section" id="iteration">
-        <div className="cs-section-head">
-          <Typography variant="micro" tone="muted">{c.s8Kicker}</Typography>
-          <Typography variant="h2">{c.s8Title}</Typography>
-          <Typography variant="bodyLg" tone="secondary">
-            {c.s8Body}
-          </Typography>
-        </div>
-        <div className="cs-section-content">
-          <div className="cs-subhead">
-            <Typography variant="h3">{c.s8SubheadTitle}</Typography>
-          </div>
-          <CasePlaceholder id="LB-ITER-01" ratio="wide"
-            src="/images/lotobola/lb_iter_01.webp"
-            alt="LotoBola design iteration — early exploration to structured mature ecosystem" />
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════
-          S9 — WHAT THIS PROJECT REPRESENTS IN MY PRACTICE
-          ════════════════════════════════════════════ */}
-      <section className="cs-section" id="reflection">
-        <div className="cs-section-head">
-          <Typography variant="micro" tone="muted">{c.s9Kicker}</Typography>
-          <Typography variant="h2">{c.s9Title}</Typography>
-          <Typography variant="bodyLg" tone="secondary">
-            {c.s9Body}
-          </Typography>
-        </div>
-        <div className="cs-section-content">
+      <CaseSection
+        id="reflection"
+        number="09"
+        label={lang === "es" ? "Reflexión" : "Reflection"}
+        heading={c.s9Title}
+        body={c.s9Body}
+        layout="text-image"
+        className="cs-section--closing"
+      >
+        <div className="lotobola-reflection-copy" data-animate="text" data-animate-delay="0">
           <Typography variant="bodyLg" tone="secondary" as="p">
             {c.s9ClosingRest}
             <Accent>{c.s9ClosingAccent}</Accent>
           </Typography>
-          <CasePlaceholder id="LB-CLOSING-01" ratio="landscape"
-            src="/images/lotobola/lb_closing_01.webp"
-            alt="LotoBola — closing ecosystem composition" />
         </div>
-      </section>
+        <CasePullquote>{closingQuote}</CasePullquote>
+        <CaseImageReveal
+          src="/images/lotobola/lb_closing_01.webp"
+          alt="LotoBola — closing ecosystem composition"
+          width={2400}
+          height={1400}
+          parallax="reverse"
+        />
+        <div className="lotobola-endcap" aria-hidden />
+      </CaseSection>
 
+      </div>
     </div>
   );
 }

@@ -28,12 +28,24 @@ function getNested(dictionary: Dictionary, key: string): unknown {
 
 export function LanguageProvider({ children }: PropsWithChildren) {
   const [lang, setLangState] = useState<Lang>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved === "es" ? "es" : "en";
+    try {
+      const saved = window.localStorage.getItem(STORAGE_KEY);
+      if (saved === "es" || saved === "en") {
+        return saved;
+      }
+    } catch {
+      // Ignore storage access failures and fall back to browser language.
+    }
+
+    return navigator.language.toLowerCase().startsWith("es") ? "es" : "en";
   });
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, lang);
+    try {
+      window.localStorage.setItem(STORAGE_KEY, lang);
+    } catch {
+      // Ignore storage write failures; language still works in-memory.
+    }
     document.documentElement.lang = lang;
   }, [lang]);
 

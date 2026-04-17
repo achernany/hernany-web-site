@@ -2,13 +2,14 @@ import { Download, Linkedin, Mail } from "lucide-react";
 import { Container } from "../components/ui/Container";
 import { Section } from "../components/ui/Section";
 import { Typography, Accent } from "../components/ui/Typography";
-import { Button } from "../components/ui/Button";
 import { Divider } from "../components/ui/Divider";
 import { PageFooter } from "../components/layout/PageFooter";
 import { useI18n } from "../i18n";
 
 export function Contact() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
+  const cvHref = lang === "es" ? "/Hernany-Acosta-CV.pdf" : "/Hernany-Acosta-CV-EN.pdf";
+  const cvFileName = lang === "es" ? "Hernany-Acosta-CV.pdf" : "Hernany-Acosta-CV-EN.pdf";
 
   return (
     <Container>
@@ -25,14 +26,19 @@ export function Contact() {
           </Typography>
 
           <div className="contact-actions">
-            <Button variant="primary" onClick={() => window.open("mailto:hey@hernanyacosta.com", "_blank")}> 
+            <a href="mailto:hey@hernanyacosta.com" className="ui-button ui-button--primary">
               <Mail size={16} />
               {t("common.actions.startConversation")}
-            </Button>
-            <Button variant="secondary" onClick={() => window.open("https://linkedin.com/in/hernanyacosta", "_blank")}> 
+            </a>
+            <a
+              href="https://linkedin.com/in/hernanyacosta"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ui-button ui-button--secondary"
+            >
               <Linkedin size={16} />
               {t("common.actions.connectLinkedIn")}
-            </Button>
+            </a>
           </div>
 
           <div className="page-divider-wrap">
@@ -40,14 +46,23 @@ export function Contact() {
           </div>
 
           <div className="contact-downloads">
-            <Button variant="secondary" onClick={() => window.open("/Hernany-Acosta-CV.pdf", "_blank")}> 
+            <a
+              href={cvHref}
+              download={cvFileName}
+              className="ui-button ui-button--secondary"
+            >
               <Download size={16} />
               {t("common.actions.downloadExecutiveCV")}
-            </Button>
-            <Button variant="secondary" onClick={() => window.open("/Hernany-Acosta-CV.pdf", "_blank")}> 
+            </a>
+            <a
+              href="/Hernany-Acosta-CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ui-button ui-button--secondary"
+            >
               <Download size={16} />
               {t("common.actions.downloadPortfolio")}
-            </Button>
+            </a>
           </div>
         </div>
       </Section>

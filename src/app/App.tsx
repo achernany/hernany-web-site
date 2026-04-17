@@ -134,6 +134,8 @@ export default function App() {
                 src="/logo.svg"
                 alt={t("common.brand")}
                 className="topbar__brand-logo topbar__brand-logo--mark"
+                width={16}
+                height={18}
               />
             </button>
             <button

@@ -23,6 +23,8 @@ export function TopBar({ onOpenMenu, onNavigateHome, scrolled }: TopBarProps) {
             src="/logo-menu.svg"
             alt={t("common.brand")}
             className="topbar__brand-logo topbar__brand-logo--menu"
+            width={156}
+            height={23}
           />
         </button>
         <button

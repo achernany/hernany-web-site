@@ -125,6 +125,18 @@
   opacity: 0.9;
 }
 
+.ui-button:focus-visible,
+.ui-icon-button:focus-visible,
+.ui-segmented__item:focus-visible,
+.ui-menu-overlay__list a:focus-visible,
+.topbar__brand-link:focus-visible,
+.topbar__menu:focus-visible,
+.home-hero__social a:focus-visible,
+.home-hero__email-link:focus-visible {
+  outline: 2px solid var(--color-accent-500);
+  outline-offset: 3px;
+}
+
 @media (min-width: 1024px) {
   .ui-button--primary:hover {
     opacity: 1;

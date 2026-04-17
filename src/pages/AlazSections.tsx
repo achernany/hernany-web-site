@@ -1,40 +1,7 @@
 import { Typography, Accent } from "../components/ui/Typography";
-import { cn } from "../lib/cn";
+import { CaseMedia } from "../components/case-study/CaseMedia";
 import { useI18n } from "../i18n";
 import "./LotoBolaCaseStudy.css";
-
-/* ============================================================
-   CasePlaceholder — local helper
-   Replace each .cs-placeholder with <img> or <video>.
-   The `id` matches the asset ID (e.g., "ALAZ-HERO-01").
-   ============================================================ */
-
-type PlaceholderRatio = "hero" | "wide" | "landscape" | "portrait" | "card" | "square";
-
-interface CasePlaceholderProps {
-  id: string;
-  ratio?: PlaceholderRatio;
-  caption?: string;
-  hint?: string;
-  className?: string;
-}
-
-function CasePlaceholder({ id, ratio = "landscape", caption, hint, className }: CasePlaceholderProps) {
-  return (
-    // asset-slot: {id} — swap this <div> for <img src="..." alt="..." /> or <video>
-    <figure className={cn("cs-ph-wrap", className)}>
-      <div
-        className={cn("cs-placeholder", `cs-placeholder--${ratio}`)}
-        aria-label={`Visual placeholder: ${id}`}
-        role="img"
-      >
-        <span className="cs-placeholder__id">{id}</span>
-        {hint && <span className="cs-placeholder__hint">{hint}</span>}
-      </div>
-      {caption && <figcaption className="cs-caption">{caption}</figcaption>}
-    </figure>
-  );
-}
 
 /* ============================================================
    AlazSections
@@ -240,7 +207,7 @@ export function AlazSections() {
         </div>
 
         {/* asset-slot: ALAZ-HERO-01 — Replace with three-project composition / ALAZ period overview */}
-        <CasePlaceholder id="ALAZ-HERO-01" ratio="hero" hint={c.heroPlaceholderHint} />
+        <CaseMedia id="ALAZ-HERO-01" ratio="hero" hint={c.heroPlaceholderHint} />
 
         <div className="cs-meta">
           <div className="cs-meta__item">
@@ -289,7 +256,7 @@ export function AlazSections() {
             </div>
           </div>
           {/* asset-slot: ALAZ-OVERVIEW-01 — Replace with three-project overview or period diagram */}
-          <CasePlaceholder id="ALAZ-OVERVIEW-01" ratio="landscape" hint={c.s2PlaceholderHint} />
+          <CaseMedia id="ALAZ-OVERVIEW-01" ratio="landscape" hint={c.s2PlaceholderHint} />
         </div>
       </section>
 
@@ -342,13 +309,13 @@ export function AlazSections() {
         </div>
         <div className="cs-section-content">
           {/* asset-slot: ALAZ-WETRAX-01 — Replace with Wetrax main dashboard or operations panel */}
-          <CasePlaceholder id="ALAZ-WETRAX-01" ratio="landscape" hint={c.s4Placeholder1Hint} />
+          <CaseMedia id="ALAZ-WETRAX-01" ratio="landscape" hint={c.s4Placeholder1Hint} />
           <div className="cs-subhead">
             <Typography variant="bodyLg" tone="secondary">{c.s4Challenge}</Typography>
             <Typography variant="bodyLg" tone="secondary">{c.s4Value}</Typography>
           </div>
           {/* asset-slot: ALAZ-WETRAX-02 — Replace with Wetrax detail flow or key module */}
-          <CasePlaceholder id="ALAZ-WETRAX-02" ratio="landscape" hint={c.s4Placeholder2Hint} />
+          <CaseMedia id="ALAZ-WETRAX-02" ratio="landscape" hint={c.s4Placeholder2Hint} />
         </div>
       </section>
 
@@ -369,9 +336,9 @@ export function AlazSections() {
         <div className="cs-section-content">
           <div className="cs-split">
             {/* asset-slot: ALAZ-SF-01 — Replace with scheduling view or patient portal */}
-            <CasePlaceholder id="ALAZ-SF-01" ratio="portrait" hint={c.s5Placeholder1Hint} />
+            <CaseMedia id="ALAZ-SF-01" ratio="portrait" hint={c.s5Placeholder1Hint} />
             {/* asset-slot: ALAZ-SF-02 — Replace with auxiliary services flow or coordination detail */}
-            <CasePlaceholder id="ALAZ-SF-02" ratio="portrait" hint={c.s5Placeholder2Hint} />
+            <CaseMedia id="ALAZ-SF-02" ratio="portrait" hint={c.s5Placeholder2Hint} />
           </div>
           <div className="cs-subhead">
             <Typography variant="bodyLg" tone="secondary">{c.s5Challenge}</Typography>
@@ -401,9 +368,9 @@ export function AlazSections() {
           </div>
           <div className="cs-split">
             {/* asset-slot: ALAZ-EGCAPP-01 — Replace with main app view or field operations screen */}
-            <CasePlaceholder id="ALAZ-EGCAPP-01" ratio="portrait" hint={c.s6Placeholder1Hint} />
+            <CaseMedia id="ALAZ-EGCAPP-01" ratio="portrait" hint={c.s6Placeholder1Hint} />
             {/* asset-slot: ALAZ-EGCAPP-02 — Replace with incident report flow or documentation module */}
-            <CasePlaceholder id="ALAZ-EGCAPP-02" ratio="portrait" hint={c.s6Placeholder2Hint} />
+            <CaseMedia id="ALAZ-EGCAPP-02" ratio="portrait" hint={c.s6Placeholder2Hint} />
           </div>
         </div>
       </section>
@@ -426,7 +393,7 @@ export function AlazSections() {
             </Typography>
           </div>
           {/* asset-slot: ALAZ-SYNTHESIS-01 — Replace with three-project comparison or scope overview */}
-          <CasePlaceholder id="ALAZ-SYNTHESIS-01" ratio="landscape" hint={c.s7PlaceholderHint} />
+          <CaseMedia id="ALAZ-SYNTHESIS-01" ratio="landscape" hint={c.s7PlaceholderHint} />
         </div>
       </section>
 
@@ -447,7 +414,7 @@ export function AlazSections() {
             <Accent>{c.s8ClosingAccent}</Accent>
           </Typography>
           {/* asset-slot: ALAZ-CLOSING-01 — Replace with closing visual / representative ALAZ period composition */}
-          <CasePlaceholder id="ALAZ-CLOSING-01" ratio="landscape" hint={c.s8PlaceholderHint} />
+          <CaseMedia id="ALAZ-CLOSING-01" ratio="landscape" hint={c.s8PlaceholderHint} />
         </div>
       </section>
 

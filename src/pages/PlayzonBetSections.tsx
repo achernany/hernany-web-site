@@ -1,40 +1,7 @@
 import { Typography, Accent } from "../components/ui/Typography";
-import { cn } from "../lib/cn";
+import { CaseMedia } from "../components/case-study/CaseMedia";
 import { useI18n } from "../i18n";
 import "./LotoBolaCaseStudy.css";
-
-/* ============================================================
-   CasePlaceholder — local helper
-   Replace each .cs-placeholder with <img> or <video>.
-   The `id` matches the asset ID (e.g., "PZ-HERO-01").
-   ============================================================ */
-
-type PlaceholderRatio = "hero" | "wide" | "landscape" | "portrait" | "card" | "square";
-
-interface CasePlaceholderProps {
-  id: string;
-  ratio?: PlaceholderRatio;
-  caption?: string;
-  hint?: string;
-  className?: string;
-}
-
-function CasePlaceholder({ id, ratio = "landscape", caption, hint, className }: CasePlaceholderProps) {
-  return (
-    // asset-slot: {id} — swap this <div> for <img src="..." alt="..." /> or <video>
-    <figure className={cn("cs-ph-wrap", className)}>
-      <div
-        className={cn("cs-placeholder", `cs-placeholder--${ratio}`)}
-        aria-label={`Visual placeholder: ${id}`}
-        role="img"
-      >
-        <span className="cs-placeholder__id">{id}</span>
-        {hint && <span className="cs-placeholder__hint">{hint}</span>}
-      </div>
-      {caption && <figcaption className="cs-caption">{caption}</figcaption>}
-    </figure>
-  );
-}
 
 /* ============================================================
    PlayzonBetSections
@@ -240,7 +207,7 @@ export function PlayzonBetSections() {
         </div>
 
         {/* asset-slot: PZ-HERO-01 — Replace with composed product hero image */}
-        <CasePlaceholder id="PZ-HERO-01" ratio="hero" hint={c.heroHint} />
+        <CaseMedia id="PZ-HERO-01" ratio="hero" hint={c.heroHint} />
 
         <div className="cs-meta">
           <div className="cs-meta__item">
@@ -289,7 +256,7 @@ export function PlayzonBetSections() {
             </div>
           </div>
           {/* asset-slot: PZ-OVERVIEW-01 — Replace with system overview / overview diagram */}
-          <CasePlaceholder id="PZ-OVERVIEW-01" ratio="landscape" hint={c.s2Hint} />
+          <CaseMedia id="PZ-OVERVIEW-01" ratio="landscape" hint={c.s2Hint} />
         </div>
       </section>
 
@@ -312,7 +279,7 @@ export function PlayzonBetSections() {
             </Typography>
           </div>
           {/* asset-slot: PZ-PROBLEM-01 — Replace with before/after platform comparison */}
-          <CasePlaceholder id="PZ-PROBLEM-01" ratio="landscape" hint={c.s3Hint} />
+          <CaseMedia id="PZ-PROBLEM-01" ratio="landscape" hint={c.s3Hint} />
         </div>
       </section>
 
@@ -335,12 +302,12 @@ export function PlayzonBetSections() {
             </Typography>
           </div>
           {/* asset-slot: PZ-REG-01 — Replace with registration wizard full flow overview */}
-          <CasePlaceholder id="PZ-REG-01" ratio="wide" hint={c.s4Hint1} />
+          <CaseMedia id="PZ-REG-01" ratio="wide" hint={c.s4Hint1} />
           <div className="cs-split">
             {/* asset-slot: PZ-REG-02 — Replace with registration step 01–02 */}
-            <CasePlaceholder id="PZ-REG-02" ratio="portrait" caption={c.s4Caption1} hint={c.s4Hint2} />
+            <CaseMedia id="PZ-REG-02" ratio="portrait" caption={c.s4Caption1} hint={c.s4Hint2} />
             {/* asset-slot: PZ-REG-03 — Replace with registration step 03 compliance */}
-            <CasePlaceholder id="PZ-REG-03" ratio="portrait" caption={c.s4Caption2} hint={c.s4Hint3} />
+            <CaseMedia id="PZ-REG-03" ratio="portrait" caption={c.s4Caption2} hint={c.s4Hint3} />
           </div>
         </div>
       </section>
@@ -361,7 +328,7 @@ export function PlayzonBetSections() {
             <Typography variant="h3">{c.s5SubTitle}</Typography>
           </div>
           {/* asset-slot: PZ-ARCH-01 — Replace with architecture before/after and frontend ownership map */}
-          <CasePlaceholder id="PZ-ARCH-01" ratio="landscape" hint={c.s5Hint} />
+          <CaseMedia id="PZ-ARCH-01" ratio="landscape" hint={c.s5Hint} />
         </div>
       </section>
 
@@ -381,9 +348,9 @@ export function PlayzonBetSections() {
             <Typography variant="h3">{c.s6SubTitle}</Typography>
           </div>
           {/* asset-slot: PZ-SB-01 — Replace with sportsbook shell adaptation / visual alignment */}
-          <CasePlaceholder id="PZ-SB-01" ratio="landscape" hint={c.s6Hint1} />
+          <CaseMedia id="PZ-SB-01" ratio="landscape" hint={c.s6Hint1} />
           {/* asset-slot: PZ-MOBILE-01 — Replace with mobile-first navigation and key operations */}
-          <CasePlaceholder id="PZ-MOBILE-01" ratio="wide" hint={c.s6Hint2} />
+          <CaseMedia id="PZ-MOBILE-01" ratio="wide" hint={c.s6Hint2} />
         </div>
       </section>
 
@@ -400,9 +367,9 @@ export function PlayzonBetSections() {
         </div>
         <div className="cs-section-content">
           {/* asset-slot: PZ-OPS-01 — Replace with account, wallet, and user status screens */}
-          <CasePlaceholder id="PZ-OPS-01" ratio="landscape" hint={c.s7Hint1} />
+          <CaseMedia id="PZ-OPS-01" ratio="landscape" hint={c.s7Hint1} />
           {/* asset-slot: PZ-OPS-02 — Replace with promotions and recurring communication surfaces */}
-          <CasePlaceholder id="PZ-OPS-02" ratio="landscape" hint={c.s7Hint2} />
+          <CaseMedia id="PZ-OPS-02" ratio="landscape" hint={c.s7Hint2} />
         </div>
       </section>
 
@@ -422,7 +389,7 @@ export function PlayzonBetSections() {
             <Typography variant="h3">{c.s8SubTitle}</Typography>
           </div>
           {/* asset-slot: PZ-ITER-01 — Replace with evolution spread: early vs. launch-ready direction */}
-          <CasePlaceholder id="PZ-ITER-01" ratio="wide" hint={c.s8Hint} />
+          <CaseMedia id="PZ-ITER-01" ratio="wide" hint={c.s8Hint} />
         </div>
       </section>
 
@@ -443,7 +410,7 @@ export function PlayzonBetSections() {
             <Accent>{c.s9ClosingAccent}</Accent>
           </Typography>
           {/* asset-slot: PZ-CLOSING-01 — Replace with strong closing visual / final product composition */}
-          <CasePlaceholder id="PZ-CLOSING-01" ratio="landscape" hint={c.s9Hint} />
+          <CaseMedia id="PZ-CLOSING-01" ratio="landscape" hint={c.s9Hint} />
         </div>
       </section>
 

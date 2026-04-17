@@ -10,8 +10,8 @@ interface HomeProps {
 
 export function Home({ onNavigate }: HomeProps) {
   const { t, lang } = useI18n();
-  const cvHref = lang === "es" ? "/Hernany-Acosta-CV-ES.pdf" : "/Hernany-Acosta-CV-EN.pdf";
-  const cvFileName = lang === "es" ? "Hernany-Acosta-CV-ES.pdf" : "Hernany-Acosta-CV-EN.pdf";
+  const cvHref = lang === "es" ? "/Hernany-Acosta-CV.pdf" : "/Hernany-Acosta-CV-EN.pdf";
+  const cvFileName = lang === "es" ? "Hernany-Acosta-CV.pdf" : "Hernany-Acosta-CV-EN.pdf";
 
   return (
     <section className="home-hero">
@@ -51,13 +51,28 @@ export function Home({ onNavigate }: HomeProps) {
           </a>
 
           <div className="home-hero__social" aria-label="Social links">
-            <a href="https://linkedin.com/in/hernanyacosta" target="_blank" rel="noreferrer">
+            <a
+              href="https://linkedin.com/in/hernanyacosta"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
               <Linkedin size={16} />
             </a>
-            <a href="https://github.com/achernany" target="_blank" rel="noreferrer">
+            <a
+              href="https://github.com/achernany"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+            >
               <Github size={16} />
             </a>
-            <a href="https://instagram.com/hernanyac" target="_blank" rel="noreferrer">
+            <a
+              href="https://instagram.com/hernanyac"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
               <Instagram size={16} />
             </a>
           </div>
