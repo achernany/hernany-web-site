@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Typography, Accent } from "../components/ui/Typography";
 import { CaseSection } from "../components/case-study/CaseSection";
 import { CaseImageReveal } from "../components/case-study/CaseImageReveal";
@@ -9,6 +9,8 @@ import { CaseLabelPill } from "../components/case-study/CaseLabelPill";
 import { CaseFrictionItem } from "../components/case-study/CaseFrictionItem";
 import { useI18n } from "../i18n";
 import { initCaseMotion } from "../lib/caseMotion";
+import { LotoBolaDesktopFigma } from "./LotoBolaDesktopFigma";
+import { LotoBolaSystemDiagram } from "../components/case-study/LotoBolaSystemDiagram";
 import "./LotoBolaCaseStudy.css";
 import "./LotoBolaNarrative.css";
 
@@ -21,6 +23,30 @@ import "./LotoBolaNarrative.css";
 export function LotoBolaSections() {
   const { lang } = useI18n();
   const rootRef = useRef<HTMLDivElement>(null);
+  const [isDesktop, setIsDesktop] = useState(() =>
+    typeof window !== "undefined" && window.matchMedia("(min-width: 1024px)").matches,
+  );
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    const handleChange = (event: MediaQueryListEvent) => {
+      setIsDesktop(event.matches);
+    };
+
+    setIsDesktop(mediaQuery.matches);
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", handleChange);
+      return () => mediaQuery.removeEventListener("change", handleChange);
+    }
+
+    mediaQuery.addListener(handleChange);
+    return () => mediaQuery.removeListener(handleChange);
+  }, []);
 
   const c = lang === "es" ? {
     /* ── HERO ── */
@@ -276,12 +302,12 @@ export function LotoBolaSections() {
   };
 
   useEffect(() => {
-    if (!rootRef.current) {
+    if (!rootRef.current || isDesktop) {
       return;
     }
 
     return initCaseMotion(rootRef.current);
-  }, [lang]);
+  }, [isDesktop, lang]);
 
   const panoramaBlocks = [
     { title: c.s2Block1Title, body: c.s2Block1Body },
@@ -411,6 +437,9 @@ export function LotoBolaSections() {
 
   return (
     <div ref={rootRef} className="cs-body lotobola-story">
+      {isDesktop ? <LotoBolaDesktopFigma lang={lang} /> : null}
+
+      <div className="lotobola-mobile-legacy">
 
       {/* ════════════════════════════════════════════
           S1 — HERO
@@ -526,6 +555,10 @@ export function LotoBolaSections() {
         body={c.archBody}
         layout="text-only"
       >
+        <div className="lotobola-system-diagram-wrapper">
+          <LotoBolaSystemDiagram lang={lang} />
+        </div>
+
         <div className="lotobola-architecture">
           <section className="lotobola-architecture__block">
             <div className="lotobola-architecture__intro" data-animate="text" data-animate-delay="0">
@@ -890,6 +923,7 @@ export function LotoBolaSections() {
         <div className="lotobola-endcap" aria-hidden />
       </CaseSection>
 
+      </div>
     </div>
   );
 }

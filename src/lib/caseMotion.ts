@@ -6,21 +6,79 @@ interface EffectHandle {
 
 type ParallaxMediaElement = HTMLImageElement | HTMLVideoElement;
 
-type SimpleParallaxConstructor = new (
-  element: ParallaxMediaElement | ParallaxMediaElement[],
-  options: Record<string, unknown>,
-) => EffectHandle;
+interface ParallaxOptions {
+  orientation?: "up" | "down";
+  scale?: number;
+  maxTransition?: number;
+}
 
 function createParallaxHandle(
-  SimpleParallax: SimpleParallaxConstructor,
   elements: ParallaxMediaElement[],
-  options: Record<string, unknown>,
+  options: ParallaxOptions,
 ) {
   if (elements.length === 0) {
     return null;
   }
 
-  return new SimpleParallax(elements.length === 1 ? elements[0] : elements, options);
+  const activeElements = elements.filter((element) => element.isConnected);
+  if (activeElements.length === 0) {
+    return null;
+  }
+
+  const direction = options.orientation === "down" ? -1 : 1;
+  const scale = options.scale ?? 1.14;
+  const maxTransition = options.maxTransition ?? 96;
+  let frameId = 0;
+
+  const update = () => {
+    frameId = 0;
+    const viewportHeight = window.innerHeight || 1;
+
+    activeElements.forEach((element) => {
+      const rect = element.getBoundingClientRect();
+      const travel = viewportHeight / 2 + rect.height / 2;
+      const distanceFromCenter = viewportHeight / 2 - (rect.top + rect.height / 2);
+      const progress = Math.max(-1, Math.min(1, distanceFromCenter / Math.max(travel, 1)));
+      const translateY = progress * maxTransition * direction;
+
+      element.style.transform = `translate3d(0, ${translateY.toFixed(2)}px, 0) scale(${scale})`;
+    });
+  };
+
+  const scheduleUpdate = () => {
+    if (frameId) {
+      return;
+    }
+
+    frameId = window.requestAnimationFrame(update);
+  };
+
+  activeElements.forEach((element) => {
+    element.style.willChange = "transform";
+    element.style.transformOrigin = "center center";
+  });
+
+  update();
+
+  window.addEventListener("scroll", scheduleUpdate, { passive: true });
+  window.addEventListener("resize", scheduleUpdate);
+
+  return {
+    destroy: () => {
+      if (frameId) {
+        window.cancelAnimationFrame(frameId);
+      }
+
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+
+      activeElements.forEach((element) => {
+        element.style.removeProperty("transform");
+        element.style.removeProperty("transform-origin");
+        element.style.removeProperty("will-change");
+      });
+    },
+  };
 }
 
 function applyDelay(root: ParentNode) {
@@ -43,8 +101,6 @@ async function initParallax(container: HTMLElement) {
     return [];
   }
 
-  const { default: SimpleParallaxModule } = await import("simple-parallax-js");
-  const SimpleParallax = SimpleParallaxModule as unknown as SimpleParallaxConstructor;
   const handles: EffectHandle[] = [];
 
   const heroImg = Array.from(
@@ -60,49 +116,37 @@ async function initParallax(container: HTMLElement) {
     container.querySelectorAll<ParallaxMediaElement>('[data-parallax="reverse"] img, [data-parallax="reverse"] video'),
   );
 
-  const heroHandle = createParallaxHandle(SimpleParallax, heroImg, {
+  const heroHandle = createParallaxHandle(heroImg, {
     orientation: "up",
     scale: 1.14,
-    delay: 0,
-    transition: EASE_OUT_EXPO,
     maxTransition: 96,
-    overflow: false,
   });
   if (heroHandle) {
     handles.push(heroHandle);
   }
 
-  const standardHandle = createParallaxHandle(SimpleParallax, standardImgs, {
+  const standardHandle = createParallaxHandle(standardImgs, {
     orientation: "up",
     scale: 1.18,
-    delay: 0,
-    transition: EASE_OUT_EXPO,
     maxTransition: 120,
-    overflow: false,
   });
   if (standardHandle) {
     handles.push(standardHandle);
   }
 
-  const deepHandle = createParallaxHandle(SimpleParallax, deepImgs, {
+  const deepHandle = createParallaxHandle(deepImgs, {
     orientation: "up",
     scale: 1.22,
-    delay: 0,
-    transition: EASE_OUT_EXPO,
     maxTransition: 148,
-    overflow: false,
   });
   if (deepHandle) {
     handles.push(deepHandle);
   }
 
-  const reverseHandle = createParallaxHandle(SimpleParallax, reverseImgs, {
+  const reverseHandle = createParallaxHandle(reverseImgs, {
     orientation: "down",
     scale: 1.14,
-    delay: 0,
-    transition: EASE_OUT_EXPO,
     maxTransition: 96,
-    overflow: false,
   });
   if (reverseHandle) {
     handles.push(reverseHandle);

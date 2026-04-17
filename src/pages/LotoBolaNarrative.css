@@ -668,3 +668,8 @@
     transition: opacity 200ms ease, background-color 200ms ease !important;
   }
 }
+
+/* ─── System Diagram wrapper ─── */
+.lotobola-system-diagram-wrapper {
+  margin-bottom: clamp(40px, 6vw, 64px);
+}
