@@ -439,6 +439,12 @@ export function LotoBolaSections() {
     <div ref={rootRef} className="cs-body lotobola-story">
       {isDesktop ? <LotoBolaDesktopFigma lang={lang} /> : null}
 
+      {isDesktop && (
+        <div className="lotobola-system-diagram-wrapper lotobola-system-diagram-wrapper--desktop">
+          <LotoBolaSystemDiagram lang={lang} />
+        </div>
+      )}
+
       <div className="lotobola-mobile-legacy">
 
       {/* ════════════════════════════════════════════

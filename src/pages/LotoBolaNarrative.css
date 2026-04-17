@@ -673,3 +673,10 @@
 .lotobola-system-diagram-wrapper {
   margin-bottom: clamp(40px, 6vw, 64px);
 }
+
+.lotobola-system-diagram-wrapper--desktop {
+  padding-inline: var(--layout-container-pad-inline, 24px);
+  max-width: var(--layout-container-max, 1200px);
+  margin-inline: auto;
+  padding-top: clamp(48px, 6vw, 80px);
+}
