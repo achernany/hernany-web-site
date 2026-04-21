@@ -78,8 +78,8 @@
   }
 
   .cs-case-page--lotobola .cs-tab-bar {
-    top: calc(16px + env(safe-area-inset-top, 0px));
-    bottom: auto;
+    top: auto;
+    bottom: calc(40px + env(safe-area-inset-bottom, 0px));
     z-index: 1200;
     padding: 0 48px;
   }
@@ -111,7 +111,7 @@
   }
 
   .cs-case-page--lotobola .page-footer {
-    padding: 16px 0 32px;
+    padding: 16px 0 calc(114px + env(safe-area-inset-bottom, 0px));
   }
 
   .cs-case-page--lotobola .page-footer__copy {
@@ -265,7 +265,8 @@
 
 .lotobola-desktop__hero-cta:disabled {
   cursor: not-allowed;
-  opacity: 0.92;
+  opacity: 0.5;
+  box-shadow: none;
 }
 
 .lotobola-desktop__medium-icon {

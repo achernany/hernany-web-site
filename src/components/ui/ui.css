@@ -125,6 +125,24 @@
   opacity: 0.9;
 }
 
+.ui-button:disabled,
+.ui-button[aria-disabled="true"],
+.ui-icon-button:disabled,
+.ui-icon-button[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.5;
+  box-shadow: none;
+  transform: none;
+}
+
+.ui-button:disabled:hover,
+.ui-button[aria-disabled="true"]:hover,
+.ui-icon-button:disabled:hover,
+.ui-icon-button[aria-disabled="true"]:hover {
+  opacity: 0.5;
+  transform: none;
+}
+
 .ui-button:focus-visible,
 .ui-icon-button:focus-visible,
 .ui-segmented__item:focus-visible,
