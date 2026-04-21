@@ -352,6 +352,15 @@
   gap: 24px;
 }
 
+.lotobola-desktop__overview-diagram {
+  width: min(100%, 1080px);
+}
+
+.lotobola-desktop__overview-diagram .lbsd {
+  min-height: 560px;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.38);
+}
+
 .lotobola-desktop__quote-shell {
   width: 1184px;
   max-width: 100%;
@@ -407,7 +416,7 @@
 .lotobola-desktop__system-carousel-viewport {
   width: 100%;
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: visible;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
@@ -415,9 +424,7 @@
   touch-action: pan-y pinch-zoom;
   cursor: grab;
   outline: none;
-  padding: 40px 0 14px;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+  padding: 34px 0 18px;
 }
 
 .lotobola-desktop__system-carousel-viewport--dragging {
@@ -458,28 +465,8 @@
   will-change: transform, opacity, filter;
 }
 
-.lotobola-desktop__system-carousel-slide::before {
-  content: "";
-  position: absolute;
-  inset: 34px 52px;
-  border-radius: 42px;
-  background: radial-gradient(circle at 50% 50%, rgba(108, 99, 255, 0.38), rgba(108, 99, 255, 0.08) 44%, transparent 72%);
-  filter: blur(30px);
-  opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 220ms ease, transform 220ms ease;
-  z-index: -1;
-  pointer-events: none;
-}
-
 .lotobola-desktop__system-carousel-slide--selected {
   filter: blur(0) saturate(1);
-}
-
-.lotobola-desktop__system-carousel-slide--selected::before {
-  opacity: 1;
-  transform: scale(1);
-  animation: lotobola-card-pulse 3.2s ease-in-out infinite;
 }
 
 .lotobola-desktop__system-carousel-slide .lotobola-desktop__system-card {
@@ -490,33 +477,12 @@
 
 .lotobola-desktop__system-carousel-slide:not(.lotobola-desktop__system-carousel-slide--selected)
   .lotobola-desktop__system-card {
-  box-shadow: 0 24px 90px rgba(12, 10, 42, 0.72), 0 0 70px rgba(108, 99, 255, 0.1);
+  box-shadow: 0 22px 72px rgba(12, 10, 42, 0.62), 0 0 38px rgba(108, 99, 255, 0.06);
 }
 
 .lotobola-desktop__system-carousel-slide--selected .lotobola-desktop__system-card {
   border-color: transparent;
-  box-shadow: 0 30px 110px rgba(13, 10, 50, 0.82), 0 0 95px rgba(108, 99, 255, 0.24);
-}
-
-.lotobola-desktop__system-carousel-slide--selected .lotobola-desktop__system-card::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  padding: 1px;
-  border-radius: inherit;
-  background: conic-gradient(
-    from 0deg,
-    rgba(108, 99, 255, 0.18),
-    rgba(169, 164, 255, 0.95),
-    rgba(255, 255, 255, 0.58),
-    rgba(108, 99, 255, 0.28),
-    rgba(108, 99, 255, 0.18)
-  );
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: lotobola-border-light 4.8s linear infinite;
-  pointer-events: none;
+  box-shadow: 0 26px 86px rgba(13, 10, 50, 0.72), 0 0 48px rgba(108, 99, 255, 0.14);
 }
 
 .lotobola-desktop__system-carousel-slide--selected .lotobola-desktop__system-card::after {
@@ -594,13 +560,13 @@
 }
 
 .lotobola-desktop__carousel-dot {
-  width: 12px;
-  height: 12px;
+  width: 8px;
+  height: 8px;
   border-radius: 999px;
   position: relative;
-  background: rgba(108, 99, 255, 0.16);
-  box-shadow: inset 0 0 0 1px rgba(108, 99, 255, 0.38);
-  transition: width 240ms ease, background 240ms ease, box-shadow 240ms ease, transform 240ms ease;
+  background: rgba(255, 255, 255, 0.22);
+  box-shadow: none;
+  transition: width 240ms ease, background 240ms ease, box-shadow 240ms ease, transform 240ms ease, opacity 240ms ease;
 }
 
 .lotobola-desktop__carousel-dot::before,
@@ -611,29 +577,29 @@
 }
 
 .lotobola-desktop__carousel-dot::before {
-  inset: -5px;
-  background: radial-gradient(circle, rgba(108, 99, 255, 0.38), transparent 64%);
+  inset: -6px;
+  background: radial-gradient(circle, rgba(108, 99, 255, 0.34), transparent 66%);
   opacity: 0;
   transform: scale(0.65);
   transition: opacity 240ms ease, transform 240ms ease;
 }
 
 .lotobola-desktop__carousel-dot::after {
-  inset: 3px;
-  background: #8f87ff;
-  opacity: 0.45;
+  inset: 0;
+  background: transparent;
+  opacity: 1;
   transition: opacity 240ms ease;
 }
 
 .lotobola-desktop__carousel-dot:hover {
   transform: translateY(-1px) scale(1.08);
-  box-shadow: inset 0 0 0 1px rgba(143, 135, 255, 0.72), 0 0 18px rgba(108, 99, 255, 0.28);
+  background: rgba(255, 255, 255, 0.38);
 }
 
 .lotobola-desktop__carousel-dot--selected {
-  width: 36px;
-  background: rgba(108, 99, 255, 0.32);
-  box-shadow: inset 0 0 0 1px rgba(143, 135, 255, 0.82), 0 0 22px rgba(108, 99, 255, 0.34);
+  width: 32px;
+  background: #6c63ff;
+  box-shadow: 0 0 18px rgba(108, 99, 255, 0.42);
 }
 
 .lotobola-desktop__carousel-dot--selected::before,
@@ -652,6 +618,35 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.lotobola-desktop__system-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    rgba(108, 99, 255, 0.22) 0%,
+    rgba(108, 99, 255, 0.22) 18%,
+    rgba(174, 168, 255, 0.95) 28%,
+    rgba(108, 99, 255, 0.22) 38%,
+    rgba(108, 99, 255, 0.22) 100%
+  );
+  background-size: 260% 100%;
+  background-position: 130% 0;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.42;
+  animation: lotobola-border-trace 4.8s linear infinite;
+  pointer-events: none;
+}
+
+.lotobola-desktop__system-carousel-slide--selected .lotobola-desktop__system-card::before {
+  opacity: 0.95;
+  animation-duration: 3.8s;
 }
 
 .lotobola-desktop__system-card > * {
@@ -797,22 +792,9 @@
   gap: 12px;
 }
 
-@keyframes lotobola-border-light {
+@keyframes lotobola-border-trace {
   to {
-    transform: rotate(1turn);
-  }
-}
-
-@keyframes lotobola-card-pulse {
-  0%,
-  100% {
-    opacity: 0.72;
-    transform: scale(0.96);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.04);
+    background-position: -130% 0;
   }
 }
 

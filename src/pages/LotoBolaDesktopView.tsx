@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState, type PointerEvent } from "react";
+import { LotoBolaSystemDiagram } from "../components/case-study/LotoBolaSystemDiagram";
 import "./LotoBolaDesktopView.css";
 
 type Lang = "es" | "en";
@@ -814,7 +815,9 @@ export function LotoBolaDesktopView({ lang }: { lang: Lang }) {
 
       <section className="lotobola-desktop__section" id="overview">
         <SectionIntro {...c.overview} />
-        <Placeholder variant="landscape" />
+        <div className="lotobola-desktop__overview-diagram">
+          <LotoBolaSystemDiagram lang={lang} />
+        </div>
       </section>
 
       <section className="lotobola-desktop__section" id="challenge">

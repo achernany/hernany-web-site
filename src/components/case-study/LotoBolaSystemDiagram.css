@@ -138,14 +138,10 @@
 
 .lbsd__nav-track {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
   padding-bottom: 16px;
 }
-
-.lbsd__nav-track::-webkit-scrollbar { display: none; }
 
 .lbsd__nav-btn {
   flex-shrink: 0;
@@ -218,11 +214,20 @@
   position: relative;
   z-index: 2;
   display: flex;
-  align-items: baseline;
+  align-items: center;
+  justify-content: space-between;
   gap: 12px;
   padding: 12px 16px;
   border-top: 1px solid var(--lbsd-border);
   animation: lbsd-enter 300ms ease both;
+}
+
+.lbsd__footer-left {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
 }
 
 .lbsd__footer-idx {
@@ -470,14 +475,10 @@
 
 .lbsd-journey__channels {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
   padding-bottom: 4px;
 }
-
-.lbsd-journey__channels::-webkit-scrollbar { display: none; }
 
 .lbsd-journey__ch-btn {
   flex-shrink: 0;
@@ -1003,5 +1004,165 @@ tbody tr[style] {
     animation: none !important;
     transform: scaleY(1);
     opacity: 1;
+  }
+}
+
+.lbsd__stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--lbsd-border);
+  position: relative;
+  z-index: 2;
+}
+
+.lbsd__step-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--lbsd-node-bg);
+  border: 1px solid var(--lbsd-node-border);
+  border-radius: 999px;
+  color: var(--lbsd-text-dim);
+  cursor: pointer;
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+
+.lbsd__step-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--lbsd-text);
+  border-color: var(--lbsd-border-soft);
+}
+
+.lbsd__step-btn:active {
+  background: var(--lbsd-accent-glow);
+  border-color: var(--lbsd-accent-border);
+  color: #fff;
+  box-shadow: 0 0 14px var(--lbsd-accent-glow);
+}
+
+.lbsd__step-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+  padding: 0 12px;
+}
+
+.lbsd__step-count {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--lbsd-accent);
+  text-transform: uppercase;
+}
+
+.lbsd__step-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--lbsd-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.lbsd__dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.lbsd__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--lbsd-text-label);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 220ms ease, width 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.lbsd__dot::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+}
+
+.lbsd__dot--active {
+  width: 22px;
+  background: var(--lbsd-accent);
+}
+
+.lbsd__ex-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  background: var(--lbsd-node-bg);
+  border: 1px solid var(--lbsd-node-border);
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--lbsd-text-dim);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lbsd__ex-link:hover {
+  background: var(--lbsd-accent-glow);
+  color: #fff;
+  border-color: var(--lbsd-accent-border);
+  box-shadow: 0 0 12px var(--lbsd-accent-glow);
+}
+
+@media (min-width: 640px) {
+  .lbsd__stepper {
+    display: none;
+  }
+
+  .lbsd__nav {
+    display: block;
+  }
+
+  .lbsd__dots {
+    display: none;
+  }
+}
+
+@media (max-width: 639px) {
+  .lbsd__nav {
+    display: none;
+  }
+
+  .lbsd__footer-desc {
+    display: none;
+  }
+
+  .lbsd__footer {
+    padding: 10px 16px;
+  }
+
+  .lbsd__ex-link {
+    font-size: 11px;
+    padding: 6px 13px;
   }
 }
