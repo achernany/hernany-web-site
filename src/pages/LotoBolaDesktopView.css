@@ -78,7 +78,9 @@
   }
 
   .cs-case-page--lotobola .cs-tab-bar {
-    bottom: 130px;
+    top: calc(16px + env(safe-area-inset-top, 0px));
+    bottom: auto;
+    z-index: 1200;
     padding: 0 48px;
   }
 
@@ -89,6 +91,7 @@
     gap: 8px;
     background: rgba(18, 18, 20, 0.55);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.42);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
   }
@@ -108,7 +111,7 @@
   }
 
   .cs-case-page--lotobola .page-footer {
-    padding: 16px 0 calc(188px + env(safe-area-inset-bottom, 0px));
+    padding: 16px 0 32px;
   }
 
   .cs-case-page--lotobola .page-footer__copy {
@@ -394,6 +397,155 @@
   gap: 16px;
 }
 
+.lotobola-desktop__system-carousel {
+  width: min(100vw, 1328px);
+  display: grid;
+  gap: 18px;
+}
+
+.lotobola-desktop__system-carousel-viewport {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y pinch-zoom;
+  outline: none;
+  padding: 18px 0 12px;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+}
+
+.lotobola-desktop__system-carousel-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.lotobola-desktop__system-carousel-viewport:focus-visible {
+  box-shadow: inset 0 0 0 2px rgba(108, 99, 255, 0.72);
+}
+
+.lotobola-desktop__system-carousel-track {
+  --carousel-slide-width: min(720px, 64vw);
+  display: flex;
+  gap: 18px;
+  padding-inline: calc((100% - var(--carousel-slide-width)) / 2);
+}
+
+.lotobola-desktop__system-carousel-slide {
+  --slide-scale: 0.78;
+  --slide-opacity: 0.62;
+  flex: 0 0 var(--carousel-slide-width);
+  min-width: 0;
+  scroll-snap-align: center;
+  transform: translate3d(0, 0, 0) scale(var(--slide-scale));
+  transform-origin: center center;
+  opacity: var(--slide-opacity);
+  transition: transform 130ms ease-out, opacity 130ms ease-out;
+  will-change: transform, opacity;
+}
+
+.lotobola-desktop__system-carousel-slide .lotobola-desktop__system-card {
+  height: 100%;
+  min-height: 430px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
+}
+
+.lotobola-desktop__carousel-controls {
+  width: min(720px, 64vw);
+  justify-self: center;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 20px;
+}
+
+.lotobola-desktop__carousel-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 40px);
+  gap: 8px;
+}
+
+.lotobola-desktop__carousel-button,
+.lotobola-desktop__carousel-dot {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.lotobola-desktop__carousel-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.04);
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.lotobola-desktop__carousel-button:hover {
+  color: #ffffff;
+  border-color: rgba(108, 99, 255, 0.72);
+  background: rgba(108, 99, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+.lotobola-desktop__carousel-button:focus-visible,
+.lotobola-desktop__carousel-dot:focus-visible {
+  outline: 2px solid rgba(108, 99, 255, 0.86);
+  outline-offset: 3px;
+}
+
+.lotobola-desktop__carousel-button-icon {
+  width: 15px;
+  height: 15px;
+}
+
+.lotobola-desktop__carousel-dots {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.lotobola-desktop__carousel-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  position: relative;
+}
+
+.lotobola-desktop__carousel-dot::before,
+.lotobola-desktop__carousel-dot::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: inherit;
+}
+
+.lotobola-desktop__carousel-dot::before {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.lotobola-desktop__carousel-dot::after {
+  opacity: 0;
+  border: 1px solid #ffffff;
+  transition: opacity 180ms ease;
+}
+
+.lotobola-desktop__carousel-dot--selected::after {
+  opacity: 1;
+}
+
 .lotobola-desktop__system-card {
   min-height: 402px;
   padding: 16px;
@@ -565,6 +717,14 @@
 
   .lotobola-desktop__system-grid {
     grid-template-columns: 1fr;
+  }
+
+  .lotobola-desktop__system-carousel-track {
+    --carousel-slide-width: min(680px, 72vw);
+  }
+
+  .lotobola-desktop__carousel-controls {
+    width: min(680px, 72vw);
   }
 
   .lotobola-desktop__quote-shell {

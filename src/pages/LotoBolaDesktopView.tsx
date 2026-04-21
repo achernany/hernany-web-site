@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useRef, useState } from "react";
 import "./LotoBolaDesktopView.css";
 
 type Lang = "es" | "en";
@@ -156,6 +157,183 @@ function ArchitecturePanel({ card }: { card: ArchitectureCard }) {
         ))}
       </div>
     </article>
+  );
+}
+
+function ArrowIcon({ direction }: { direction: "prev" | "next" }) {
+  return (
+    <svg className="lotobola-desktop__carousel-button-icon" viewBox="0 0 532 532" aria-hidden="true">
+      <path
+        fill="currentColor"
+        d={
+          direction === "prev"
+            ? "M355.66 11.354c13.793-13.805 36.208-13.805 50.001 0 13.785 13.804 13.785 36.238 0 50.034L201.22 266l204.442 204.61c13.785 13.805 13.785 36.239 0 50.044-13.793 13.796-36.208 13.796-50.002 0L126.328 291.2a35.065 35.065 0 0 1-10.326-25.126c0-9.2 3.393-18.26 10.326-25.2L355.66 11.354Z"
+            : "M176.34 520.646c-13.793 13.805-36.208 13.805-50.001 0-13.785-13.804-13.785-36.238 0-50.034L330.78 266 126.34 61.391c-13.785-13.805-13.785-36.239 0-50.044 13.793-13.796 36.208-13.796 50.002 0l229.332 229.454A35.065 35.065 0 0 1 416 265.927c0 9.2-3.393 18.26-10.326 25.2L176.34 520.646Z"
+        }
+      />
+    </svg>
+  );
+}
+
+function ArchitectureCarousel({ cards, lang }: { cards: ArchitectureCard[]; lang: Lang }) {
+  const viewportRef = useRef<HTMLDivElement | null>(null);
+  const slideRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const rafRef = useRef<number | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const updateSlides = useCallback(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+
+    const viewportRect = viewport.getBoundingClientRect();
+    const viewportCenter = viewportRect.left + viewportRect.width / 2;
+    let closestIndex = 0;
+    let closestDistance = Number.POSITIVE_INFINITY;
+
+    slideRefs.current.forEach((slide, index) => {
+      if (!slide) return;
+
+      const slideRect = slide.getBoundingClientRect();
+      const slideCenter = slideRect.left + slideRect.width / 2;
+      const distance = Math.abs(slideCenter - viewportCenter);
+      const falloff = Math.min(distance / (viewportRect.width * 0.48), 1);
+      const scale = 1 - falloff * 0.22;
+      const opacity = 1 - falloff * 0.38;
+
+      slide.style.setProperty("--slide-scale", scale.toFixed(3));
+      slide.style.setProperty("--slide-opacity", opacity.toFixed(3));
+
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = index;
+      }
+    });
+
+    setSelectedIndex((current) => (current === closestIndex ? current : closestIndex));
+  }, []);
+
+  const scheduleUpdate = useCallback(() => {
+    if (rafRef.current !== null) return;
+
+    rafRef.current = window.requestAnimationFrame(() => {
+      rafRef.current = null;
+      updateSlides();
+    });
+  }, [updateSlides]);
+
+  const scrollToIndex = useCallback(
+    (index: number) => {
+      const viewport = viewportRef.current;
+      const total = cards.length;
+      if (!viewport || total === 0) return;
+
+      const targetIndex = (index + total) % total;
+      const target = slideRefs.current[targetIndex];
+      if (!target) return;
+
+      viewport.scrollTo({
+        left: target.offsetLeft - (viewport.clientWidth - target.clientWidth) / 2,
+        behavior: "smooth",
+      });
+      setSelectedIndex(targetIndex);
+    },
+    [cards.length],
+  );
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return undefined;
+
+    updateSlides();
+    viewport.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      viewport.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      if (rafRef.current !== null) window.cancelAnimationFrame(rafRef.current);
+    };
+  }, [scheduleUpdate, updateSlides]);
+
+  const labels =
+    lang === "es"
+      ? {
+          title: "Carrusel de arquitectura del sistema",
+          prev: "Ver tarjeta anterior",
+          next: "Ver siguiente tarjeta",
+          dot: "Ver tarjeta",
+        }
+      : {
+          title: "System architecture carousel",
+          prev: "Show previous card",
+          next: "Show next card",
+          dot: "Show card",
+        };
+
+  return (
+    <div className="lotobola-desktop__system-carousel" aria-label={labels.title}>
+      <div
+        className="lotobola-desktop__system-carousel-viewport"
+        ref={viewportRef}
+        tabIndex={0}
+        role="region"
+        aria-label={labels.title}
+        onKeyDown={(event) => {
+          if (event.key === "ArrowLeft") scrollToIndex(selectedIndex - 1);
+          if (event.key === "ArrowRight") scrollToIndex(selectedIndex + 1);
+        }}
+      >
+        <div className="lotobola-desktop__system-carousel-track">
+          {cards.map((card, index) => (
+            <div
+              key={card.index}
+              className="lotobola-desktop__system-carousel-slide"
+              ref={(node) => {
+                slideRefs.current[index] = node;
+              }}
+            >
+              <ArchitecturePanel card={card} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="lotobola-desktop__carousel-controls">
+        <div className="lotobola-desktop__carousel-buttons">
+          <button
+            type="button"
+            className="lotobola-desktop__carousel-button"
+            onClick={() => scrollToIndex(selectedIndex - 1)}
+            aria-label={labels.prev}
+          >
+            <ArrowIcon direction="prev" />
+          </button>
+          <button
+            type="button"
+            className="lotobola-desktop__carousel-button"
+            onClick={() => scrollToIndex(selectedIndex + 1)}
+            aria-label={labels.next}
+          >
+            <ArrowIcon direction="next" />
+          </button>
+        </div>
+
+        <div className="lotobola-desktop__carousel-dots">
+          {cards.map((card, index) => (
+            <button
+              key={card.index}
+              type="button"
+              className={`lotobola-desktop__carousel-dot${
+                selectedIndex === index ? " lotobola-desktop__carousel-dot--selected" : ""
+              }`}
+              onClick={() => scrollToIndex(index)}
+              aria-label={`${labels.dot} ${card.index}`}
+              aria-current={selectedIndex === index ? "true" : undefined}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -604,11 +782,7 @@ export function LotoBolaDesktopView({ lang }: { lang: Lang }) {
           <p className="lotobola-desktop__note">{c.architecture.serviceNote}</p>
         </div>
 
-        <div className="lotobola-desktop__system-grid">
-          {c.architecture.cards.map((card) => (
-            <ArchitecturePanel key={card.index} card={card} />
-          ))}
-        </div>
+        <ArchitectureCarousel cards={c.architecture.cards} lang={lang} />
 
         <div className="lotobola-desktop__architecture-copy">
           <h3 className="lotobola-desktop__subtitle">{c.architecture.frictionTitle}</h3>
