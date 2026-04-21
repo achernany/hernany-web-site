@@ -193,6 +193,12 @@ function ArchitectureCarousel({ cards, lang }: { cards: ArchitectureCard[]; lang
     const viewport = viewportRef.current;
     if (!viewport) return;
 
+    const firstSlide = slideRefs.current[0];
+    if (firstSlide) {
+      const edgeSpace = Math.max((viewport.clientWidth - firstSlide.offsetWidth) / 2, 0);
+      viewport.style.setProperty("--carousel-edge-space", `${edgeSpace}px`);
+    }
+
     const viewportRect = viewport.getBoundingClientRect();
     const viewportCenter = viewportRect.left + viewportRect.width / 2;
     let closestIndex = 0;
@@ -219,6 +225,13 @@ function ArchitectureCarousel({ cards, lang }: { cards: ArchitectureCard[]; lang
       }
     });
 
+    const closestSlide = slideRefs.current[closestIndex];
+    if (closestSlide) {
+      closestSlide.style.setProperty("--slide-scale", "1");
+      closestSlide.style.setProperty("--slide-opacity", "1");
+      closestSlide.style.setProperty("--slide-blur", "0px");
+    }
+
     setSelectedIndex((current) => (current === closestIndex ? current : closestIndex));
   }, []);
 
@@ -241,8 +254,13 @@ function ArchitectureCarousel({ cards, lang }: { cards: ArchitectureCard[]; lang
       const target = slideRefs.current[targetIndex];
       if (!target) return;
 
+      const viewportRect = viewport.getBoundingClientRect();
+      const targetRect = target.getBoundingClientRect();
+      const scrollDelta =
+        targetRect.left + targetRect.width / 2 - (viewportRect.left + viewportRect.width / 2);
+
       viewport.scrollTo({
-        left: target.offsetLeft - (viewport.clientWidth - target.clientWidth) / 2,
+        left: viewport.scrollLeft + scrollDelta,
         behavior: "smooth",
       });
       setSelectedIndex(targetIndex);
