@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, type PointerEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type PointerEvent, type ReactNode } from "react";
 import { LotoBolaSystemDiagram } from "../components/case-study/LotoBolaSystemDiagram";
 import "./LotoBolaDesktopView.css";
 
@@ -72,10 +72,26 @@ interface DesktopCopy {
   };
 }
 
+function KickerText({ kicker }: { kicker: string }) {
+  const parts = kicker.split(" — ");
+
+  if (parts.length < 2) return <>{kicker}</>;
+
+  return (
+    <>
+      {parts[0]}
+      <span className="lotobola-desktop__eyebrow-separator">-</span>
+      {parts.slice(1).join(" - ")}
+    </>
+  );
+}
+
 function SectionIntro({ kicker, title, body, subtitle }: SectionCopy) {
   return (
     <div className="lotobola-desktop__intro">
-      <p className="lotobola-desktop__eyebrow">{kicker}</p>
+      <p className="lotobola-desktop__eyebrow">
+        <KickerText kicker={kicker} />
+      </p>
       <h2 className="lotobola-desktop__title">{title}</h2>
       {subtitle ? <h3 className="lotobola-desktop__subtitle">{subtitle}</h3> : null}
       <p className="lotobola-desktop__body">{body}</p>
@@ -87,7 +103,7 @@ function QuoteBlock({
   children,
   accent = false,
 }: {
-  children: string;
+  children: ReactNode;
   accent?: boolean;
 }) {
   return (
@@ -422,6 +438,54 @@ function FrictionItem({ item }: { item: FrictionRow }) {
       </span>
       <p className="lotobola-desktop__friction-solution">{item.solution}</p>
     </article>
+  );
+}
+
+function ArchitectureQuote({ lang }: { lang: Lang }) {
+  if (lang === "es") {
+    return (
+      <>
+        Esta arquitectura sirvió como{" "}
+        <span className="lotobola-desktop__quote-accent">
+          base para definir prioridades, flujos críticos y decisiones de interfaz
+        </span>{" "}
+        a lo largo del producto.
+      </>
+    );
+  }
+
+  return (
+    <>
+      This architecture became the{" "}
+      <span className="lotobola-desktop__quote-accent">
+        basis for defining priorities, critical flows, and interface decisions
+      </span>{" "}
+      throughout the product.
+    </>
+  );
+}
+
+function ReflectionQuote({ lang }: { lang: Lang }) {
+  if (lang === "es") {
+    return (
+      <>
+        La expresión más clara de cómo mi práctica se ha ido constituyendo en{" "}
+        <span className="lotobola-desktop__quote-accent">
+          formas cada vez más complejas de abordar el diseño:
+        </span>{" "}
+        desde el producto y el servicio hasta los sistemas en los que ambos se insertan y operan.
+      </>
+    );
+  }
+
+  return (
+    <>
+      The clearest expression of how my practice has evolved toward{" "}
+      <span className="lotobola-desktop__quote-accent">
+        increasingly complex ways of approaching design:
+      </span>{" "}
+      from product and service into the systems where both are inserted and operate.
+    </>
   );
 }
 
@@ -872,7 +936,9 @@ export function LotoBolaDesktopView({ lang }: { lang: Lang }) {
           ))}
         </div>
 
-        <QuoteBlock accent>{c.architecture.quote}</QuoteBlock>
+        <QuoteBlock>
+          <ArchitectureQuote lang={lang} />
+        </QuoteBlock>
       </section>
 
       <section className="lotobola-desktop__section" id="public-experience">
@@ -919,7 +985,9 @@ export function LotoBolaDesktopView({ lang }: { lang: Lang }) {
 
       <section className="lotobola-desktop__section lotobola-desktop__section--final" id="reflection">
         <SectionIntro {...c.reflection} />
-        <QuoteBlock>{c.reflection.quote}</QuoteBlock>
+        <QuoteBlock>
+          <ReflectionQuote lang={lang} />
+        </QuoteBlock>
         <Placeholder variant="final" bleed />
       </section>
     </div>

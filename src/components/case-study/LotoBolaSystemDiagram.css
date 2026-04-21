@@ -845,28 +845,32 @@ tbody tr[style] {
   /* Ecosystem */
   .lbsd-ecosystem {
     position: relative;
+    padding: 20px 0;
   }
 
   .lbsd-ecosystem__io {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 4px;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     z-index: 3;
+    white-space: nowrap;
+    pointer-events: none;
   }
 
   .lbsd-ecosystem__io--left {
-    left: -4px;
-    align-items: flex-start;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .lbsd-ecosystem__io--right {
-    right: -4px;
-    align-items: flex-end;
+    right: auto;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .lbsd-ecosystem__io span:first-child {
@@ -880,7 +884,7 @@ tbody tr[style] {
   .lbsd-ecosystem__io span:last-child {
     font-size: 8px;
     color: var(--lbsd-text-dim);
-    writing-mode: vertical-rl;
+    writing-mode: horizontal-tb;
   }
 
   /* Flow — horizontal on desktop */

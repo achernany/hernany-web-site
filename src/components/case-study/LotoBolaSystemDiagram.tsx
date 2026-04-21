@@ -61,15 +61,15 @@ const VIEWS: ViewMeta[] = [
    ────────────────────────────────────────────── */
 function EcosystemView({ visible }: { visible: boolean }) {
   const actors = [
-    { label: "Usuario\nWeb", type: "default" },
-    { label: "Usuario\nExprés", type: "default" },
-    { label: "Op. POS\nBodega", type: "default" },
-    { label: "Op. POS\nTambo", type: "critical" },
-    { label: "Op. POS\nFranquicia", type: "default" },
+    { label: "Usuario Web", type: "default" },
+    { label: "Usuario Exprés", type: "default" },
+    { label: "Op. POS Bodega", type: "default" },
+    { label: "Op. POS Tambo", type: "critical" },
+    { label: "Op. POS Franquicia", type: "default" },
     { label: "Supervisor", type: "default" },
-    { label: "Admin\nNegocio", type: "default" },
-    { label: "Admin\nTécnico", type: "default" },
-    { label: "Audiencia\nDisplay", type: "accent" },
+    { label: "Admin Negocio", type: "default" },
+    { label: "Admin Técnico", type: "default" },
+    { label: "Audiencia Display", type: "accent" },
   ];
 
   const surfaces = [
