@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type PointerEvent } from "react";
 import "./LotoBolaDesktopView.css";
 
 type Lang = "es" | "en";
@@ -179,7 +179,14 @@ function ArchitectureCarousel({ cards, lang }: { cards: ArchitectureCard[]; lang
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const slideRefs = useRef<Array<HTMLDivElement | null>>([]);
   const rafRef = useRef<number | null>(null);
+  const dragRef = useRef({
+    isDragging: false,
+    pointerId: -1,
+    startX: 0,
+    scrollLeft: 0,
+  });
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
 
   const updateSlides = useCallback(() => {
     const viewport = viewportRef.current;
@@ -199,9 +206,11 @@ function ArchitectureCarousel({ cards, lang }: { cards: ArchitectureCard[]; lang
       const falloff = Math.min(distance / (viewportRect.width * 0.48), 1);
       const scale = 1 - falloff * 0.22;
       const opacity = 1 - falloff * 0.38;
+      const blur = falloff * 1.4;
 
       slide.style.setProperty("--slide-scale", scale.toFixed(3));
       slide.style.setProperty("--slide-opacity", opacity.toFixed(3));
+      slide.style.setProperty("--slide-blur", `${blur.toFixed(2)}px`);
 
       if (distance < closestDistance) {
         closestDistance = distance;
@@ -240,6 +249,20 @@ function ArchitectureCarousel({ cards, lang }: { cards: ArchitectureCard[]; lang
     [cards.length],
   );
 
+  const stopDragging = useCallback((event?: PointerEvent<HTMLDivElement>) => {
+    const viewport = viewportRef.current;
+    if (!dragRef.current.isDragging) return;
+
+    if (event && viewport?.hasPointerCapture(event.pointerId)) {
+      viewport.releasePointerCapture(event.pointerId);
+    }
+
+    dragRef.current.isDragging = false;
+    dragRef.current.pointerId = -1;
+    setIsDragging(false);
+    scheduleUpdate();
+  }, [scheduleUpdate]);
+
   useEffect(() => {
     const viewport = viewportRef.current;
     if (!viewport) return undefined;
@@ -273,11 +296,42 @@ function ArchitectureCarousel({ cards, lang }: { cards: ArchitectureCard[]; lang
   return (
     <div className="lotobola-desktop__system-carousel" aria-label={labels.title}>
       <div
-        className="lotobola-desktop__system-carousel-viewport"
         ref={viewportRef}
         tabIndex={0}
         role="region"
         aria-label={labels.title}
+        className={`lotobola-desktop__system-carousel-viewport${
+          isDragging ? " lotobola-desktop__system-carousel-viewport--dragging" : ""
+        }`}
+        onPointerDown={(event) => {
+          if (event.button !== 0 || !event.isPrimary) return;
+
+          const viewport = viewportRef.current;
+          if (!viewport) return;
+
+          dragRef.current = {
+            isDragging: true,
+            pointerId: event.pointerId,
+            startX: event.clientX,
+            scrollLeft: viewport.scrollLeft,
+          };
+          viewport.setPointerCapture(event.pointerId);
+          setIsDragging(true);
+        }}
+        onPointerMove={(event) => {
+          const viewport = viewportRef.current;
+          const drag = dragRef.current;
+          if (!viewport || !drag.isDragging || drag.pointerId !== event.pointerId) return;
+
+          event.preventDefault();
+          viewport.scrollLeft = drag.scrollLeft - (event.clientX - drag.startX);
+          scheduleUpdate();
+        }}
+        onPointerUp={stopDragging}
+        onPointerCancel={stopDragging}
+        onPointerLeave={(event) => {
+          if (dragRef.current.isDragging) stopDragging(event);
+        }}
         onKeyDown={(event) => {
           if (event.key === "ArrowLeft") scrollToIndex(selectedIndex - 1);
           if (event.key === "ArrowRight") scrollToIndex(selectedIndex + 1);
@@ -287,7 +341,9 @@ function ArchitectureCarousel({ cards, lang }: { cards: ArchitectureCard[]; lang
           {cards.map((card, index) => (
             <div
               key={card.index}
-              className="lotobola-desktop__system-carousel-slide"
+              className={`lotobola-desktop__system-carousel-slide${
+                selectedIndex === index ? " lotobola-desktop__system-carousel-slide--selected" : ""
+              }`}
               ref={(node) => {
                 slideRefs.current[index] = node;
               }}
