@@ -689,6 +689,12 @@
   backdrop-filter: blur(20px);
 }
 
+.cs-tab-bar .ui-segmented__item {
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: -0.02em;
+}
+
 /* Desktop: items fill the bar equally, allow overflow for scale hover */
 @media (min-width: 1024px) {
   .cs-tab-bar .ui-segmented {
@@ -739,8 +745,6 @@
     justify-content: flex-start;
     padding-top: 12px;
     padding-inline: var(--space-4, 4px);
-    font-size: 11px;
-    letter-spacing: 0.03em;
     color: var(--color-text-muted);
     border-top: 2px solid transparent;
     transition: color 180ms ease, border-color 180ms ease;
@@ -750,7 +754,7 @@
   .cs-tab-bar .ui-segmented__item--active {
     background: transparent;
     color: var(--color-accent-500);
-    font-weight: 600;
+    font-weight: 700;
     border-top-color: var(--color-accent-500);
   }
 }

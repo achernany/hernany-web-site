@@ -591,6 +591,8 @@ export function LotoBolaSystemDiagram({ lang }: { lang: string }) {
   const [visible, setVisible] = useState(false);
   const [scanned, setScanned] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -625,11 +627,35 @@ export function LotoBolaSystemDiagram({ lang }: { lang: string }) {
   const goPrev = () => changeView(VIEWS[(activeIdx - 1 + VIEWS.length) % VIEWS.length].id);
   const meta = VIEWS[activeIdx];
 
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches[0];
+    touchStartX.current = touch.clientX;
+    touchStartY.current = touch.clientY;
+  };
+
+  const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - touchStartX.current;
+    const deltaY = touch.clientY - touchStartY.current;
+    touchStartX.current = null;
+    touchStartY.current = null;
+
+    if (Math.abs(deltaX) < 42 || Math.abs(deltaX) < Math.abs(deltaY) * 1.2) return;
+    if (deltaX < 0) {
+      goNext();
+    } else {
+      goPrev();
+    }
+  };
+
   return (
     <div
       ref={containerRef}
       className={`lbsd ${visible ? "lbsd--visible" : ""} ${scanned ? "lbsd--scanned" : ""}`}
       aria-label={lang === "es" ? "Diagrama del sistema interactivo" : "Interactive system diagram"}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       {/* Scan line */}
       {visible && !scanned && <div className="lbsd__scan-line" aria-hidden="true" />}

@@ -99,8 +99,6 @@
   .cs-case-page--lotobola .cs-tab-bar .ui-segmented__item {
     min-height: 44px;
     padding: 10px 16px;
-    font-size: 16px;
-    line-height: 24px;
     color: rgba(255, 255, 255, 0.48);
   }
 
@@ -886,7 +884,8 @@
   .lotobola-desktop-view {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: min(342px, 100%);
+    margin-inline: auto;
   }
 
   .cs-case-page--lotobola {
@@ -971,12 +970,23 @@
     width: 100%;
     gap: 24px;
     padding: 64px 0 0;
-    border-top-color: rgba(255, 255, 255, 0.08);
+    border-top: 0.5px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .lotobola-desktop__section--hero + .lotobola-desktop__section,
+  .lotobola-desktop__section#overview + .lotobola-desktop__section {
+    border-top: 0.5px solid rgba(255, 255, 255, 0.06);
   }
 
   .lotobola-desktop__section--hero {
+    min-height: 780px;
     padding-top: 24px;
     border-top: none;
+  }
+
+  .lotobola-desktop__section#overview {
+    min-height: 1484px;
+    padding-top: 24px;
   }
 
   .lotobola-desktop__section--final {
@@ -1001,6 +1011,11 @@
     min-height: 456px;
     justify-content: flex-start;
     padding-top: 0;
+  }
+
+  .lotobola-desktop__section#overview .lotobola-desktop__intro {
+    min-height: 624px;
+    justify-content: flex-start;
   }
 
   .lotobola-desktop__hero-title {
@@ -1041,10 +1056,12 @@
   }
 
   .lotobola-desktop__hero-subtitle {
+    min-height: 96px;
     line-height: 24px;
   }
 
   .lotobola-desktop__hero-summary {
+    min-height: 192px;
     line-height: 24px;
   }
 
@@ -1058,6 +1075,7 @@
     grid-template-columns: 1fr;
     gap: 4px;
     width: 100%;
+    min-height: 252px;
   }
 
   .lotobola-desktop__metric {
@@ -1077,13 +1095,38 @@
 
   .lotobola-desktop__overview-diagram {
     width: 100%;
+    overflow: hidden;
   }
 
   .lotobola-desktop__overview-diagram .lbsd {
-    min-height: auto;
+    min-height: 812px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    touch-action: pan-y;
   }
 
   .lotobola-desktop__overview-diagram .lbsd__nav {
+    display: none;
+  }
+
+  .lotobola-desktop__overview-diagram .lbsd__grid-bg {
+    display: none;
+  }
+
+  .lotobola-desktop__overview-diagram .lbsd__stepper,
+  .lotobola-desktop__overview-diagram .lbsd__footer {
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+
+  .lotobola-desktop__overview-diagram .lbsd-actors__scroll,
+  .lotobola-desktop__overview-diagram .lbsd-surfaces__grid {
+    border: 0;
+    scrollbar-width: none;
+  }
+
+  .lotobola-desktop__overview-diagram .lbsd-actors__scroll::-webkit-scrollbar,
+  .lotobola-desktop__overview-diagram .lbsd-surfaces__grid::-webkit-scrollbar {
     display: none;
   }
 
@@ -1177,19 +1220,28 @@
   }
 
   .lotobola-desktop__system-carousel {
-    width: calc(100vw - 48px);
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+    overflow: hidden;
   }
 
   .lotobola-desktop__system-carousel-viewport {
     padding: 0 0 10px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    touch-action: pan-x pan-y;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .lotobola-desktop__system-carousel-viewport::-webkit-scrollbar {
+    display: none;
   }
 
   .lotobola-desktop__system-carousel-track {
     --carousel-slide-width: 264px;
     gap: 16px;
-    padding-inline: 0;
+    padding-inline: calc((100vw - var(--carousel-slide-width)) / 2);
   }
 
   .lotobola-desktop__system-carousel-slide {
@@ -1206,7 +1258,7 @@
   .lotobola-desktop__system-card {
     min-height: 770px;
     padding: 12px;
-    border-radius: 8px;
+    border-radius: 24px;
     gap: 16px;
   }
 
@@ -1234,13 +1286,13 @@
   .lotobola-desktop__system-group {
     min-height: auto;
     padding: 8px;
-    border-radius: 8px;
-    gap: 8px;
+    border-radius: 16px;
+    gap: 4px;
   }
 
   .lotobola-desktop__system-group-title {
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 14px;
+    line-height: 16px;
   }
 
   .lotobola-desktop__system-item {
@@ -1287,13 +1339,4 @@
     color: #b5b5b5;
   }
 
-  .cs-case-page--lotobola .cs-tab-bar .ui-segmented__item {
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 400;
-  }
-
-  .cs-case-page--lotobola .cs-tab-bar .ui-segmented__item--active {
-    font-weight: 700;
-  }
 }
