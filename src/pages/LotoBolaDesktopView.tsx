@@ -133,17 +133,115 @@ function Placeholder({
 }
 
 function PlaceholderCarousel() {
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const rafRef = useRef<number | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const updateCards = useCallback(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+
+    const viewportRect = viewport.getBoundingClientRect();
+    const viewportCenter = viewportRect.left + viewportRect.width / 2;
+    let closestIndex = 0;
+    let closestDistance = Number.POSITIVE_INFINITY;
+
+    cardRefs.current.forEach((card, index) => {
+      if (!card) return;
+
+      const cardRect = card.getBoundingClientRect();
+      const cardCenter = cardRect.left + cardRect.width / 2;
+      const distance = Math.abs(cardCenter - viewportCenter);
+      const falloff = Math.min(distance / (viewportRect.width * 0.48), 1);
+
+      card.style.setProperty("--placeholder-opacity", (1 - falloff * 0.58).toFixed(3));
+      card.style.setProperty("--placeholder-scale", (1 - falloff * 0.08).toFixed(3));
+
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = index;
+      }
+    });
+
+    const closestCard = cardRefs.current[closestIndex];
+    if (closestCard) {
+      closestCard.style.setProperty("--placeholder-opacity", "1");
+      closestCard.style.setProperty("--placeholder-scale", "1");
+    }
+
+    setSelectedIndex((current) => (current === closestIndex ? current : closestIndex));
+  }, []);
+
+  const scheduleUpdate = useCallback(() => {
+    if (rafRef.current !== null) return;
+
+    rafRef.current = window.requestAnimationFrame(() => {
+      rafRef.current = null;
+      updateCards();
+    });
+  }, [updateCards]);
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return undefined;
+
+    updateCards();
+    viewport.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      viewport.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      if (rafRef.current !== null) window.cancelAnimationFrame(rafRef.current);
+    };
+  }, [scheduleUpdate, updateCards]);
+
+  const scrollToIndex = useCallback((index: number) => {
+    const viewport = viewportRef.current;
+    const target = cardRefs.current[index];
+    if (!viewport || !target) return;
+
+    const viewportRect = viewport.getBoundingClientRect();
+    const targetRect = target.getBoundingClientRect();
+    const scrollDelta =
+      targetRect.left + targetRect.width / 2 - (viewportRect.left + viewportRect.width / 2);
+
+    viewport.scrollTo({
+      left: viewport.scrollLeft + scrollDelta,
+      behavior: "smooth",
+    });
+    setSelectedIndex(index);
+  }, []);
+
   return (
     <div className="lotobola-desktop__mobile-carousel-shell">
-      <div className="lotobola-desktop__placeholder-row">
-        <Placeholder variant="card" />
-        <Placeholder variant="card" />
-        <Placeholder variant="card" />
+      <div ref={viewportRef} className="lotobola-desktop__placeholder-row">
+        {[0, 1, 2].map((item) => (
+          <div
+            key={item}
+            className="lotobola-desktop__placeholder-slide"
+            ref={(node) => {
+              cardRefs.current[item] = node;
+            }}
+          >
+            <Placeholder variant="card" />
+          </div>
+        ))}
       </div>
-      <div className="lotobola-desktop__mobile-dots" aria-hidden="true">
-        <span className="lotobola-desktop__mobile-dot lotobola-desktop__mobile-dot--active" />
-        <span className="lotobola-desktop__mobile-dot" />
-        <span className="lotobola-desktop__mobile-dot" />
+      <div className="lotobola-desktop__mobile-dots">
+        {[0, 1, 2].map((item) => (
+          <button
+            key={item}
+            type="button"
+            className={`lotobola-desktop__mobile-dot${
+              selectedIndex === item ? " lotobola-desktop__mobile-dot--active" : ""
+            }`}
+            onClick={() => scrollToIndex(item)}
+            aria-label={`Show card ${item + 1}`}
+            aria-current={selectedIndex === item ? "true" : undefined}
+          />
+        ))}
       </div>
     </div>
   );

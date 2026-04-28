@@ -8,18 +8,18 @@
   position: sticky;
   top: 0;
   z-index: var(--layer-topbar);
-  background: rgba(8, 9, 15, 0.88);
-  -webkit-backdrop-filter: blur(32px);
-  backdrop-filter: blur(32px);
+  background: rgba(8, 9, 15, 0.4);
+  -webkit-backdrop-filter: blur(40px);
+  backdrop-filter: blur(40px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 @media (max-width: 1023px) {
   .cs-sticky-header {
     min-height: 72px;
-    background: #08090f;
-    -webkit-backdrop-filter: blur(32px);
-    backdrop-filter: blur(32px);
+    background: rgba(8, 9, 15, 0.4);
+    -webkit-backdrop-filter: blur(40px);
+    backdrop-filter: blur(40px);
     border-bottom: 0;
   }
 
@@ -51,8 +51,8 @@
 
   .cs-sticky-header .detail-header__title {
     color: #ffffff;
-    font-size: 15px;
-    line-height: 22px;
+    font-size: 16px;
+    line-height: 24px;
     font-weight: 400;
     letter-spacing: 0;
     white-space: nowrap;
@@ -631,7 +631,7 @@
   position: relative;
   z-index: 1;
   font-family: var(--font-sans);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 16px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -852,7 +852,7 @@
   align-items: center;
   justify-content: center;
   font-family: var(--font-sans);
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 0.02em;
   color: var(--color-text-muted);
   flex-shrink: 0;

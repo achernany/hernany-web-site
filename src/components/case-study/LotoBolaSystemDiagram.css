@@ -156,7 +156,7 @@
   border-radius: 999px;
   color: var(--lbsd-text-dim);
   font-family: inherit;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.02em;
   cursor: pointer;
@@ -184,7 +184,7 @@
 }
 
 .lbsd__nav-num {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.08em;
   color: var(--lbsd-accent);
@@ -235,7 +235,7 @@
 }
 
 .lbsd__footer-idx {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.12em;
   color: var(--lbsd-accent);
@@ -244,7 +244,7 @@
 }
 
 .lbsd__footer-desc {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--lbsd-text-dim);
   line-height: 1.5;
 }
@@ -296,7 +296,7 @@
 
 .lbsd-node--surface {
   padding: 8px 14px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
 }
 
@@ -414,7 +414,7 @@
   background: var(--lbsd-node-bg);
   border: 1px solid var(--lbsd-node-border);
   border-radius: 6px;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--lbsd-text);
   opacity: 0;
 }
@@ -489,13 +489,13 @@
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   padding: 6px 12px;
   background: var(--lbsd-node-bg);
   border: 1px solid var(--lbsd-node-border);
   border-radius: 999px;
   font-family: inherit;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--lbsd-text-dim);
   cursor: pointer;
@@ -569,7 +569,7 @@
 .lbsd-journey__row:last-child { border-bottom: none; }
 
 .lbsd-journey__dim {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--lbsd-text-label);
@@ -609,7 +609,7 @@
   width: 100%;
   min-width: 600px;
   border-collapse: collapse;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .lbsd-actors__th-actor,
@@ -650,7 +650,7 @@ tbody tr[style] {
 
 .lbsd-actors__td-name {
   padding: 10px 10px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--lbsd-text);
   border-bottom: 1px solid var(--lbsd-border);
@@ -694,7 +694,7 @@ tbody tr[style] {
 .lbsd-actors__legend-item {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   font-size: 10px;
   color: var(--lbsd-text-dim);
 }
@@ -743,7 +743,7 @@ tbody tr[style] {
   align-items: center;
   justify-content: center;
   padding: 10px 8px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--lbsd-text);
   text-align: center;
@@ -784,7 +784,7 @@ tbody tr[style] {
 
 .lbsd-surfaces__dim {
   padding: 10px 12px;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--lbsd-text);
   line-height: 1.4;
   border-right: 1px solid var(--lbsd-border);
@@ -826,11 +826,11 @@ tbody tr[style] {
   .lbsd__nav-btn {
     font-size: 12px;
     padding: 8px 14px;
-    gap: 7px;
+    gap: 8px;
   }
 
   .lbsd__nav-num {
-    font-size: 9px;
+    font-size: 10px;
   }
 
   .lbsd__canvas {
@@ -929,7 +929,7 @@ tbody tr[style] {
   }
 
   .lbsd-journey__val {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   /* Surfaces */
@@ -938,7 +938,7 @@ tbody tr[style] {
   }
 
   .lbsd-surfaces__cell-label {
-    font-size: 9px;
+    font-size: 10px;
   }
 }
 
@@ -952,7 +952,7 @@ tbody tr[style] {
   }
 
   .lbsd-node {
-    font-size: 11px;
+    font-size: 12px;
     padding: 7px 12px;
   }
 
@@ -975,11 +975,11 @@ tbody tr[style] {
   }
 
   .lbsd-flow__col-label {
-    font-size: 9px;
+    font-size: 10px;
   }
 
   .lbsd-layer__label {
-    font-size: 9px;
+    font-size: 10px;
   }
 }
 
@@ -1059,14 +1059,15 @@ tbody tr[style] {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
+  gap: 4px;
   flex: 1;
   min-width: 0;
   padding: 0 12px;
 }
 
 .lbsd__step-count {
-  font-size: 9px;
+  font-size: 12px;
+  line-height: 16px;
   font-weight: 700;
   letter-spacing: 0.14em;
   color: var(--lbsd-accent);
@@ -1074,7 +1075,8 @@ tbody tr[style] {
 }
 
 .lbsd__step-label {
-  font-size: 13px;
+  font-size: 16px;
+  line-height: 24px;
   font-weight: 600;
   color: var(--lbsd-text);
   white-space: nowrap;
@@ -1121,7 +1123,7 @@ tbody tr[style] {
 .lbsd__ex-link {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   padding: 5px 11px;
   background: var(--lbsd-node-bg);
   border: 1px solid var(--lbsd-node-border);
@@ -1171,7 +1173,7 @@ tbody tr[style] {
   }
 
   .lbsd__ex-link {
-    font-size: 11px;
+    font-size: 12px;
     padding: 6px 13px;
   }
 }
