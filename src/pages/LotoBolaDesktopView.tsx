@@ -132,6 +132,23 @@ function Placeholder({
   );
 }
 
+function PlaceholderCarousel() {
+  return (
+    <div className="lotobola-desktop__mobile-carousel-shell">
+      <div className="lotobola-desktop__placeholder-row">
+        <Placeholder variant="card" />
+        <Placeholder variant="card" />
+        <Placeholder variant="card" />
+      </div>
+      <div className="lotobola-desktop__mobile-dots" aria-hidden="true">
+        <span className="lotobola-desktop__mobile-dot lotobola-desktop__mobile-dot--active" />
+        <span className="lotobola-desktop__mobile-dot" />
+        <span className="lotobola-desktop__mobile-dot" />
+      </div>
+    </div>
+  );
+}
+
 function MediumIcon() {
   return (
     <svg
@@ -1042,11 +1059,7 @@ export function LotoBolaDesktopView({ lang }: { lang: Lang }) {
       <section className="lotobola-desktop__section" id="challenge">
         <SectionIntro {...c.challenge} />
 
-        <div className="lotobola-desktop__placeholder-row">
-          <Placeholder variant="card" />
-          <Placeholder variant="card" />
-          <Placeholder variant="card" />
-        </div>
+        <PlaceholderCarousel />
 
         <QuoteBlock accent>{c.challenge.quote}</QuoteBlock>
       </section>
@@ -1096,11 +1109,7 @@ export function LotoBolaDesktopView({ lang }: { lang: Lang }) {
       <section className="lotobola-desktop__section" id="operations">
         <SectionIntro {...c.operations} />
 
-        <div className="lotobola-desktop__placeholder-row">
-          <Placeholder variant="card" />
-          <Placeholder variant="card" />
-          <Placeholder variant="card" />
-        </div>
+        <PlaceholderCarousel />
 
         <div className="lotobola-desktop__communication">
           <h3 className="lotobola-desktop__subtitle">{c.operations.communicationTitle}</h3>

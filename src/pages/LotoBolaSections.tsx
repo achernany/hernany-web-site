@@ -437,7 +437,7 @@ export function LotoBolaSections() {
 
   return (
     <div ref={rootRef} className="cs-body lotobola-story">
-      {isDesktop ? <LotoBolaDesktopView lang={lang} /> : null}
+      <LotoBolaDesktopView lang={lang} />
 
       {isDesktop && (
         <div className="lotobola-system-diagram-wrapper lotobola-system-diagram-wrapper--desktop">
@@ -871,7 +871,7 @@ export function LotoBolaSections() {
       >
         <CaseImageReveal
           src="/images/lotobola/lb_ds_01.webp"
-          alt="LotoBola design system — typography, colors, components, and Figma foundation"
+          alt="LotoBola design system — typography, colors, components, and product foundation"
           className="lotobola-asset-card"
           parallax="deep"
           interactive

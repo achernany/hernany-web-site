@@ -129,7 +129,7 @@
         "name": "Pacasmayo",
         "kicker": "DESIGN SYSTEMS ENGINEERING",
         "descriptionAccent": "Design-to-code token pipeline",
-        "descriptionRest": "connecting Figma, Storybook and Angular implementation.",
+        "descriptionRest": "connecting design, Storybook and Angular implementation.",
         "stats": {
           "role": "Design Systems Lead",
           "scope": "Tokens · Governance · Component Library",

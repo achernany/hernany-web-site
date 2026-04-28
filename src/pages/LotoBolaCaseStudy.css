@@ -14,6 +14,79 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+@media (max-width: 1023px) {
+  .cs-sticky-header {
+    min-height: 72px;
+    background: #08090f;
+    -webkit-backdrop-filter: blur(32px);
+    backdrop-filter: blur(32px);
+    border-bottom: 0;
+  }
+
+  .cs-sticky-header .ui-container {
+    width: 100%;
+    max-width: none;
+    padding-inline: 16px;
+  }
+
+  .cs-sticky-header .detail-header {
+    height: 40px;
+    padding: 16px 0;
+    box-sizing: content-box;
+    gap: 8px;
+  }
+
+  .cs-sticky-header .detail-header__left {
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: 12px;
+  }
+
+  .cs-sticky-header .ui-icon-button--back {
+    width: 40px;
+    height: 40px;
+    background: #6c63ff;
+    box-shadow: 0 0 40px rgba(108, 99, 255, 0.35);
+  }
+
+  .cs-sticky-header .detail-header__title {
+    color: #ffffff;
+    font-size: 15px;
+    line-height: 22px;
+    font-weight: 400;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+
+  .cs-sticky-header .ui-menu-overlay__lang {
+    width: 184px;
+    height: 40px;
+    flex: 0 0 184px;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 2px;
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .cs-sticky-header .ui-menu-overlay__lang-btn {
+    width: 88px;
+    height: 36px;
+    padding: 0;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: rgba(255, 255, 255, 0.48);
+  }
+
+  .cs-sticky-header .ui-menu-overlay__lang-btn--active {
+    color: #ffffff;
+    background: #6c63ff;
+    box-shadow: 0 0 18px rgba(108, 99, 255, 0.35), 0 0 0 1px rgba(108, 99, 255, 0.2);
+  }
+}
+
 /* --- Page Body --- */
 .cs-body {
   padding-bottom: var(--space-96);
