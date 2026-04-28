@@ -805,6 +805,143 @@ const englishCopy: DesktopCopy = {
       "The journey map made it possible to identify moments where the experience could break or lose clarity. Each one became a concrete product and interface decision.",
     quote:
       "This architecture became the basis for defining priorities, critical flows, and interface decisions throughout the product.",
+    cards: [
+      {
+        index: "01",
+        label: "System foundations",
+        title: "The experience branches out",
+        body: "Games, validations, and prize rules that support the full ecosystem.",
+        groups: [
+          { title: "Games", items: ["PozoPower", "PozoPowerGO", "Revancha", "Lakidey", "Elige3", "Instant games"] },
+          {
+            title: "Ticketing and compliance",
+            items: ["Ticket creation", "Ticket validation", "Regulatory control", "Age verification"],
+          },
+          { title: "Results and campaigns", items: ["Draw results", "Revancha", "Hero content and promotions"] },
+        ],
+      },
+      {
+        index: "02",
+        label: "Journeys",
+        title: "The experience branches out",
+        body: "The journey changes by channel, purchase speed, and level of assistance.",
+        groups: [
+          { title: "Web player", items: ["Discovery", "Registration + OTP", "Exploration", "Order", "Payment", "Results"] },
+          {
+            title: "Assisted retail",
+            items: ["Seller login", "Assistance", "Order", "Payment", "Printing", "Delivery"],
+          },
+          { title: "Alternate paths", items: ["Express purchase", "Falabella", "TinBet / AT / LiveSport", "Physical scratch cards"] },
+        ],
+      },
+      {
+        index: "03",
+        label: "Surfaces",
+        title: "The experience branches out",
+        body: "Each journey lands on different surfaces with distinct rhythms and constraints.",
+        groups: [
+          {
+            title: "Visible fronts",
+            items: [
+              "LotoBola website",
+              "Express web purchase",
+              "Ticket lookup",
+              "Web instant games",
+              "Web promotions",
+              "Partner integration",
+            ],
+          },
+          {
+            title: "Physical channels",
+            items: [
+              "SUNMI V2S POS app",
+              "Tambo integration",
+              "BetHouse integration",
+              "Partner integration",
+              "Inventory control",
+              "Sales dashboard",
+            ],
+          },
+          {
+            title: "Broadcast and support",
+            items: [
+              "Tambo screens",
+              "Promo animations",
+              "Draw animations",
+              "Backoffice control panel",
+              "Communications",
+            ],
+          },
+        ],
+      },
+      {
+        index: "04",
+        label: "Internal logic",
+        title: "The experience branches out",
+        body: "Where interaction becomes order, ticket, payment, result, and content.",
+        groups: [
+          {
+            title: "Central management",
+            items: ["Player data", "Sales / Operator", "Authentication", "KYC and verification", "Conversion flow", "Compliance"],
+          },
+          {
+            title: "Order and ticketing",
+            items: [
+              "Game catalog",
+              "Order builder",
+              "Cart logic",
+              "Ticket generation",
+              "Ticket status",
+              "Gifting and others",
+            ],
+          },
+          {
+            title: "Payments and results",
+            items: ["Payment route", "Callbacks", "Manual validation", "Winner logic", "Content control", "Result lookup"],
+          },
+        ],
+      },
+      {
+        index: "05",
+        label: "Integrations",
+        title: "The experience branches out",
+        body: "External integrations that feed, process, or publish sensitive parts of the system.",
+        groups: [
+          {
+            title: "Core provider",
+            items: ["SkillRock RNG", "Game catalog API", "Player data API", "Ticketing Engine", "Draw / Results"],
+          },
+          { title: "Payments", items: ["PAYU", "Yape", "PagoEfectivo", "POS", "Banks and gateways"] },
+          { title: "Partners and content", items: ["Hero banner CMS", "Falabella integration", "Mailing", "CRM integration"] },
+        ],
+      },
+      {
+        index: "06",
+        label: "Operation",
+        title: "The experience branches out",
+        body: "The layer where the system is monitored, corrected, reconciled, and kept healthy.",
+        groups: [
+          {
+            title: "Draw and revancha",
+            items: [
+              "Draw backoffice",
+              "Monitor DB sync",
+              "Manual validation",
+              "Winner generator",
+              "Backoffice promotions",
+            ],
+          },
+          {
+            title: "Monitoring",
+            items: ["Inventory dashboard", "Sales analytics", "DataDog web", "Transaction monitoring"],
+          },
+          {
+            title: "Support",
+            items: ["Promo control panel", "Compliance dashboard", "Support backoffice", "Prize payment", "Claims", "ARCO rights"],
+          },
+        ],
+      },
+    ],
   },
   publicExperience: {
     kicker: "04 — Public Experience",

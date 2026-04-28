@@ -139,6 +139,7 @@
 .lbsd__nav-track {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 6px;
   padding-bottom: 16px;
 }
@@ -147,6 +148,7 @@
   flex-shrink: 0;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   padding: 7px 12px;
   background: var(--lbsd-node-bg);
@@ -165,6 +167,7 @@
     box-shadow 180ms ease;
   -webkit-tap-highlight-color: transparent;
   white-space: nowrap;
+  text-align: center;
 }
 
 .lbsd__nav-btn:hover {
@@ -189,6 +192,7 @@
 }
 
 .lbsd__nav-btn--active .lbsd__nav-num {
+  color: #fff;
   opacity: 1;
 }
 
@@ -250,7 +254,7 @@
    ═══════════════════════════════ */
 .lbsd-node {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   padding: 6px 10px;
@@ -336,6 +340,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  align-items: center;
 }
 
 .lbsd-connector-row {

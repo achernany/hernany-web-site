@@ -25,7 +25,7 @@ const VIEWS: ViewMeta[] = [
   {
     id: "flow",
     es: "Flujo Operacional",
-    en: "Op. Flow",
+    en: "Operational Flow",
     descEs: "Lógica invisible: experiencia visible, operación y sistemas conectados por dependencias",
     descEn: "Invisible logic: visible experience, operation, and systems connected by dependencies",
     exUrl: "https://excalidraw.com/#json=TxVIkDJSHeB1cP1LgMzr7,lTLrRlUNZ8856c4nFHqC9Q",
@@ -33,7 +33,7 @@ const VIEWS: ViewMeta[] = [
   {
     id: "journey",
     es: "Journey Multicanal",
-    en: "Multi-Channel",
+    en: "Multichannel",
     descEs: "5 canales · contextos radicalmente diferentes · POS Tambo como caso extremo",
     descEn: "5 channels · radically different contexts · POS Tambo as extreme case",
     exUrl: "https://excalidraw.com/#json=Qxx6wy2b6d92v_ah57AeC,5kVjFJZSTrl0WVEkeU7avA",
@@ -59,34 +59,64 @@ const VIEWS: ViewMeta[] = [
 /* ──────────────────────────────────────────────
    VIEW 1 — ECOSYSTEM MAP
    ────────────────────────────────────────────── */
-function EcosystemView({ visible }: { visible: boolean }) {
-  const actors = [
-    { label: "Usuario Web", type: "default" },
-    { label: "Usuario Exprés", type: "default" },
-    { label: "Op. POS Bodega", type: "default" },
-    { label: "Op. POS Tambo", type: "critical" },
-    { label: "Op. POS Franquicia", type: "default" },
-    { label: "Supervisor", type: "default" },
-    { label: "Admin Negocio", type: "default" },
-    { label: "Admin Técnico", type: "default" },
-    { label: "Audiencia Display", type: "accent" },
-  ];
+function EcosystemView({ lang, visible }: { lang: string; visible: boolean }) {
+  const isEs = lang === "es";
 
-  const surfaces = [
-    { label: "Web", type: "accent" },
-    { label: "Exprés", type: "accent" },
-    { label: "POS Bodega", type: "default" },
-    { label: "POS Tambo", type: "critical" },
-    { label: "POS Franquicia", type: "default" },
-  ];
+  const actors = isEs
+    ? [
+        { label: "Usuario Web", type: "default" },
+        { label: "Usuario Exprés", type: "default" },
+        { label: "Operador POS Bodega", type: "default" },
+        { label: "Operador POS Tambo", type: "critical" },
+        { label: "Operador POS Franquicia", type: "default" },
+        { label: "Supervisor", type: "default" },
+        { label: "Administrador de Negocio", type: "default" },
+        { label: "Administrador Técnico", type: "default" },
+        { label: "Audiencia Display", type: "accent" },
+      ]
+    : [
+        { label: "Web User", type: "default" },
+        { label: "Express User", type: "default" },
+        { label: "Warehouse POS Operator", type: "default" },
+        { label: "Tambo POS Operator", type: "critical" },
+        { label: "Franchise POS Operator", type: "default" },
+        { label: "Supervisor", type: "default" },
+        { label: "Business Administrator", type: "default" },
+        { label: "Technical Administrator", type: "default" },
+        { label: "Display Audience", type: "accent" },
+      ];
 
-  const systems = [
-    { label: "Core\nde Juego", type: "critical" },
-    { label: "Pasarela\nde Pago", type: "default" },
-    { label: "Backoffice", type: "default" },
-    { label: "Analytics", type: "default" },
-    { label: "Display\nEngine", type: "accent" },
-  ];
+  const surfaces = isEs
+    ? [
+        { label: "Web", type: "accent" },
+        { label: "Exprés", type: "accent" },
+        { label: "POS Bodega", type: "default" },
+        { label: "POS Tambo", type: "critical" },
+        { label: "POS Franquicia", type: "default" },
+      ]
+    : [
+        { label: "Web", type: "accent" },
+        { label: "Express", type: "accent" },
+        { label: "Warehouse POS", type: "default" },
+        { label: "Tambo POS", type: "critical" },
+        { label: "Franchise POS", type: "default" },
+      ];
+
+  const systems = isEs
+    ? [
+        { label: "Core de Juego", type: "critical" },
+        { label: "Pasarela de Pago", type: "default" },
+        { label: "Backoffice", type: "default" },
+        { label: "Analytics", type: "default" },
+        { label: "Display Engine", type: "accent" },
+      ]
+    : [
+        { label: "Game Core", type: "critical" },
+        { label: "Payment Gateway", type: "default" },
+        { label: "Backoffice", type: "default" },
+        { label: "Analytics", type: "default" },
+        { label: "Display Engine", type: "accent" },
+      ];
 
   return (
     <div className="lbsd-ecosystem">
@@ -112,9 +142,7 @@ function EcosystemView({ visible }: { visible: boolean }) {
                 style={{ "--node-delay": `${i * 40}ms` } as React.CSSProperties}
                 data-visible={visible}
               >
-                {a.label.split("\n").map((line, li) => (
-                  <span key={li}>{line}</span>
-                ))}
+                {a.label}
               </div>
             ))}
           </div>
@@ -162,9 +190,7 @@ function EcosystemView({ visible }: { visible: boolean }) {
                 style={{ "--node-delay": `${240 + i * 50}ms` } as React.CSSProperties}
                 data-visible={visible}
               >
-                {s.label.split("\n").map((line, li) => (
-                  <span key={li}>{line}</span>
-                ))}
+                {s.label}
               </div>
             ))}
           </div>
@@ -655,7 +681,7 @@ export function LotoBolaSystemDiagram({ lang }: { lang: string }) {
 
       {/* Canvas */}
       <div className={`lbsd__canvas ${isTransitioning ? "lbsd__canvas--exiting" : "lbsd__canvas--entering"}`}>
-        {activeView === "ecosystem" && <EcosystemView visible={visible} />}
+        {activeView === "ecosystem" && <EcosystemView lang={lang} visible={visible} />}
         {activeView === "flow" && <FlowView lang={lang} visible={visible} />}
         {activeView === "journey" && <JourneyView lang={lang} visible={visible} />}
         {activeView === "actors" && <ActorsView lang={lang} visible={visible} />}
