@@ -213,42 +213,6 @@
   pointer-events: none;
 }
 
-/* ─── Footer ─── */
-.lbsd__footer {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 12px 16px;
-  border-top: 1px solid var(--lbsd-border);
-  animation: lbsd-enter 300ms ease both;
-}
-
-.lbsd__footer-left {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  flex: 1;
-  min-width: 0;
-}
-
-.lbsd__footer-idx {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: var(--lbsd-accent);
-  opacity: 0.7;
-  flex-shrink: 0;
-}
-
-.lbsd__footer-desc {
-  font-size: 12px;
-  color: var(--lbsd-text-dim);
-  line-height: 1.5;
-}
-
 /* ═══════════════════════════════
    NODE shared styles
    ═══════════════════════════════ */
@@ -297,7 +261,7 @@
 .lbsd-node--surface {
   padding: 8px 14px;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 /* ═══════════════════════════════
@@ -838,15 +802,6 @@ tbody tr[style] {
     min-height: 360px;
   }
 
-  .lbsd__footer {
-    padding: 14px 20px;
-    gap: 14px;
-  }
-
-  .lbsd__footer-desc {
-    font-size: 12px;
-  }
-
   /* Ecosystem */
   .lbsd-ecosystem {
     position: relative;
@@ -1120,31 +1075,6 @@ tbody tr[style] {
   background: var(--lbsd-accent);
 }
 
-.lbsd__ex-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 5px 11px;
-  background: var(--lbsd-node-bg);
-  border: 1px solid var(--lbsd-node-border);
-  border-radius: 999px;
-  font-size: 10px;
-  font-weight: 500;
-  color: var(--lbsd-text-dim);
-  text-decoration: none;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: background 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.lbsd__ex-link:hover {
-  background: var(--lbsd-accent-glow);
-  color: #fff;
-  border-color: var(--lbsd-accent-border);
-  box-shadow: 0 0 12px var(--lbsd-accent-glow);
-}
-
 @media (min-width: 640px) {
   .lbsd__stepper {
     display: none;
@@ -1156,24 +1086,5 @@ tbody tr[style] {
 
   .lbsd__dots {
     display: none;
-  }
-}
-
-@media (max-width: 639px) {
-  .lbsd__nav {
-    display: none;
-  }
-
-  .lbsd__footer-desc {
-    display: none;
-  }
-
-  .lbsd__footer {
-    padding: 10px 16px;
-  }
-
-  .lbsd__ex-link {
-    font-size: 12px;
-    padding: 6px 13px;
   }
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import "./LotoBolaSystemDiagram.css";
 
 type View = "ecosystem" | "flow" | "journey" | "actors" | "surfaces";
@@ -8,9 +8,6 @@ interface ViewMeta {
   id: View;
   es: string;
   en: string;
-  descEs: string;
-  descEn: string;
-  exUrl: string;
 }
 
 const VIEWS: ViewMeta[] = [
@@ -18,41 +15,26 @@ const VIEWS: ViewMeta[] = [
     id: "ecosystem",
     es: "Ecosistema",
     en: "Ecosystem",
-    descEs: "9 tipos de actor · 5 superficies · múltiples dependencias externas críticas",
-    descEn: "9 actor types · 5 surfaces · multiple critical external dependencies",
-    exUrl: "https://excalidraw.com/#json=RwTX2SCZunSmHZdkRxhi-,VCEd75DBO6SgqKw79cju3g",
   },
   {
     id: "flow",
     es: "Flujo Operacional",
     en: "Operational Flow",
-    descEs: "Lógica invisible: experiencia visible, operación y sistemas conectados por dependencias",
-    descEn: "Invisible logic: visible experience, operation, and systems connected by dependencies",
-    exUrl: "https://excalidraw.com/#json=TxVIkDJSHeB1cP1LgMzr7,lTLrRlUNZ8856c4nFHqC9Q",
   },
   {
     id: "journey",
     es: "Journey Multicanal",
     en: "Multichannel",
-    descEs: "5 canales · contextos radicalmente diferentes · POS Tambo como caso extremo",
-    descEn: "5 channels · radically different contexts · POS Tambo as extreme case",
-    exUrl: "https://excalidraw.com/#json=Qxx6wy2b6d92v_ah57AeC,5kVjFJZSTrl0WVEkeU7avA",
   },
   {
     id: "actors",
     es: "Actores",
     en: "Actors",
-    descEs: "El mito del usuario promedio destruido: de 0 interacción a sesiones de alta complejidad",
-    descEn: "The average user myth destroyed: from 0 interaction to high-complexity sessions",
-    exUrl: "https://excalidraw.com/#json=-9Apf2VwcxyKEQCoO2ghl,raFdav4Z0W-xShSLOYvVZg",
   },
   {
     id: "surfaces",
     es: "Superficies",
     en: "Surfaces",
-    descEs: "4 superficies · 8 dimensiones · Display Tambo: el caso de diseño más extremo",
-    descEn: "4 surfaces · 8 dimensions · Display Tambo: the most extreme design case",
-    exUrl: "https://excalidraw.com/#json=2gQ2tFYYHg6NULfT-ui7c,PLACp4Bs4wTMDxvDscUq_A",
   },
 ];
 
@@ -623,9 +605,9 @@ export function LotoBolaSystemDiagram({ lang }: { lang: string }) {
   };
 
   const activeIdx = VIEWS.findIndex((v) => v.id === activeView);
+  const activeMeta = VIEWS[activeIdx];
   const goNext = () => changeView(VIEWS[(activeIdx + 1) % VIEWS.length].id);
   const goPrev = () => changeView(VIEWS[(activeIdx - 1 + VIEWS.length) % VIEWS.length].id);
-  const meta = VIEWS[activeIdx];
 
   const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
     const touch = event.touches[0];
@@ -676,7 +658,7 @@ export function LotoBolaSystemDiagram({ lang }: { lang: string }) {
           <span className="lbsd__step-count">
             {String(activeIdx + 1).padStart(2, "0")} / {String(VIEWS.length).padStart(2, "0")}
           </span>
-          <span className="lbsd__step-label">{lang === "es" ? meta.es : meta.en}</span>
+          <span className="lbsd__step-label">{lang === "es" ? activeMeta.es : activeMeta.en}</span>
         </div>
         <button
           type="button"
@@ -728,26 +710,6 @@ export function LotoBolaSystemDiagram({ lang }: { lang: string }) {
         ))}
       </div>
 
-      <div className="lbsd__footer">
-        <div className="lbsd__footer-left">
-          <span className="lbsd__footer-idx">
-            {String(activeIdx + 1).padStart(2, "0")} / {String(VIEWS.length).padStart(2, "0")}
-          </span>
-          <span className="lbsd__footer-desc">
-            {lang === "es" ? meta.descEs : meta.descEn}
-          </span>
-        </div>
-        <a
-          href={meta.exUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="lbsd__ex-link"
-          aria-label={lang === "es" ? "Abrir diagrama en Excalidraw" : "Open diagram in Excalidraw"}
-        >
-          <ExternalLink size={11} aria-hidden="true" />
-          {lang === "es" ? "Ver diagrama" : "View diagram"}
-        </a>
-      </div>
     </div>
   );
 }
