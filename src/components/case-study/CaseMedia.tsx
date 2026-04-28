@@ -38,7 +38,7 @@ export function CaseMedia({
             className="cs-media__image"
             loading={priority ? "eager" : "lazy"}
             decoding={priority ? "sync" : "async"}
-            fetchPriority={priority ? "high" : "auto"}
+            {...({ fetchpriority: priority ? "high" : "auto" } as Record<string, string>)}
             width={width}
             height={height}
           />

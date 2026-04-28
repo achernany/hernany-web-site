@@ -93,7 +93,7 @@ function ResponsivePicture({
         className="case-hero-stage__media"
         loading={loading}
         decoding={decoding}
-        fetchPriority={fetchPriority}
+        {...({ fetchpriority: fetchPriority } as Record<string, string>)}
         width={asset.width}
         height={asset.height}
         style={{ objectFit }}
