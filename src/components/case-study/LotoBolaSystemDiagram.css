@@ -221,16 +221,16 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 6px 10px;
+  padding: 8px 12px;
   background: var(--lbsd-node-bg);
   border: 1px solid var(--lbsd-node-border);
   border-radius: 8px;
-  font-size: 10px;
+  font-size: 12px;
+  line-height: 16px;
   font-weight: 500;
   color: var(--lbsd-text);
   text-align: center;
   letter-spacing: 0.02em;
-  line-height: 1.3;
   white-space: nowrap;
   opacity: 0;
   transition: box-shadow 300ms ease, border-color 300ms ease;
@@ -259,9 +259,7 @@
 }
 
 .lbsd-node--surface {
-  padding: 8px 14px;
-  font-size: 12px;
-  font-weight: 500;
+  padding: 8px 12px;
 }
 
 /* ═══════════════════════════════
@@ -293,10 +291,11 @@
 }
 
 .lbsd-layer__label {
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  color: var(--lbsd-text-label);
+  font-size: 10px;
+  line-height: 16px;
+  font-weight: 400;
+  letter-spacing: 1.4px;
+  color: #6c63ff;
   text-transform: uppercase;
 }
 
@@ -908,12 +907,12 @@ tbody tr[style] {
 
   .lbsd-node {
     font-size: 12px;
-    padding: 7px 12px;
+    line-height: 16px;
+    padding: 8px 12px;
   }
 
   .lbsd-node--surface {
-    padding: 10px 18px;
-    font-size: 12px;
+    padding: 8px 12px;
   }
 
   .lbsd-layer {
@@ -935,6 +934,7 @@ tbody tr[style] {
 
   .lbsd-layer__label {
     font-size: 10px;
+    line-height: 16px;
   }
 }
 

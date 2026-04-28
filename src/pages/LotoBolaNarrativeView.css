@@ -1,4 +1,4 @@
-.lotobola-desktop-view {
+.lotobola-narrative-view {
   display: none;
 }
 
@@ -120,14 +120,14 @@
     color: #b5b5b5;
   }
 
-  .lotobola-desktop-view {
+  .lotobola-narrative-view {
     display: flex;
     flex-direction: column;
     width: 100%;
   }
 }
 
-.lotobola-desktop__section {
+.lotobola-narrative__section {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -137,27 +137,27 @@
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.lotobola-desktop__section--hero {
+.lotobola-narrative__section--hero {
   border-top: none;
   padding: 24px 0;
 }
 
-.lotobola-desktop__section--hero + .lotobola-desktop__section {
+.lotobola-narrative__section--hero + .lotobola-narrative__section {
   border-top: none;
 }
 
-.lotobola-desktop__section#overview + .lotobola-desktop__section {
+.lotobola-narrative__section#overview + .lotobola-narrative__section {
   border-top: none;
 }
 
-.lotobola-desktop__section--final {
+.lotobola-narrative__section--final {
   padding-bottom: 0;
 }
 
-.lotobola-desktop__hero,
-.lotobola-desktop__intro,
-.lotobola-desktop__architecture-copy,
-.lotobola-desktop__communication {
+.lotobola-narrative__hero,
+.lotobola-narrative__intro,
+.lotobola-narrative__architecture-copy,
+.lotobola-narrative__communication {
   width: 680px;
   max-width: 100%;
   display: flex;
@@ -167,25 +167,25 @@
   text-align: center;
 }
 
-.lotobola-desktop__hero-title,
-.lotobola-desktop__title,
-.lotobola-desktop__subtitle,
-.lotobola-desktop__system-title,
-.lotobola-desktop__system-group-title,
-.lotobola-desktop__note {
+.lotobola-narrative__hero-title,
+.lotobola-narrative__title,
+.lotobola-narrative__subtitle,
+.lotobola-narrative__system-title,
+.lotobola-narrative__system-group-title,
+.lotobola-narrative__note {
   margin: 0;
   font-family: var(--font-sans);
   color: #ffffff;
 }
 
-.lotobola-desktop__hero-title {
+.lotobola-narrative__hero-title {
   font-size: 64px;
   line-height: 66px;
   font-weight: 600;
   letter-spacing: -1.28px;
 }
 
-.lotobola-desktop__eyebrow {
+.lotobola-narrative__eyebrow {
   margin: 0;
   color: rgba(255, 255, 255, 0.48);
   font-size: 12px;
@@ -195,38 +195,38 @@
   opacity: 0.5;
 }
 
-.lotobola-desktop__eyebrow-separator {
+.lotobola-narrative__eyebrow-separator {
   display: inline-block;
   margin: 0 7px;
   color: rgba(108, 99, 255, 0.72);
 }
 
-.lotobola-desktop__title {
+.lotobola-narrative__title {
   font-size: 40px;
   line-height: 44px;
   font-weight: 600;
   letter-spacing: -0.4px;
 }
 
-.lotobola-desktop__subtitle {
+.lotobola-narrative__subtitle {
   font-size: 24px;
   line-height: 32px;
   font-weight: 500;
 }
 
-.lotobola-desktop__hero-subtitle,
-.lotobola-desktop__hero-summary,
-.lotobola-desktop__body,
-.lotobola-desktop__system-body,
-.lotobola-desktop__note,
-.lotobola-desktop__friction-solution {
+.lotobola-narrative__hero-subtitle,
+.lotobola-narrative__hero-summary,
+.lotobola-narrative__body,
+.lotobola-narrative__system-body,
+.lotobola-narrative__note,
+.lotobola-narrative__friction-solution {
   margin: 0;
   color: rgba(255, 255, 255, 0.72);
   font-size: 16px;
   line-height: 28px;
 }
 
-.lotobola-desktop__hero-subtitle {
+.lotobola-narrative__hero-subtitle {
   width: 499px;
   max-width: 100%;
   font-family: var(--font-sans);
@@ -236,16 +236,16 @@
   color: rgba(255, 255, 255, 0.72);
 }
 
-.lotobola-desktop__hero-summary {
+.lotobola-narrative__hero-summary {
   width: 530px;
   max-width: 100%;
 }
 
-.lotobola-desktop__accent {
+.lotobola-narrative__accent {
   color: #6c63ff;
 }
 
-.lotobola-desktop__hero-cta {
+.lotobola-narrative__hero-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -257,41 +257,41 @@
   border: 2px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.06);
   color: rgba(255, 255, 255, 0.9);
-  font-size: 16px;
-  line-height: 24px;
+  font-size: var(--text-button-size);
+  line-height: var(--text-button-line);
   font-weight: 500;
   white-space: nowrap;
   text-decoration: none;
   transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease, opacity 180ms ease;
 }
 
-.lotobola-desktop__hero-cta:hover:not(:disabled) {
+.lotobola-narrative__hero-cta:hover:not(:disabled) {
   transform: translateY(-1px);
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.28);
 }
 
-.lotobola-desktop__hero-cta:disabled {
+.lotobola-narrative__hero-cta:disabled {
   cursor: not-allowed;
   opacity: 0.5;
   box-shadow: none;
 }
 
-.lotobola-desktop__medium-icon {
+.lotobola-narrative__medium-icon {
   width: 18px;
   height: 18px;
   fill: #f5f5f7;
   flex-shrink: 0;
 }
 
-.lotobola-desktop__metrics {
+.lotobola-narrative__metrics {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 4px;
 }
 
-.lotobola-desktop__metric {
+.lotobola-narrative__metric {
   min-height: 56px;
   padding: 4px 8px;
   display: flex;
@@ -302,7 +302,7 @@
   text-align: center;
 }
 
-.lotobola-desktop__metric-label {
+.lotobola-narrative__metric-label {
   margin: 0;
   color: #6c63ff;
   font-size: 10px;
@@ -311,48 +311,48 @@
   text-transform: uppercase;
 }
 
-.lotobola-desktop__metric-value {
+.lotobola-narrative__metric-value {
   margin: 0;
   color: #ffffff;
   font-size: 12px;
   line-height: 14px;
 }
 
-.lotobola-desktop__placeholder {
+.lotobola-narrative__placeholder {
   width: 100%;
   background: #1e1e1e;
   flex-shrink: 0;
 }
 
-.lotobola-desktop__placeholder--card {
+.lotobola-narrative__placeholder--card {
   width: 264px;
   height: 264px;
   border-radius: 24px;
 }
 
-.lotobola-desktop__placeholder--landscape {
+.lotobola-narrative__placeholder--landscape {
   width: 1184px;
   max-width: 100%;
   height: 880px;
 }
 
-.lotobola-desktop__placeholder--hero {
+.lotobola-narrative__placeholder--hero {
   width: 1184px;
   max-width: 100%;
   height: 652px;
 }
 
-.lotobola-desktop__placeholder--final {
+.lotobola-narrative__placeholder--final {
   width: 1440px;
   max-width: calc(100% + 96px);
   height: 880px;
 }
 
-.lotobola-desktop__placeholder--bleed {
+.lotobola-narrative__placeholder--bleed {
   margin-inline: -48px;
 }
 
-.lotobola-desktop__placeholder-row {
+.lotobola-narrative__placeholder-row {
   width: 980px;
   max-width: 100%;
   display: flex;
@@ -360,29 +360,29 @@
   gap: 24px;
 }
 
-.lotobola-desktop__mobile-dots {
+.lotobola-narrative__mobile-dots {
   display: none;
 }
 
-.lotobola-desktop__overview-diagram {
+.lotobola-narrative__overview-diagram {
   width: min(100%, 1080px);
 }
 
-.lotobola-desktop__overview-diagram .lbsd {
+.lotobola-narrative__overview-diagram .lbsd {
   min-height: 560px;
   background: transparent;
   border-color: rgba(255, 255, 255, 0.08);
   box-shadow: none;
 }
 
-.lotobola-desktop__overview-diagram .lbsd__nav {
+.lotobola-narrative__overview-diagram .lbsd__nav {
   display: flex;
   justify-content: center;
   padding: 16px 20px 0;
   border-bottom: none;
 }
 
-.lotobola-desktop__overview-diagram .lbsd__nav-track {
+.lotobola-narrative__overview-diagram .lbsd__nav-track {
   justify-content: center;
   gap: 8px;
   width: auto;
@@ -395,31 +395,31 @@
   backdrop-filter: blur(10px);
 }
 
-.lotobola-desktop__overview-diagram .lbsd__nav-btn {
+.lotobola-narrative__overview-diagram .lbsd__nav-btn {
   min-height: 32px;
   padding: 7px 14px;
   border-color: transparent;
   background: transparent;
 }
 
-.lotobola-desktop__overview-diagram .lbsd__nav-btn--active {
+.lotobola-narrative__overview-diagram .lbsd__nav-btn--active {
   background: #6c63ff;
   border-color: rgba(108, 99, 255, 0.82);
   box-shadow: 0 0 18px rgba(108, 99, 255, 0.32);
 }
 
-.lotobola-desktop__overview-diagram .lbsd__canvas {
+.lotobola-narrative__overview-diagram .lbsd__canvas {
   padding-top: 26px;
 }
 
-.lotobola-desktop__quote-shell {
+.lotobola-narrative__quote-shell {
   width: 1184px;
   max-width: 100%;
   padding: 0 180px;
   box-sizing: border-box;
 }
 
-.lotobola-desktop__quote {
+.lotobola-narrative__quote {
   width: 720px;
   max-width: 100%;
   margin: 0 auto;
@@ -433,19 +433,19 @@
   text-align: center;
 }
 
-.lotobola-desktop__quote--accent {
+.lotobola-narrative__quote--accent {
   color: #6c63ff;
 }
 
-.lotobola-desktop__quote-accent {
+.lotobola-narrative__quote-accent {
   color: #6c63ff;
 }
 
-.lotobola-desktop__architecture-copy {
+.lotobola-narrative__architecture-copy {
   gap: 24px;
 }
 
-.lotobola-desktop__note {
+.lotobola-narrative__note {
   width: 680px;
   max-width: 100%;
   font-style: italic;
@@ -455,20 +455,20 @@
   color: #ffffff;
 }
 
-.lotobola-desktop__system-grid {
+.lotobola-narrative__system-grid {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
 }
 
-.lotobola-desktop__system-carousel {
+.lotobola-narrative__system-carousel {
   width: min(100vw, 1328px);
   display: grid;
   gap: 10px;
 }
 
-.lotobola-desktop__system-carousel-viewport {
+.lotobola-narrative__system-carousel-viewport {
   width: 100%;
   overflow-x: auto;
   overflow-y: visible;
@@ -482,29 +482,29 @@
   padding: 30px 0 42px;
 }
 
-.lotobola-desktop__system-carousel-viewport--dragging {
+.lotobola-narrative__system-carousel-viewport--dragging {
   cursor: grabbing;
   scroll-behavior: auto;
   scroll-snap-type: none;
   user-select: none;
 }
 
-.lotobola-desktop__system-carousel-viewport::-webkit-scrollbar {
+.lotobola-narrative__system-carousel-viewport::-webkit-scrollbar {
   display: none;
 }
 
-.lotobola-desktop__system-carousel-viewport:focus-visible {
+.lotobola-narrative__system-carousel-viewport:focus-visible {
   box-shadow: inset 0 0 0 2px rgba(108, 99, 255, 0.72);
 }
 
-.lotobola-desktop__system-carousel-track {
+.lotobola-narrative__system-carousel-track {
   --carousel-slide-width: min(720px, 64vw);
   display: flex;
   gap: 20px;
   padding-inline: var(--carousel-edge-space, calc((100% - var(--carousel-slide-width)) / 2));
 }
 
-.lotobola-desktop__system-carousel-slide {
+.lotobola-narrative__system-carousel-slide {
   --slide-scale: 0.78;
   --slide-opacity: 0.62;
   --slide-blur: 1.4px;
@@ -523,27 +523,27 @@
   will-change: transform, opacity, filter;
 }
 
-.lotobola-desktop__system-carousel-slide--selected {
+.lotobola-narrative__system-carousel-slide--selected {
   filter: blur(0) saturate(1);
 }
 
-.lotobola-desktop__system-carousel-slide .lotobola-desktop__system-card {
+.lotobola-narrative__system-carousel-slide .lotobola-narrative__system-card {
   height: auto;
   min-height: auto;
   box-shadow: 0 18px 70px rgba(0, 0, 0, 0.42);
 }
 
-.lotobola-desktop__system-carousel-slide:not(.lotobola-desktop__system-carousel-slide--selected)
-  .lotobola-desktop__system-card {
+.lotobola-narrative__system-carousel-slide:not(.lotobola-narrative__system-carousel-slide--selected)
+  .lotobola-narrative__system-card {
   box-shadow: 0 16px 44px rgba(12, 10, 42, 0.52), 0 0 6px rgba(108, 99, 255, 0.015);
 }
 
-.lotobola-desktop__system-carousel-slide--selected .lotobola-desktop__system-card {
+.lotobola-narrative__system-carousel-slide--selected .lotobola-narrative__system-card {
   border-color: #6c63ff;
   box-shadow: 0 18px 46px rgba(13, 10, 50, 0.58), 0 0 8px rgba(108, 99, 255, 0.035);
 }
 
-.lotobola-desktop__carousel-controls {
+.lotobola-narrative__carousel-controls {
   width: min(720px, 64vw);
   justify-self: center;
   display: grid;
@@ -552,14 +552,14 @@
   gap: 20px;
 }
 
-.lotobola-desktop__carousel-buttons {
+.lotobola-narrative__carousel-buttons {
   display: grid;
   grid-template-columns: repeat(2, 40px);
   gap: 8px;
 }
 
-.lotobola-desktop__carousel-button,
-.lotobola-desktop__carousel-dot {
+.lotobola-narrative__carousel-button,
+.lotobola-narrative__carousel-dot {
   -webkit-appearance: none;
   appearance: none;
   margin: 0;
@@ -570,7 +570,7 @@
   touch-action: manipulation;
 }
 
-.lotobola-desktop__carousel-button {
+.lotobola-narrative__carousel-button {
   width: 40px;
   height: 40px;
   border-radius: 999px;
@@ -583,32 +583,32 @@
   transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
-.lotobola-desktop__carousel-button:hover {
+.lotobola-narrative__carousel-button:hover {
   color: #ffffff;
   border-color: rgba(108, 99, 255, 0.72);
   background: rgba(108, 99, 255, 0.18);
   transform: translateY(-1px);
 }
 
-.lotobola-desktop__carousel-button:focus-visible,
-.lotobola-desktop__carousel-dot:focus-visible {
+.lotobola-narrative__carousel-button:focus-visible,
+.lotobola-narrative__carousel-dot:focus-visible {
   outline: 2px solid rgba(108, 99, 255, 0.86);
   outline-offset: 3px;
 }
 
-.lotobola-desktop__carousel-button-icon {
+.lotobola-narrative__carousel-button-icon {
   width: 16px;
   height: 16px;
 }
 
-.lotobola-desktop__carousel-dots {
+.lotobola-narrative__carousel-dots {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 8px;
 }
 
-.lotobola-desktop__carousel-dot {
+.lotobola-narrative__carousel-dot {
   width: 8px;
   height: 8px;
   border-radius: 999px;
@@ -618,14 +618,14 @@
   transition: width 240ms ease, background 240ms ease, box-shadow 240ms ease, transform 240ms ease, opacity 240ms ease;
 }
 
-.lotobola-desktop__carousel-dot::before,
-.lotobola-desktop__carousel-dot::after {
+.lotobola-narrative__carousel-dot::before,
+.lotobola-narrative__carousel-dot::after {
   content: "";
   position: absolute;
   border-radius: inherit;
 }
 
-.lotobola-desktop__carousel-dot::before {
+.lotobola-narrative__carousel-dot::before {
   inset: -6px;
   background: radial-gradient(circle, rgba(108, 99, 255, 0.34), transparent 66%);
   opacity: 0;
@@ -633,30 +633,30 @@
   transition: opacity 240ms ease, transform 240ms ease;
 }
 
-.lotobola-desktop__carousel-dot::after {
+.lotobola-narrative__carousel-dot::after {
   inset: 0;
   background: transparent;
   opacity: 1;
   transition: opacity 240ms ease;
 }
 
-.lotobola-desktop__carousel-dot:hover {
+.lotobola-narrative__carousel-dot:hover {
   transform: translateY(-1px) scale(1.08);
   background: rgba(255, 255, 255, 0.38);
 }
 
-.lotobola-desktop__carousel-dot--selected {
+.lotobola-narrative__carousel-dot--selected {
   width: 32px;
   background: #6c63ff;
   box-shadow: 0 0 18px rgba(108, 99, 255, 0.42);
 }
 
-.lotobola-desktop__carousel-dot--selected::before,
-.lotobola-desktop__carousel-dot--selected::after {
+.lotobola-narrative__carousel-dot--selected::before,
+.lotobola-narrative__carousel-dot--selected::after {
   opacity: 1;
 }
 
-.lotobola-desktop__system-card {
+.lotobola-narrative__system-card {
   position: relative;
   overflow: hidden;
   min-height: 402px;
@@ -669,18 +669,18 @@
   gap: 16px;
 }
 
-.lotobola-desktop__system-card > * {
+.lotobola-narrative__system-card > * {
   position: relative;
   z-index: 1;
 }
 
-.lotobola-desktop__system-card-header {
+.lotobola-narrative__system-card-header {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.lotobola-desktop__system-chip {
+.lotobola-narrative__system-chip {
   width: 40px;
   height: 40px;
   border-radius: 120px;
@@ -695,7 +695,7 @@
   font-weight: 700;
 }
 
-.lotobola-desktop__system-label {
+.lotobola-narrative__system-label {
   margin: 0;
   color: #ffffff;
   font-size: 12px;
@@ -703,26 +703,26 @@
   text-transform: uppercase;
 }
 
-.lotobola-desktop__system-title {
+.lotobola-narrative__system-title {
   font-size: 24px;
   line-height: 32px;
   font-weight: 500;
   text-align: center;
 }
 
-.lotobola-desktop__system-body {
+.lotobola-narrative__system-body {
   line-height: 24px;
   text-align: center;
   color: rgba(255, 255, 255, 0.76);
 }
 
-.lotobola-desktop__system-groups {
+.lotobola-narrative__system-groups {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
 
-.lotobola-desktop__system-group {
+.lotobola-narrative__system-group {
   min-height: 226px;
   padding: 8px;
   border-radius: 24px;
@@ -732,7 +732,7 @@
   gap: 16px;
 }
 
-.lotobola-desktop__system-group-title {
+.lotobola-narrative__system-group-title {
   font-size: 12px;
   line-height: 16px;
   font-weight: 700;
@@ -741,7 +741,7 @@
   color: #6c63ff;
 }
 
-.lotobola-desktop__system-list {
+.lotobola-narrative__system-list {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -750,7 +750,7 @@
   gap: 8px;
 }
 
-.lotobola-desktop__system-item {
+.lotobola-narrative__system-item {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -759,7 +759,7 @@
   line-height: 22px;
 }
 
-.lotobola-desktop__system-dot {
+.lotobola-narrative__system-dot {
   width: 6px;
   height: 6px;
   border-radius: 999px;
@@ -767,13 +767,13 @@
   flex-shrink: 0;
 }
 
-.lotobola-desktop__frictions {
+.lotobola-narrative__frictions {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.lotobola-desktop__friction-row {
+.lotobola-narrative__friction-row {
   width: 100%;
   min-height: 144px;
   padding: 32px;
@@ -784,12 +784,12 @@
   transition: background-color 180ms ease, transform 180ms ease;
 }
 
-.lotobola-desktop__friction-index,
-.lotobola-desktop__friction-arrow {
+.lotobola-narrative__friction-index,
+.lotobola-narrative__friction-arrow {
   color: #6366f1;
 }
 
-.lotobola-desktop__friction-index {
+.lotobola-narrative__friction-index {
   display: inline-block;
   font-size: 80px;
   line-height: 80px;
@@ -799,37 +799,37 @@
   transition: color 180ms ease, opacity 180ms ease, transform 180ms ease, text-shadow 180ms ease;
 }
 
-.lotobola-desktop__friction-problem {
+.lotobola-narrative__friction-problem {
   margin: 0;
   color: #ffffff;
   font-size: 16px;
   line-height: 28px;
 }
 
-.lotobola-desktop__friction-arrow {
+.lotobola-narrative__friction-arrow {
   text-align: center;
   font-size: 24px;
   line-height: 32px;
   transition: color 180ms ease, transform 180ms ease, text-shadow 180ms ease;
 }
 
-.lotobola-desktop__communication {
+.lotobola-narrative__communication {
   gap: 12px;
 }
 
 @media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
-  .lotobola-desktop__friction-row:hover {
+  .lotobola-narrative__friction-row:hover {
     background: linear-gradient(90deg, rgba(108, 99, 255, 0.055), rgba(108, 99, 255, 0));
   }
 
-  .lotobola-desktop__friction-row:hover .lotobola-desktop__friction-index {
+  .lotobola-narrative__friction-row:hover .lotobola-narrative__friction-index {
     opacity: 0.78;
     color: #7d75ff;
     transform: translateX(6px) scale(1.045);
     text-shadow: 0 0 18px rgba(108, 99, 255, 0.32);
   }
 
-  .lotobola-desktop__friction-row:hover .lotobola-desktop__friction-arrow {
+  .lotobola-narrative__friction-row:hover .lotobola-narrative__friction-arrow {
     color: #8c84ff;
     transform: translateX(5px) scale(1.16);
     text-shadow: 0 0 14px rgba(108, 99, 255, 0.4);
@@ -837,50 +837,50 @@
 }
 
 @media (max-width: 1279px) {
-  .lotobola-desktop__hero,
-  .lotobola-desktop__intro,
-  .lotobola-desktop__architecture-copy,
-  .lotobola-desktop__communication {
+  .lotobola-narrative__hero,
+  .lotobola-narrative__intro,
+  .lotobola-narrative__architecture-copy,
+  .lotobola-narrative__communication {
     width: min(680px, 100%);
   }
 
-  .lotobola-desktop__metrics {
+  .lotobola-narrative__metrics {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .lotobola-desktop__placeholder--landscape,
-  .lotobola-desktop__placeholder--hero {
+  .lotobola-narrative__placeholder--landscape,
+  .lotobola-narrative__placeholder--hero {
     height: 640px;
   }
 
-  .lotobola-desktop__placeholder-row {
+  .lotobola-narrative__placeholder-row {
     flex-wrap: wrap;
   }
 
-  .lotobola-desktop__system-grid {
+  .lotobola-narrative__system-grid {
     grid-template-columns: 1fr;
   }
 
-  .lotobola-desktop__system-carousel-track {
+  .lotobola-narrative__system-carousel-track {
     --carousel-slide-width: min(680px, 72vw);
   }
 
-  .lotobola-desktop__carousel-controls {
+  .lotobola-narrative__carousel-controls {
     width: min(680px, 72vw);
   }
 
-  .lotobola-desktop__quote-shell {
+  .lotobola-narrative__quote-shell {
     padding-inline: 80px;
   }
 
-  .lotobola-desktop__friction-row {
+  .lotobola-narrative__friction-row {
     grid-template-columns: 112px minmax(0, 1fr) 40px minmax(0, 1fr);
     column-gap: 24px;
   }
 }
 
 @media (max-width: 1023px) {
-  .lotobola-desktop-view {
+  .lotobola-narrative-view {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -969,88 +969,88 @@
     box-shadow: 0 0 18px rgba(108, 99, 255, 0.35);
   }
 
-  .lotobola-desktop__section {
+  .lotobola-narrative__section {
     width: 100%;
     gap: 24px;
     padding: 24px 0;
     border-top: 0.5px solid rgba(255, 255, 255, 0.06);
   }
 
-  .lotobola-desktop__section--hero + .lotobola-desktop__section,
-  .lotobola-desktop__section#overview + .lotobola-desktop__section {
+  .lotobola-narrative__section--hero + .lotobola-narrative__section,
+  .lotobola-narrative__section#overview + .lotobola-narrative__section {
     border-top: 0.5px solid rgba(255, 255, 255, 0.06);
   }
 
-  .lotobola-desktop__section--hero {
+  .lotobola-narrative__section--hero {
     min-height: auto;
     padding: 24px 0;
     border-top: none;
   }
 
-  .lotobola-desktop__section#overview {
+  .lotobola-narrative__section#overview {
     min-height: auto;
     padding: 24px 0;
   }
 
-  .lotobola-desktop__section--final {
+  .lotobola-narrative__section--final {
     padding-bottom: 24px;
   }
 
-  .lotobola-desktop__section#retail-channels {
+  .lotobola-narrative__section#retail-channels {
     display: none;
   }
 
-  .lotobola-desktop__hero,
-  .lotobola-desktop__intro,
-  .lotobola-desktop__architecture-copy,
-  .lotobola-desktop__communication {
+  .lotobola-narrative__hero,
+  .lotobola-narrative__intro,
+  .lotobola-narrative__architecture-copy,
+  .lotobola-narrative__communication {
     width: 100%;
     gap: 24px;
     align-items: center;
     text-align: center;
   }
 
-  .lotobola-desktop__hero {
+  .lotobola-narrative__hero {
     min-height: auto;
     justify-content: flex-start;
     padding-top: 0;
   }
 
-  .lotobola-desktop__section#overview .lotobola-desktop__intro {
+  .lotobola-narrative__section#overview .lotobola-narrative__intro {
     min-height: auto;
     justify-content: flex-start;
   }
 
-  .lotobola-desktop__hero-title {
+  .lotobola-narrative__hero-title {
     font-size: 44px;
     line-height: 48px;
     letter-spacing: -1.28px;
     font-weight: 600;
   }
 
-  .lotobola-desktop__title {
+  .lotobola-narrative__title {
     font-size: 32px;
     line-height: 32px;
     letter-spacing: 0;
   }
 
-  .lotobola-desktop__subtitle {
+  .lotobola-narrative__subtitle {
     font-size: 24px;
     line-height: 32px;
   }
 
-  .lotobola-desktop__eyebrow {
+  .lotobola-narrative__eyebrow {
     width: 100%;
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 1.44px;
   }
 
-  .lotobola-desktop__hero-subtitle,
-  .lotobola-desktop__hero-summary,
-  .lotobola-desktop__body,
-  .lotobola-desktop__system-body,
-  .lotobola-desktop__friction-solution {
+  .lotobola-narrative__hero-subtitle,
+  .lotobola-narrative__hero-summary,
+  .lotobola-narrative__body,
+  .lotobola-narrative__system-body,
+  .lotobola-narrative__friction-solution {
     width: 100%;
     font-size: 16px;
     line-height: 24px;
@@ -1058,23 +1058,23 @@
     letter-spacing: 0;
   }
 
-  .lotobola-desktop__hero-subtitle {
+  .lotobola-narrative__hero-subtitle {
     min-height: auto;
     line-height: 24px;
   }
 
-  .lotobola-desktop__hero-summary {
+  .lotobola-narrative__hero-summary {
     min-height: auto;
     line-height: 24px;
   }
 
-  .lotobola-desktop__hero-cta {
+  .lotobola-narrative__hero-cta {
     min-width: 185px;
     height: 48px;
     padding: 12px 18px;
   }
 
-  .lotobola-desktop__metrics {
+  .lotobola-narrative__metrics {
     grid-template-columns: 1fr;
     gap: 4px;
     width: 100%;
@@ -1082,27 +1082,27 @@
     padding-block: 8px;
   }
 
-  .lotobola-desktop__metric {
+  .lotobola-narrative__metric {
     min-height: 56px;
     padding: 4px 8px;
   }
 
-  .lotobola-desktop__metric-label {
+  .lotobola-narrative__metric-label {
     font-size: 10px;
     line-height: 16px;
   }
 
-  .lotobola-desktop__metric-value {
+  .lotobola-narrative__metric-value {
     font-size: 12px;
     line-height: 14px;
   }
 
-  .lotobola-desktop__overview-diagram {
+  .lotobola-narrative__overview-diagram {
     width: 100%;
     overflow: hidden;
   }
 
-  .lotobola-desktop__overview-diagram .lbsd {
+  .lotobola-narrative__overview-diagram .lbsd {
     min-height: 0;
     border: 0;
     border-radius: 0;
@@ -1110,42 +1110,42 @@
     touch-action: pan-y;
   }
 
-  .lotobola-desktop__overview-diagram .lbsd__nav {
+  .lotobola-narrative__overview-diagram .lbsd__nav {
     display: none;
   }
 
-  .lotobola-desktop__overview-diagram .lbsd__grid-bg {
+  .lotobola-narrative__overview-diagram .lbsd__grid-bg {
     display: none;
   }
 
-  .lotobola-desktop__overview-diagram .lbsd__stepper {
+  .lotobola-narrative__overview-diagram .lbsd__stepper {
     border-color: rgba(255, 255, 255, 0.06);
   }
 
-  .lotobola-desktop__overview-diagram .lbsd-actors__scroll,
-  .lotobola-desktop__overview-diagram .lbsd-surfaces__grid {
+  .lotobola-narrative__overview-diagram .lbsd-actors__scroll,
+  .lotobola-narrative__overview-diagram .lbsd-surfaces__grid {
     border: 0;
     scrollbar-width: none;
   }
 
-  .lotobola-desktop__overview-diagram .lbsd-actors__scroll::-webkit-scrollbar,
-  .lotobola-desktop__overview-diagram .lbsd-surfaces__grid::-webkit-scrollbar {
+  .lotobola-narrative__overview-diagram .lbsd-actors__scroll::-webkit-scrollbar,
+  .lotobola-narrative__overview-diagram .lbsd-surfaces__grid::-webkit-scrollbar {
     display: none;
   }
 
-  .lotobola-desktop__quote-shell {
+  .lotobola-narrative__quote-shell {
     width: 100%;
     padding-inline: 0;
   }
 
-  .lotobola-desktop__quote {
+  .lotobola-narrative__quote {
     width: 100%;
     padding: 24px 0;
     font-size: 24px;
     line-height: 32px;
   }
 
-  .lotobola-desktop__mobile-carousel-shell {
+  .lotobola-narrative__mobile-carousel-shell {
     width: calc(100% + 32px);
     margin-inline: -16px;
     display: grid;
@@ -1153,7 +1153,7 @@
     overflow: hidden;
   }
 
-  .lotobola-desktop__placeholder-row {
+  .lotobola-narrative__placeholder-row {
     width: 100%;
     max-width: none;
     flex-wrap: nowrap;
@@ -1167,11 +1167,11 @@
     mask-image: linear-gradient(90deg, transparent 0, #000 15%, #000 85%, transparent 100%);
   }
 
-  .lotobola-desktop__placeholder-row::-webkit-scrollbar {
+  .lotobola-narrative__placeholder-row::-webkit-scrollbar {
     display: none;
   }
 
-  .lotobola-desktop__placeholder-slide {
+  .lotobola-narrative__placeholder-slide {
     --placeholder-opacity: 0.42;
     --placeholder-scale: 0.92;
     flex: 0 0 264px;
@@ -1184,23 +1184,23 @@
       transform 320ms cubic-bezier(0.42, 0, 0.18, 1);
   }
 
-  .lotobola-desktop__placeholder--card {
+  .lotobola-narrative__placeholder--card {
     width: 264px;
     height: 264px;
     border-radius: 8px;
   }
 
-  .lotobola-desktop__placeholder-row .lotobola-desktop__placeholder--card {
+  .lotobola-narrative__placeholder-row .lotobola-narrative__placeholder--card {
     box-shadow: 0 18px 50px rgba(0, 0, 0, 0.24);
   }
 
-  .lotobola-desktop__mobile-dots {
+  .lotobola-narrative__mobile-dots {
     display: flex;
     justify-content: center;
     gap: 8px;
   }
 
-  .lotobola-desktop__mobile-dot {
+  .lotobola-narrative__mobile-dot {
     width: 8px;
     height: 8px;
     border-radius: 999px;
@@ -1209,40 +1209,40 @@
     padding: 0;
   }
 
-  .lotobola-desktop__mobile-dot--active {
+  .lotobola-narrative__mobile-dot--active {
     width: 24px;
     background: #6c63ff;
   }
 
-  .lotobola-desktop__placeholder--landscape,
-  .lotobola-desktop__placeholder--hero,
-  .lotobola-desktop__placeholder--final {
+  .lotobola-narrative__placeholder--landscape,
+  .lotobola-narrative__placeholder--hero,
+  .lotobola-narrative__placeholder--final {
     width: 100%;
     max-width: 100%;
     height: 560px;
     border-radius: 8px;
   }
 
-  .lotobola-desktop__placeholder--bleed {
+  .lotobola-narrative__placeholder--bleed {
     width: calc(100% + 32px);
     max-width: calc(100% + 32px);
     margin-inline: -16px;
     border-radius: 0;
   }
 
-  .lotobola-desktop__note {
+  .lotobola-narrative__note {
     width: 100%;
     font-size: 24px;
     line-height: 28px;
   }
 
-  .lotobola-desktop__system-carousel {
+  .lotobola-narrative__system-carousel {
     width: calc(100% + 32px);
     margin-inline: -16px;
     overflow: hidden;
   }
 
-  .lotobola-desktop__system-carousel-viewport {
+  .lotobola-narrative__system-carousel-viewport {
     padding: 0;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -1251,76 +1251,76 @@
     -webkit-overflow-scrolling: touch;
   }
 
-  .lotobola-desktop__system-carousel-viewport::-webkit-scrollbar {
+  .lotobola-narrative__system-carousel-viewport::-webkit-scrollbar {
     display: none;
   }
 
-  .lotobola-desktop__system-carousel-track {
+  .lotobola-narrative__system-carousel-track {
     --carousel-slide-width: 264px;
     gap: 12px;
     padding-inline: calc((100% - var(--carousel-slide-width)) / 2);
   }
 
-  .lotobola-desktop__system-carousel-slide {
+  .lotobola-narrative__system-carousel-slide {
     --slide-scale: 0.92;
     --slide-opacity: 0.42;
     --slide-blur: 1.4px;
   }
 
-  .lotobola-desktop__carousel-controls {
+  .lotobola-narrative__carousel-controls {
     display: none;
   }
 
-  .lotobola-desktop__system-card {
+  .lotobola-narrative__system-card {
     min-height: 0;
     padding: 12px;
     border-radius: 24px;
     gap: 16px;
   }
 
-  .lotobola-desktop__system-card-header {
+  .lotobola-narrative__system-card-header {
     flex-direction: column;
     align-items: center;
     gap: 8px;
   }
 
-  .lotobola-desktop__system-title {
+  .lotobola-narrative__system-title {
     font-size: 24px;
     line-height: 24px;
   }
 
-  .lotobola-desktop__system-body {
+  .lotobola-narrative__system-body {
     font-size: 16px;
-    line-height: 20px;
+    line-height: 24px;
   }
 
-  .lotobola-desktop__system-groups {
+  .lotobola-narrative__system-groups {
     grid-template-columns: 1fr;
     gap: 12px;
   }
 
-  .lotobola-desktop__system-group {
+  .lotobola-narrative__system-group {
     min-height: auto;
     padding: 8px;
     border-radius: 16px;
     gap: 4px;
   }
 
-  .lotobola-desktop__system-group-title {
+  .lotobola-narrative__system-group-title {
     font-size: 14px;
     line-height: 16px;
   }
 
-  .lotobola-desktop__system-item {
+  .lotobola-narrative__system-item {
     font-size: 16px;
     line-height: 24px;
   }
 
-  .lotobola-desktop__frictions {
+  .lotobola-narrative__frictions {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  .lotobola-desktop__friction-row {
+  .lotobola-narrative__friction-row {
     min-height: 210px;
     padding: 0 0 24px;
     grid-template-columns: 1fr;
@@ -1329,31 +1329,31 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  .lotobola-desktop__friction-index {
+  .lotobola-narrative__friction-index {
     font-size: 80px;
     line-height: 80px;
     color: #6366f1;
     opacity: 1;
   }
 
-  .lotobola-desktop__friction-problem,
-  .lotobola-desktop__friction-solution {
+  .lotobola-narrative__friction-problem,
+  .lotobola-narrative__friction-solution {
     font-size: 16px;
     line-height: 24px;
   }
 
-  .lotobola-desktop__friction-arrow {
+  .lotobola-narrative__friction-arrow {
     font-size: 22px;
     line-height: 22px;
     color: #6366f1;
     opacity: 1;
   }
 
-  .lotobola-desktop__friction-row:last-child {
+  .lotobola-narrative__friction-row:last-child {
     border-bottom: 0;
   }
 
-  .lotobola-desktop__section#reflection {
+  .lotobola-narrative__section#reflection {
     border-top: 0;
   }
 

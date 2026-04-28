@@ -9,7 +9,7 @@ import { CaseLabelPill } from "../components/case-study/CaseLabelPill";
 import { CaseFrictionItem } from "../components/case-study/CaseFrictionItem";
 import { useI18n } from "../i18n";
 import { initCaseMotion } from "../lib/caseMotion";
-import { LotoBolaDesktopView } from "./LotoBolaDesktopView";
+import { LotoBolaNarrativeView } from "./LotoBolaNarrativeView";
 import { LotoBolaSystemDiagram } from "../components/case-study/LotoBolaSystemDiagram";
 import "./LotoBolaCaseStudy.css";
 import "./LotoBolaNarrative.css";
@@ -437,7 +437,7 @@ export function LotoBolaSections() {
 
   return (
     <div ref={rootRef} className="cs-body lotobola-story">
-      <LotoBolaDesktopView lang={lang} />
+      <LotoBolaNarrativeView lang={lang} />
 
       {isDesktop && (
         <div className="lotobola-system-diagram-wrapper lotobola-system-diagram-wrapper--desktop">
