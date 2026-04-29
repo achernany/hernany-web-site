@@ -1039,6 +1039,6 @@
 
 @media (max-width: 1023px) {
   .cs-case-page .page-footer {
-    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px) + var(--space-16));
+    padding-bottom: calc(112px + env(safe-area-inset-bottom, 0px));
   }
 }

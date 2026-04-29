@@ -31,6 +31,13 @@ export interface FrictionRow {
   solution: string;
 }
 
+export interface ProcessCard {
+  index: string;
+  label: string;
+  title: string;
+  body: string;
+}
+
 export interface NarrativeCopy {
   hero: {
     title: string;
@@ -62,7 +69,9 @@ export interface NarrativeCopy {
     communicationBody: string;
   };
   system: SectionCopy;
-  process: SectionCopy;
+  process: SectionCopy & {
+    cards: ProcessCard[];
+  };
   reflection: SectionCopy & {
     quote: string;
   };
@@ -322,6 +331,36 @@ const spanishCopy: NarrativeCopy = {
     subtitle: "De exploraciones tempranas a un sistema más estructurado",
     body:
       "El proyecto no surgió como una solución cerrada desde el inicio. Fue tomando forma a través de exploraciones, ajustes de flujo, decisiones operativas, pruebas de estructura y refinamientos visuales que respondían a la complejidad real del sistema. Mostrar esa evolución permite entender cómo la solución pasó de exploraciones iniciales y necesidades fragmentadas a una arquitectura más madura, capaz de sostener múltiples superficies, distintos tipos de usuario y una operación más consistente en el tiempo.",
+    cards: [
+      {
+        index: "01",
+        label: "Exploración / Sistema",
+        title: "Exploración inicial",
+        body:
+          "Primeras hipótesis de producto, pantallas y reglas críticas para entender el alcance real del ecosistema.",
+      },
+      {
+        index: "02",
+        label: "Journey / Arquitectura",
+        title: "Estructura de flujos",
+        body:
+          "Ordenamiento de journeys, puntos de fricción y dependencias entre canales para volver legible la experiencia.",
+      },
+      {
+        index: "03",
+        label: "Operación / Canales",
+        title: "Alineación operativa",
+        body:
+          "Conexión entre venta asistida, validaciones, operación interna y comunicación pública como una misma estructura.",
+      },
+      {
+        index: "04",
+        label: "Design ops / Escalabilidad",
+        title: "Sistema evolutivo",
+        body:
+          "Refinamiento visual y funcional hacia una base consistente, escalable y preparada para nuevas superficies.",
+      },
+    ],
   },
   reflection: {
     kicker: "10 — reflexión",
@@ -565,6 +604,36 @@ const englishCopy: NarrativeCopy = {
     subtitle: "From early explorations to a more structured system",
     body:
       "The project did not emerge as a closed solution from the beginning. It took shape through explorations, flow adjustments, operational decisions, structure tests, and visual refinements that responded to the real complexity of the system.",
+    cards: [
+      {
+        index: "01",
+        label: "Exploration / System",
+        title: "Initial exploration",
+        body:
+          "Early product hypotheses, screens, and critical rules helped reveal the real scope of the ecosystem.",
+      },
+      {
+        index: "02",
+        label: "Journey / Architecture",
+        title: "Flow structure",
+        body:
+          "Journeys, friction points, and channel dependencies were organized to make the experience legible.",
+      },
+      {
+        index: "03",
+        label: "Operation / Channels",
+        title: "Operational alignment",
+        body:
+          "Assisted sales, validations, internal operation, and public communication were connected as one structure.",
+      },
+      {
+        index: "04",
+        label: "Design ops / Scalability",
+        title: "Evolving system",
+        body:
+          "Visual and functional refinements shaped a consistent foundation ready for new surfaces and growth.",
+      },
+    ],
   },
   reflection: {
     kicker: "10 — Reflection",

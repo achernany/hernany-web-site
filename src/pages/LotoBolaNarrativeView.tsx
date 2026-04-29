@@ -1,7 +1,42 @@
 import { useCallback, useEffect, useRef, useState, type PointerEvent, type ReactNode } from "react";
 import { LotoBolaSystemDiagram } from "../components/case-study/LotoBolaSystemDiagram";
-import { copyByLang, type ArchitectureCard, type FrictionRow, type Lang, type SectionCopy } from "./LotoBolaNarrativeContent";
+import {
+  copyByLang,
+  type ArchitectureCard,
+  type FrictionRow,
+  type Lang,
+  type ProcessCard,
+  type SectionCopy,
+} from "./LotoBolaNarrativeContent";
 import "./LotoBolaNarrativeView.css";
+
+function easeInOutCubic(progress: number) {
+  return progress < 0.5 ? 4 * progress * progress * progress : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+}
+
+function animateScrollLeft(element: HTMLElement, targetLeft: number, duration = 760) {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    element.scrollLeft = targetLeft;
+    return;
+  }
+
+  const startLeft = element.scrollLeft;
+  const distance = targetLeft - startLeft;
+  const startTime = window.performance.now();
+
+  const tick = (currentTime: number) => {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+
+    element.scrollLeft = startLeft + distance * easeInOutCubic(progress);
+
+    if (progress < 1) {
+      window.requestAnimationFrame(tick);
+    }
+  };
+
+  window.requestAnimationFrame(tick);
+}
 
 function KickerText({ kicker }: { kicker: string }) {
   const parts = kicker.split(" — ");
@@ -138,10 +173,7 @@ function PlaceholderCarousel() {
     const scrollDelta =
       targetRect.left + targetRect.width / 2 - (viewportRect.left + viewportRect.width / 2);
 
-    viewport.scrollTo({
-      left: viewport.scrollLeft + scrollDelta,
-      behavior: "smooth",
-    });
+    animateScrollLeft(viewport, viewport.scrollLeft + scrollDelta, 720);
     setSelectedIndex(index);
   }, []);
 
@@ -321,10 +353,7 @@ function ArchitectureCarousel({ cards, lang }: { cards: ArchitectureCard[]; lang
       const scrollDelta =
         targetRect.left + targetRect.width / 2 - (viewportRect.left + viewportRect.width / 2);
 
-      viewport.scrollTo({
-        left: viewport.scrollLeft + scrollDelta,
-        behavior: "smooth",
-      });
+      animateScrollLeft(viewport, viewport.scrollLeft + scrollDelta, 820);
       setSelectedIndex(targetIndex);
     },
     [cards.length],
@@ -470,6 +499,195 @@ function ArchitectureCarousel({ cards, lang }: { cards: ArchitectureCard[]; lang
           ))}
         </div>
       </div>
+    </div>
+  );
+}
+
+function ProcessCarousel({ cards, lang }: { cards: ProcessCard[]; lang: Lang }) {
+  const viewportRef = useRef<HTMLDivElement | null>(null);
+  const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const rafRef = useRef<number | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [activeCard, setActiveCard] = useState<ProcessCard | null>(null);
+
+  const updateCards = useCallback(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+
+    const viewportRect = viewport.getBoundingClientRect();
+    const viewportCenter = viewportRect.left + viewportRect.width / 2;
+    let closestIndex = 0;
+    let closestDistance = Number.POSITIVE_INFINITY;
+
+    cardRefs.current.forEach((card, index) => {
+      if (!card) return;
+
+      const cardRect = card.getBoundingClientRect();
+      const cardCenter = cardRect.left + cardRect.width / 2;
+      const distance = Math.abs(cardCenter - viewportCenter);
+      card.style.setProperty("--process-card-opacity", "1");
+
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = index;
+      }
+    });
+
+    const closestCard = cardRefs.current[closestIndex];
+    if (closestCard) {
+      closestCard.style.setProperty("--process-card-opacity", "1");
+    }
+
+    setSelectedIndex((current) => (current === closestIndex ? current : closestIndex));
+  }, []);
+
+  const scheduleUpdate = useCallback(() => {
+    if (rafRef.current !== null) return;
+
+    rafRef.current = window.requestAnimationFrame(() => {
+      rafRef.current = null;
+      updateCards();
+    });
+  }, [updateCards]);
+
+  const scrollToIndex = useCallback((index: number) => {
+    const viewport = viewportRef.current;
+    const target = cardRefs.current[index];
+    if (!viewport || !target) return;
+
+    const viewportRect = viewport.getBoundingClientRect();
+    const targetRect = target.getBoundingClientRect();
+    const scrollDelta =
+      targetRect.left + targetRect.width / 2 - (viewportRect.left + viewportRect.width / 2);
+
+    animateScrollLeft(viewport, viewport.scrollLeft + scrollDelta, 780);
+    setSelectedIndex(index);
+  }, []);
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return undefined;
+
+    updateCards();
+    viewport.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      viewport.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      if (rafRef.current !== null) window.cancelAnimationFrame(rafRef.current);
+    };
+  }, [scheduleUpdate, updateCards]);
+
+  const labels =
+    lang === "es"
+      ? {
+          title: "Carrusel de iteración y evolución",
+          dot: "Ver etapa",
+          open: "Abrir detalle de etapa",
+          close: "Cerrar detalle",
+        }
+      : {
+          title: "Iteration and evolution carousel",
+          dot: "Show stage",
+          open: "Open stage detail",
+          close: "Close detail",
+        };
+
+  useEffect(() => {
+    if (!activeCard) return undefined;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && window.matchMedia("(max-width: 1023px)").matches) setActiveCard(null);
+    };
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverscroll = document.documentElement.style.overscrollBehavior;
+
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overscrollBehavior = "none";
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overscrollBehavior = previousHtmlOverscroll;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [activeCard]);
+
+  return (
+    <div className="lotobola-narrative__process-carousel" aria-label={labels.title}>
+      <div ref={viewportRef} className="lotobola-narrative__process-carousel-viewport" role="region">
+        <div className="lotobola-narrative__process-carousel-track">
+          {cards.map((card, index) => (
+            <article
+              key={card.index}
+              className="lotobola-narrative__process-card"
+              ref={(node) => {
+                cardRefs.current[index] = node;
+              }}
+            >
+              <button
+                type="button"
+                className="lotobola-narrative__process-card-button"
+                onClick={() => setActiveCard(card)}
+                aria-label={`${labels.open}: ${card.title}`}
+              >
+                <div className="lotobola-narrative__process-card-media" aria-hidden="true" />
+                <div className="lotobola-narrative__process-card-copy">
+                  <p className="lotobola-narrative__process-card-label">{card.label}</p>
+                  <h3 className="lotobola-narrative__process-card-title">{card.title}</h3>
+                  <p className="lotobola-narrative__process-card-body">{card.body}</p>
+                </div>
+              </button>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div className="lotobola-narrative__process-dots">
+        {cards.map((card, index) => (
+          <button
+            key={card.index}
+            type="button"
+            className={`lotobola-narrative__process-dot${
+              selectedIndex === index ? " lotobola-narrative__process-dot--selected" : ""
+            }`}
+            onClick={() => scrollToIndex(index)}
+            aria-label={`${labels.dot} ${card.index}`}
+            aria-current={selectedIndex === index ? "true" : undefined}
+          />
+        ))}
+      </div>
+
+      {activeCard ? (
+        <div className="lotobola-narrative__process-modal" role="dialog" aria-modal="true" aria-labelledby="process-detail-title">
+          <button
+            type="button"
+            className="lotobola-narrative__process-modal-backdrop"
+            aria-label={labels.close}
+            onClick={() => {
+              if (window.matchMedia("(max-width: 1023px)").matches) setActiveCard(null);
+            }}
+          />
+          <div className="lotobola-narrative__process-modal-panel">
+            <button
+              type="button"
+              className="lotobola-narrative__process-modal-close"
+              onClick={() => setActiveCard(null)}
+              aria-label={labels.close}
+            >
+              ×
+            </button>
+            <div className="lotobola-narrative__process-modal-media" aria-hidden="true" />
+            <div className="lotobola-narrative__process-modal-copy">
+              <p className="lotobola-narrative__process-card-label">{activeCard.label}</p>
+              <h3 id="process-detail-title" className="lotobola-narrative__process-modal-title">
+                {activeCard.title}
+              </h3>
+              <p className="lotobola-narrative__process-modal-body">{activeCard.body}</p>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -642,7 +860,7 @@ export function LotoBolaNarrativeView({ lang }: { lang: Lang }) {
 
       <section className="lotobola-narrative__section" id="process">
         <SectionIntro {...c.process} />
-        <Placeholder variant="landscape" />
+        <ProcessCarousel cards={c.process.cards} lang={lang} />
       </section>
 
       <section className="lotobola-narrative__section lotobola-narrative__section--final" id="reflection">
