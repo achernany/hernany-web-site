@@ -48,9 +48,7 @@ export interface NarrativeCopy {
     metrics: MetricItem[];
   };
   overview: SectionCopy;
-  challenge: SectionCopy & {
-    quote: string;
-  };
+  challenge: SectionCopy;
   architecture: SectionCopy & {
     serviceTitle: string;
     serviceBody: string;
@@ -110,8 +108,6 @@ const spanishCopy: NarrativeCopy = {
     title: "El desafío real",
     body:
       "Diseñar Lotobola no consistía en optimizar un único journey digital, sino en dar forma a un sistema de lotería distribuido entre canales, superficies y actores muy distintos entre sí. La experiencia del jugador dependía tanto de la claridad de la capa visible como de la consistencia entre venta asistida, validaciones, operación interna, comunicación promocional e integraciones con terceros. El desafío era lograr que un ecosistema fragmentado, entre web, POS, backoffice, displays y canales retail con ritmos de uso diferentes, pudiera funcionar como una experiencia conectada, comprensible y operable, sin perder coherencia entre capas públicas, comerciales y operativas. La hipótesis de trabajo fue que, si conseguíamos alinear arquitectura de experiencia, lógica operativa y fundamentos de interfaz en un sistema común, el producto no solo sería más claro para el usuario final, sino también más fácil de vender, operar, gobernar y escalar con consistencia a lo largo del tiempo.",
-    quote:
-      "Un producto de lotería no es solo un problema de pantallas. Es un problema de servicio, de operaciones, de comunicación y de sistemas integrados multiplataforma y con roles y usuarios múltiples.",
   },
   architecture: {
     kicker: "03 — arquitectura",
@@ -406,8 +402,6 @@ const englishCopy: NarrativeCopy = {
     title: "The real challenge",
     body:
       "Designing LotoBola was not about optimizing a single digital journey, but about giving form to a lottery system distributed across channels, surfaces, and very different actors. The player experience depended both on the clarity of the visible layer and on consistency across assisted sales, validations, internal operations, promotional communication, and third-party integrations. The challenge was to make a fragmented ecosystem across web, POS, back office, displays, and retail channels function as one connected, understandable, and operable experience without losing coherence between public, commercial, and operational layers.",
-    quote:
-      "A lottery product is not only a screen problem. It is a service, operations, communication, and integrated system problem across platforms and multiple roles.",
   },
   architecture: {
     ...spanishCopy.architecture,

@@ -98,7 +98,48 @@ function Placeholder({
   );
 }
 
-function PlaceholderCarousel() {
+function VisualAsset({
+  src,
+  variant = "landscape",
+  bleed = false,
+}: {
+  src: string;
+  variant?: "landscape" | "final";
+  bleed?: boolean;
+}) {
+  return (
+    <img
+      className={`lotobola-narrative__visual-asset lotobola-narrative__visual-asset--${variant}${
+        bleed ? " lotobola-narrative__visual-asset--bleed" : ""
+      }`}
+      src={src}
+      alt=""
+      width={2368}
+      height={1760}
+      loading="lazy"
+      aria-hidden="true"
+    />
+  );
+}
+
+const challengeImages = [
+  "/images/lotobola/lotobola_challenge_01.webp",
+  "/images/lotobola/lotobola_challenge_02.webp",
+  "/images/lotobola/lotobola_challenge_03.webp",
+];
+
+const lotobolaAssets = {
+  publicExperience: "/images/lotobola/lotobola_public_experience.webp",
+  retailLayer: "/images/lotobola/lotobola_retail_layer.webp",
+  multipleActors: "/images/lotobola/lotobola_multiple_actors.webp",
+  operationalLayer: "/images/lotobola/lotobola_operational_layer.webp",
+  restrictedCommunication: "/images/lotobola/lotobola_restricted_comunication.webp",
+  systemCoherence: "/images/lotobola/lotobola_system_coherence.webp",
+  finalReflection: "/images/lotobola/lotobola_final_reflextion.webp",
+};
+
+function PlaceholderCarousel({ images }: { images?: string[] }) {
+  const items = images ?? [undefined, undefined, undefined];
   const viewportRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
   const rafRef = useRef<number | null>(null);
@@ -107,6 +148,18 @@ function PlaceholderCarousel() {
   const updateCards = useCallback(() => {
     const viewport = viewportRef.current;
     if (!viewport) return;
+
+    const desktopStatic =
+      window.matchMedia("(min-width: 1024px) and (hover: hover) and (pointer: fine)").matches;
+    if (desktopStatic) {
+      cardRefs.current.forEach((card) => {
+        if (!card) return;
+        card.style.setProperty("--placeholder-opacity", "1");
+        card.style.setProperty("--placeholder-scale", "1");
+      });
+      setSelectedIndex(0);
+      return;
+    }
 
     const viewportRect = viewport.getBoundingClientRect();
     const viewportCenter = viewportRect.left + viewportRect.width / 2;
@@ -180,7 +233,7 @@ function PlaceholderCarousel() {
   return (
     <div className="lotobola-narrative__mobile-carousel-shell">
       <div ref={viewportRef} className="lotobola-narrative__placeholder-row">
-        {[0, 1, 2].map((item) => (
+        {items.map((src, item) => (
           <div
             key={item}
             className="lotobola-narrative__placeholder-slide"
@@ -188,12 +241,23 @@ function PlaceholderCarousel() {
               cardRefs.current[item] = node;
             }}
           >
-            <Placeholder variant="card" />
+            {src ? (
+              <img
+                className="lotobola-narrative__placeholder-image"
+                src={src}
+                alt=""
+                width={1584}
+                height={1584}
+                loading="lazy"
+              />
+            ) : (
+              <Placeholder variant="card" />
+            )}
           </div>
         ))}
       </div>
       <div className="lotobola-narrative__mobile-dots">
-        {[0, 1, 2].map((item) => (
+        {items.map((_, item) => (
           <button
             key={item}
             type="button"
@@ -729,6 +793,28 @@ function ArchitectureQuote({ lang }: { lang: Lang }) {
   );
 }
 
+function ChallengeQuote({ lang }: { lang: Lang }) {
+  if (lang === "es") {
+    return (
+      <>
+        Un producto de lotería no se diseña solo desde las pantallas.{" "}
+        Integra servicio, operaciones, comunicación y sistemas multiplataforma,{" "}
+        <span className="lotobola-narrative__quote-accent">
+          con múltiples roles, usuarios y puntos de contacto.
+        </span>
+      </>
+    );
+  }
+
+  return (
+    <>
+      A lottery product is not designed only through screens.{" "}
+      It integrates service, operations, communication, and multiplatform systems,{" "}
+      <span className="lotobola-narrative__quote-accent">with multiple roles, users, and touchpoints.</span>
+    </>
+  );
+}
+
 function ReflectionQuote({ lang }: { lang: Lang }) {
   if (lang === "es") {
     return (
@@ -793,9 +879,11 @@ export function LotoBolaNarrativeView({ lang }: { lang: Lang }) {
       <section className="lotobola-narrative__section" id="challenge">
         <SectionIntro {...c.challenge} />
 
-        <PlaceholderCarousel />
+        <PlaceholderCarousel images={challengeImages} />
 
-        <QuoteBlock accent>{c.challenge.quote}</QuoteBlock>
+        <QuoteBlock>
+          <ChallengeQuote lang={lang} />
+        </QuoteBlock>
       </section>
 
       <section className="lotobola-narrative__section" id="architecture">
@@ -827,35 +915,35 @@ export function LotoBolaNarrativeView({ lang }: { lang: Lang }) {
 
       <section className="lotobola-narrative__section" id="public-experience">
         <SectionIntro {...c.publicExperience} />
-        <Placeholder variant="landscape" />
+        <VisualAsset src={lotobolaAssets.publicExperience} />
       </section>
 
       <section className="lotobola-narrative__section" id="retail-channels">
         <SectionIntro {...c.retailChannels} />
-        <Placeholder variant="landscape" />
+        <VisualAsset src={lotobolaAssets.retailLayer} />
       </section>
 
       <section className="lotobola-narrative__section" id="multiple-actors">
         <SectionIntro {...c.multipleActors} />
-        <Placeholder variant="landscape" />
+        <VisualAsset src={lotobolaAssets.multipleActors} />
       </section>
 
       <section className="lotobola-narrative__section" id="operations">
         <SectionIntro {...c.operations} />
 
-        <PlaceholderCarousel />
+        <VisualAsset src={lotobolaAssets.operationalLayer} />
 
         <div className="lotobola-narrative__communication">
           <h3 className="lotobola-narrative__subtitle">{c.operations.communicationTitle}</h3>
           <p className="lotobola-narrative__body">{c.operations.communicationBody}</p>
         </div>
 
-        <Placeholder variant="landscape" />
+        <VisualAsset src={lotobolaAssets.restrictedCommunication} />
       </section>
 
       <section className="lotobola-narrative__section" id="system">
         <SectionIntro {...c.system} />
-        <Placeholder variant="landscape" />
+        <VisualAsset src={lotobolaAssets.systemCoherence} />
       </section>
 
       <section className="lotobola-narrative__section" id="process">
@@ -868,7 +956,7 @@ export function LotoBolaNarrativeView({ lang }: { lang: Lang }) {
         <QuoteBlock>
           <ReflectionQuote lang={lang} />
         </QuoteBlock>
-        <Placeholder variant="final" bleed />
+        <VisualAsset src={lotobolaAssets.finalReflection} variant="final" bleed />
       </section>
     </div>
   );
