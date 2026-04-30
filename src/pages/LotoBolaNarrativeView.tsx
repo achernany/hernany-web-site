@@ -762,7 +762,6 @@ function FrictionItem({ item }: { item: FrictionRow }) {
       <span className="lotobola-narrative__friction-index">{item.index}</span>
       <p className="lotobola-narrative__friction-problem">{item.problem}</p>
       <span className="lotobola-narrative__friction-arrow" aria-hidden="true">
-        ↓
       </span>
       <p className="lotobola-narrative__friction-solution">{item.solution}</p>
     </article>
