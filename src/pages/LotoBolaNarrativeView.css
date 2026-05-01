@@ -31,7 +31,8 @@
 
   .cs-case-page--lotobola .cs-sticky-header .ui-container {
     width: 100%;
-    max-width: none;
+    max-width: 1280px;
+    margin-inline: auto;
     padding-inline: 0;
   }
 
@@ -115,7 +116,7 @@
   }
 
   .cs-case-page--lotobola .page-footer {
-    padding: 16px 0 calc(114px + env(safe-area-inset-bottom, 0px));
+    padding: 32px 0 calc(176px + env(safe-area-inset-bottom, 0px));
   }
 
   .cs-case-page--lotobola .page-footer__copy {
@@ -652,9 +653,9 @@
 }
 
 .lotobola-narrative__system-carousel-slide {
-  --slide-scale: 0.78;
-  --slide-opacity: 0.62;
-  --slide-blur: 1.4px;
+  --slide-scale: 0.88;
+  --slide-opacity: 0.76;
+  --slide-blur: 0.8px;
   position: relative;
   flex: 0 0 var(--carousel-slide-width);
   min-width: 0;
@@ -664,9 +665,9 @@
   opacity: var(--slide-opacity);
   filter: blur(var(--slide-blur)) saturate(0.82);
   transition:
-    transform 780ms cubic-bezier(0.42, 0, 0.18, 1),
-    opacity 780ms cubic-bezier(0.42, 0, 0.18, 1),
-    filter 780ms cubic-bezier(0.42, 0, 0.18, 1);
+    transform 960ms cubic-bezier(0.25, 1, 0.5, 1),
+    opacity 960ms cubic-bezier(0.25, 1, 0.5, 1),
+    filter 960ms cubic-bezier(0.25, 1, 0.5, 1);
   will-change: transform, opacity, filter;
 }
 
@@ -990,6 +991,13 @@
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-x;
+  cursor: grab;
+}
+
+.lotobola-narrative__process-carousel-viewport--dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
 }
 
 .lotobola-narrative__process-carousel-viewport::-webkit-scrollbar {
@@ -1036,38 +1044,12 @@
   background: #1e1e1e;
 }
 
-.lotobola-narrative__process-card-button {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  z-index: 1;
-  min-height: 0;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: inherit;
-  background: transparent;
-  color: inherit;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  cursor: pointer;
-  text-align: inherit;
-  font: inherit;
-}
-
-.lotobola-narrative__process-card-button:focus-visible {
-  outline: 2px solid rgba(108, 99, 255, 0.86);
-  outline-offset: -4px;
-}
-
 .lotobola-narrative__process-card-media {
   width: 100%;
   position: absolute;
   inset: 0;
   height: auto;
+  z-index: 0;
   background: #1e1e1e;
 }
 
@@ -1075,6 +1057,8 @@
   flex: 0 0 auto;
   height: 138px;
   padding: 8px 16px;
+  position: relative;
+  z-index: 1;
   border-top: 0.5px solid rgba(255, 255, 255, 0.38);
   margin-top: auto;
   background: rgba(48, 48, 48, 0.62);
@@ -1110,6 +1094,30 @@
   color: rgba(255, 255, 255, 0.68);
   font-size: 14px;
   line-height: 18px;
+}
+
+.lotobola-narrative__process-more {
+  -webkit-appearance: none;
+  appearance: none;
+  min-height: 32px;
+  align-self: center;
+  margin: auto 0 0;
+  padding: 6px 16px;
+  border: 0;
+  border-radius: 999px;
+  background: #6c63ff;
+  color: #ffffff;
+  font-family: "Mulish", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: 0;
+  box-shadow: 0 0 18px rgba(108, 99, 255, 0.28);
+}
+
+.lotobola-narrative__process-more:disabled {
+  cursor: not-allowed;
+  opacity: 0.64;
 }
 
 .lotobola-narrative__process-dots {
@@ -1264,8 +1272,9 @@
   }
 
   .lotobola-narrative__process-card:hover {
-    border-color: rgba(108, 99, 255, 0.82);
-    box-shadow: 0 18px 50px rgba(13, 10, 50, 0.42), 0 0 22px rgba(108, 99, 255, 0.16);
+    border-color: transparent;
+    box-shadow: 0 18px 50px rgba(13, 10, 50, 0.42), 0 0 24px rgba(108, 99, 255, 0.18);
+    transform: translate3d(0, -2px, 0) scale(1.015);
   }
 
   .lotobola-narrative__friction-row:hover {
@@ -1764,12 +1773,12 @@
 
   .lotobola-narrative__process-carousel-track {
     justify-content: flex-start;
-    padding-inline: calc((100% - 264px) / 2);
+    padding-inline: calc((100% - 284px) / 2);
   }
 
   .lotobola-narrative__process-card {
-    flex-basis: 264px;
-    width: 264px;
+    flex-basis: 284px;
+    width: 284px;
     height: 380px;
   }
 
@@ -1917,7 +1926,7 @@
   }
 
   .cs-case-page--lotobola .page-footer {
-    padding: 16px 0 calc(112px + env(safe-area-inset-bottom, 0px));
+    padding: 24px 16px calc(148px + env(safe-area-inset-bottom, 0px));
   }
 
   .cs-case-page--lotobola .page-footer__copy {

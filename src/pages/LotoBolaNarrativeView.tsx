@@ -368,10 +368,10 @@ function ArchitectureCarousel({ cards, lang }: { cards: ArchitectureCard[]; lang
       const slideRect = slide.getBoundingClientRect();
       const slideCenter = slideRect.left + slideRect.width / 2;
       const distance = Math.abs(slideCenter - viewportCenter);
-      const falloff = Math.min(distance / (viewportRect.width * 0.48), 1);
-      const scale = 1 - falloff * 0.22;
-      const opacity = 1 - falloff * 0.38;
-      const blur = falloff * 1.4;
+      const falloff = Math.min(distance / (viewportRect.width * 0.72), 1);
+      const scale = 1 - falloff * 0.12;
+      const opacity = 1 - falloff * 0.24;
+      const blur = falloff * 0.8;
 
       slide.style.setProperty("--slide-scale", scale.toFixed(3));
       slide.style.setProperty("--slide-opacity", opacity.toFixed(3));
@@ -417,7 +417,7 @@ function ArchitectureCarousel({ cards, lang }: { cards: ArchitectureCard[]; lang
       const scrollDelta =
         targetRect.left + targetRect.width / 2 - (viewportRect.left + viewportRect.width / 2);
 
-      animateScrollLeft(viewport, viewport.scrollLeft + scrollDelta, 820);
+      animateScrollLeft(viewport, viewport.scrollLeft + scrollDelta, 980);
       setSelectedIndex(targetIndex);
     },
     [cards.length],
@@ -571,8 +571,15 @@ function ProcessCarousel({ cards, lang }: { cards: ProcessCard[]; lang: Lang }) 
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
   const rafRef = useRef<number | null>(null);
+  const dragRef = useRef({
+    isDragging: false,
+    pointerId: -1,
+    startX: 0,
+    scrollLeft: 0,
+  });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [activeCard, setActiveCard] = useState<ProcessCard | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
 
   const updateCards = useCallback(() => {
     const viewport = viewportRef.current;
@@ -643,18 +650,37 @@ function ProcessCarousel({ cards, lang }: { cards: ProcessCard[]; lang: Lang }) 
     };
   }, [scheduleUpdate, updateCards]);
 
+  const stopDragging = useCallback(
+    (event?: PointerEvent<HTMLDivElement>) => {
+      const viewport = viewportRef.current;
+      if (!dragRef.current.isDragging) return;
+
+      if (event && viewport?.hasPointerCapture(event.pointerId)) {
+        viewport.releasePointerCapture(event.pointerId);
+      }
+
+      dragRef.current.isDragging = false;
+      dragRef.current.pointerId = -1;
+      setIsDragging(false);
+      scheduleUpdate();
+    },
+    [scheduleUpdate],
+  );
+
   const labels =
     lang === "es"
       ? {
           title: "Carrusel de iteración y evolución",
           dot: "Ver etapa",
           open: "Abrir detalle de etapa",
+          more: "Ver más",
           close: "Cerrar detalle",
         }
       : {
           title: "Iteration and evolution carousel",
           dot: "Show stage",
           open: "Open stage detail",
+          more: "View more",
           close: "Close detail",
         };
 
@@ -679,7 +705,42 @@ function ProcessCarousel({ cards, lang }: { cards: ProcessCard[]; lang: Lang }) 
 
   return (
     <div className="lotobola-narrative__process-carousel" aria-label={labels.title}>
-      <div ref={viewportRef} className="lotobola-narrative__process-carousel-viewport" role="region">
+      <div
+        ref={viewportRef}
+        className={`lotobola-narrative__process-carousel-viewport${
+          isDragging ? " lotobola-narrative__process-carousel-viewport--dragging" : ""
+        }`}
+        role="region"
+        onPointerDown={(event) => {
+          if (event.button !== 0 || !event.isPrimary) return;
+
+          const viewport = viewportRef.current;
+          if (!viewport) return;
+
+          dragRef.current = {
+            isDragging: true,
+            pointerId: event.pointerId,
+            startX: event.clientX,
+            scrollLeft: viewport.scrollLeft,
+          };
+          viewport.setPointerCapture(event.pointerId);
+          setIsDragging(true);
+        }}
+        onPointerMove={(event) => {
+          const viewport = viewportRef.current;
+          const drag = dragRef.current;
+          if (!viewport || !drag.isDragging || drag.pointerId !== event.pointerId) return;
+
+          event.preventDefault();
+          viewport.scrollLeft = drag.scrollLeft - (event.clientX - drag.startX);
+          scheduleUpdate();
+        }}
+        onPointerUp={stopDragging}
+        onPointerCancel={stopDragging}
+        onPointerLeave={(event) => {
+          if (dragRef.current.isDragging) stopDragging(event);
+        }}
+      >
         <div className="lotobola-narrative__process-carousel-track">
           {cards.map((card, index) => (
             <article
@@ -689,19 +750,20 @@ function ProcessCarousel({ cards, lang }: { cards: ProcessCard[]; lang: Lang }) 
                 cardRefs.current[index] = node;
               }}
             >
-              <button
-                type="button"
-                className="lotobola-narrative__process-card-button"
-                onClick={() => setActiveCard(card)}
-                aria-label={`${labels.open}: ${card.title}`}
-              >
-                <div className="lotobola-narrative__process-card-media" aria-hidden="true" />
-                <div className="lotobola-narrative__process-card-copy">
-                  <p className="lotobola-narrative__process-card-label">{card.label}</p>
-                  <h3 className="lotobola-narrative__process-card-title">{card.title}</h3>
-                  <p className="lotobola-narrative__process-card-body">{card.body}</p>
-                </div>
-              </button>
+              <div className="lotobola-narrative__process-card-media" aria-hidden="true" />
+              <div className="lotobola-narrative__process-card-copy">
+                <p className="lotobola-narrative__process-card-label">{card.label}</p>
+                <h3 className="lotobola-narrative__process-card-title">{card.title}</h3>
+                <p className="lotobola-narrative__process-card-body">{card.body}</p>
+                <button
+                  type="button"
+                  className="lotobola-narrative__process-more"
+                  disabled
+                  aria-label={`${labels.open}: ${card.title}`}
+                >
+                  {labels.more}
+                </button>
+              </div>
             </article>
           ))}
         </div>

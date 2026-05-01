@@ -330,31 +330,31 @@ const spanishCopy: NarrativeCopy = {
     cards: [
       {
         index: "01",
-        label: "Exploración / Sistema",
-        title: "Exploración inicial",
+        label: "Iteración / Home",
+        title: "Home en evolución",
         body:
-          "Primeras hipótesis de producto, pantallas y reglas críticas para entender el alcance real del ecosistema.",
+          "Rediseños guiados por datos, lectura de comportamiento y ajustes sobre conversión inicial.",
       },
       {
         index: "02",
-        label: "Journey / Arquitectura",
-        title: "Estructura de flujos",
+        label: "Producto / Suscripción",
+        title: "Recurrencia de sorteos",
         body:
-          "Ordenamiento de journeys, puntos de fricción y dependencias entre canales para volver legible la experiencia.",
+          "Decisiones sobre ubicación, claridad promocional y límites técnicos del ticket.",
       },
       {
         index: "03",
-        label: "Operación / Canales",
-        title: "Alineación operativa",
+        label: "Ventas / Landings",
+        title: "Landings comerciales",
         body:
-          "Conexión entre venta asistida, validaciones, operación interna y comunicación pública como una misma estructura.",
+          "Páginas adaptadas a campañas, canales y necesidades específicas de conversión.",
       },
       {
         index: "04",
-        label: "Design ops / Escalabilidad",
-        title: "Sistema evolutivo",
+        label: "Sistema / Tokens",
+        title: "Design system vivo",
         body:
-          "Refinamiento visual y funcional hacia una base consistente, escalable y preparada para nuevas superficies.",
+          "Arquitectura de tokens, naming y conexión entre Figma, repositorio y Storybook.",
       },
     ],
   },
@@ -601,31 +601,27 @@ const englishCopy: NarrativeCopy = {
     cards: [
       {
         index: "01",
-        label: "Exploration / System",
-        title: "Initial exploration",
-        body:
-          "Early product hypotheses, screens, and critical rules helped reveal the real scope of the ecosystem.",
+        label: "Iteration / Home",
+        title: "Evolving home",
+        body: "Redesigns guided by data, behavioral reading, and adjustments to initial conversion.",
       },
       {
         index: "02",
-        label: "Journey / Architecture",
-        title: "Flow structure",
-        body:
-          "Journeys, friction points, and channel dependencies were organized to make the experience legible.",
+        label: "Product / Subscription",
+        title: "Recurring draws",
+        body: "Decisions around placement, promotional clarity, and technical limits of the ticket.",
       },
       {
         index: "03",
-        label: "Operation / Channels",
-        title: "Operational alignment",
-        body:
-          "Assisted sales, validations, internal operation, and public communication were connected as one structure.",
+        label: "Sales / Landings",
+        title: "Commercial landings",
+        body: "Pages adapted to campaigns, channels, and specific conversion needs.",
       },
       {
         index: "04",
-        label: "Design ops / Scalability",
-        title: "Evolving system",
-        body:
-          "Visual and functional refinements shaped a consistent foundation ready for new surfaces and growth.",
+        label: "System / Tokens",
+        title: "Living design system",
+        body: "Token architecture, naming, and connection between Figma, repository, and Storybook.",
       },
     ],
   },
