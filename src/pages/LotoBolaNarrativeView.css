@@ -24,9 +24,9 @@
     min-height: 81px;
     padding: 0 48px;
     border-bottom: none;
-    background: rgba(8, 9, 15, 0.88);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
+    background: rgba(8, 9, 15, 0.62);
+    -webkit-backdrop-filter: blur(40px);
+    backdrop-filter: blur(40px);
   }
 
   .cs-case-page--lotobola .cs-sticky-header .ui-container {
@@ -67,7 +67,12 @@
     justify-content: center;
     gap: 4px;
     padding: 2px;
-    background: rgba(255, 255, 255, 0.06);
+    box-sizing: border-box;
+    background: rgba(18, 18, 20, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.28);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
   }
 
   .cs-case-page--lotobola .ui-menu-overlay__lang-btn {
@@ -977,13 +982,15 @@
 }
 
 .lotobola-narrative__process-carousel {
-  width: min(100%, 1184px);
+  width: min(100%, 1232px);
   display: grid;
   gap: 16px;
+  margin-block: -24px;
 }
 
 .lotobola-narrative__process-carousel-viewport {
   width: 100%;
+  box-sizing: border-box;
   overflow-x: auto;
   overflow-y: visible;
   scroll-snap-type: x mandatory;
@@ -992,6 +999,8 @@
   -webkit-overflow-scrolling: touch;
   touch-action: pan-x;
   cursor: grab;
+  padding: 24px;
+  margin-inline: -24px;
 }
 
 .lotobola-narrative__process-carousel-viewport--dragging {
@@ -1048,22 +1057,25 @@
   width: 100%;
   position: absolute;
   inset: 0;
-  height: auto;
+  height: 100%;
   z-index: 0;
+  display: block;
+  object-fit: cover;
+  object-position: center top;
   background: #1e1e1e;
 }
 
 .lotobola-narrative__process-card-copy {
   flex: 0 0 auto;
-  height: 138px;
+  height: 168px;
   padding: 8px 16px;
   position: relative;
   z-index: 1;
   border-top: 0.5px solid rgba(255, 255, 255, 0.38);
   margin-top: auto;
-  background: rgba(48, 48, 48, 0.62);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
+  background: rgba(18, 18, 20, 0.68);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -1105,19 +1117,19 @@
   padding: 6px 16px;
   border: 0;
   border-radius: 999px;
-  background: #6c63ff;
-  color: #ffffff;
+  background: rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.56);
   font-family: "Mulish", sans-serif;
   font-size: 14px;
   line-height: 20px;
   font-weight: 500;
   letter-spacing: 0;
-  box-shadow: 0 0 18px rgba(108, 99, 255, 0.28);
+  box-shadow: none;
 }
 
 .lotobola-narrative__process-more:disabled {
   cursor: not-allowed;
-  opacity: 0.64;
+  opacity: 1;
 }
 
 .lotobola-narrative__process-dots {
@@ -1410,8 +1422,13 @@
     flex: 0 0 184px;
     height: 40px;
     padding: 2px;
+    box-sizing: border-box;
     gap: 4px;
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(18, 18, 20, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.28);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
   }
 
   .cs-case-page--lotobola .ui-menu-overlay__lang-btn {
@@ -1757,6 +1774,7 @@
   .lotobola-narrative__process-carousel {
     width: calc(100% + 32px);
     margin-inline: -16px;
+    margin-block: -24px;
     overflow: hidden;
     gap: 12px;
   }
@@ -1768,6 +1786,8 @@
     touch-action: pan-x;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
+    padding: 24px 0;
+    margin-inline: 0;
     mask-image: linear-gradient(90deg, transparent 0, #000 15%, #000 85%, transparent 100%);
   }
 
@@ -1783,7 +1803,7 @@
   }
 
   .lotobola-narrative__process-card-media {
-    height: 242px;
+    height: 100%;
     min-height: 0;
   }
 

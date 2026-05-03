@@ -10,8 +10,8 @@ import {
 } from "./LotoBolaNarrativeContent";
 import "./LotoBolaNarrativeView.css";
 
-function easeInOutCubic(progress: number) {
-  return progress < 0.5 ? 4 * progress * progress * progress : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+function easeSlide(progress: number) {
+  return 1 - Math.pow(1 - progress, 4);
 }
 
 function animateScrollLeft(element: HTMLElement, targetLeft: number, duration = 760) {
@@ -28,7 +28,7 @@ function animateScrollLeft(element: HTMLElement, targetLeft: number, duration = 
     const elapsed = currentTime - startTime;
     const progress = Math.min(elapsed / duration, 1);
 
-    element.scrollLeft = startLeft + distance * easeInOutCubic(progress);
+    element.scrollLeft = startLeft + distance * easeSlide(progress);
 
     if (progress < 1) {
       window.requestAnimationFrame(tick);
@@ -631,7 +631,7 @@ function ProcessCarousel({ cards, lang }: { cards: ProcessCard[]; lang: Lang }) 
     const scrollDelta =
       targetRect.left + targetRect.width / 2 - (viewportRect.left + viewportRect.width / 2);
 
-    animateScrollLeft(viewport, viewport.scrollLeft + scrollDelta, 780);
+    animateScrollLeft(viewport, viewport.scrollLeft + scrollDelta, 620);
     setSelectedIndex(index);
   }, []);
 
@@ -750,7 +750,15 @@ function ProcessCarousel({ cards, lang }: { cards: ProcessCard[]; lang: Lang }) 
                 cardRefs.current[index] = node;
               }}
             >
-              <div className="lotobola-narrative__process-card-media" aria-hidden="true" />
+              <img
+                className="lotobola-narrative__process-card-media"
+                src={card.image}
+                alt=""
+                width={1136}
+                height={1520}
+                loading="lazy"
+                aria-hidden="true"
+              />
               <div className="lotobola-narrative__process-card-copy">
                 <p className="lotobola-narrative__process-card-label">{card.label}</p>
                 <h3 className="lotobola-narrative__process-card-title">{card.title}</h3>

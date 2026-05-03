@@ -36,6 +36,7 @@ export interface ProcessCard {
   label: string;
   title: string;
   body: string;
+  image: string;
 }
 
 export interface NarrativeCopy {
@@ -334,6 +335,7 @@ const spanishCopy: NarrativeCopy = {
         title: "Home en evolución",
         body:
           "Rediseños guiados por datos, lectura de comportamiento y ajustes sobre conversión inicial.",
+        image: "/images/lotobola/lotobola_iteration_evolution_01.webp",
       },
       {
         index: "02",
@@ -341,6 +343,7 @@ const spanishCopy: NarrativeCopy = {
         title: "Recurrencia de sorteos",
         body:
           "Decisiones sobre ubicación, claridad promocional y límites técnicos del ticket.",
+        image: "/images/lotobola/lotobola_iteration_evolution_02.webp",
       },
       {
         index: "03",
@@ -348,6 +351,7 @@ const spanishCopy: NarrativeCopy = {
         title: "Landings comerciales",
         body:
           "Páginas adaptadas a campañas, canales y necesidades específicas de conversión.",
+        image: "/images/lotobola/lotobola_iteration_evolution_03.webp",
       },
       {
         index: "04",
@@ -355,6 +359,7 @@ const spanishCopy: NarrativeCopy = {
         title: "Design system vivo",
         body:
           "Arquitectura de tokens, naming y conexión entre Figma, repositorio y Storybook.",
+        image: "/images/lotobola/lotobola_iteration_evolution_04.webp",
       },
     ],
   },
@@ -604,24 +609,28 @@ const englishCopy: NarrativeCopy = {
         label: "Iteration / Home",
         title: "Evolving home",
         body: "Redesigns guided by data, behavioral reading, and adjustments to initial conversion.",
+        image: "/images/lotobola/lotobola_iteration_evolution_01.webp",
       },
       {
         index: "02",
         label: "Product / Subscription",
         title: "Recurring draws",
         body: "Decisions around placement, promotional clarity, and technical limits of the ticket.",
+        image: "/images/lotobola/lotobola_iteration_evolution_02.webp",
       },
       {
         index: "03",
         label: "Sales / Landings",
         title: "Commercial landings",
         body: "Pages adapted to campaigns, channels, and specific conversion needs.",
+        image: "/images/lotobola/lotobola_iteration_evolution_03.webp",
       },
       {
         index: "04",
         label: "System / Tokens",
         title: "Living design system",
         body: "Token architecture, naming, and connection between Figma, repository, and Storybook.",
+        image: "/images/lotobola/lotobola_iteration_evolution_04.webp",
       },
     ],
   },
