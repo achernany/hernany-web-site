@@ -451,6 +451,7 @@ export interface SiteSetting {
     systems?: string | null;
     approach?: string | null;
     selectedWork?: string | null;
+    aboutMe?: string | null;
     extendedWork?: string | null;
     contact?: string | null;
   };
@@ -583,6 +584,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         systems?: T;
         approach?: T;
         selectedWork?: T;
+        aboutMe?: T;
         extendedWork?: T;
         contact?: T;
       };

@@ -20,18 +20,19 @@
     }
   },
   "menu": {
-    "systems": "Sistemas",
+    "systems": "Inicio",
     "approach": "Enfoque",
-    "selectedWork": "Trabajos",
+    "selectedWork": "Proyectos",
     "extendedWork": "Trabajos Extendidos",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "aboutMe": "Sobre mí"
   },
   "home": {
-    "titleLine1": "Diseñando Sistemas",
-    "titleLine2": "Bajo Restricciones Reales",
-    "descriptionAccent": "Plataformas reguladas, infraestructuras multi-tenant",
-    "descriptionRest": "y ecosistemas de producto entregados de estrategia a producción.",
-    "meta": "Strategy → Architecture → Production.",
+    "titleLine1": "De problemas complejos",
+    "titleLine2": "a productos reales",
+    "descriptionAccent": "Conecto negocio, experiencia, diseño y tecnología",
+    "descriptionRest": "para definir, diseñar y llevar productos digitales a producción.",
+    "meta": "Estrategia → Sistemas → Ejecución",
     "typewriterPrefix": "Systems Thinking +",
     "typewriterAccent": "Real-World Execution",
     "email": "hey@hernanyacosta.com"

@@ -15,6 +15,7 @@ export const SiteSettings: GlobalConfig = {
         { name: 'systems', type: 'text', localized: true },
         { name: 'approach', type: 'text', localized: true },
         { name: 'selectedWork', type: 'text', localized: true },
+        { name: 'aboutMe', type: 'text', localized: true },
         { name: 'extendedWork', type: 'text', localized: true },
         { name: 'contact', type: 'text', localized: true },
       ],

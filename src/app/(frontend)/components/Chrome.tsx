@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
+import { Menu, X } from 'lucide-react'
 
 export type NavItem = { label: string; href: string }
 
@@ -10,6 +11,14 @@ interface ChromeProps {
   locale: 'es' | 'en'
   openLabel: string
   closeLabel: string
+}
+
+function Brand() {
+  return (
+    <a href="/" className="brand" aria-label="Home">
+      Hernany<em>Acosta</em>
+    </a>
+  )
 }
 
 export function Chrome({ items, locale, openLabel, closeLabel }: ChromeProps) {
@@ -31,41 +40,38 @@ export function Chrome({ items, locale, openLabel, closeLabel }: ChromeProps) {
 
   return (
     <>
-      <header className="topbar">
-        <div className="topbar-inner">
-          <a href="/" className="brand" aria-label="Home">
-            H.
-          </a>
-          <button
-            type="button"
-            className="menu-btn"
-            aria-label={openLabel}
-            onClick={() => setOpen(true)}
-          >
-            <span />
-            <span />
-            <span />
-          </button>
-        </div>
+      <header className="topbar frame">
+        <Brand />
+        <button
+          type="button"
+          className="menu-btn"
+          aria-label={openLabel}
+          onClick={() => setOpen(true)}
+        >
+          <Menu size={24} />
+        </button>
       </header>
 
       {open && (
         <div className="overlay" role="dialog" aria-modal="true">
-          <button
-            type="button"
-            className="overlay-close"
-            aria-label={closeLabel}
-            onClick={() => setOpen(false)}
-          >
-            ×
-          </button>
+          <div className="topbar">
+            <Brand />
+            <button
+              type="button"
+              className="menu-btn"
+              aria-label={closeLabel}
+              onClick={() => setOpen(false)}
+            >
+              <X size={24} />
+            </button>
+          </div>
           <nav className="overlay-nav">
             {items.map((item, i) => (
               <a
                 key={item.href}
                 href={item.href}
                 className={`overlay-item${isActive(item.href) ? ' active' : ''}`}
-                style={{ ['--d' as string]: `${80 + i * 70}ms` }}
+                style={{ ['--d' as string]: `${60 + i * 60}ms` }}
                 onClick={() => setOpen(false)}
               >
                 {item.label}
