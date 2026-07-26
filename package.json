@@ -1,25 +1,37 @@
 {
-  "name": "hernany-portfolio",
+  "name": "hernany-acosta-website",
+  "version": "0.1.0",
   "private": true,
-  "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "typecheck": "tsc --noEmit",
-    "preview": "vite preview"
+    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
+    "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
+    "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
+    "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
+    "seed": "cross-env NODE_OPTIONS=--no-deprecation payload run src/seed.ts"
   },
   "dependencies": {
+    "@payloadcms/db-sqlite": "^3.0.0",
+    "@payloadcms/next": "^3.0.0",
+    "@payloadcms/richtext-lexical": "^3.0.0",
+    "cross-env": "^7.0.3",
+    "graphql": "^16.9.0",
     "lucide-react": "0.487.0",
-    "react": "18",
-    "react-dom": "18",
-    "simple-parallax-js": "^6.3.3"
+    "next": "~15.4.11",
+    "payload": "^3.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sharp": "^0.34.0",
+    "@payloadcms/db-vercel-postgres": "^3.0.0"
   },
   "devDependencies": {
-    "@types/react": "18",
-    "@types/react-dom": "18",
-    "@vitejs/plugin-react": "4.7.0",
-    "typescript": "^5.8.3",
-    "vite": "6.3.5"
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=18.20.2"
   }
 }

@@ -1,0 +1,210 @@
+{
+  "common": {
+    "brand": "HERNANY ACOSTA",
+    "copyright": "© 2026 Hernany Acosta. All rights reserved.",
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu",
+    "language": {
+      "en": "English",
+      "es": "Spanish"
+    },
+    "actions": {
+      "startConversation": "Start the Conversation",
+      "connectLinkedIn": "Connect on LinkedIn",
+      "downloadExecutiveCV": "Download executive CV",
+      "downloadPortfolio": "Download Portfolio",
+      "viewAppliedCases": "View Applied Cases",
+      "enterSystems": "Enter the Systems",
+      "startNow": "Start Now",
+      "back": "Back"
+    }
+  },
+  "menu": {
+    "systems": "Systems",
+    "approach": "Approach",
+    "selectedWork": "Selected Work",
+    "extendedWork": "Extended Work",
+    "contact": "Contact"
+  },
+  "home": {
+    "titleLine1": "Designing Systems",
+    "titleLine2": "Under Real Constraints",
+    "descriptionAccent": "Regulated platforms, multi-tenant infrastructures",
+    "descriptionRest": "and product ecosystems delivered from strategy to production.",
+    "meta": "Strategy → Architecture → Production.",
+    "typewriterPrefix": "Systems Thinking +",
+    "typewriterAccent": "Real-World Execution",
+    "email": "hey@hernanyacosta.com"
+  },
+  "approach": {
+    "titlePrefix": "How I",
+    "titleAccent": "Work",
+    "systemThinkingTitle": "System Thinking",
+    "systemThinkingBody": "I map constraints before designing interfaces.",
+    "integrationTitle": "Cross-Functional Integration",
+    "integrationBody": "From regulatory logic to frontend implementation.",
+    "executionTitle": "Execution Discipline",
+    "executionBody": "Design systems that ship, not slide decks.",
+    "dontTitle": "What I don't do",
+    "dontOne": "Decorative UI without structural thinking",
+    "dontTwo": "Concept-first, execution-later design",
+    "dontThree": "Design disconnected from engineering realities"
+  },
+  "contact": {
+    "titleLine1": "Building Something",
+    "titleLine2": "Complex?",
+    "descriptionPrefix": "If your product",
+    "descriptionAccent": "operates under real constraints, regulatory, operational or technical,",
+    "descriptionSuffix": "we should talk."
+  },
+  "selectedWorks": {
+    "splashTitleLine1": "Designing Systems",
+    "splashTitleLine2": "Under Constraint",
+    "splashDescriptionAccent": "Regulated platforms, multi-tenant systems and enterprise infrastructures",
+    "splashDescriptionSuffix": "delivered from architecture to production.",
+    "splashMeta": "Strategy → Architecture → Production.",
+    "segmentLabel": "Selected systems",
+    "works": {
+      "lotobola": {
+        "name": "LotoBola",
+        "kicker": "DESIGNING A REGULATED MULTI-CHANNEL LOTTERY INFRASTRUCTURE FROM ZERO",
+        "descriptionAccent": "A distributed retail and digital lottery system",
+        "descriptionRest": "built under operational pressure, regulatory constraints and competitive market entry.",
+        "stats": {
+          "role": "Product Designer (Founding Team)",
+          "scope": "POS · Web · Backoffice · Payments · Compliance",
+          "timeline": "9 months to launch",
+          "scale": "3,000 projected POS · 700+ Tambo stores · 15,000+ daily transactions"
+        }
+      },
+      "playzonbet": {
+        "name": "PlayzonBet",
+        "kicker": "MULTI-TENANT SPORTSBOOK REBUILD",
+        "descriptionAccent": "White-label regulated sportsbook platform",
+        "descriptionRest": "rebuilt from legacy architecture and compliance constraints.",
+        "stats": {
+          "role": "Lead Product Designer",
+          "scope": "UX Architecture · Multi-brand Theming · KYC Flows",
+          "timeline": "10 months delivery",
+          "scale": "5 brands · 2 countries · enterprise CMS governance"
+        }
+      },
+      "alaz": {
+        "name": "Alaz",
+        "kicker": "PRODUCT STRATEGY & DELIVERY OPERATIONS",
+        "descriptionAccent": "Cross-industry product programs",
+        "descriptionRest": "focused on operational alignment and measurable execution.",
+        "stats": {
+          "role": "Product Consultant",
+          "scope": "Service Design · Discovery · Delivery Systems",
+          "timeline": "Ongoing engagements",
+          "scale": "B2B, regulated and infrastructure products"
+        }
+      },
+      "inlearning": {
+        "name": "InLearning",
+        "kicker": "RESEARCH-DRIVEN IA & FLOW REDESIGN",
+        "descriptionAccent": "Enterprise learning platform optimization",
+        "descriptionRest": "reducing cognitive load and improving completion rates.",
+        "stats": {
+          "role": "Lead UX Designer",
+          "scope": "IA Tree · Authentication · Notifications",
+          "timeline": "6 months",
+          "scale": "Admin, instructor and learner journeys"
+        }
+      },
+      "eva": {
+        "name": "EVA",
+        "kicker": "HUMANIZING THE VIRTUAL CAMPUS EXPERIENCE",
+        "descriptionAccent": "Guided, community-aware UX for a virtual campus",
+        "descriptionRest": "redesigning login, password recovery, and a new notification system.",
+        "stats": {
+          "role": "UX/UI Lead",
+          "scope": "Login · Password Recovery · Notifications",
+          "timeline": "Multi-phase",
+          "scale": "Students, teachers, and staff across 4 institutions"
+        }
+      },
+      "pacasmayo": {
+        "name": "Pacasmayo",
+        "kicker": "DESIGN SYSTEMS ENGINEERING",
+        "descriptionAccent": "Design-to-code token pipeline",
+        "descriptionRest": "connecting design, Storybook and Angular implementation.",
+        "stats": {
+          "role": "Design Systems Lead",
+          "scope": "Tokens · Governance · Component Library",
+          "timeline": "9 months",
+          "scale": "Enterprise-wide multi-team adoption"
+        }
+      }
+    },
+    "statLabels": {
+      "role": "ROLE",
+      "scope": "SCOPE",
+      "timeline": "TIMELINE",
+      "scale": "SCALE"
+    }
+  },
+  "extendedWorks": {
+    "titleLine1": "Applied Design",
+    "titleLine2": "Across Contexts",
+    "descriptionAccent": "Targeted product and consulting engagements",
+    "descriptionRest": "where execution, clarity and operational alignment were critical.",
+    "cards": {
+      "applied": {
+        "title": "Applied Product Engagements",
+        "description": "Short-cycle product design initiatives focused on operational systems, service flows and implementation alignment.",
+        "tags": [
+          "UX Architecture",
+          "Multi-Role Flows",
+          "Validation Loops",
+          "Service Blueprinting",
+          "Frontend Coordination"
+        ]
+      },
+      "consulting": {
+        "title": "Corporate & Consulting Engagements",
+        "description": "Cross-industry collaborations supporting digital optimization, campaign systems and structural UX improvements.",
+        "tags": [
+          "Stakeholder Workshops",
+          "Campaign Architecture",
+          "Cross-team Governance",
+          "Design Operations",
+          "Optimization"
+        ]
+      }
+    }
+  },
+  "lotoBolaGate": {
+    "eyebrow": "Restricted access",
+    "copy": "This case study is private. Enter the code to view it."
+  },
+  "extendedWorkDetail": {
+    "applied": {
+      "backTitle": "Extended works",
+      "title": "Applied Product Engagements",
+      "descriptionAccent": "Short-cycle product design initiatives",
+      "descriptionRest": "focused on operational systems, service flows and implementation alignment.",
+      "tags": [
+        "UX Architecture",
+        "Multi-Role Flows",
+        "Validation Loops",
+        "Service Blueprinting",
+        "Frontend Coordination"
+      ]
+    },
+    "consulting": {
+      "backTitle": "Extended works",
+      "title": "Corporate & Consulting Engagements",
+      "descriptionAccent": "Cross-industry collaborations",
+      "descriptionRest": "supporting campaign systems, optimization and structural UX improvements.",
+      "tags": [
+        "Stakeholder Workshops",
+        "Campaign Architecture",
+        "Cross-team Governance",
+        "Design Operations",
+        "Optimization"
+      ]
+    }
+  }
+}

@@ -1,4 +1,8 @@
-node_modules
-dist
-.DS_Store
+node_modules/
+.next/
 .env
+payload.db
+payload.db-journal
+media/
+.DS_Store
+*.log
