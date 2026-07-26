@@ -42,7 +42,8 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   db: (() => {
-    const uri = process.env.DATABASE_URI || process.env.POSTGRES_URL || ''
+    const uri =
+      process.env.DATABASE_URI || process.env.DATABASE_URL || process.env.POSTGRES_URL || ''
     if (uri.startsWith('postgres')) {
       return vercelPostgresAdapter({ pool: { connectionString: uri } })
     }
