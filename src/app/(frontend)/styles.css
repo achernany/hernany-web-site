@@ -587,6 +587,11 @@ a {
     align-items: center;
   }
 
+  .btn--w234,
+  .btn--w208 {
+    width: 284px;
+  }
+
   .only-mobile {
     display: block;
   }
