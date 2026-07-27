@@ -60,6 +60,8 @@ export default async function Home() {
         </a>
       </div>
 
+      <hr className="separator only-mobile" />
+
       <div className="contact-options">
         <a className="home-email" href={`mailto:${email}`}>
           {email}

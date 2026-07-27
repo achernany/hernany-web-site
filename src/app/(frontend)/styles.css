@@ -509,70 +509,133 @@ a {
   color: var(--ink);
 }
 
+.only-mobile {
+  display: none;
+}
+
 /* ---- Mobile (tipo app) ---- */
 @media (max-width: 820px) {
   .shell,
   .overlay {
-    padding: 0 20px 12px;
+    padding: 0 16px 16px;
   }
 
   .topbar {
-    padding: 18px 12px;
+    padding: 16px;
+  }
+
+  .brand {
+    font-size: 16px;
+    letter-spacing: -0.48px;
+  }
+
+  .brand em {
+    font-weight: 300;
   }
 
   .view {
-    padding: 24px 12px;
+    padding: 16px;
+  }
+
+  .view--bottom,
+  .view--top,
+  .view--center {
+    justify-content: flex-start;
+    gap: 24px;
+  }
+
+  .text-stack {
+    padding: 44px 0;
+    gap: 16px;
+    text-align: center;
   }
 
   .title-xl {
-    font-size: 38px;
-    line-height: 40px;
-    letter-spacing: -1.2px;
+    font-size: 28px;
+    line-height: 32px;
+    letter-spacing: -0.84px;
   }
 
   .subtitle-xl {
-    font-size: 20px;
-    line-height: 26px;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.32px;
   }
 
   .title-page {
-    font-size: 30px;
-    line-height: 36px;
+    font-size: 28px;
+    line-height: 32px;
+    letter-spacing: -0.84px;
   }
 
   .subtitle-page {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 24px;
+    letter-spacing: -0.32px;
   }
 
   .body-rich {
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.24px;
+    text-align: center;
   }
 
   .btn-row {
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .only-mobile {
+    display: block;
   }
 
   .contact-options {
+    margin-top: auto;
     flex-direction: column;
-    gap: 12px;
-    align-items: flex-start;
+    gap: 16px;
+    padding-top: 24px;
   }
 
-  .cards-row {
-    flex-direction: column;
-    gap: 12px;
+  .contact-options .btn {
+    order: -1;
   }
 
-  .pcard,
-  .pcard--tall {
-    width: 100%;
-    height: 96px;
+  .home-email {
+    padding: 0;
   }
 
   .overlay-item {
-    font-size: 30px;
+    font-size: 32px;
     line-height: 36px;
+    letter-spacing: -0.96px;
+  }
+
+  /* Carrusel horizontal de proyectos */
+  .cards-row {
+    justify-content: flex-start;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin: 0 -16px;
+    padding: 12px 16px;
+    scrollbar-width: none;
+  }
+
+  .cards-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pcard {
+    flex: none;
+    scroll-snap-align: center;
+  }
+
+  .pcard:first-child {
+    margin-left: auto;
+  }
+
+  .pcard:last-child {
+    margin-right: auto;
   }
 }
