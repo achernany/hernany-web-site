@@ -54,7 +54,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   const t = settings.theme
   const themeVars = {
-    '--accent': t?.accent || '#04816c',
+    '--accent': t?.accent || '#6366F1',
     '--bg': t?.bg || '#eef0f2',
     '--ink': t?.ink || '#5f666f',
     '--muted': t?.muted || '#8a929c',
