@@ -19,7 +19,10 @@ export const metadata = {
   description:
     'De problemas complejos a productos reales. Conecto negocio, experiencia, diseño y tecnología para llevar productos digitales a producción.',
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: '32x32' },
+    ],
     apple: '/apple-touch-icon.png',
   },
   openGraph: {
