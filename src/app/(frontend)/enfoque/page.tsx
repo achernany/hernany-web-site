@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { getLocale } from '../locale'
 import { copy } from '../content'
 import { RichBody, Spans } from '../components/Rich'
@@ -24,9 +25,9 @@ export default async function Enfoque() {
       <hr className="separator" />
 
       <div className="action-stack">
-        <a className="btn btn--ghost btn--w208" href="/contacto">
+        <Link className="btn btn--ghost btn--w208" href="/contacto" prefetch>
           {labels.conversemos}
-        </a>
+        </Link>
       </div>
     </main>
   )

@@ -5,6 +5,7 @@ import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import sharp from 'sharp'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
@@ -50,4 +51,12 @@ export default buildConfig({
     return sqliteAdapter({ client: { url: uri || 'file:./payload.db' } })
   })(),
   sharp,
+  plugins: process.env.BLOB_READ_WRITE_TOKEN
+    ? [
+        vercelBlobStorage({
+          collections: { media: true },
+          token: process.env.BLOB_READ_WRITE_TOKEN,
+        }),
+      ]
+    : [],
 })

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 
@@ -13,19 +14,12 @@ interface ChromeProps {
   closeLabel: string
 }
 
-function Brand() {
-  return (
-    <a href="/" className="brand" aria-label="Home">
-      Hernany<em>Acosta</em>
-    </a>
-  )
-}
-
 export function Chrome({ items, locale, openLabel, closeLabel }: ChromeProps) {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
 
+  // El overlay se cierra solo cuando la ruta nueva ya montó (sin flash de la vista anterior)
   useEffect(() => {
     setOpen(false)
   }, [pathname])
@@ -41,7 +35,9 @@ export function Chrome({ items, locale, openLabel, closeLabel }: ChromeProps) {
   return (
     <>
       <header className="topbar frame">
-        <Brand />
+        <Link href="/" className="brand" aria-label="Home" prefetch>
+          Hernany<em>Acosta</em>
+        </Link>
         <button
           type="button"
           className="menu-btn"
@@ -55,7 +51,9 @@ export function Chrome({ items, locale, openLabel, closeLabel }: ChromeProps) {
       {open && (
         <div className="overlay" role="dialog" aria-modal="true">
           <div className="topbar">
-            <Brand />
+            <Link href="/" className="brand" aria-label="Home" prefetch>
+              H.
+            </Link>
             <button
               type="button"
               className="menu-btn"
@@ -67,15 +65,18 @@ export function Chrome({ items, locale, openLabel, closeLabel }: ChromeProps) {
           </div>
           <nav className="overlay-nav">
             {items.map((item, i) => (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
+                prefetch
                 className={`overlay-item${isActive(item.href) ? ' active' : ''}`}
                 style={{ ['--d' as string]: `${60 + i * 60}ms` }}
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  if (isActive(item.href)) setOpen(false)
+                }}
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </nav>
           <div className="overlay-lang">

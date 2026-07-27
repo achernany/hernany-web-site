@@ -4,6 +4,18 @@ export const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
   access: { read: () => true },
   fields: [
+    {
+      name: 'theme',
+      type: 'group',
+      admin: { description: 'Colores del sitio (hex, ej. #04816c)' },
+      fields: [
+        { name: 'accent', type: 'text', defaultValue: '#04816c' },
+        { name: 'bg', type: 'text', defaultValue: '#eef0f2' },
+        { name: 'ink', type: 'text', defaultValue: '#5f666f' },
+        { name: 'muted', type: 'text', defaultValue: '#8a929c' },
+        { name: 'hairline', type: 'text', defaultValue: '#d9dde1' },
+      ],
+    },
     { name: 'brand', type: 'text', localized: true },
     { name: 'copyright', type: 'text', localized: true },
     { name: 'menuOpen', type: 'text', localized: true },

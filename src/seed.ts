@@ -30,6 +30,7 @@ async function run() {
       slug: 'site-settings',
       locale,
       data: {
+        theme: d.theme,
         brand: d.common.brand,
         copyright: d.common.copyright,
         menuOpen: d.common.menuOpen,

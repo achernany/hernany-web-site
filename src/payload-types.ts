@@ -443,6 +443,16 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface SiteSetting {
   id: number;
+  /**
+   * Colores del sitio (hex, ej. #04816c)
+   */
+  theme?: {
+    accent?: string | null;
+    bg?: string | null;
+    ink?: string | null;
+    muted?: string | null;
+    hairline?: string | null;
+  };
   brand?: string | null;
   copyright?: string | null;
   menuOpen?: string | null;
@@ -495,6 +505,27 @@ export interface SiteSetting {
  */
 export interface HomePage {
   id: number;
+  /**
+   * Mensajes del hero. Se muestra uno al azar en cada visita.
+   */
+  messages?:
+    | {
+        titleAccent?: string | null;
+        titleRest?: string | null;
+        descriptionAccent?: string | null;
+        descriptionRest?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Palabras del loop animado (Estrategia / Sistemas / Ejecución)
+   */
+  metaItems?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   titleLine1?: string | null;
   titleLine2?: string | null;
   descriptionAccent?: string | null;
@@ -574,6 +605,15 @@ export interface ExtendedWorksPage {
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
+  theme?:
+    | T
+    | {
+        accent?: T;
+        bg?: T;
+        ink?: T;
+        muted?: T;
+        hairline?: T;
+      };
   brand?: T;
   copyright?: T;
   menuOpen?: T;
@@ -625,6 +665,21 @@ export interface SiteSettingsSelect<T extends boolean = true> {
  * via the `definition` "home-page_select".
  */
 export interface HomePageSelect<T extends boolean = true> {
+  messages?:
+    | T
+    | {
+        titleAccent?: T;
+        titleRest?: T;
+        descriptionAccent?: T;
+        descriptionRest?: T;
+        id?: T;
+      };
+  metaItems?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
   titleLine1?: T;
   titleLine2?: T;
   descriptionAccent?: T;

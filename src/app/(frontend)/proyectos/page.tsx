@@ -4,21 +4,20 @@ import { getLocale } from '../locale'
 import { copy } from '../content'
 import { RichBody, Spans } from '../components/Rich'
 
-const FEATURED = ['playzonbet', 'lotobola', 'eva']
-
 export default async function Proyectos() {
   const locale = await getLocale()
   const payload = await getPayload({ config })
   const c = copy[locale].proyectos
 
+  // Todos los proyectos "selected" del CMS, ordenados: agregar uno en /admin lo suma aquí
   const works = await payload.find({
     collection: 'case-studies',
-    where: { slug: { in: FEATURED } },
+    where: { category: { equals: 'selected' } },
+    sort: 'order',
     locale,
-    limit: 10,
+    limit: 12,
   })
-  const bySlug = new Map(works.docs.map((w) => [w.slug, w]))
-  const cards = FEATURED.map((slug) => bySlug.get(slug)).filter(Boolean)
+  const cards = works.docs
 
   return (
     <main className="view view--top frame">
@@ -37,11 +36,16 @@ export default async function Proyectos() {
       <hr className="separator" />
 
       <div className="cards-row">
-        {cards.map((w, i) => (
-          <a key={w!.id} className={`pcard${i === 1 ? ' pcard--tall' : ''}`} href="/proyectos">
-            <span className="pcard-label">{w!.name}</span>
-          </a>
-        ))}
+        {cards.map((w, i) => {
+          const cover = w.cover && typeof w.cover === 'object' ? w.cover : null
+          const tall = cards.length === 3 && i === 1
+          return (
+            <a key={w.id} className={`pcard${tall ? ' pcard--tall' : ''}`} href="/proyectos">
+              {cover?.url && <img className="pcard-img" src={cover.url} alt={cover.alt || w.name} />}
+              <span className="pcard-label">{w.name}</span>
+            </a>
+          )
+        })}
       </div>
     </main>
   )

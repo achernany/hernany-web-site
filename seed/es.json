@@ -35,7 +35,38 @@
     "meta": "Estrategia → Sistemas → Ejecución",
     "typewriterPrefix": "Systems Thinking +",
     "typewriterAccent": "Real-World Execution",
-    "email": "hey@hernanyacosta.com"
+    "email": "hey@hernanyacosta.com",
+    "messages": [
+      {
+        "titleAccent": "De problemas complejos",
+        "titleRest": "a productos reales",
+        "descriptionAccent": "Conecto negocio, experiencia, diseño y tecnología",
+        "descriptionRest": "para definir, diseñar y llevar productos digitales a producción."
+      },
+      {
+        "titleAccent": "Del caos operativo",
+        "titleRest": "a sistemas que escalan",
+        "descriptionAccent": "Alineo reglas de negocio, equipos y restricciones reales",
+        "descriptionRest": "para que el producto sobreviva al contacto con producción."
+      },
+      {
+        "titleAccent": "De la ambigüedad",
+        "titleRest": "a decisiones claras",
+        "descriptionAccent": "Convierto requerimientos incompletos en flujos, estados y criterios",
+        "descriptionRest": "que los equipos pueden ejecutar sin fricción."
+      }
+    ],
+    "metaItems": [
+      {
+        "text": "Estrategia"
+      },
+      {
+        "text": "Sistemas"
+      },
+      {
+        "text": "Ejecución"
+      }
+    ]
   },
   "approach": {
     "titlePrefix": "Cómo",
@@ -207,5 +238,12 @@
         "Optimization"
       ]
     }
+  },
+  "theme": {
+    "accent": "#04816c",
+    "bg": "#eef0f2",
+    "ink": "#5f666f",
+    "muted": "#8a929c",
+    "hairline": "#d9dde1"
   }
 }

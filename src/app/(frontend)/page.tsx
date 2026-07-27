@@ -1,9 +1,13 @@
 import config from '@payload-config'
 import { getPayload } from 'payload'
+import Link from 'next/link'
 import { ArrowRight, Download, Github, Instagram, Linkedin } from 'lucide-react'
 import { getLocale } from './locale'
 import { copy } from './content'
 import { CV, LINKS } from './links'
+import { TextLoop } from './components/TextLoop'
+
+export const dynamic = 'force-dynamic'
 
 export default async function Home() {
   const locale = await getLocale()
@@ -12,25 +16,45 @@ export default async function Home() {
   const labels = copy[locale].labels
   const email = home.email || 'hey@hernanyacosta.com'
 
+  // Mensaje al azar en cada visita
+  const messages =
+    home.messages && home.messages.length > 0
+      ? home.messages
+      : [
+          {
+            titleAccent: home.titleLine1,
+            titleRest: home.titleLine2,
+            descriptionAccent: home.descriptionAccent,
+            descriptionRest: home.descriptionRest,
+          },
+        ]
+  const msg = messages[Math.floor(Math.random() * messages.length)]
+
+  const metaItems = (home.metaItems || [])
+    .map((m) => m.text)
+    .filter((t): t is string => Boolean(t))
+
   return (
     <main className="view view--bottom frame">
       <div className="text-stack">
         <h1 className="title-xl">
-          <span className="accent">{home.titleLine1}</span>
+          <span className="accent">{msg.titleAccent}</span>
           <br />
-          {home.titleLine2}
+          {msg.titleRest}
         </h1>
         <p className="subtitle-xl">
-          <span className="accent">{home.descriptionAccent}</span> {home.descriptionRest}
+          <span className="accent">{msg.descriptionAccent}</span> {msg.descriptionRest}
         </p>
-        <p className="meta-line">{home.meta}</p>
+        <p className="meta-line">
+          {metaItems.length > 0 ? <TextLoop items={metaItems} /> : home.meta}
+        </p>
       </div>
 
       <div className="btn-row">
-        <a className="btn btn--primary btn--w234" href="/proyectos">
+        <Link className="btn btn--primary btn--w234" href="/proyectos" prefetch>
           {labels.verProyectos}
           <ArrowRight size={16} />
-        </a>
+        </Link>
         <a className="btn btn--ghost btn--w208" href={`mailto:${email}`}>
           {labels.conversemos}
         </a>
