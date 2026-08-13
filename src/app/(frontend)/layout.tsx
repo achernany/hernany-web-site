@@ -4,6 +4,7 @@ import config from '@payload-config'
 import { getPayload } from 'payload'
 import { Chrome, type NavItem } from './components/Chrome'
 import { getLocale } from './locale'
+import '../globals.css'
 import './styles.css'
 
 const poppins = Poppins({

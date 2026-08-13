@@ -1,0 +1,102 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* ---------------------------------------------------------------
+   Puente theme <- CMS
+   ---------------------------------------------------------------
+   El CMS inyecta inline en <html> (ver layout.tsx) 5 variables:
+     --accent  (color de marca)     --bg   (fondo de pagina)
+     --ink     (texto principal)    --muted (texto secundario)
+     --hairline (bordes)
+   Aca los tokens semanticos de shadcn se ALIASEAN a esas 5 vars.
+   Resultado: editar un color en /admin mueve el CSS a mano Y los
+   componentes shadcn con la misma fuente de verdad.
+
+   Los tokens sin equivalente en el CMS (card/popover/secondary/
+   accent-surface, destructive, charts, sidebar) usan vars privadas
+   --sc-* derivadas con color-mix para mantener cohesion.
+
+   La fuente NO se rutea por @theme a proposito: Poppins entra por
+   next/font como var(--font-sans) y styles.css la aplica directo en
+   body. Meterla en @theme inline genera un self-reference circular.
+   --------------------------------------------------------------- */
+
+@theme inline {
+  /* --- Puenteados a las vars del CMS --- */
+  --color-background: var(--bg);
+  --color-foreground: var(--ink);
+  --color-card: var(--bg);
+  --color-card-foreground: var(--ink);
+  --color-popover: var(--bg);
+  --color-popover-foreground: var(--ink);
+  --color-primary: var(--accent);
+  --color-primary-foreground: var(--bg);
+  --color-secondary: var(--sc-surface);
+  --color-secondary-foreground: var(--ink);
+  --color-muted: var(--sc-surface);
+  --color-muted-foreground: var(--muted);
+  --color-accent: var(--sc-surface);
+  --color-accent-foreground: var(--ink);
+  --color-border: var(--hairline);
+  --color-input: var(--hairline);
+  --color-ring: var(--accent);
+  --color-destructive: var(--sc-destructive);
+
+  /* --- Charts / sidebar (poco usados en el portfolio) --- */
+  --color-chart-1: var(--sc-chart-1);
+  --color-chart-2: var(--sc-chart-2);
+  --color-chart-3: var(--sc-chart-3);
+  --color-chart-4: var(--sc-chart-4);
+  --color-chart-5: var(--sc-chart-5);
+  --color-sidebar: var(--sc-surface);
+  --color-sidebar-foreground: var(--ink);
+  --color-sidebar-primary: var(--accent);
+  --color-sidebar-primary-foreground: var(--bg);
+  --color-sidebar-accent: var(--sc-surface);
+  --color-sidebar-accent-foreground: var(--ink);
+  --color-sidebar-border: var(--hairline);
+  --color-sidebar-ring: var(--accent);
+
+  /* Radios de shadcn (independientes del pill 120px del sistema a mano) */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --radius: 0.625rem;
+
+  /* Fallbacks de las 5 vars del CMS: si /admin todavia no las inyecta,
+     el sitio igual renderiza con la paleta base (misma que styles.css). */
+  --accent: #6366f1;
+  --bg: #eef0f2;
+  --ink: #5f666f;
+  --muted: #8a929c;
+  --hairline: #d9dde1;
+
+  /* Vars privadas de shadcn (prefijo --sc- para NO colisionar con el CMS).
+     Derivadas de las del CMS con color-mix para cohesion cromatica. */
+  --sc-surface: color-mix(in srgb, var(--ink) 6%, var(--bg));
+  --sc-destructive: oklch(0.577 0.245 27.325);
+  --sc-chart-1: var(--accent);
+  --sc-chart-2: color-mix(in srgb, var(--accent) 70%, var(--bg));
+  --sc-chart-3: var(--muted);
+  --sc-chart-4: color-mix(in srgb, var(--ink) 60%, var(--bg));
+  --sc-chart-5: var(--ink);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
