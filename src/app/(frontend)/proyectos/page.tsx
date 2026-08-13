@@ -41,6 +41,7 @@ export default async function Proyectos() {
           const tall = cards.length === 3 && i === 1
           return (
             <a key={w.id} className={`pcard${tall ? ' pcard--tall' : ''}`} href="/proyectos">
+              <span className="pcard-goo" aria-hidden="true" />
               {cover?.url && <img className="pcard-img" src={cover.url} alt={cover.alt || w.name} />}
               <span className="pcard-label">{w.name}</span>
             </a>

@@ -644,3 +644,81 @@ a {
     margin-right: auto;
   }
 }
+
+/* ---- Gooey: liquido de marca en las cards (spike Liquid Gooey) ---- */
+.goo-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Capa gooey dentro de la card: dos blobs que suben y se funden con el
+   filtro SVG #goo. Se revela en hover; el label queda siempre por encima. */
+.pcard-goo {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  filter: url(#goo);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.pcard:hover .pcard-goo {
+  opacity: 1;
+}
+
+.pcard-goo::before,
+.pcard-goo::after {
+  content: '';
+  position: absolute;
+  bottom: -25%;
+  border-radius: 44% 56% 50% 50%;
+  background: var(--accent);
+}
+
+.pcard-goo::before {
+  width: 80%;
+  height: 55%;
+  left: -10%;
+  animation: goo-drift-a 5.5s ease-in-out infinite;
+}
+
+.pcard-goo::after {
+  width: 74%;
+  height: 52%;
+  right: -10%;
+  animation: goo-drift-b 6.5s ease-in-out infinite;
+}
+
+.pcard-label {
+  z-index: 2;
+}
+
+@keyframes goo-drift-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(12%, -14%) scale(1.1);
+  }
+}
+
+@keyframes goo-drift-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-10%, -10%) scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pcard-goo::before,
+  .pcard-goo::after {
+    animation: none;
+  }
+}
